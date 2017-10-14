@@ -370,7 +370,6 @@ extension UILabel {
    
    class func onBoardingTitleView(withText text: String) -> UILabel {
       let onBoardingTitleLabel = UILabel()
-      onBoardingTitleLabel.backgroundColor = UIColor.orange
       onBoardingTitleLabel.attributedText = UILabel.attributedString(withText: text, andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 16.0)!, andCharacterSpacing: nil, isCentered: true)
       onBoardingTitleLabel.setLineHeightInset(3.0)
       return onBoardingTitleLabel

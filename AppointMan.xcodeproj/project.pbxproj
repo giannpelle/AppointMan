@@ -108,6 +108,8 @@
 		23E63CB51F41B15A0084EA75 /* SFText-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 23E63C821F41B15A0084EA75 /* SFText-SemiboldItalic.otf */; };
 		23FEE8791EE4B3C00062192C /* AppointmentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEE8781EE4B3C00062192C /* AppointmentBox.swift */; };
 		23FEE87B1EE4B3DB0062192C /* AppointmentBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23FEE87A1EE4B3DB0062192C /* AppointmentBox.xib */; };
+		EF3290931F927409008BB930 /* OnBoardingNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3290921F927409008BB930 /* OnBoardingNavigationBar.swift */; };
+		EF3290951F927C0F008BB930 /* ClosingDaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3290941F927C0F008BB930 /* ClosingDaysViewController.swift */; };
 		EFBB49881F8C41890011698E /* NewServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBB49871F8C41890011698E /* NewServiceViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -236,6 +238,8 @@
 		23E63C821F41B15A0084EA75 /* SFText-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFText-SemiboldItalic.otf"; sourceTree = "<group>"; };
 		23FEE8781EE4B3C00062192C /* AppointmentBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppointmentBox.swift; sourceTree = "<group>"; };
 		23FEE87A1EE4B3DB0062192C /* AppointmentBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppointmentBox.xib; sourceTree = "<group>"; };
+		EF3290921F927409008BB930 /* OnBoardingNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingNavigationBar.swift; sourceTree = "<group>"; };
+		EF3290941F927C0F008BB930 /* ClosingDaysViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosingDaysViewController.swift; sourceTree = "<group>"; };
 		EFBB49871F8C41890011698E /* NewServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewServiceViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -389,10 +393,12 @@
 		236DF5011F586BD700A48C73 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				EFBB49871F8C41890011698E /* NewServiceViewController.swift */,
+				EF3290921F927409008BB930 /* OnBoardingNavigationBar.swift */,
 				23C80E3E1F7D27A700C4CACE /* AddServicesViewController.swift */,
+				EFBB49871F8C41890011698E /* NewServiceViewController.swift */,
 				23C80E401F7D694900C4CACE /* AddEmployeesViewController.swift */,
 				236DF4FF1F585BC100A48C73 /* WorkingHoursViewController.swift */,
+				EF3290941F927C0F008BB930 /* ClosingDaysViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -737,6 +743,7 @@
 				23801A641F55745200847830 /* GPFloatingTextField.swift in Sources */,
 				2330859E1EDEB2C300D4FB8C /* SmartDeleteTextField.swift in Sources */,
 				234178961ECC32B0000630A1 /* FloatLabelTextField.swift in Sources */,
+				EF3290951F927C0F008BB930 /* ClosingDaysViewController.swift in Sources */,
 				23347C4A1F5096570080E355 /* FilterAppointmentTableViewCell.swift in Sources */,
 				23FEE8791EE4B3C00062192C /* AppointmentBox.swift in Sources */,
 				2304A6161F40598D00E1FB7E /* ClientiViewController.swift in Sources */,
@@ -745,6 +752,7 @@
 				238BA8081EC9D9F4002F9F0A /* CalendarView.swift in Sources */,
 				237C52991EC4BF1800D98DD9 /* FilterViewController.swift in Sources */,
 				237C52971EC4BE5C00D98DD9 /* HomeSplitViewController.swift in Sources */,
+				EF3290931F927409008BB930 /* OnBoardingNavigationBar.swift in Sources */,
 				2304A6201F4060A700E1FB7E /* Gadgets.swift in Sources */,
 				236DF5001F585BC100A48C73 /* WorkingHoursViewController.swift in Sources */,
 				237C52691EC4B6CB00D98DD9 /* AppDelegate.swift in Sources */,

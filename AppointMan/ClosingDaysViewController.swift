@@ -1,25 +1,23 @@
 //
-//  AddEmployeesViewController.swift
+//  ClosingDaysViewController.swift
 //  AppointMan
 //
-//  Created by Gianluigi Pelle on 9/28/17.
+//  Created by Gianluigi Pelle on 10/14/17.
 //  Copyright © 2017 Scratch App. All rights reserved.
 //
 
 import UIKit
 
-class AddEmployeesViewController: UIViewController {
+class ClosingDaysViewController: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      
-      self.setupCurrentNavigationItem()
       
    }
    
    func setupCurrentNavigationItem() {
       // navigation bar title
-      self.navigationItem.titleView = UILabel.onBoardingTitleView(withText: "Aggiungi dipendenti")
+      self.navigationItem.titleView = UILabel.onBoardingTitleView(withText: "Seleziona giorni di chiusura")
       
       // Avanti bar button item
       let nextBarButton = UIButton()
