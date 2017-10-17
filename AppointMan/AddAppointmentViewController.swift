@@ -127,19 +127,19 @@ class AddAppointmentViewController: UIViewController {
    func onDeleteClosure(stackView: UIStackView) -> (() -> Void)? {
       
       return {
-         if (stackView.last() as! SmartDeleteTextField).text == "" && stackView.arrangedSubviews.count > 1 {
-            stackView.removeLast()
+         if (stackView.arrangedSubviews.last as! SmartDeleteTextField).text == "" && stackView.arrangedSubviews.count > 1 {
+            stackView.removeArrangedSubview(stackView.arrangedSubviews.last!)
             self.selectedData.client = ""
          }
       }
    }
    
-   func cancelBarButtonItemPressed(sender: UIBarButtonItem) {
+   @objc func cancelBarButtonItemPressed(sender: UIBarButtonItem) {
       self.delegate?.hideOverlayView()
       self.dismiss(animated: false, completion: nil)
    }
    
-   func doneBarButtonItemPressed(sender: UIBarButtonItem) {
+   @objc func doneBarButtonItemPressed(sender: UIBarButtonItem) {
       
       print(self.selectedData)
       

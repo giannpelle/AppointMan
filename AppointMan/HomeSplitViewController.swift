@@ -43,7 +43,7 @@ class HomeSplitViewController: UIViewController {
       
    }
    
-   func keyboardNotification(notification: NSNotification) {
+   @objc func keyboardNotification(notification: NSNotification) {
       
       let isShowing = notification.name == .UIKeyboardWillShow
       

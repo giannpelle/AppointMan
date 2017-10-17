@@ -145,7 +145,7 @@ class HomeViewController: UIViewController {
    
    var translationInView: CGPoint = CGPoint.zero
    
-   func updateMasterWidthWhileDragging(sender: UIPanGestureRecognizer) {
+   @objc func updateMasterWidthWhileDragging(sender: UIPanGestureRecognizer) {
       
       let deltaTranslationInView = sender.translation(in: self.view)
       translationInView.x += deltaTranslationInView.x

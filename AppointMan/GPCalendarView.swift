@@ -210,11 +210,11 @@ class GPCalendarView: UIView {
       self.daysCollectionView.bottomAnchor.constraint(equalTo: self.calendarBoxView.bottomAnchor, constant: -14.0).isActive = true
    }
    
-   func previousMonthButtonPressed(sender: UIButton) {
+   @objc func previousMonthButtonPressed(sender: UIButton) {
       self.updateDaysCollectionViewMonth(withValue: -1)
    }
    
-   func nextMonthButtonPressed(sender: UIButton) {
+   @objc func nextMonthButtonPressed(sender: UIButton) {
       self.updateDaysCollectionViewMonth(withValue: 1)
    }
    

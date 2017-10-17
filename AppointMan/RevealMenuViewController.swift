@@ -174,7 +174,7 @@ class RevealMenuViewController: UIViewController {
       
    }
    
-   func revealMenuPanGestureRecognized(sender: UIPanGestureRecognizer) {
+   @objc func revealMenuPanGestureRecognized(sender: UIPanGestureRecognizer) {
       
       switch sender.state {
       case .began:
@@ -344,7 +344,7 @@ extension RevealMenuViewController: RevealMenuDelegate {
       
    }
    
-   func closeRevealMenu() {
+   @objc func closeRevealMenu() {
       guard self.isRevealMenuOpen else {
          return
       }

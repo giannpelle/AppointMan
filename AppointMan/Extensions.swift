@@ -98,6 +98,11 @@ extension UIStoryboard {
       return addServicesVC
    }
    
+   class func newServiceVC() -> NewServiceViewController {
+      let newServiceVC = UIStoryboard(name: "OnBoarding", bundle: Bundle.main).instantiateViewController(withIdentifier: "newServiceVC") as! NewServiceViewController
+      return newServiceVC
+   }
+   
    class func addEmployeesVC() -> AddEmployeesViewController {
       let addEmployeesVC = UIStoryboard(name: "OnBoarding", bundle: Bundle.main).instantiateViewController(withIdentifier: "addEmployeesVC") as! AddEmployeesViewController
       return addEmployeesVC
@@ -289,6 +294,7 @@ extension CALayer {
       self.masksToBounds = false
       self.insertSublayer(shape, at: 0)
    }
+   
 }
 
 extension UIImage {
@@ -342,12 +348,12 @@ extension UILabel {
       let attrString = NSMutableAttributedString(string: text)
       let style = NSMutableParagraphStyle()
       style.alignment = isCentered ? .center : .natural
-      attrString.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSRange(location: 0, length: text.characters.count))
+      attrString.addAttribute(NSAttributedStringKey.paragraphStyle, value: style, range: NSRange(location: 0, length: text.characters.count))
       if let characterSpacing = characterSpacing {
-         attrString.addAttribute(NSKernAttributeName, value: characterSpacing, range: NSRange(location: 0, length: text.characters.count))
+         attrString.addAttribute(NSAttributedStringKey.kern, value: characterSpacing, range: NSRange(location: 0, length: text.characters.count))
       }
-      attrString.addAttribute(NSFontAttributeName, value: font, range: NSRange(location: 0, length: text.characters.count))
-      attrString.addAttribute(NSForegroundColorAttributeName, value: textColor, range: NSRange(location: 0, length: text.characters.count))
+      attrString.addAttribute(NSAttributedStringKey.font, value: font, range: NSRange(location: 0, length: text.characters.count))
+      attrString.addAttribute(NSAttributedStringKey.foregroundColor, value: textColor, range: NSRange(location: 0, length: text.characters.count))
       return attrString
    }
    
@@ -357,12 +363,12 @@ extension UILabel {
       style.alignment = isCentered ? .center : .natural
       
       var attributes: [String: Any] = [
-         NSFontAttributeName : font,
-         NSForegroundColorAttributeName : textColor,
-         NSParagraphStyleAttributeName: style
+         NSAttributedStringKey.font.rawValue : font,
+         NSAttributedStringKey.foregroundColor.rawValue : textColor,
+         NSAttributedStringKey.paragraphStyle.rawValue: style
       ]
       if let characterSpacing = characterSpacing {
-         attributes[NSKernAttributeName] = characterSpacing
+         attributes[NSAttributedStringKey.kern.rawValue] = characterSpacing
       }
       
       return attributes
@@ -399,7 +405,7 @@ extension NSLayoutConstraint {
    func setMultiplier(multiplier:CGFloat) -> NSLayoutConstraint {
       NSLayoutConstraint.deactivate([self])
       let newConstraint = NSLayoutConstraint(
-         item: firstItem,
+         item: firstItem as Any,
          attribute: firstAttribute,
          relatedBy: relation,
          toItem: secondItem,
@@ -411,20 +417,6 @@ extension NSLayoutConstraint {
       newConstraint.identifier = self.identifier
       NSLayoutConstraint.activate([newConstraint])
       return newConstraint
-   }
-}
-
-extension UIStackView {
-   
-   func removeLast() {
-      guard self.arrangedSubviews.count > 1 else {
-         return
-      }
-      self.removeArrangedSubview(self.arrangedSubviews[self.arrangedSubviews.count - 2])
-   }
-   
-   func last() -> UIView {
-      return self.arrangedSubviews[self.arrangedSubviews.count - 1]
    }
 }
 

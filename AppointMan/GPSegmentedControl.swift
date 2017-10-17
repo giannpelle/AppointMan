@@ -8,32 +8,15 @@
 
 import UIKit
 
-class GPSegmentedControl: UISegmentedControl {
-
-   init() {
-      super.init(frame: CGRect.zero)
-      self.setup()
-   }
+extension UISegmentedControl {
    
-   override init(frame: CGRect) {
-      super.init(frame: frame)
-      self.setup()
-   }
-   
-   required init?(coder aDecoder: NSCoder) {
-      super.init(coder: aDecoder)
-      self.setup()
-   }
-   
-   private func setup() {
-      self.tintColor = UIColor.white
-      self.layer.masksToBounds = true
+   func onBoardingSetUp(withOptions options: [String]) {
+      self.tintColor = UIColor.amBlue
+      self.layer.masksToBounds = false
+      self.clipsToBounds = false
       self.layer.cornerRadius = 5.0
-      self.layer.borderColor = UIColor.white.cgColor
-      self.layer.borderWidth = 1.0
-      self.backgroundColor = UIColor.amBlue
       
-      self.setup(withOptions: ["GIORNO", "MESE"])
+      self.setup(withOptions: options)
    }
    
    func setup(withOptions options: [String]) {
@@ -44,14 +27,15 @@ class GPSegmentedControl: UISegmentedControl {
       let style = NSMutableParagraphStyle()
       style.lineSpacing = 2.0
       style.alignment = .center
-      self.setTitleTextAttributes([NSParagraphStyleAttributeName: style,
-           NSKernAttributeName: 1.0,
-           NSFontAttributeName: UIFont.init(name: "SFUIText-Bold", size: 10.0) ?? UIFont.systemFont(ofSize: 10.0),
-           NSForegroundColorAttributeName: UIColor.white], for: .normal)
-      self.setTitleTextAttributes([NSParagraphStyleAttributeName: style,
-           NSKernAttributeName: 1.0,
-           NSFontAttributeName: UIFont.init(name: "SFUIText-Bold", size: 10.0) ?? UIFont.systemFont(ofSize: 10.0),
-           NSForegroundColorAttributeName: UIColor.amBlue], for: .selected)
+      self.setTitleTextAttributes([NSAttributedStringKey.paragraphStyle: style,
+                                   NSAttributedStringKey.kern: 1.0,
+                                   NSAttributedStringKey.font: UIFont.init(name: "SFUIText-Bold", size: 10.0)!,
+                                   NSAttributedStringKey.foregroundColor: UIColor.amBlue], for: .normal)
+      self.setTitleTextAttributes([NSAttributedStringKey.paragraphStyle: style,
+                                   NSAttributedStringKey.kern: 1.0,
+                                   NSAttributedStringKey.font: UIFont.init(name: "SFUIText-Bold", size: 10.0)!,
+                                   NSAttributedStringKey.foregroundColor: UIColor.white], for: .selected)
       self.selectedSegmentIndex = 0
    }
+
 }

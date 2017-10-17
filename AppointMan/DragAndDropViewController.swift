@@ -125,15 +125,15 @@ class DragAndDropViewController: UIViewController {
          appointmentView.tag = index
          switch index {
          case 0:
-            appointmentView.appointmentAccessoryView.backgroundColor = UIColor(colorLiteralRed: 225/255.0, green: 140/255.0, blue: 140/255.0, alpha: 1.0)
+            appointmentView.appointmentAccessoryView.backgroundColor = UIColor(red: 225/255.0, green: 140/255.0, blue: 140/255.0, alpha: 1.0)
          case 1:
-            appointmentView.appointmentAccessoryView.backgroundColor = UIColor(colorLiteralRed: 129/255.0, green: 193/255.0, blue: 150/255.0, alpha: 1.0)
+            appointmentView.appointmentAccessoryView.backgroundColor = UIColor(red: 129/255.0, green: 193/255.0, blue: 150/255.0, alpha: 1.0)
          case 2:
-            appointmentView.appointmentAccessoryView.backgroundColor = UIColor(colorLiteralRed: 148/255.0, green: 179/255.0, blue: 233/255.0, alpha: 1.0)
+            appointmentView.appointmentAccessoryView.backgroundColor = UIColor(red: 148/255.0, green: 179/255.0, blue: 233/255.0, alpha: 1.0)
          case 3:
-            appointmentView.appointmentAccessoryView.backgroundColor = UIColor(colorLiteralRed: 148/255.0, green: 179/255.0, blue: 233/255.0, alpha: 1.0)
+            appointmentView.appointmentAccessoryView.backgroundColor = UIColor(red: 148/255.0, green: 179/255.0, blue: 233/255.0, alpha: 1.0)
          case 4:
-            appointmentView.appointmentAccessoryView.backgroundColor = UIColor(colorLiteralRed: 148/255.0, green: 179/255.0, blue: 233/255.0, alpha: 1.0)
+            appointmentView.appointmentAccessoryView.backgroundColor = UIColor(red: 148/255.0, green: 179/255.0, blue: 233/255.0, alpha: 1.0)
          default:
             break
          }
@@ -155,7 +155,7 @@ class DragAndDropViewController: UIViewController {
       
    }
    
-   func appointmentViewDidPressed(sender: UITapGestureRecognizer) {
+   @objc func appointmentViewDidPressed(sender: UITapGestureRecognizer) {
       if let selectedView = sender.view {
          
          if self.selectedAppoitmentViews.contains(selectedView) {

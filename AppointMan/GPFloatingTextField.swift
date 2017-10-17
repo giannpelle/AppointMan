@@ -32,7 +32,7 @@ class GPFloatingTextField: UITextField {
       let style = NSMutableParagraphStyle()
       style.lineSpacing = 14.0
       style.alignment = .natural
-      let attributes: [String: Any] = [NSParagraphStyleAttributeName: style, NSKernAttributeName: 0.0, NSFontAttributeName: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, NSForegroundColorAttributeName: UIColor.amFloatingTextFieldText]
+      let attributes: [String: Any] = [NSAttributedStringKey.paragraphStyle.rawValue: style, NSAttributedStringKey.kern.rawValue: 0.0, NSAttributedStringKey.font.rawValue: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, NSAttributedStringKey.foregroundColor.rawValue: UIColor.amFloatingTextFieldText]
       return attributes
    }()
    

@@ -126,7 +126,7 @@ class WorkingHoursPlannerView: UIView {
       self.bottomPlaceholderView.heightAnchor.constraint(equalToConstant: self.hourUnitHeight / 2.0).isActive = true
    }
    
-   func longPressGestureRecognized(sender: UILongPressGestureRecognizer) {
+   @objc func longPressGestureRecognized(sender: UILongPressGestureRecognizer) {
       guard !self.topPlaceholderView.frame.contains(sender.location(in: self)) && !self.bottomPlaceholderView.frame.contains(sender.location(in: self)) else {
          return
       }

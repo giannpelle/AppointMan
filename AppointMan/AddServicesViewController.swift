@@ -10,6 +10,11 @@ import UIKit
 
 class AddServicesViewController: UIViewController {
    
+   @IBOutlet weak var servicesLabel: UILabel!
+   @IBOutlet weak var sortLabel: UILabel!
+   @IBOutlet weak var sortSegmentedControl: UISegmentedControl!
+   @IBOutlet weak var servicesCollectionView: UICollectionView!
+   
    var tapOverlayGesture: UITapGestureRecognizer!
    
    override func viewDidAppear(_ animated: Bool) {
@@ -22,7 +27,7 @@ class AddServicesViewController: UIViewController {
       self.view.window?.addGestureRecognizer(self.tapOverlayGesture)
    }
    
-   func overlayTapped(sender: UITapGestureRecognizer) {
+   @objc func overlayTapped(sender: UITapGestureRecognizer) {
       if sender.state == .ended {
          guard let presentedView = presentedViewController?.view else {
             return
@@ -42,7 +47,23 @@ class AddServicesViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       
+      self.navigationController?.navigationBar.sizeToFit()
+      
+      self.applyTypography()
       self.setupCurrentNavigationItem()
+      
+      self.sortSegmentedControl.onBoardingSetUp(withOptions: ["DURATA", "A-Z"])
+      
+      self.servicesCollectionView.delegate = self
+      self.servicesCollectionView.dataSource = self
+      (self.servicesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.estimatedItemSize = CGSize(width: 160.0, height: 78.0)
+      (self.servicesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.sectionHeadersPinToVisibleBounds = true
+      
+   }
+   
+   func applyTypography() {
+      self.servicesLabel.attributedText = UILabel.attributedString(withText: "Servizi", andTextColor: UIColor.amOnBoardingHeaderTextGrey, andFont: UIFont.init(name: "SFUIText-Regular", size: 22.0)!, andCharacterSpacing: 0.0)
+      self.sortLabel.attributedText = UILabel.attributedString(withText: "Ordina", andTextColor: UIColor.amOnBoardingHeaderTextLightGrey, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
    }
    
    func setupCurrentNavigationItem() {
@@ -58,18 +79,59 @@ class AddServicesViewController: UIViewController {
       
    }
    
-   func nextBarButtonItemPressed(sender: UIBarButtonItem) {
+   @objc func nextBarButtonItemPressed(sender: UIBarButtonItem) {
       let nextVC = UIStoryboard.addEmployeesVC()
       self.navigationController?.pushViewController(nextVC, animated: true)
    }
    
-   @IBAction func centeredButtonPressed(sender: UIButton) {
-      if let newServiceVC = UIStoryboard(name: "OnBoarding", bundle: nil).instantiateViewController(withIdentifier: "newServiceVC") as? NewServiceViewController {
-         newServiceVC.modalPresentationStyle = .formSheet
-         newServiceVC.preferredContentSize = CGSize(width: 540.0, height: 540.0)
-         self.present(newServiceVC, animated: true, completion: nil)
-      }
+   @IBAction func newServiceButtonPressed(sender: UIButton) {
+      let newServiceVC = UIStoryboard.newServiceVC()
+      newServiceVC.modalPresentationStyle = .formSheet
+      newServiceVC.preferredContentSize = CGSize(width: 540.0, height: 540.0)
+      self.present(newServiceVC, animated: true, completion: nil)
    }
+   
+}
+
+extension AddServicesViewController: UICollectionViewDataSource {
+   
+   func numberOfSections(in collectionView: UICollectionView) -> Int {
+      return 3
+   }
+   
+   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+      return 8
+   }
+   
+   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "serviceCellId", for: indexPath) as? ServiceCollectionViewCell else {
+         return UICollectionViewCell()
+      }
+      return cell
+   }
+   
+   func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+      guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "onBoardingSectionHeaderId", for: indexPath) as? ServicesHeaderCollectionReusableView else {
+         return UICollectionReusableView()
+      }
+      
+      header.sectionType = SectionType(rawValue: indexPath.section)
+      return header
+   }
+}
+
+extension AddServicesViewController: UICollectionViewDelegateFlowLayout {
+   
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+      return CGSize(width: UIScreen.main.bounds.size.width, height: 64.0)
+   }
+   
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+      return UIEdgeInsets(top: 8.0, left: 14.0, bottom: 8.0, right: 14.0)
+   }
+}
+
+extension AddServicesViewController: UICollectionViewDelegate {
    
 }
 

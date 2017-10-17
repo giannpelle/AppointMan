@@ -37,13 +37,13 @@ class AddEmployeesViewController: UIViewController {
       self.navigationItem.leftBarButtonItem = backBarButtonItem
    }
    
-   func nextBarButtonItemPressed(sender: UIBarButtonItem) {
+   @objc func nextBarButtonItemPressed(sender: UIBarButtonItem) {
       //let nextVC = UIStoryboard.addEmployeesVC()
       //self.navigationController?.pushViewController(nextVC, animated: true)
       //nextVC.navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "on_boarding_back_button"), style: .plain, target: self, action: nil)
    }
    
-   func backBarButtonItemPressed(sender: UIButton) {
+   @objc func backBarButtonItemPressed(sender: UIButton) {
       self.navigationController?.popViewController(animated: true)
    }
    

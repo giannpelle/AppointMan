@@ -72,7 +72,7 @@ class ThumbnailVerticallyButton: UIButton {
    }
    
    func setup(withImage image: UIImage, andText text: String) {
-      self.setAttributedTitle(UILabel.attributedString(withText: text, andTextColor: UIColor(colorLiteralRed: 103/255.0, green: 103/255.0, blue: 103/255.0, alpha: 1.0), andFont: UIFont.init(name: "SFUIText-Semibold", size: 11.0)!, andCharacterSpacing: nil, isCentered: true), for: .normal)
+      self.setAttributedTitle(UILabel.attributedString(withText: text, andTextColor: UIColor(red: 103/255.0, green: 103/255.0, blue: 103/255.0, alpha: 1.0), andFont: UIFont.init(name: "SFUIText-Semibold", size: 11.0)!, andCharacterSpacing: nil, isCentered: true), for: .normal)
       self.setAttributedTitle(UILabel.attributedString(withText: text, andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 11.0)!, andCharacterSpacing: nil, isCentered: true), for: .selected)
       self.setImage(image.scale(toSize: CGSize(width: 48.0, height: 48.0)), for: .normal)
       self.setImage(image.scale(toSize: CGSize(width: 48.0, height: 48.0)).alpha(0.6), for: .selected)
@@ -231,7 +231,7 @@ class BoxView: UIView {
       self.deleteBoxButton.isHidden = true
    }
    
-   func deleteBoxButtonPressed(sender: UIButton) {
+   @objc func deleteBoxButtonPressed(sender: UIButton) {
       self.delegate?.didRemove(view: self, atColomnIndex: self.colomnIndex)
       self.removeFromSuperview()
    }

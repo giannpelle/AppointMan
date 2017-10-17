@@ -142,7 +142,7 @@ class AgendaViewController: UIViewController {
       
    }
    
-   func bubbleMenuPanGestureRecognized(sender: UIPanGestureRecognizer) {
+   @objc func bubbleMenuPanGestureRecognized(sender: UIPanGestureRecognizer) {
       
       switch sender.state {
       case .began:
