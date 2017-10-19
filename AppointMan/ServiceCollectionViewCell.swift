@@ -48,13 +48,24 @@ class ServiceCollectionViewCell: UICollectionViewCell {
    
    override func awakeFromNib() {
       super.awakeFromNib()
-      
+
+      self.applyTypography()
+      self.setupUI()
+   }
+   
+   func applyTypography() {
       self.serviceNameLabel.attributedText = UILabel.attributedString(withText: "Nome servizio", andTextColor: ServiceColor.getRandomColor(dark: true), andFont: UIFont.init(name: "SFUIText-Semibold", size: 14.0)!, andCharacterSpacing: 0.0)
-      self.serviceDurationLabel.attributedText = UILabel.attributedString(withText: "45 minuti", andTextColor: ServiceColor.getRandomColor(), andFont: UIFont.init(name: "SFUIText-Semibold", size: 11.0)!, andCharacterSpacing: 0.0)
+      self.serviceNameLabel.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
+      
+      self.serviceDurationLabel.attributedText = UILabel.attributedString(withText: "45 minuti", andTextColor: 
+         ServiceColor.getRandomColor(), andFont: UIFont.init(name: "SFUIText-Semibold", size: 11.0)!, andCharacterSpacing: 0.0)
+      self.serviceDurationLabel.heightAnchor.constraint(equalToConstant: 13.0).isActive = true
+   }
+   
+   func setupUI() {
       
       let maleImageView = UIImageView(image: #imageLiteral(resourceName: "iconcina_sesso_uomo"))
       self.gendersStackView.addArrangedSubview(maleImageView)
-      
    }
    
    func showOverlayMenu() {
@@ -93,7 +104,7 @@ class ServiceCollectionViewCell: UICollectionViewCell {
             deleteButton.setImage(#imageLiteral(resourceName: "iconcina_cestino"), for: .normal)
             deleteButton.addTarget(self, action: #selector(self.deleteServiceButtonPressed(sender:)), for: .touchUpInside)
             let editButton = UIButton()
-            editButton.setImage(#imageLiteral(resourceName: "iconcina_matita"), for: .normal)
+            editButton.setImage(#imageLiteral(resourceName: "iconcina_action_matita"), for: .normal)
             editButton.addTarget(self, action: #selector(self.editServiceButtonPressed(sender:)), for: .touchUpInside)
             let stack = UIStackView(arrangedSubviews: [deleteButton, editButton])
             stack.axis = .horizontal

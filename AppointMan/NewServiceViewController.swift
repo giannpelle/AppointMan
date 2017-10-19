@@ -27,6 +27,7 @@ class NewServiceViewController: UIViewController {
       didSet {
          self.manCheckboxButton.isSelected = self.isManBoxEnabled
          self.manLabel.attributedText = UILabel.attributedString(withText: "UOMO", andTextColor: self.isManBoxEnabled ? UIColor.amBlue : UIColor.grayWith(value: 214), andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
+         self.manLabel.heightAnchor.constraint(equalToConstant: 14.0).isActive = true
          self.manDurationPickerView.isUserInteractionEnabled = self.isManBoxEnabled
          self.manDurationPickerView.reloadAllComponents()
       }
@@ -35,6 +36,7 @@ class NewServiceViewController: UIViewController {
       didSet {
          self.womanCheckboxButton.isSelected = self.isWomanBoxEnabled
          self.womanLabel.attributedText = UILabel.attributedString(withText: "DONNA", andTextColor: self.isWomanBoxEnabled ? UIColor.amBlue : UIColor.grayWith(value: 214), andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
+         self.womanLabel.heightAnchor.constraint(equalToConstant: 14.0).isActive = true
          self.womanDurationPickerView.isUserInteractionEnabled = self.isWomanBoxEnabled
          self.womanDurationPickerView.reloadAllComponents()
       }
@@ -49,6 +51,7 @@ class NewServiceViewController: UIViewController {
    
    func applyTypography() {
       self.newServiceLabel.attributedText = UILabel.attributedString(withText: "NUOVO SERVIZIO", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
+      self.newServiceLabel.heightAnchor.constraint(equalToConstant: 14.0).isActive = true
       
       self.durationLabel.attributedText = UILabel.attributedString(withText: "DURATA", andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
       self.durationLabel.heightAnchor.constraint(equalToConstant: 14.0).isActive = true
@@ -75,13 +78,13 @@ class NewServiceViewController: UIViewController {
       
       self.manBoxView.layer.cornerRadius = 5.0
       self.manBoxView.layer.shadowColor = UIColor(red: 116/255.0, green: 141/255.0, blue: 176/255.0, alpha: 1.0).cgColor
-      self.manBoxView.layer.shadowOpacity = 0.4
+      self.manBoxView.layer.shadowOpacity = 0.25
       self.manBoxView.layer.shadowRadius = 6.0
       self.manBoxView.layer.shadowOffset = .zero
       
       self.womanBoxView.layer.cornerRadius = 5.0
       self.womanBoxView.layer.shadowColor = UIColor(red: 116/255.0, green: 141/255.0, blue: 176/255.0, alpha: 1.0).cgColor
-      self.womanBoxView.layer.shadowOpacity = 0.4
+      self.womanBoxView.layer.shadowOpacity = 0.25
       self.womanBoxView.layer.shadowRadius = 6.0
       self.womanBoxView.layer.shadowOffset = .zero
       

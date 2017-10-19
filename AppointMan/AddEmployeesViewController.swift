@@ -10,10 +10,29 @@ import UIKit
 
 class AddEmployeesViewController: UIViewController {
    
+   @IBOutlet weak var employeesLabel: UILabel!
+   @IBOutlet weak var employeesCollectionView: UICollectionView!
+   
    override func viewDidLoad() {
       super.viewDidLoad()
       
       self.setupCurrentNavigationItem()
+      self.applyTypography()
+      self.setupUI()
+      
+   }
+   
+   func applyTypography() {
+      
+      self.employeesLabel.attributedText = UILabel.attributedString(withText: "Dipendenti", andTextColor: UIColor.amOnBoardingHeaderTextGrey, andFont: UIFont.init(name: "SFUIText-Regular", size: 22.0)!, andCharacterSpacing: 0.0)
+      self.employeesLabel.heightAnchor.constraint(equalToConstant: 26.0).isActive = true
+   }
+   
+   func setupUI() {
+      
+      self.employeesCollectionView.dataSource = self
+      self.employeesCollectionView.delegate = self
+      self.employeesCollectionView.contentInset = UIEdgeInsetsMake(6.0, 26.0, 6.0, 26.0)
       
    }
    
@@ -46,5 +65,39 @@ class AddEmployeesViewController: UIViewController {
    @objc func backBarButtonItemPressed(sender: UIButton) {
       self.navigationController?.popViewController(animated: true)
    }
+   
+}
+
+extension AddEmployeesViewController: UICollectionViewDataSource {
+   
+   func numberOfSections(in collectionView: UICollectionView) -> Int {
+      return 1
+   }
+   
+   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+      return 5
+   }
+   
+   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "employeeCellId", for: indexPath) as? EmployeeCollectionViewCell else {
+         return UICollectionViewCell()
+      }
+      
+      let images = [#imageLiteral(resourceName: "thumbnail_1"), #imageLiteral(resourceName: "thumbnail_2"), #imageLiteral(resourceName: "thumbnail_3"), #imageLiteral(resourceName: "thumbnail_4"), #imageLiteral(resourceName: "thumbnail_5")]
+      cell.employeeImageView.image = images[indexPath.row]
+      
+      return cell
+   }
+   
+}
+
+extension AddEmployeesViewController: UICollectionViewDelegateFlowLayout {
+   
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+      return CGSize(width: 314.0, height: 320.0)
+   }
+}
+
+extension AddEmployeesViewController: UICollectionViewDelegate {
    
 }

@@ -20,7 +20,7 @@ class FiltraAppuntamentiViewController: UIViewController {
    // BANNER
    @IBOutlet weak var filterBannerView: UIView!
    @IBOutlet weak var filterAppointmentsLabel: UILabel!
-   @IBOutlet weak var employeeLabel: UILabel!
+   @IBOutlet weak var employeesLabel: UILabel!
    @IBOutlet weak var employeePickerCollectionView: UICollectionView!
    @IBOutlet weak var disclosureIndicatorImageView: UIImageView!
    
@@ -54,7 +54,9 @@ class FiltraAppuntamentiViewController: UIViewController {
       self.filterAppointmentsScrollView.delegate = self
       
       self.filterAppointmentsLabel.attributedText = UILabel.attributedString(withText: "FILTRA APPUNTAMENTI", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86, isCentered: true)
-      self.employeeLabel.attributedText = UILabel.attributedString(withText: "DIPENDENTE/I", andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
+      self.filterAppointmentsLabel.heightAnchor.constraint(equalToConstant: 14.0).isActive = true
+      self.employeesLabel.attributedText = UILabel.attributedString(withText: "DIPENDENTE/I", andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
+      self.employeesLabel.heightAnchor.constraint(equalToConstant: 14.0).isActive = true
       
       self.employeePickerCollectionView.tag = 2
       self.employeePickerCollectionView.delegate = self

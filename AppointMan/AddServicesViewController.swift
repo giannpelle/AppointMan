@@ -56,14 +56,15 @@ class AddServicesViewController: UIViewController {
       
       self.servicesCollectionView.delegate = self
       self.servicesCollectionView.dataSource = self
-      (self.servicesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.estimatedItemSize = CGSize(width: 160.0, height: 78.0)
       (self.servicesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.sectionHeadersPinToVisibleBounds = true
       
    }
    
    func applyTypography() {
       self.servicesLabel.attributedText = UILabel.attributedString(withText: "Servizi", andTextColor: UIColor.amOnBoardingHeaderTextGrey, andFont: UIFont.init(name: "SFUIText-Regular", size: 22.0)!, andCharacterSpacing: 0.0)
+      self.servicesLabel.heightAnchor.constraint(equalToConstant: 26.0).isActive = true
       self.sortLabel.attributedText = UILabel.attributedString(withText: "Ordina", andTextColor: UIColor.amOnBoardingHeaderTextLightGrey, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
+      self.sortLabel.heightAnchor.constraint(equalToConstant: 14.0).isActive = true
    }
    
    func setupCurrentNavigationItem() {
@@ -121,6 +122,10 @@ extension AddServicesViewController: UICollectionViewDataSource {
 }
 
 extension AddServicesViewController: UICollectionViewDelegateFlowLayout {
+   
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+      return CGSize(width: 160.0, height: 78.0)
+   }
    
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
       return CGSize(width: UIScreen.main.bounds.size.width, height: 64.0)

@@ -115,6 +115,7 @@
 		EFBB49881F8C41890011698E /* NewServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBB49871F8C41890011698E /* NewServiceViewController.swift */; };
 		EFD86F951F92953E00E92425 /* ServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */; };
 		EFD86F971F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD86F961F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift */; };
+		EFE309091F98A2ED006247B2 /* EmployeeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE309081F98A2ED006247B2 /* EmployeeCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,6 +250,7 @@
 		EFBB49871F8C41890011698E /* NewServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewServiceViewController.swift; sourceTree = "<group>"; };
 		EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCollectionViewCell.swift; sourceTree = "<group>"; };
 		EFD86F961F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		EFE309081F98A2ED006247B2 /* EmployeeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,6 +420,7 @@
 				EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */,
 				EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */,
 				EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */,
+				EFE309081F98A2ED006247B2 /* EmployeeCollectionViewCell.swift */,
 				236DF5071F58753E00A48C73 /* WorkingHoursPlannerView.xib */,
 				236DF5031F586C4F00A48C73 /* WorkingHoursPlannerView.swift */,
 			);
@@ -761,6 +764,7 @@
 				23801A641F55745200847830 /* GPFloatingTextField.swift in Sources */,
 				2330859E1EDEB2C300D4FB8C /* SmartDeleteTextField.swift in Sources */,
 				234178961ECC32B0000630A1 /* FloatLabelTextField.swift in Sources */,
+				EFE309091F98A2ED006247B2 /* EmployeeCollectionViewCell.swift in Sources */,
 				EF3290951F927C0F008BB930 /* ClosingDaysViewController.swift in Sources */,
 				23347C4A1F5096570080E355 /* FilterAppointmentTableViewCell.swift in Sources */,
 				23FEE8791EE4B3C00062192C /* AppointmentBox.swift in Sources */,
