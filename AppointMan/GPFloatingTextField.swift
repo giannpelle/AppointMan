@@ -60,6 +60,12 @@ class GPFloatingTextField: UITextField {
    }
    
    private func setup() {
+      
+      // to avoid auto layout conflicts, really strange, test on real device uncommenting the following lines of code
+      self.autocorrectionType = .no
+      self.inputAssistantItem.leadingBarButtonGroups.removeAll()
+      self.inputAssistantItem.trailingBarButtonGroups.removeAll()
+      
       self.borderStyle = .none
       
       self.underlineLayer = CALayer()

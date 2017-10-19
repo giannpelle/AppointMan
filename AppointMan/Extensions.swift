@@ -113,6 +113,11 @@ extension UIStoryboard {
       return newEmployeeVC
    }
    
+   class func workingHoursVC() -> WorkingHoursViewController {
+      let workingHoursVC = UIStoryboard(name: "OnBoarding", bundle: Bundle.main).instantiateViewController(withIdentifier: "workingHoursVC") as! WorkingHoursViewController
+      return workingHoursVC
+   }
+   
    class func agendaVC() -> AgendaViewController {
       let agendaVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "agendaVC") as! AgendaViewController
       return agendaVC

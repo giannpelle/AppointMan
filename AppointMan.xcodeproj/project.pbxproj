@@ -19,8 +19,6 @@
 		2330859E1EDEB2C300D4FB8C /* SmartDeleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2330859D1EDEB2C300D4FB8C /* SmartDeleteTextField.swift */; };
 		233085A01EDEC4A500D4FB8C /* DragAndDropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2330859F1EDEC4A500D4FB8C /* DragAndDropViewController.swift */; };
 		23347C4A1F5096570080E355 /* FilterAppointmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23347C491F5096570080E355 /* FilterAppointmentTableViewCell.swift */; };
-		234178961ECC32B0000630A1 /* FloatLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234178941ECC32B0000630A1 /* FloatLabelTextField.swift */; };
-		234178971ECC32B0000630A1 /* FloatLabelTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234178951ECC32B0000630A1 /* FloatLabelTextView.swift */; };
 		234A536E1ED599DF00B5FAF8 /* TagsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234A536D1ED599DF00B5FAF8 /* TagsTextField.swift */; };
 		234A53701ED59C1500B5FAF8 /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234A536F1ED59C1500B5FAF8 /* UnderlinedTextField.swift */; };
 		234D40491ED2DCC3008F4AA9 /* SuggestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 234D40481ED2DCC3008F4AA9 /* SuggestionCell.xib */; };
@@ -108,6 +106,7 @@
 		23E63CB51F41B15A0084EA75 /* SFText-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 23E63C821F41B15A0084EA75 /* SFText-SemiboldItalic.otf */; };
 		23FEE8791EE4B3C00062192C /* AppointmentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEE8781EE4B3C00062192C /* AppointmentBox.swift */; };
 		23FEE87B1EE4B3DB0062192C /* AppointmentBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23FEE87A1EE4B3DB0062192C /* AppointmentBox.xib */; };
+		EF0EAF1A1F99560A0092F810 /* InOutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0EAF191F99560A0092F810 /* InOutAnimator.swift */; };
 		EF23F1EE1F977503007661BC /* DeleteServicePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */; };
 		EF23F1F01F977517007661BC /* DeleteServicePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */; };
 		EF3290931F927409008BB930 /* OnBoardingNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3290921F927409008BB930 /* OnBoardingNavigationBar.swift */; };
@@ -149,8 +148,6 @@
 		2330859D1EDEB2C300D4FB8C /* SmartDeleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartDeleteTextField.swift; sourceTree = "<group>"; };
 		2330859F1EDEC4A500D4FB8C /* DragAndDropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragAndDropViewController.swift; sourceTree = "<group>"; };
 		23347C491F5096570080E355 /* FilterAppointmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterAppointmentTableViewCell.swift; sourceTree = "<group>"; };
-		234178941ECC32B0000630A1 /* FloatLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatLabelTextField.swift; sourceTree = "<group>"; };
-		234178951ECC32B0000630A1 /* FloatLabelTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatLabelTextView.swift; sourceTree = "<group>"; };
 		234A536D1ED599DF00B5FAF8 /* TagsTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTextField.swift; sourceTree = "<group>"; };
 		234A536F1ED59C1500B5FAF8 /* UnderlinedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		234D40481ED2DCC3008F4AA9 /* SuggestionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuggestionCell.xib; sourceTree = "<group>"; };
@@ -244,6 +241,7 @@
 		23E63C821F41B15A0084EA75 /* SFText-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFText-SemiboldItalic.otf"; sourceTree = "<group>"; };
 		23FEE8781EE4B3C00062192C /* AppointmentBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppointmentBox.swift; sourceTree = "<group>"; };
 		23FEE87A1EE4B3DB0062192C /* AppointmentBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppointmentBox.xib; sourceTree = "<group>"; };
+		EF0EAF191F99560A0092F810 /* InOutAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutAnimator.swift; sourceTree = "<group>"; };
 		EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeleteServicePopupView.xib; sourceTree = "<group>"; };
 		EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteServicePopupView.swift; sourceTree = "<group>"; };
 		EF3290921F927409008BB930 /* OnBoardingNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingNavigationBar.swift; sourceTree = "<group>"; };
@@ -280,14 +278,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2303DD201ECC49B300C24113 /* Third-Party Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				234178931ECC315C000630A1 /* FloatLabelTextField */,
-			);
-			name = "Third-Party Libraries";
-			sourceTree = "<group>";
-		};
 		2303DD211ECC49C900C24113 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +287,7 @@
 				234A536D1ED599DF00B5FAF8 /* TagsTextField.swift */,
 				234A536F1ED59C1500B5FAF8 /* UnderlinedTextField.swift */,
 				2330859D1EDEB2C300D4FB8C /* SmartDeleteTextField.swift */,
+				EF0EAF191F99560A0092F810 /* InOutAnimator.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -346,15 +337,6 @@
 				2303DD231ECC49E900C24113 /* Views */,
 			);
 			name = MAIN;
-			sourceTree = "<group>";
-		};
-		234178931ECC315C000630A1 /* FloatLabelTextField */ = {
-			isa = PBXGroup;
-			children = (
-				234178941ECC32B0000630A1 /* FloatLabelTextField.swift */,
-				234178951ECC32B0000630A1 /* FloatLabelTextView.swift */,
-			);
-			name = FloatLabelTextField;
 			sourceTree = "<group>";
 		};
 		236DF4B21F58067A00A48C73 /* GPCalendar */ = {
@@ -454,7 +436,6 @@
 			isa = PBXGroup;
 			children = (
 				237C52681EC4B6CB00D98DD9 /* AppDelegate.swift */,
-				2303DD201ECC49B300C24113 /* Third-Party Libraries */,
 				238B1BAD1F52974E00A1F6CA /* Libraries */,
 				2303DD211ECC49C900C24113 /* Utilities */,
 				236DF4FA1F5859A800A48C73 /* ONBOARDING */,
@@ -766,7 +747,6 @@
 				236DF5041F586C4F00A48C73 /* WorkingHoursPlannerView.swift in Sources */,
 				23801A641F55745200847830 /* GPFloatingTextField.swift in Sources */,
 				2330859E1EDEB2C300D4FB8C /* SmartDeleteTextField.swift in Sources */,
-				234178961ECC32B0000630A1 /* FloatLabelTextField.swift in Sources */,
 				EFE309091F98A2ED006247B2 /* EmployeeCollectionViewCell.swift in Sources */,
 				EF3290951F927C0F008BB930 /* ClosingDaysViewController.swift in Sources */,
 				23347C4A1F5096570080E355 /* FilterAppointmentTableViewCell.swift in Sources */,
@@ -788,11 +768,11 @@
 				2304A61A1F40599A00E1FB7E /* StatisticheViewController.swift in Sources */,
 				EF348CCD1F990388007E5FB5 /* NewEmployeeViewController.swift in Sources */,
 				EFBB49881F8C41890011698E /* NewServiceViewController.swift in Sources */,
-				234178971ECC32B0000630A1 /* FloatLabelTextView.swift in Sources */,
 				237C529B1EC4BF3200D98DD9 /* HomeViewController.swift in Sources */,
 				236DF4F31F58152300A48C73 /* GPSegmentedControl.swift in Sources */,
 				238BA8041EC9CD03002F9F0A /* Const.swift in Sources */,
 				238B1BB11F52977400A1F6CA /* CalendarDayCollectionViewCell.swift in Sources */,
+				EF0EAF1A1F99560A0092F810 /* InOutAnimator.swift in Sources */,
 				2304A6101F40589400E1FB7E /* RevealMenuViewController.swift in Sources */,
 				2304A6181F40599300E1FB7E /* ProdottiViewController.swift in Sources */,
 				233085A01EDEC4A500D4FB8C /* DragAndDropViewController.swift in Sources */,

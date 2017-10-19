@@ -21,11 +21,14 @@ class NewEmployeeViewController: UIViewController {
    @IBOutlet weak var servicesLabel: UILabel!
    @IBOutlet weak var saveButton: UIButton!
    
+   let inOutTransition = InOutAnimator()
+   
    override func viewDidLoad() {
       super.viewDidLoad()
       
       self.applyTypography()
       self.setupUI()
+      
    }
    
    func applyTypography() {
@@ -51,4 +54,38 @@ class NewEmployeeViewController: UIViewController {
       self.view.endEditing(true)
    }
    
+   @IBAction func closeButtonPressed(sender: UIButton) {
+      self.dismiss(animated: true, completion: nil)
+   }
+   
+   @IBAction func addEmployeeWorkingHoursButtonPressed(sender: UIButton) {
+      let workingHoursVC = UIStoryboard.workingHoursVC()
+      self.inOutTransition.duration = 1.5
+      self.inOutTransition.originFrame = sender.convert(sender.bounds, to: nil)
+      self.inOutTransition.presentingVCFrame = self.view.convert(self.view.bounds, to: nil)
+      workingHoursVC.transitioningDelegate = self
+      self.present(workingHoursVC, animated: true, completion: nil)
+   }
+   
+   @IBAction func addServicesButtonPressed(sender: UIButton) {
+      
+   }
+   
+   @IBAction func saveButtonPressed(sender: UIButton) {
+      self.dismiss(animated: true, completion: nil)
+   }
+   
+}
+
+extension NewEmployeeViewController: UIViewControllerTransitioningDelegate {
+   
+   func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+      self.inOutTransition.isPresenting = false
+      return inOutTransition
+   }
+   
+   func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+      self.inOutTransition.isPresenting = true
+      return inOutTransition
+   }
 }

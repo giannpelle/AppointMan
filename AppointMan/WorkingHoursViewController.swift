@@ -15,6 +15,8 @@ class WorkingHoursViewController: UIViewController {
    let placeholderInsetHeight: CGFloat = 10.0
    
    @IBOutlet weak var employeeLabel: UILabel!
+   @IBOutlet weak var cancelButton: UIButton!
+   @IBOutlet weak var doneButton: UIButton!
    @IBOutlet weak var weekDaysStackView: UIStackView!
    @IBOutlet weak var hoursScrollView: UIScrollView!
    @IBOutlet weak var workingHoursPlannerScrollView: UIScrollView!
@@ -22,15 +24,20 @@ class WorkingHoursViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       
+      self.applyTypography()
+      self.setupUI()
+   }
+   
+   func applyTypography() {
       self.employeeLabel.attributedText = UILabel.attributedString(withText: "Gianluigi Pelle", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 16.0)!, andCharacterSpacing: nil, isCentered: true)
       self.employeeLabel.heightAnchor.constraint(equalToConstant: 19.0).isActive = true
       
-      self.setupWeekdaysStackView()
-      self.setupHoursScrollView()
-      self.setupWorkingHoursPlannerScrollView()
-   }
-   
-   func setupWeekdaysStackView() {
+      self.cancelButton.setAttributedTitle(UILabel.attributedString(withText: "Annulla", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: nil), for: .normal)
+      self.cancelButton.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
+      
+      self.doneButton.setAttributedTitle(UILabel.attributedString(withText: "Fatto", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: nil), for: .normal)
+      self.doneButton.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
+      
       let days = Date.weekDays()
       for (index, view) in self.weekDaysStackView.arrangedSubviews.enumerated() {
          if let dayLabel = view as? UILabel {
@@ -38,6 +45,11 @@ class WorkingHoursViewController: UIViewController {
             dayLabel.heightAnchor.constraint(equalToConstant: 19.0).isActive = true
          }
       }
+   }
+   
+   func setupUI() {
+      self.setupHoursScrollView()
+      self.setupWorkingHoursPlannerScrollView()
    }
    
    func setupHoursScrollView() {
@@ -56,7 +68,6 @@ class WorkingHoursViewController: UIViewController {
          myLabel.widthAnchor.constraint(equalToConstant: self.hoursScrollView.bounds.size.width).isActive = true
          myLabel.heightAnchor.constraint(equalToConstant: self.hourUnitHeight).isActive = true
          myLabel.attributedText = UILabel.attributedString(withText: "\(index + 6):00", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: nil, isCentered: true)
-         myLabel.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
          hourLabels.append(myLabel)
       }
       
@@ -82,7 +93,7 @@ class WorkingHoursViewController: UIViewController {
    
    func setupWorkingHoursPlannerScrollView() {
       
-      self.workingHoursPlannerScrollView.clipsToBounds = false
+      self.workingHoursPlannerScrollView.clipsToBounds = true
       self.workingHoursPlannerScrollView.delegate = self
       self.workingHoursPlannerScrollView.bounces = false
       self.workingHoursPlannerScrollView.showsVerticalScrollIndicator = false
@@ -106,6 +117,15 @@ class WorkingHoursViewController: UIViewController {
       workingHoursPlannerView.topAnchor.constraint(equalTo: self.workingHoursPlannerScrollView.topAnchor, constant: 0.0).isActive = true
       workingHoursPlannerView.heightAnchor.constraint(equalToConstant: self.hourUnitHeight * (self.numberOfHours)).isActive = true
    }
+   
+   @IBAction func cancelButtonPressed(sender: UIButton) {
+      self.dismiss(animated: true, completion: nil)
+   }
+   
+   @IBAction func doneButtonPressed(sender: UIButton) {
+      self.dismiss(animated: true, completion: nil)
+   }
+   
 }
 
 extension WorkingHoursViewController: UIScrollViewDelegate {

@@ -13,6 +13,35 @@ class AddEmployeesViewController: UIViewController {
    @IBOutlet weak var employeesLabel: UILabel!
    @IBOutlet weak var employeesCollectionView: UICollectionView!
    
+   var tapOverlayGesture: UITapGestureRecognizer!
+   
+   override func viewDidAppear(_ animated: Bool) {
+      super.viewDidAppear(animated)
+      
+      self.tapOverlayGesture = UITapGestureRecognizer(target: self, action: #selector(self.overlayTapped(sender:)))
+      self.tapOverlayGesture.delegate = self
+      self.tapOverlayGesture.numberOfTapsRequired = 1
+      self.tapOverlayGesture.cancelsTouchesInView = false
+      self.view.window?.addGestureRecognizer(self.tapOverlayGesture)
+   }
+   
+   @objc func overlayTapped(sender: UITapGestureRecognizer) {
+      if sender.state == .ended {
+         guard let presentedView = presentedViewController?.view else {
+            return
+         }
+         if !presentedView.bounds.contains(sender.location(in: presentedView)) {
+            self.dismiss(animated: true, completion: nil)
+         }
+      }
+   }
+   
+   override func viewWillDisappear(_ animated: Bool) {
+      super.viewWillDisappear(animated)
+      
+      self.view.window?.removeGestureRecognizer(tapOverlayGesture)
+   }
+   
    override func viewDidLoad() {
       super.viewDidLoad()
       
@@ -95,7 +124,6 @@ extension AddEmployeesViewController: UICollectionViewDataSource {
       
       return cell
    }
-   
 }
 
 extension AddEmployeesViewController: UICollectionViewDelegateFlowLayout {
@@ -107,4 +135,11 @@ extension AddEmployeesViewController: UICollectionViewDelegateFlowLayout {
 
 extension AddEmployeesViewController: UICollectionViewDelegate {
    
+}
+
+extension AddEmployeesViewController: UIGestureRecognizerDelegate {
+   
+   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+      return true
+   }
 }
