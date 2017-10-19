@@ -19,7 +19,7 @@ class SliderDatePickerDayCollectionViewCell: UICollectionViewCell {
             self.dayLabel.attributedText = UILabel.attributedString(withText: self.dayLabel.attributedText?.string ?? "", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 21.0) ?? UIFont.systemFont(ofSize: 21.0), andCharacterSpacing: nil, isCentered: true)
          } else {
             self.dayLabel.attributedText = UILabel.attributedString(withText: self.dayLabel.attributedText?.string ?? "", andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 13.0) ?? UIFont.systemFont(ofSize: 13.0), andCharacterSpacing: nil, isCentered: true)
-            self.dayLabel.setLineHeightInset(2.0)
+            self.dayLabel.heightAnchor.constraint(equalToConstant: 15.0).isActive = true
          }
       }
    }
@@ -67,7 +67,7 @@ class SliderDatePickerDayCollectionViewCell: UICollectionViewCell {
    
    func setup(withDay day: String) {
       self.dayLabel.attributedText = UILabel.attributedString(withText: day, andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 13.0) ?? UIFont.systemFont(ofSize: 13.0), andCharacterSpacing: nil, isCentered: true)
-      self.dayLabel.setLineHeightInset(2.0)
+      self.dayLabel.heightAnchor.constraint(equalToConstant: 15.0).isActive = true
    }
 }
 

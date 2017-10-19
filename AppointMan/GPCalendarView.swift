@@ -39,7 +39,7 @@ class GPCalendarView: UIView {
    var currentMonthIndex: Int = 0 {
       didSet {
          self.monthLabel.attributedText = UILabel.attributedString(withText: Date().increaseMonth(by: self.currentMonthIndex).getMonthAndYearText().capitalized, andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 14.0)!, andCharacterSpacing: nil, isCentered: true)
-         self.monthLabel.setLineHeightInset(2.0)
+         self.monthLabel.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
          self.cleanCells()
          self.currentIndexPathSelected = nil
          self.daysCollectionView.reloadData()
@@ -159,7 +159,7 @@ class GPCalendarView: UIView {
       
       self.monthLabel = UILabel()
       self.monthLabel.attributedText = UILabel.attributedString(withText: Date().increaseMonth(by: self.currentMonthIndex).getMonthAndYearText().capitalized, andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 14.0)!, andCharacterSpacing: nil, isCentered: true)
-      self.monthLabel.setLineHeightInset(2.0)
+      self.monthLabel.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
       self.topBar.addSubview(self.monthLabel)
       self.monthLabel.translatesAutoresizingMaskIntoConstraints = false
       self.monthLabel.centerXAnchor.constraint(equalTo: self.topBar.centerXAnchor).isActive = true
@@ -179,7 +179,7 @@ class GPCalendarView: UIView {
       for dayOfWeek in Date.weekDays(withShortFormat: true) {
          let weekDayLabel = UILabel()
          weekDayLabel.attributedText = UILabel.attributedString(withText: dayOfWeek.uppercased(), andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 10)!, andCharacterSpacing: nil, isCentered: true)
-         weekDayLabel.setLineHeightInset(2.0)
+         weekDayLabel.heightAnchor.constraint(equalToConstant: 12.0).isActive = true
          weekDayLabels.append(weekDayLabel)
       }
       

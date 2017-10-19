@@ -60,7 +60,7 @@ class ServicesHeaderCollectionReusableView: UICollectionReusableView {
          rightAccessoryLinePath.addLine(to: CGPoint(x: rect.size.width - 14.0, y: ((rect.size.height / 2.0) - 1.0).rounded()))
       }
       
-      UIColor(red: 151/255.0, green: 151/255.0, blue: 151/255.0, alpha: 1.0).setStroke()
+      UIColor.grayWith(value: 151).setStroke()
       leftAccessoryLinePath.stroke()
       rightAccessoryLinePath.stroke()
    }

@@ -108,6 +108,8 @@
 		23E63CB51F41B15A0084EA75 /* SFText-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 23E63C821F41B15A0084EA75 /* SFText-SemiboldItalic.otf */; };
 		23FEE8791EE4B3C00062192C /* AppointmentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEE8781EE4B3C00062192C /* AppointmentBox.swift */; };
 		23FEE87B1EE4B3DB0062192C /* AppointmentBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23FEE87A1EE4B3DB0062192C /* AppointmentBox.xib */; };
+		EF23F1EE1F977503007661BC /* DeleteServicePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */; };
+		EF23F1F01F977517007661BC /* DeleteServicePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */; };
 		EF3290931F927409008BB930 /* OnBoardingNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3290921F927409008BB930 /* OnBoardingNavigationBar.swift */; };
 		EF3290951F927C0F008BB930 /* ClosingDaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3290941F927C0F008BB930 /* ClosingDaysViewController.swift */; };
 		EFBB49881F8C41890011698E /* NewServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBB49871F8C41890011698E /* NewServiceViewController.swift */; };
@@ -240,6 +242,8 @@
 		23E63C821F41B15A0084EA75 /* SFText-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFText-SemiboldItalic.otf"; sourceTree = "<group>"; };
 		23FEE8781EE4B3C00062192C /* AppointmentBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppointmentBox.swift; sourceTree = "<group>"; };
 		23FEE87A1EE4B3DB0062192C /* AppointmentBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppointmentBox.xib; sourceTree = "<group>"; };
+		EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeleteServicePopupView.xib; sourceTree = "<group>"; };
+		EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteServicePopupView.swift; sourceTree = "<group>"; };
 		EF3290921F927409008BB930 /* OnBoardingNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingNavigationBar.swift; sourceTree = "<group>"; };
 		EF3290941F927C0F008BB930 /* ClosingDaysViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosingDaysViewController.swift; sourceTree = "<group>"; };
 		EFBB49871F8C41890011698E /* NewServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewServiceViewController.swift; sourceTree = "<group>"; };
@@ -412,6 +416,8 @@
 			children = (
 				EFD86F961F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift */,
 				EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */,
+				EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */,
+				EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */,
 				236DF5071F58753E00A48C73 /* WorkingHoursPlannerView.xib */,
 				236DF5031F586C4F00A48C73 /* WorkingHoursPlannerView.swift */,
 			);
@@ -689,6 +695,7 @@
 				23E63CA81F41B15A0084EA75 /* SFDisplay-Thin.otf in Resources */,
 				23E63CA41F41B15A0084EA75 /* SFDisplay-Light.otf in Resources */,
 				234D40491ED2DCC3008F4AA9 /* SuggestionCell.xib in Resources */,
+				EF23F1EE1F977503007661BC /* DeleteServicePopupView.xib in Resources */,
 				23E63CA91F41B15A0084EA75 /* SFDisplay-Ultralight.otf in Resources */,
 				23E63C8B1F41B15A0084EA75 /* SF-Pro-Display-Medium.otf in Resources */,
 				23E63CA61F41B15A0084EA75 /* SFDisplay-Regular.otf in Resources */,
@@ -740,6 +747,7 @@
 			files = (
 				237500641EE69EF800B99CF5 /* ScheduleItemView.swift in Sources */,
 				23B1E8B51F44890F00BE5BB6 /* ThumbnailCollectionViewCell.swift in Sources */,
+				EF23F1F01F977517007661BC /* DeleteServicePopupView.swift in Sources */,
 				237A135E1ECB890200DF0182 /* AddAppointmentViewController.swift in Sources */,
 				23E63C4C1F41A37E0084EA75 /* FiltraAppuntamentiViewController.swift in Sources */,
 				23C80E411F7D694900C4CACE /* AddEmployeesViewController.swift in Sources */,

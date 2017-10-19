@@ -315,9 +315,21 @@ extension UIImage {
       UIGraphicsEndImageContext()
       return newImage!
    }
+   
+   func takeSnapshotOfView(sourceView view: UIView) -> UIImage {
+      UIGraphicsBeginImageContext(view.frame.size)
+      view.drawHierarchy(in: CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height), afterScreenUpdates: true)
+      let image = UIGraphicsGetImageFromCurrentImageContext()
+      UIGraphicsEndImageContext()
+      return image!
+   }
 }
 
 extension UIColor {
+   
+   class func grayWith(value: CGFloat) -> UIColor {
+      return UIColor(red: value/255.0, green: value/255.0, blue: value/255.0, alpha: 1.0)
+   }
    
    class func getMiddleColor(fromColor startColor: UIColor, toColor endColor: UIColor, withPercentage percentage: CGFloat) -> UIColor {
       guard percentage != 0.0 else {
@@ -337,11 +349,6 @@ extension UIColor {
 }
 
 extension UILabel {
-   
-   func setLineHeightInset(_ height: CGFloat) {
-      self.sizeToFit()
-      self.bounds.size.height += height
-   }
    
    class func attributedString(withText text: String, andTextColor textColor: UIColor, andFont font: UIFont, andCharacterSpacing characterSpacing: CGFloat?, isCentered: Bool = false) -> NSAttributedString {
       
@@ -377,7 +384,7 @@ extension UILabel {
    class func onBoardingTitleView(withText text: String) -> UILabel {
       let onBoardingTitleLabel = UILabel()
       onBoardingTitleLabel.attributedText = UILabel.attributedString(withText: text, andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 16.0)!, andCharacterSpacing: nil, isCentered: true)
-      onBoardingTitleLabel.setLineHeightInset(3.0)
+      onBoardingTitleLabel.heightAnchor.constraint(equalToConstant: 19.0).isActive = true
       return onBoardingTitleLabel
    }
 }

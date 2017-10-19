@@ -133,6 +133,12 @@ extension AddServicesViewController: UICollectionViewDelegateFlowLayout {
 
 extension AddServicesViewController: UICollectionViewDelegate {
    
+   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      if let currentCell = collectionView.cellForItem(at: indexPath) as? ServiceCollectionViewCell {
+         currentCell.showOverlayMenu()
+      }
+   }
+   
 }
 
 extension AddServicesViewController: UIGestureRecognizerDelegate {

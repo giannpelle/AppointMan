@@ -22,7 +22,7 @@ class SuggestionCollectionViewCell: UICollectionViewCell {
       super.awakeFromNib()
       
       self.suggestionButton.contentEdgeInsets = UIEdgeInsets(top: 0.0, left: 12.0, bottom: 0.0, right: 12.0)
-      self.suggestionButton.backgroundColor = UIColor(red: 97/255.0, green: 97/255.0, blue: 97/255.0, alpha: 1.0)
+      self.suggestionButton.backgroundColor = UIColor.grayWith(value: 97)
       self.suggestionButton.layer.cornerRadius = 4.0
       self.suggestionButton.heightAnchor.constraint(equalToConstant: 49.0).isActive = true
       

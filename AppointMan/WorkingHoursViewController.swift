@@ -23,7 +23,7 @@ class WorkingHoursViewController: UIViewController {
       super.viewDidLoad()
       
       self.employeeLabel.attributedText = UILabel.attributedString(withText: "Gianluigi Pelle", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 16.0)!, andCharacterSpacing: nil, isCentered: true)
-      self.employeeLabel.setLineHeightInset(3.0)
+      self.employeeLabel.heightAnchor.constraint(equalToConstant: 19.0).isActive = true
       
       self.setupWeekdaysStackView()
       self.setupHoursScrollView()
@@ -35,7 +35,7 @@ class WorkingHoursViewController: UIViewController {
       for (index, view) in self.weekDaysStackView.arrangedSubviews.enumerated() {
          if let dayLabel = view as? UILabel {
             dayLabel.attributedText = UILabel.attributedString(withText: days[index], andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 16.0)!, andCharacterSpacing: 1.14, isCentered: true)
-            dayLabel.setLineHeightInset(3.0)
+            dayLabel.heightAnchor.constraint(equalToConstant: 19.0).isActive = true
          }
       }
    }
@@ -56,7 +56,7 @@ class WorkingHoursViewController: UIViewController {
          myLabel.widthAnchor.constraint(equalToConstant: self.hoursScrollView.bounds.size.width).isActive = true
          myLabel.heightAnchor.constraint(equalToConstant: self.hourUnitHeight).isActive = true
          myLabel.attributedText = UILabel.attributedString(withText: "\(index + 6):00", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: nil, isCentered: true)
-         myLabel.setLineHeightInset(2.0)
+         myLabel.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
          hourLabels.append(myLabel)
       }
       

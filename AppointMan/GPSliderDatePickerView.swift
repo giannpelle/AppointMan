@@ -24,7 +24,7 @@ class GPSliderDatePickerView: UIView {
       didSet {
          print(self.currentDateSelected.getFullDayDescription())
          self.currentDayAccessoryLabel.attributedText = UILabel.attributedString(withText: self.currentDateSelected.getFullDayDescription(), andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 12.0) ?? UIFont.systemFont(ofSize: 12), andCharacterSpacing: nil, isCentered: true)
-         self.currentDayAccessoryLabel.setLineHeightInset(2.0)
+         self.currentDayAccessoryLabel.heightAnchor.constraint(equalToConstant: 14.0).isActive = true
          self.delegate?.sliderDatePickerView(sliderDatePickerView: self, didSelectDate: self.currentDateSelected)
          let date1 = Calendar.current.startOfDay(for: Date().startOfMonth())
          let date2 = Calendar.current.startOfDay(for: self.currentDateSelected.startOfMonth())
@@ -89,7 +89,7 @@ class GPSliderDatePickerView: UIView {
       
       self.currentDayAccessoryLabel = UILabel()
       self.currentDayAccessoryLabel.attributedText = UILabel.attributedString(withText: Date().getFullDayDescription(), andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 12.0) ?? UIFont.systemFont(ofSize: 12), andCharacterSpacing: nil, isCentered: true)
-      self.currentDayAccessoryLabel.setLineHeightInset(2.0)
+      self.currentDayAccessoryLabel.heightAnchor.constraint(equalToConstant: 14.0).isActive = true
       self.currentDayAccessoryView.addSubview(self.currentDayAccessoryLabel)
       self.currentDayAccessoryLabel.translatesAutoresizingMaskIntoConstraints = false
       self.currentDayAccessoryLabel.leadingAnchor.constraint(equalTo: self.currentDayAccessoryView.leadingAnchor, constant: 10.0).isActive = true
@@ -213,10 +213,10 @@ extension GPSliderDatePickerView: UICollectionViewDelegate {
             if value <= cell.bounds.size.width {
                let percentage = (value * 1.0 / cell.bounds.size.width)
                cell.dayLabel.attributedText = UILabel.attributedString(withText: cell.dayLabel.attributedText?.string ?? "", andTextColor: UIColor.getMiddleColor(fromColor: UIColor.amOpaqueBlue, toColor: UIColor.white, withPercentage: 1 - percentage), andFont: UIFont.init(name: "SFUIText-Bold", size: (21.0 - 13.0) - (value * (21.0 - 13.0) / cell.bounds.size.width) + 13.0) ?? UIFont.systemFont(ofSize: (21.0 - 13.0) - (value * (21.0 - 13.0) / cell.bounds.size.width) + 13.0), andCharacterSpacing: nil, isCentered: true)
-               cell.dayLabel.setLineHeightInset(2.0)
+               cell.dayLabel.heightAnchor.constraint(equalToConstant: (21.0 - 13.0) - (value * (21.0 - 13.0) / cell.bounds.size.width) + 13.0 + 2.0).isActive = true
             } else {
                cell.dayLabel.attributedText = UILabel.attributedString(withText: cell.dayLabel.attributedText?.string ?? "", andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 13.0) ?? UIFont.systemFont(ofSize: 13.0), andCharacterSpacing: nil, isCentered: true)
-               cell.dayLabel.setLineHeightInset(2.0)
+               cell.dayLabel.heightAnchor.constraint(equalToConstant: 15.0).isActive = true
             }
          }
       }
@@ -233,7 +233,7 @@ extension GPSliderDatePickerView: UICollectionViewDelegate {
          let nearestCellIndex = rightCellDistance < leftCellDistance ? rightCellIndex : leftCellIndex
          let newIndexPath = self.getIndexPath(fromCurrentIndex: Int(nearestCellIndex))
          self.currentDayAccessoryLabel.attributedText = UILabel.attributedString(withText: Date().increaseMonth(by: self.currentMonthIndex).increaseMonth(by: newIndexPath.section - 2).convert(toDay: self.calendarDays[newIndexPath.section][newIndexPath.row]).getFullDayDescription(), andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 12.0) ?? UIFont.systemFont(ofSize: 12), andCharacterSpacing: nil, isCentered: true)
-         self.currentDayAccessoryLabel.setLineHeightInset(2.0)
+         self.currentDayAccessoryLabel.heightAnchor.constraint(equalToConstant: 14.0).isActive = true
       }
    }
    

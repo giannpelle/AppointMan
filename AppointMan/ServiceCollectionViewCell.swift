@@ -14,6 +14,10 @@ class ServiceCollectionViewCell: UICollectionViewCell {
    @IBOutlet weak var serviceDurationLabel: UILabel!
    @IBOutlet weak var gendersStackView: UIStackView!
    
+   weak var overlayLayer: CALayer?
+   weak var actionsStackView: UIStackView?
+   var isActionsMenuOpen: Bool = false
+   
    override func draw(_ rect: CGRect) {
       super.draw(rect)
       
@@ -51,7 +55,66 @@ class ServiceCollectionViewCell: UICollectionViewCell {
       let maleImageView = UIImageView(image: #imageLiteral(resourceName: "iconcina_sesso_uomo"))
       self.gendersStackView.addArrangedSubview(maleImageView)
       
+   }
+   
+   func showOverlayMenu() {
+   
+      if self.isActionsMenuOpen {
+         self.isActionsMenuOpen = false
+         
+         if let overlay = self.overlayLayer {
+            overlay.removeFromSuperlayer()
+         }
+         
+         if let actionsMenu = self.actionsStackView {
+            actionsMenu.removeFromSuperview()
+         }
+      } else {
+         self.isActionsMenuOpen = true
+         
+         if let overlay = self.overlayLayer {
+            self.layer.addSublayer(overlay)
+         } else {
+            let overlayLayer = CALayer()
+            overlayLayer.backgroundColor = UIColor.black.withAlphaComponent(0.6).cgColor
+            overlayLayer.frame = self.bounds
+            self.overlayLayer = overlayLayer
+            self.layer.addSublayer(overlayLayer)
+         }
+         
+         if let actionsMenu = self.actionsStackView {
+            self.addSubview(actionsMenu)
+            actionsMenu.translatesAutoresizingMaskIntoConstraints = false
+            actionsMenu.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+            actionsMenu.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            actionsMenu.heightAnchor.constraint(equalToConstant: 42.0).isActive = true
+         } else {
+            let deleteButton = UIButton()
+            deleteButton.setImage(#imageLiteral(resourceName: "iconcina_cestino"), for: .normal)
+            deleteButton.addTarget(self, action: #selector(self.deleteServiceButtonPressed(sender:)), for: .touchUpInside)
+            let editButton = UIButton()
+            editButton.setImage(#imageLiteral(resourceName: "iconcina_matita"), for: .normal)
+            editButton.addTarget(self, action: #selector(self.editServiceButtonPressed(sender:)), for: .touchUpInside)
+            let stack = UIStackView(arrangedSubviews: [deleteButton, editButton])
+            stack.axis = .horizontal
+            stack.distribution = .fillEqually
+            stack.alignment = .center
+            stack.spacing = 24.0
+            self.actionsStackView = stack
+            self.addSubview(stack)
+            stack.translatesAutoresizingMaskIntoConstraints = false
+            stack.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+            stack.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            stack.heightAnchor.constraint(equalToConstant: 42.0).isActive = true
+         }
+      }
+   }
+   
+   @objc func deleteServiceButtonPressed(sender: UIButton) {
       
+   }
+   
+   @objc func editServiceButtonPressed(sender: UIButton) {
       
    }
    

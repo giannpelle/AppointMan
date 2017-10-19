@@ -46,11 +46,11 @@ class FilterAppointmentTableViewCell: UITableViewCell {
       self.appointmentCardView.addLeftBar(withColor: service.serviceColor)
       
       self.timeLabel.attributedText = UILabel.attributedString(withText: service.serviceTime, andTextColor: service.serviceColor, andFont: UIFont.init(name: "SFUIText-Semibold", size: 9.0)!, andCharacterSpacing: nil)
-      self.timeLabel.setLineHeightInset(2.0)
+      self.timeLabel.heightAnchor.constraint(equalToConstant: 11.0).isActive = true
       self.serviceLabel.attributedText = UILabel.attributedString(withText: service.serviceName, andTextColor: service.serviceColor, andFont: UIFont.init(name: "SFUIText-Semibold", size: 14.0)!, andCharacterSpacing: nil)
-      self.serviceLabel.setLineHeightInset(2.0)
+      self.serviceLabel.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
       self.customerLabel.attributedText = UILabel.attributedString(withText: service.customer, andTextColor: service.serviceColor, andFont: UIFont.init(name: "SFUIText-Semibold", size: 11.0)!, andCharacterSpacing: nil)
-      self.customerLabel.setLineHeightInset(2.0)
+      self.customerLabel.heightAnchor.constraint(equalToConstant: 13.0).isActive = true
       self.employeeImageView.clipsToBounds = true
       self.employeeImageView.layer.cornerRadius = self.employeeImageView.bounds.size.width / 2.0
       self.employeeImageView.image = service.employeeImage

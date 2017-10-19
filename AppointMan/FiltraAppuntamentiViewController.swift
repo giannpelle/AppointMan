@@ -125,7 +125,7 @@ extension FiltraAppuntamentiViewController: UITableViewDataSource {
       let headerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.bounds.size.width, height: 48.0))
       let titleLabel = UILabel()
       titleLabel.attributedText = UILabel.attributedString(withText: "1\(section) maggio 2017", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: 0.0)
-      titleLabel.setLineHeightInset(14.0)
+      titleLabel.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
       headerView.addSubview(titleLabel)
       titleLabel.translatesAutoresizingMaskIntoConstraints = false
       titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 20.0).isActive = true
