@@ -140,7 +140,6 @@ class EmployeeCollectionViewCell: UICollectionViewCell {
    func setupUI() {
       
       self.employeeImageView.layer.masksToBounds = true
-      self.employeeImageView.layer.isOpaque = true
       self.employeeImageView.layer.cornerRadius = self.employeeImageView.bounds.size.width / 2.0
    }
    

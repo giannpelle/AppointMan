@@ -88,7 +88,7 @@ class AddServicesViewController: UIViewController {
    @IBAction func newServiceButtonPressed(sender: UIButton) {
       let newServiceVC = UIStoryboard.newServiceVC()
       newServiceVC.modalPresentationStyle = .formSheet
-      newServiceVC.preferredContentSize = CGSize(width: 540.0, height: 540.0)
+      newServiceVC.preferredContentSize = CGSize(width: 540.0, height: 460.0)
       self.present(newServiceVC, animated: true, completion: nil)
    }
    

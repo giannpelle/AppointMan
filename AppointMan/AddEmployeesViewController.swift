@@ -66,6 +66,13 @@ class AddEmployeesViewController: UIViewController {
       self.navigationController?.popViewController(animated: true)
    }
    
+   @IBAction func newEmployeeButtonPressed(sender: UIButton) {
+      let newServiceVC = UIStoryboard.newEmployeeVC()
+      newServiceVC.modalPresentationStyle = .formSheet
+      newServiceVC.preferredContentSize = CGSize(width: 540.0, height: 645.0)
+      self.present(newServiceVC, animated: true, completion: nil)
+   }
+   
 }
 
 extension AddEmployeesViewController: UICollectionViewDataSource {
