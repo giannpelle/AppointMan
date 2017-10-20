@@ -52,7 +52,7 @@ class AddServicesViewController: UIViewController {
       self.applyTypography()
       self.setupCurrentNavigationItem()
       
-      self.sortSegmentedControl.onBoardingSetUp(withOptions: ["DURATA", "A-Z"])
+      self.sortSegmentedControl.setup(withOptions: ["DURATA", "A-Z"], isBlueBackground: false)
       
       self.servicesCollectionView.delegate = self
       self.servicesCollectionView.dataSource = self

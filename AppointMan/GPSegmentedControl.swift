@@ -10,16 +10,15 @@ import UIKit
 
 extension UISegmentedControl {
    
-   func onBoardingSetUp(withOptions options: [String]) {
-      self.tintColor = UIColor.amBlue
-      self.layer.masksToBounds = false
-      self.clipsToBounds = false
-      self.layer.cornerRadius = 5.0
+   func setup(withOptions options: [String], isBlueBackground: Bool) {
       
-      self.setup(withOptions: options)
-   }
-   
-   func setup(withOptions options: [String]) {
+      self.tintColor = isBlueBackground ? UIColor.white : UIColor.amBlue
+      self.layer.masksToBounds = true
+      self.layer.cornerRadius = self.bounds.size.height / 2.0
+      self.layer.borderColor = isBlueBackground ? UIColor.white.cgColor : UIColor.amBlue.cgColor
+      self.layer.borderWidth = 1.0
+      self.backgroundColor = isBlueBackground ? UIColor.amBlue : UIColor.white
+      
       for (index, option) in options.enumerated() {
          self.setTitle(option, forSegmentAt: index)
       }
@@ -29,12 +28,12 @@ extension UISegmentedControl {
       style.alignment = .center
       self.setTitleTextAttributes([NSAttributedStringKey.paragraphStyle: style,
                                    NSAttributedStringKey.kern: 1.0,
-                                   NSAttributedStringKey.font: UIFont.init(name: "SFUIText-Bold", size: 10.0)!,
-                                   NSAttributedStringKey.foregroundColor: UIColor.amBlue], for: .normal)
+                                   NSAttributedStringKey.font: UIFont.init(name: "SFUIText-Bold", size: 10.0) ?? UIFont.systemFont(ofSize: 10.0),
+                                   NSAttributedStringKey.foregroundColor: isBlueBackground ? UIColor.white : UIColor.amBlue], for: .normal)
       self.setTitleTextAttributes([NSAttributedStringKey.paragraphStyle: style,
                                    NSAttributedStringKey.kern: 1.0,
-                                   NSAttributedStringKey.font: UIFont.init(name: "SFUIText-Bold", size: 10.0)!,
-                                   NSAttributedStringKey.foregroundColor: UIColor.white], for: .selected)
+                                   NSAttributedStringKey.font: UIFont.init(name: "SFUIText-Bold", size: 10.0) ?? UIFont.systemFont(ofSize: 10.0),
+                                   NSAttributedStringKey.foregroundColor: isBlueBackground ? UIColor.amBlue : UIColor.white], for: .selected)
       self.selectedSegmentIndex = 0
    }
 

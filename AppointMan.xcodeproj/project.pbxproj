@@ -116,6 +116,9 @@
 		EFD86F951F92953E00E92425 /* ServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */; };
 		EFD86F971F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD86F961F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift */; };
 		EFE309091F98A2ED006247B2 /* EmployeeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE309081F98A2ED006247B2 /* EmployeeCollectionViewCell.swift */; };
+		EFF22E9F1F99F11600C7E052 /* BottomImagePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFF22E9E1F99F11600C7E052 /* BottomImagePickerView.xib */; };
+		EFF22EA11F99F15200C7E052 /* BottomImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF22EA01F99F15200C7E052 /* BottomImagePickerView.swift */; };
+		EFF22EA51F9A49F600C7E052 /* ServicesInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFF22EA41F9A49F600C7E052 /* ServicesInputView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -251,6 +254,9 @@
 		EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCollectionViewCell.swift; sourceTree = "<group>"; };
 		EFD86F961F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		EFE309081F98A2ED006247B2 /* EmployeeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCollectionViewCell.swift; sourceTree = "<group>"; };
+		EFF22E9E1F99F11600C7E052 /* BottomImagePickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomImagePickerView.xib; sourceTree = "<group>"; };
+		EFF22EA01F99F15200C7E052 /* BottomImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomImagePickerView.swift; sourceTree = "<group>"; };
+		EFF22EA41F9A49F600C7E052 /* ServicesInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServicesInputView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -406,8 +412,11 @@
 				EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */,
 				EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */,
 				EFE309081F98A2ED006247B2 /* EmployeeCollectionViewCell.swift */,
+				EFF22E9E1F99F11600C7E052 /* BottomImagePickerView.xib */,
+				EFF22EA01F99F15200C7E052 /* BottomImagePickerView.swift */,
 				236DF5071F58753E00A48C73 /* WorkingHoursPlannerView.xib */,
 				236DF5031F586C4F00A48C73 /* WorkingHoursPlannerView.swift */,
+				EFF22EA41F9A49F600C7E052 /* ServicesInputView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -670,6 +679,7 @@
 				23E63C9A1F41B15A0084EA75 /* SF-Pro-Text-LightItalic.otf in Resources */,
 				23E63CA21F41B15A0084EA75 /* SFDisplay-Bold.otf in Resources */,
 				23E63C851F41B15A0084EA75 /* SF-Pro-Display-Bold.otf in Resources */,
+				EFF22E9F1F99F11600C7E052 /* BottomImagePickerView.xib in Resources */,
 				23E63C991F41B15A0084EA75 /* SF-Pro-Text-Light.otf in Resources */,
 				23E63C9B1F41B15A0084EA75 /* SF-Pro-Text-Medium.otf in Resources */,
 				23E63C981F41B15A0084EA75 /* SF-Pro-Text-HeavyItalic.otf in Resources */,
@@ -702,6 +712,7 @@
 				23E63CAB1F41B15A0084EA75 /* SFText-BoldItalic.otf in Resources */,
 				23E63CAA1F41B15A0084EA75 /* SFText-Bold.otf in Resources */,
 				23E63C971F41B15A0084EA75 /* SF-Pro-Text-Heavy.otf in Resources */,
+				EFF22EA51F9A49F600C7E052 /* ServicesInputView.xib in Resources */,
 				23E63C951F41B15A0084EA75 /* SF-Pro-Text-Bold.otf in Resources */,
 				23E63C8D1F41B15A0084EA75 /* SF-Pro-Display-Regular.otf in Resources */,
 				23E63CA31F41B15A0084EA75 /* SFDisplay-Heavy.otf in Resources */,
@@ -771,6 +782,7 @@
 				237C529B1EC4BF3200D98DD9 /* HomeViewController.swift in Sources */,
 				236DF4F31F58152300A48C73 /* GPSegmentedControl.swift in Sources */,
 				238BA8041EC9CD03002F9F0A /* Const.swift in Sources */,
+				EFF22EA11F99F15200C7E052 /* BottomImagePickerView.swift in Sources */,
 				238B1BB11F52977400A1F6CA /* CalendarDayCollectionViewCell.swift in Sources */,
 				EF0EAF1A1F99560A0092F810 /* InOutAnimator.swift in Sources */,
 				2304A6101F40589400E1FB7E /* RevealMenuViewController.swift in Sources */,
