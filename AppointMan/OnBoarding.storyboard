@@ -658,6 +658,88 @@
             </objects>
             <point key="canvasLocation" x="-649.21875" y="35.9375"/>
         </scene>
+        <!--Closing Days View Controller-->
+        <scene sceneID="OZa-g3-wGj">
+            <objects>
+                <viewController storyboardIdentifier="closingDaysVC" id="SSi-3r-VSO" customClass="ClosingDaysViewController" customModule="AppointMan" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eS1-zb-dvr"/>
+                        <viewControllerLayoutGuide type="bottom" id="e6U-lh-xgi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Eu0-fi-9Z1">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qNo-Aq-Vm3">
+                                <rect key="frame" x="24" y="24" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qic-xs-kYQ">
+                                <rect key="frame" x="24" y="87.5" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4Tx-4b-4Hs">
+                                <rect key="frame" x="24" y="133" width="976" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="47b-h6-KPe">
+                                        <rect key="frame" x="0.0" y="0.0" width="122.5" height="60"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7pC-Db-Wvv">
+                                        <rect key="frame" x="142.5" y="0.0" width="122" height="60"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKq-1I-tOd">
+                                        <rect key="frame" x="284.5" y="0.0" width="122.5" height="60"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j3E-Py-7gE">
+                                        <rect key="frame" x="427" y="0.0" width="122" height="60"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rR-hH-mhr">
+                                        <rect key="frame" x="569" y="0.0" width="122.5" height="60"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LDB-ir-xrm">
+                                        <rect key="frame" x="711.5" y="0.0" width="122" height="60"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8i-uY-6dP">
+                                        <rect key="frame" x="853.5" y="0.0" width="122.5" height="60"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Aao-dz-IQZ"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4Tx-4b-4Hs" firstAttribute="leading" secondItem="Eu0-fi-9Z1" secondAttribute="leading" constant="24" id="12n-TD-sGd"/>
+                            <constraint firstItem="qNo-Aq-Vm3" firstAttribute="top" secondItem="Eu0-fi-9Z1" secondAttribute="top" constant="24" id="2ZQ-Bf-TuQ"/>
+                            <constraint firstItem="qNo-Aq-Vm3" firstAttribute="leading" secondItem="Eu0-fi-9Z1" secondAttribute="leading" constant="24" id="DQD-zj-oBN"/>
+                            <constraint firstItem="qic-xs-kYQ" firstAttribute="top" secondItem="qNo-Aq-Vm3" secondAttribute="bottom" constant="43" id="WMU-ht-l2h"/>
+                            <constraint firstItem="qic-xs-kYQ" firstAttribute="leading" secondItem="Eu0-fi-9Z1" secondAttribute="leading" constant="24" id="eYX-59-ZA6"/>
+                            <constraint firstItem="4Tx-4b-4Hs" firstAttribute="top" secondItem="qic-xs-kYQ" secondAttribute="bottom" constant="25" id="inv-iB-bH6"/>
+                            <constraint firstAttribute="trailing" secondItem="4Tx-4b-4Hs" secondAttribute="trailing" constant="24" id="sXd-ns-Cih"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="closingDaysLabel" destination="qNo-Aq-Vm3" id="hlW-UG-pKK"/>
+                        <outlet property="closureLabel" destination="qic-xs-kYQ" id="MT5-ki-uLR"/>
+                        <outlet property="weekDaysStackView" destination="4Tx-4b-4Hs" id="S1e-Ao-NmG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v6r-4h-ctE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="24" y="36"/>
+        </scene>
         <!--Working Hours View Controller-->
         <scene sceneID="dhm-Gf-XnU">
             <objects>
@@ -780,7 +862,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="feX-xW-525" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32" y="36"/>
+            <point key="canvasLocation" x="-649" y="754"/>
         </scene>
         <!--New Service View Controller-->
         <scene sceneID="WnH-jd-dA8">
@@ -973,7 +1055,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TNP-Vk-plh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2044" y="36"/>
+            <point key="canvasLocation" x="-1990" y="36"/>
         </scene>
     </scenes>
     <resources>
