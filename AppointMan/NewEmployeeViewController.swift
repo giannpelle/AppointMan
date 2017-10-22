@@ -19,11 +19,16 @@ class NewEmployeeViewController: UIViewController {
    @IBOutlet weak var employeeEmailFloatingTextField: GPFloatingTextField!
    @IBOutlet weak var employeeWorkingHoursLabel: UILabel!
    @IBOutlet weak var addEmployeeWorkingHoursButton: UIButton!
+   @IBOutlet weak var addEmployeeWorkingHoursButtonTrailingAnchor: NSLayoutConstraint!
+   @IBOutlet weak var workingHoursStackView: UIStackView!
    @IBOutlet weak var servicesLabel: UILabel!
    @IBOutlet weak var addServicesButton: UIButton!
    @IBOutlet weak var employeeServicesCollectionView: UICollectionView!
    @IBOutlet weak var saveButton: UIButton!
    
+   lazy var addEmployeeWorkingHoursButtonLeadingAnchor: NSLayoutConstraint = {
+      return self.addEmployeeWorkingHoursButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20.0)
+   }()
    lazy var inOutTransition = {
       return InOutAnimator()
    }()
@@ -56,7 +61,11 @@ class NewEmployeeViewController: UIViewController {
    func applyTypography() {
       self.newEmployeeLabel.attributedText = UILabel.attributedString(withText: "NUOVO DIPENDENTE", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86, isCentered: true)
       self.employeeWorkingHoursLabel.attributedText = UILabel.attributedString(withText: "ORARIO DI LAVORO", andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
-      self.addEmployeeWorkingHoursButton.setAttributedTitle(UILabel.attributedString(withText: "SELEZIONA ORARIO", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.0, isCentered: true), for: .normal)
+      if let workingHoursLabels = self.workingHoursStackView.arrangedSubviews as? [UILabel] {
+         for (index, workingHoursLabel) in workingHoursLabels.enumerated() {
+            workingHoursLabel.attributedText = UILabel.attributedString(withText: Date.weekDays(withShortFormat: true)[index].uppercased(), andTextColor: index % 3 == 0 ? UIColor.grayWith(value: 214) : UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86, isCentered: true)
+         }
+      }
       self.servicesLabel.attributedText = UILabel.attributedString(withText: "SERVIZI", andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
       self.saveButton.setAttributedTitle(UILabel.attributedString(withText: "SALVA", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 16.0)!, andCharacterSpacing: 1.14, isCentered: true), for: .normal)
       self.saveButton.setAttributedTitle(UILabel.attributedString(withText: "SALVA", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 16.0)!, andCharacterSpacing: 1.14, isCentered: true), for: .disabled)
@@ -79,6 +88,27 @@ class NewEmployeeViewController: UIViewController {
       self.employeeEmailFloatingTextField.setPlaceholderText(placeholderText: "Email")
       self.employeeEmailFloatingTextField.delegate = self
       self.employeeEmailFloatingTextField.tag = 3
+      
+      self.addEmployeeWorkingHoursButton.clipsToBounds = true
+      self.addEmployeeWorkingHoursButton.layer.cornerRadius = 5.0
+      if self.workingHoursStackView.isHidden {
+         self.addEmployeeWorkingHoursButtonTrailingAnchor.isActive = false
+         self.addEmployeeWorkingHoursButtonLeadingAnchor.isActive = true
+         self.addEmployeeWorkingHoursButton.setImage(#imageLiteral(resourceName: "icona_aggiungi_orario"), for: .normal)
+         self.addEmployeeWorkingHoursButton.setAttributedTitle(UILabel.attributedString(withText: "SELEZIONA ORARIO", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.0, isCentered: true), for: .normal)
+         self.addEmployeeWorkingHoursButton.setBackgroundColor(color: UIColor.amBlue, forState: .normal)
+         self.addEmployeeWorkingHoursButton.contentEdgeInsets = UIEdgeInsetsMake(0.0, 13.0, 0.0, 22.0)
+         self.addEmployeeWorkingHoursButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 6.0, 0.0, -6.0)
+      } else {
+         self.addEmployeeWorkingHoursButtonLeadingAnchor.isActive = false
+         self.addEmployeeWorkingHoursButtonTrailingAnchor.isActive = true
+         self.addEmployeeWorkingHoursButton.setImage(nil, for: .normal)
+         self.addEmployeeWorkingHoursButton.setAttributedTitle(UILabel.attributedString(withText: "MODIFICA", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.0, isCentered: true), for: .normal)
+         self.addEmployeeWorkingHoursButton.setBackgroundColor(color: UIColor.grayWith(value: 182), forState: .normal)
+         self.addEmployeeWorkingHoursButton.contentEdgeInsets = UIEdgeInsetsMake(0.0, 16.0, 0.0, 16.0)
+         self.addEmployeeWorkingHoursButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
+      }
+      
       self.addEmployeeWorkingHoursButton.layer.cornerRadius = 5.0
       self.addServicesButton.setImage(#imageLiteral(resourceName: "on_boarding_plus"), for: .normal)
       self.addServicesButton.setImage(#imageLiteral(resourceName: "on_boarding_plus_disabled"), for: .disabled)
