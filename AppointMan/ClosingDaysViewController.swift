@@ -10,6 +10,9 @@ import UIKit
 
 class ClosingDaysViewController: UIViewController {
    
+   @IBOutlet weak var navigationTitleViewLabel: UILabel!
+   @IBOutlet weak var navigationRightBarButton: UIButton!
+   @IBOutlet weak var navigationBackButton: UIButton!
    @IBOutlet weak var closingDaysLabel: UILabel!
    @IBOutlet weak var closureLabel: UILabel!
    @IBOutlet weak var weekDaysStackView: UIStackView!
@@ -22,6 +25,8 @@ class ClosingDaysViewController: UIViewController {
    }
    
    func applyTypography() {
+      self.navigationTitleViewLabel.attributedText = UILabel.attributedString(withText: "Seleziona giorni di chiusura", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 16.0)!, andCharacterSpacing: nil, isCentered: true)
+      self.navigationRightBarButton.setAttributedTitle(UILabel.attributedString(withText: "Fine", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: nil), for: .normal)
       self.closingDaysLabel.attributedText = UILabel.attributedString(withText: "Giorni di chiusura", andTextColor: UIColor.grayWith(value: 85), andFont: UIFont.init(name: "SFUIText-Regular", size: 22.0)!, andCharacterSpacing: nil)
       self.closureLabel.attributedText = UILabel.attributedString(withText: "TURNO DI CHIUSURA", andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
       if let weekDayButtons = self.weekDaysStackView.arrangedSubviews as? [UIButton] {
@@ -34,6 +39,9 @@ class ClosingDaysViewController: UIViewController {
    }
    
    func setupUI() {
+      self.navigationRightBarButton.addTarget(self, action: #selector(self.nextBarButtonItemPressed(sender:)), for: .touchUpInside)
+      self.navigationBackButton.addTarget(self, action: #selector(self.backBarButtonItemPressed(sender:)), for: .touchUpInside)
+      
       if let weekDayButtons = self.weekDaysStackView.arrangedSubviews as? [UIButton] {
          for weekDayButton in weekDayButtons {
             weekDayButton.clipsToBounds = true
@@ -48,26 +56,6 @@ class ClosingDaysViewController: UIViewController {
    
    @objc func weekDayButtonPressed(sender: UIButton) {
       sender.isSelected = !sender.isSelected
-   }
-   
-   func setupCurrentNavigationItem() {
-      // navigation bar title
-      self.navigationItem.titleView = UILabel.onBoardingTitleView(withText: "Seleziona giorni di chiusura")
-      
-      // Avanti bar button item
-      let nextBarButton = UIButton()
-      nextBarButton.addTarget(self, action: #selector(self.nextBarButtonItemPressed(sender:)), for: .touchUpInside)
-      nextBarButton.setAttributedTitle(UILabel.attributedString(withText: "Avanti", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: nil), for: .normal)
-      let nextBarButtonItem = UIBarButtonItem(customView: nextBarButton)
-      self.navigationItem.rightBarButtonItem = nextBarButtonItem
-      
-      // Back button item
-      let backButton = UIButton()
-      backButton.addTarget(self, action: #selector(self.backBarButtonItemPressed(sender:)), for: .touchUpInside)
-      backButton.setImage(#imageLiteral(resourceName: "on_boarding_back_button"), for: .normal)
-      backButton.sizeToFit()
-      let backBarButtonItem = UIBarButtonItem(customView: backButton)
-      self.navigationItem.leftBarButtonItem = backBarButtonItem
    }
    
    @objc func nextBarButtonItemPressed(sender: UIBarButtonItem) {

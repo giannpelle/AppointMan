@@ -10,6 +10,9 @@ import UIKit
 
 class AddEmployeesViewController: UIViewController {
    
+   @IBOutlet weak var navigationTitleViewLabel: UILabel!
+   @IBOutlet weak var navigationRightBarButton: UIButton!
+   @IBOutlet weak var navigationBackButton: UIButton!
    @IBOutlet weak var employeesLabel: UILabel!
    @IBOutlet weak var addEmployeeButton: UIButton!
    @IBOutlet weak var employeesCollectionView: UICollectionView!
@@ -60,19 +63,21 @@ class AddEmployeesViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      self.setupCurrentNavigationItem()
       self.applyTypography()
       self.setupUI()
-      
    }
    
    func applyTypography() {
-      
+      self.navigationTitleViewLabel.attributedText = UILabel.attributedString(withText: "Aggiungi dipendenti", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 16.0)!, andCharacterSpacing: nil, isCentered: true)
+      self.navigationRightBarButton.setAttributedTitle(UILabel.attributedString(withText: "Avanti", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: nil), for: .normal)
       self.employeesLabel.attributedText = UILabel.attributedString(withText: "Dipendenti", andTextColor: UIColor.amOnBoardingHeaderTextGrey, andFont: UIFont.init(name: "SFUIText-Regular", size: 22.0)!, andCharacterSpacing: 0.0)
       self.employeesLabel.heightAnchor.constraint(equalToConstant: 26.0).isActive = true
    }
    
    func setupUI() {
+      self.navigationRightBarButton.addTarget(self, action: #selector(self.nextBarButtonItemPressed(sender:)), for: .touchUpInside)
+      self.navigationBackButton.addTarget(self, action: #selector(self.backBarButtonItemPressed(sender:)), for: .touchUpInside)
+      
       self.addEmployeeButton.setImage(#imageLiteral(resourceName: "on_boarding_plus"), for: .normal)
       self.addEmployeeButton.setImage(#imageLiteral(resourceName: "on_boarding_plus_disabled"), for: .disabled)
       
@@ -82,30 +87,9 @@ class AddEmployeesViewController: UIViewController {
       
    }
    
-   func setupCurrentNavigationItem() {
-      // navigation bar title
-      self.navigationItem.titleView = UILabel.onBoardingTitleView(withText: "Aggiungi dipendenti")
-      
-      // Avanti bar button item
-      let nextBarButton = UIButton()
-      nextBarButton.addTarget(self, action: #selector(self.nextBarButtonItemPressed(sender:)), for: .touchUpInside)
-      nextBarButton.setAttributedTitle(UILabel.attributedString(withText: "Avanti", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: nil), for: .normal)
-      let nextBarButtonItem = UIBarButtonItem(customView: nextBarButton)
-      self.navigationItem.rightBarButtonItem = nextBarButtonItem
-      
-      // Back button item
-      let backButton = UIButton()
-      backButton.addTarget(self, action: #selector(self.backBarButtonItemPressed(sender:)), for: .touchUpInside)
-      backButton.setImage(#imageLiteral(resourceName: "on_boarding_back_button"), for: .normal)
-      backButton.sizeToFit()
-      let backBarButtonItem = UIBarButtonItem(customView: backButton)
-      self.navigationItem.leftBarButtonItem = backBarButtonItem
-   }
-   
    @objc func nextBarButtonItemPressed(sender: UIBarButtonItem) {
       let nextVC = UIStoryboard.closingDaysVC()
       self.navigationController?.pushViewController(nextVC, animated: true)
-      nextVC.navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "on_boarding_back_button"), style: .plain, target: self, action: nil)
    }
    
    @objc func backBarButtonItemPressed(sender: UIButton) {

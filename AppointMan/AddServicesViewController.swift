@@ -10,6 +10,8 @@ import UIKit
 
 class AddServicesViewController: UIViewController {
    
+   @IBOutlet weak var navigationTitleViewLabel: UILabel!
+   @IBOutlet weak var navigationRightBarButton: UIButton!
    @IBOutlet weak var servicesLabel: UILabel!
    @IBOutlet weak var addServiceButton: UIButton!
    @IBOutlet weak var sortLabel: UILabel!
@@ -48,10 +50,8 @@ class AddServicesViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      self.navigationController?.navigationBar.sizeToFit()
-      
       self.applyTypography()
-      self.setupCurrentNavigationItem()
+      self.setupUI()
       
       self.sortSegmentedControl.setup(withOptions: ["DURATA", "A-Z"], isBlueBackground: false)
       
@@ -62,6 +62,8 @@ class AddServicesViewController: UIViewController {
    }
    
    func applyTypography() {
+      self.navigationTitleViewLabel.attributedText = UILabel.attributedString(withText: "Aggiungi servizi", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 16.0)!, andCharacterSpacing: nil, isCentered: true)
+      self.navigationRightBarButton.setAttributedTitle(UILabel.attributedString(withText: "Avanti", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: nil), for: .normal)
       self.servicesLabel.attributedText = UILabel.attributedString(withText: "Servizi", andTextColor: UIColor.amOnBoardingHeaderTextGrey, andFont: UIFont.init(name: "SFUIText-Regular", size: 22.0)!, andCharacterSpacing: 0.0)
       self.servicesLabel.heightAnchor.constraint(equalToConstant: 26.0).isActive = true
       self.sortLabel.attributedText = UILabel.attributedString(withText: "Ordina", andTextColor: UIColor.amOnBoardingHeaderTextLightGrey, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
@@ -69,21 +71,9 @@ class AddServicesViewController: UIViewController {
    }
    
    func setupUI() {
+      self.navigationRightBarButton.addTarget(self, action: #selector(self.nextBarButtonItemPressed(sender:)), for: .touchUpInside)
       self.addServiceButton.setImage(#imageLiteral(resourceName: "on_boarding_plus"), for: .normal)
       self.addServiceButton.setImage(#imageLiteral(resourceName: "on_boarding_plus_disabled"), for: .disabled)
-   }
-   
-   func setupCurrentNavigationItem() {
-      // navigation bar title
-      self.navigationItem.titleView = UILabel.onBoardingTitleView(withText: "Aggiungi servizi")
-      
-      // Avanti bar button item
-      let nextBarButton = UIButton()
-      nextBarButton.addTarget(self, action: #selector(self.nextBarButtonItemPressed(sender:)), for: .touchUpInside)
-      nextBarButton.setAttributedTitle(UILabel.attributedString(withText: "Avanti", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: nil), for: .normal)
-      let nextBarButtonItem = UIBarButtonItem(customView: nextBarButton)
-      self.navigationItem.rightBarButtonItem = nextBarButtonItem
-      
    }
    
    @objc func nextBarButtonItemPressed(sender: UIBarButtonItem) {

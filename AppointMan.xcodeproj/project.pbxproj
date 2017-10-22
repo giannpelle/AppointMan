@@ -112,7 +112,6 @@
 		EF23F1EE1F977503007661BC /* DeleteServicePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */; };
 		EF23F1F01F977517007661BC /* DeleteServicePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */; };
 		EF2A93FE1F9ABD22001FB319 /* ServicesInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2A93FD1F9ABD22001FB319 /* ServicesInputView.swift */; };
-		EF3290931F927409008BB930 /* OnBoardingNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3290921F927409008BB930 /* OnBoardingNavigationBar.swift */; };
 		EF3290951F927C0F008BB930 /* ClosingDaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3290941F927C0F008BB930 /* ClosingDaysViewController.swift */; };
 		EF348CCD1F990388007E5FB5 /* NewEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF348CCC1F990388007E5FB5 /* NewEmployeeViewController.swift */; };
 		EF649D5D1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */; };
@@ -254,7 +253,6 @@
 		EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeleteServicePopupView.xib; sourceTree = "<group>"; };
 		EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteServicePopupView.swift; sourceTree = "<group>"; };
 		EF2A93FD1F9ABD22001FB319 /* ServicesInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesInputView.swift; sourceTree = "<group>"; };
-		EF3290921F927409008BB930 /* OnBoardingNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingNavigationBar.swift; sourceTree = "<group>"; };
 		EF3290941F927C0F008BB930 /* ClosingDaysViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosingDaysViewController.swift; sourceTree = "<group>"; };
 		EF348CCC1F990388007E5FB5 /* NewEmployeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEmployeeViewController.swift; sourceTree = "<group>"; };
 		EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeServiceCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -401,7 +399,6 @@
 		236DF5011F586BD700A48C73 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				EF3290921F927409008BB930 /* OnBoardingNavigationBar.swift */,
 				23C80E3E1F7D27A700C4CACE /* AddServicesViewController.swift */,
 				EFBB49871F8C41890011698E /* NewServiceViewController.swift */,
 				23C80E401F7D694900C4CACE /* AddEmployeesViewController.swift */,
@@ -785,7 +782,6 @@
 				EF1E99F91F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift in Sources */,
 				237C52971EC4BE5C00D98DD9 /* HomeSplitViewController.swift in Sources */,
 				EF649D5D1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift in Sources */,
-				EF3290931F927409008BB930 /* OnBoardingNavigationBar.swift in Sources */,
 				2304A6201F4060A700E1FB7E /* Gadgets.swift in Sources */,
 				236DF5001F585BC100A48C73 /* WorkingHoursViewController.swift in Sources */,
 				237C52691EC4B6CB00D98DD9 /* AppDelegate.swift in Sources */,
@@ -908,7 +904,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -959,7 +955,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -975,7 +971,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZGBRK2HS2K;
 				INFOPLIST_FILE = AppointMan/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = it.scratchapp.projects.AppointMan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -992,7 +988,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZGBRK2HS2K;
 				INFOPLIST_FILE = AppointMan/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = it.scratchapp.projects.AppointMan;
 				PRODUCT_NAME = "$(TARGET_NAME)";

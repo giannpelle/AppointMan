@@ -95,11 +95,6 @@ extension Overlayable {
 }
 
 extension UIStoryboard {
-
-   class func onBoardingNVC() -> UINavigationController {
-      let onBoardingNVC = UIStoryboard(name: "OnBoarding", bundle: Bundle.main).instantiateViewController(withIdentifier: "onBoardingNVC") as! UINavigationController
-      return onBoardingNVC
-   }
    
    class func addServicesVC() -> AddServicesViewController {
       let addServicesVC = UIStoryboard(name: "OnBoarding", bundle: Bundle.main).instantiateViewController(withIdentifier: "addServicesVC") as! AddServicesViewController
@@ -404,12 +399,6 @@ extension UILabel {
       return attributes
    }
    
-   class func onBoardingTitleView(withText text: String) -> UILabel {
-      let onBoardingTitleLabel = UILabel()
-      onBoardingTitleLabel.attributedText = UILabel.attributedString(withText: text, andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 16.0)!, andCharacterSpacing: nil, isCentered: true)
-      onBoardingTitleLabel.heightAnchor.constraint(equalToConstant: 19.0).isActive = true
-      return onBoardingTitleLabel
-   }
 }
 
 extension UIButton {
