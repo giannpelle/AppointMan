@@ -69,6 +69,7 @@ class NewServiceViewController: UIViewController {
       self.serviceColorButton.addTarget(self, action: #selector(self.openColorPicker), for: .touchUpInside)
 
       self.serviceNameTextField.setPlaceholderText(placeholderText: "Nome servizio")
+      self.serviceNameTextField.delegate = self
       
       let manTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.manBoxViewTapped(sender:)))
       self.manBoxView.addGestureRecognizer(manTapGesture)
@@ -217,4 +218,12 @@ extension NewServiceViewController: UIPickerViewDataSource {
 
 extension NewServiceViewController: UIPickerViewDelegate {
    
+}
+
+extension NewServiceViewController: UITextFieldDelegate {
+   
+   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+      textField.resignFirstResponder()
+      return false
+   }
 }

@@ -8,12 +8,18 @@
 
 import UIKit
 
+protocol BottomImagePickerViewDelegate: class {
+   func takePhotoHandler()
+   func choosePhotoFromLibraryHandler()
+   func removePhotoHandler()
+}
+
 class BottomImagePickerView: UIView {
    
    @IBOutlet weak var imagePickerActionsStackView: UIStackView!
    @IBOutlet weak var bottomImagePickerViewBottomAnchor: NSLayoutConstraint!
    
-   weak var imagePickerDelegate: NewEmployeeViewControllerDelegate?
+   weak var delegate: BottomImagePickerViewDelegate?
    
    override func awakeFromNib() {
       super.awakeFromNib()
@@ -50,6 +56,7 @@ class BottomImagePickerView: UIView {
          actions[1].addTarget(self, action: #selector(self.choosePhotoFromLibraryHandler(sender:)), for: .touchUpInside)
          
          actions[2].setAttributedTitle(UILabel.attributedString(withText: "RIMUOVI IMMAGINE", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.0, isCentered: true), for: .normal)
+         actions[2].setAttributedTitle(UILabel.attributedString(withText: "RIMUOVI IMMAGINE", andTextColor: UIColor.white.withAlphaComponent(0.5), andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.0, isCentered: true), for: .disabled)
          actions[2].addTarget(self, action: #selector(self.removeImageHandler(sender:)), for: .touchUpInside)
          actions[2].isEnabled = false
          
@@ -58,15 +65,15 @@ class BottomImagePickerView: UIView {
    }
    
    @objc func takePhotoHandler(sender: UIButton) {
-      self.imagePickerDelegate?.takePhotoHandler()
+      self.delegate?.takePhotoHandler()
    }
    
    @objc func choosePhotoFromLibraryHandler(sender: UIButton) {
-      self.imagePickerDelegate?.choosePhotoFromLibraryHandler()
+      self.delegate?.choosePhotoFromLibraryHandler()
    }
    
    @objc func removeImageHandler(sender: UIButton) {
-      self.imagePickerDelegate?.removePhotoHandler()
+      self.delegate?.removePhotoHandler()
    }
    
 }

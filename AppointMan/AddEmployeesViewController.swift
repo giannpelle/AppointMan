@@ -30,8 +30,22 @@ class AddEmployeesViewController: UIViewController {
          guard let presentedView = presentedViewController?.view else {
             return
          }
+         if let inputView = UIApplication.shared.keyWindow?.subviews.last as? ServicesInputView, sender.location(in: inputView).y > 0 {
+            return
+         }
          if !presentedView.bounds.contains(sender.location(in: presentedView)) {
-            self.dismiss(animated: true, completion: nil)
+            if let inputView = UIApplication.shared.keyWindow?.subviews.last as? ServicesInputView, let presentedVC = self.presentedViewController as? NewEmployeeViewController {
+               UIView.animate(withDuration: 0.7, animations: {
+                  presentedVC.containerScrollView.contentOffset.y = 0.0
+                  inputView.frame.origin.y = UIScreen.main.bounds.size.height
+               }, completion: { (success) in
+                  if success {
+                     inputView.removeFromSuperview()
+                  }
+               })
+            } else {
+               self.dismiss(animated: true, completion: nil)
+            }
          }
       }
    }

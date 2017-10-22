@@ -8,15 +8,10 @@
 
 import UIKit
 
-protocol NewEmployeeViewControllerDelegate: class {
-   func takePhotoHandler()
-   func choosePhotoFromLibraryHandler()
-   func removePhotoHandler()
-}
-
 class NewEmployeeViewController: UIViewController {
    
    @IBOutlet weak var newEmployeeLabel: UILabel!
+   @IBOutlet weak var containerScrollView: UIScrollView!
    @IBOutlet weak var employeeImageView: UIImageView!
    @IBOutlet weak var employeeFirstNameFloatingTextField: GPFloatingTextField!
    @IBOutlet weak var employeeLastNameFloatingTextField: GPFloatingTextField!
@@ -27,19 +22,26 @@ class NewEmployeeViewController: UIViewController {
    @IBOutlet weak var servicesLabel: UILabel!
    @IBOutlet weak var saveButton: UIButton!
    
-   let inOutTransition = InOutAnimator()
-   let imagePicker = UIImagePickerController()
+   lazy var inOutTransition = {
+      return InOutAnimator()
+   }()
+   lazy var imagePicker = {
+      return UIImagePickerController()
+   }()
    lazy var bottomImagePickerView: BottomImagePickerView? = {
       guard let bottomImagePickerView = Bundle.main.loadNibNamed("BottomImagePickerView", owner: nil, options: nil)?.first as? BottomImagePickerView else {
          return nil
       }
-      bottomImagePickerView.imagePickerDelegate = self
-      bottomImagePickerView.alpha = 0.0
-      bottomImagePickerView.bottomImagePickerViewBottomAnchor.constant = -158.0
-      bottomImagePickerView.layoutIfNeeded()
-      bottomImagePickerView.bottomImagePickerViewBottomAnchor.constant = 0.0
+      bottomImagePickerView.delegate = self
       self.imagePicker.delegate = self
       return bottomImagePickerView
+   }()
+   lazy var servicesInputView: ServicesInputView? = {
+      guard let servicesInputView = Bundle.main.loadNibNamed("ServicesInputView", owner: nil, options: nil)?.first as? ServicesInputView else {
+         return nil
+      }
+      servicesInputView.delegate = self
+      return servicesInputView
    }()
    
    override func viewDidLoad() {
@@ -55,6 +57,7 @@ class NewEmployeeViewController: UIViewController {
       self.addEmployeeWorkingHoursButton.setAttributedTitle(UILabel.attributedString(withText: "SELEZIONA ORARIO", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.0, isCentered: true), for: .normal)
       self.servicesLabel.attributedText = UILabel.attributedString(withText: "SERVIZI", andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
       self.saveButton.setAttributedTitle(UILabel.attributedString(withText: "SALVA", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 16.0)!, andCharacterSpacing: 1.14, isCentered: true), for: .normal)
+      self.saveButton.setAttributedTitle(UILabel.attributedString(withText: "SALVA", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 16.0)!, andCharacterSpacing: 1.14, isCentered: true), for: .disabled)
    }
    
    func setupUI() {
@@ -63,10 +66,22 @@ class NewEmployeeViewController: UIViewController {
       self.employeeImageView.isUserInteractionEnabled = true
       self.employeeImageView.addGestureRecognizer(tapGesture)
       self.employeeFirstNameFloatingTextField.setPlaceholderText(placeholderText: "Nome")
+      self.employeeFirstNameFloatingTextField.delegate = self
+      self.employeeFirstNameFloatingTextField.tag = 0
       self.employeeLastNameFloatingTextField.setPlaceholderText(placeholderText: "Cognome")
+      self.employeeLastNameFloatingTextField.delegate = self
+      self.employeeLastNameFloatingTextField.tag = 1
       self.employeeCellPhoneNumberFloatingTextField.setPlaceholderText(placeholderText: "Telefono")
+      self.employeeCellPhoneNumberFloatingTextField.delegate = self
+      self.employeeCellPhoneNumberFloatingTextField.tag = 2
       self.employeeEmailFloatingTextField.setPlaceholderText(placeholderText: "Email")
+      self.employeeEmailFloatingTextField.delegate = self
+      self.employeeEmailFloatingTextField.tag = 3
       self.addEmployeeWorkingHoursButton.layer.cornerRadius = 5.0
+      self.saveButton.layer.cornerRadius = 3.0
+      self.saveButton.isEnabled = false
+      self.saveButton.setBackgroundColor(color: UIColor.amBlue, forState: .normal)
+      self.saveButton.setBackgroundColor(color: UIColor.grayWith(value: 236), forState: .disabled)
    }
    
    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -81,6 +96,11 @@ class NewEmployeeViewController: UIViewController {
    
    @objc func showBottomImagePickerView(sender: UITapGestureRecognizer) {
       if let bottomImagePickerView = self.bottomImagePickerView {
+         bottomImagePickerView.alpha = 0.0
+         bottomImagePickerView.bottomImagePickerViewBottomAnchor.constant = -158.0
+         bottomImagePickerView.layoutIfNeeded()
+         bottomImagePickerView.bottomImagePickerViewBottomAnchor.constant = 0.0
+         
          self.view.addSubview(bottomImagePickerView)
          bottomImagePickerView.translatesAutoresizingMaskIntoConstraints = false
          bottomImagePickerView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
@@ -119,6 +139,17 @@ class NewEmployeeViewController: UIViewController {
    
    @IBAction func addServicesButtonPressed(sender: UIButton) {
       
+      if let servicesInputView = self.servicesInputView, let window = UIApplication.shared.keyWindow {
+         servicesInputView.frame = CGRect(x: 0.0, y: UIScreen.main.bounds.size.height, width: UIScreen.main.bounds.size.width, height: (UIScreen.main.bounds.size.height / 2.0) + 10.0)
+         window.addSubview(servicesInputView)
+         
+         UIView.animate(withDuration: 0.7, animations: {
+            self.containerScrollView.contentOffset.y = 310.0
+            servicesInputView.frame.origin.y = (UIScreen.main.bounds.size.height / 2.0) - 10.0
+         }, completion: { (success) in
+            
+         })
+      }
    }
    
    @IBAction func saveButtonPressed(sender: UIButton) {
@@ -127,7 +158,7 @@ class NewEmployeeViewController: UIViewController {
    
 }
 
-extension NewEmployeeViewController: NewEmployeeViewControllerDelegate {
+extension NewEmployeeViewController: BottomImagePickerViewDelegate {
    
    func takePhotoHandler() {
       if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -147,7 +178,7 @@ extension NewEmployeeViewController: NewEmployeeViewControllerDelegate {
    }
    
    func removePhotoHandler() {
-      
+      self.hideBottomImagePickerView()
    }
 }
 
@@ -174,6 +205,34 @@ extension UIImagePickerController {
    }
    override open var supportedInterfaceOrientations : UIInterfaceOrientationMask {
       return .landscape
+   }
+}
+
+extension NewEmployeeViewController: ServicesInputViewDelegate {
+   
+   func resetContentOffset() {
+      UIView.animate(withDuration: 0.7) {
+         self.containerScrollView.contentOffset.y = 0.0
+      }
+   }
+}
+
+extension NewEmployeeViewController: UITextFieldDelegate {
+   
+   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+      switch textField.tag {
+      case 0:
+         self.employeeLastNameFloatingTextField.becomeFirstResponder()
+      case 1:
+         self.employeeCellPhoneNumberFloatingTextField.becomeFirstResponder()
+      case 2:
+         self.employeeEmailFloatingTextField.becomeFirstResponder()
+      case 3:
+         textField.resignFirstResponder()
+      default:
+         break
+      }
+      return false
    }
 }
 
