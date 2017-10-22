@@ -9,6 +9,14 @@
 import Foundation
 import UIKit
 
+func *(lhs: Int, rhs: CGFloat) -> CGFloat {
+   return CGFloat(lhs) * rhs
+}
+
+func *(lhs: CGFloat, rhs: Int) -> CGFloat {
+   return lhs * CGFloat(rhs)
+}
+
 protocol Overlayable {
    func drawOverlay(_ rect: CGRect)
 }
