@@ -112,5 +112,10 @@ extension ServicesInputView: UICollectionViewDelegateFlowLayout {
 
 extension ServicesInputView: UICollectionViewDelegate {
    
+   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      if let currentCell = collectionView.cellForItem(at: indexPath) as? ServiceInputViewCollectionViewCell {
+         currentCell.showSelectionBorderLayer()
+      }
+   }
 }
 

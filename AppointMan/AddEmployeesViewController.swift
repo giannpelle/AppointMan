@@ -11,6 +11,7 @@ import UIKit
 class AddEmployeesViewController: UIViewController {
    
    @IBOutlet weak var employeesLabel: UILabel!
+   @IBOutlet weak var addEmployeeButton: UIButton!
    @IBOutlet weak var employeesCollectionView: UICollectionView!
    
    var tapOverlayGesture: UITapGestureRecognizer!
@@ -72,6 +73,8 @@ class AddEmployeesViewController: UIViewController {
    }
    
    func setupUI() {
+      self.addEmployeeButton.setImage(#imageLiteral(resourceName: "on_boarding_plus"), for: .normal)
+      self.addEmployeeButton.setImage(#imageLiteral(resourceName: "on_boarding_plus_disabled"), for: .disabled)
       
       self.employeesCollectionView.dataSource = self
       self.employeesCollectionView.delegate = self

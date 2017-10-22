@@ -14,6 +14,40 @@ class ServiceInputViewCollectionViewCell: UICollectionViewCell {
    @IBOutlet weak var serviceDurationLabel: UILabel!
    @IBOutlet weak var gendersStackView: UIStackView!
    
+   lazy var selectionBorderLayer: CAShapeLayer = {
+      let selectionBorderLayer = CAShapeLayer()
+      selectionBorderLayer.fillColor = UIColor.clear.cgColor
+      let selectionPath = UIBezierPath(roundedRect: self.bounds.insetBy(dx: 0.0, dy: -1.0), cornerRadius: 5.0)
+      selectionBorderLayer.path = selectionPath.cgPath
+      selectionBorderLayer.strokeColor = UIColor.amBlue.cgColor
+      selectionBorderLayer.lineWidth = 3.0
+      selectionBorderLayer.frame = self.bounds
+      
+      let circleLayer = CAShapeLayer()
+      circleLayer.fillColor = UIColor.amBlue.cgColor
+      let circlePath = UIBezierPath(ovalIn: CGRect(x: 0.0, y: 0.0, width: 16.0, height: 16.0))
+      circleLayer.path = circlePath.cgPath
+      circleLayer.frame = CGRect(x: self.bounds.size.width - 11.0, y: -4.0, width: 16.0, height: 16.0)
+      
+      let checkLayer = CAShapeLayer()
+      checkLayer.fillColor = UIColor.clear.cgColor
+      let checkPath = UIBezierPath()
+      checkPath.move(to: CGPoint(x: 4.0, y: 7.0))
+      checkPath.addLine(to: CGPoint(x: 7.0, y: 10.0))
+      checkPath.addLine(to: CGPoint(x: 12.0, y: 5.0))
+      checkLayer.path = checkPath.cgPath
+      checkLayer.strokeColor = UIColor.white.cgColor
+      checkLayer.lineWidth = 2.0
+      checkLayer.frame = circleLayer.bounds
+      circleLayer.addSublayer(checkLayer)
+      
+      let totalLayer = CAShapeLayer()
+      totalLayer.addSublayer(selectionBorderLayer)
+      totalLayer.addSublayer(circleLayer)
+      
+      return totalLayer
+   }()
+   
    override func draw(_ rect: CGRect) {
       super.draw(rect)
       
@@ -61,6 +95,10 @@ class ServiceInputViewCollectionViewCell: UICollectionViewCell {
       
       let maleImageView = UIImageView(image: #imageLiteral(resourceName: "iconcina_sesso_uomo"))
       self.gendersStackView.addArrangedSubview(maleImageView)
+   }
+   
+   func showSelectionBorderLayer() {
+      self.layer.addSublayer(self.selectionBorderLayer)
    }
    
 }

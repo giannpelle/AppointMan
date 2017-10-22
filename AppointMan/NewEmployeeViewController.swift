@@ -20,6 +20,7 @@ class NewEmployeeViewController: UIViewController {
    @IBOutlet weak var employeeWorkingHoursLabel: UILabel!
    @IBOutlet weak var addEmployeeWorkingHoursButton: UIButton!
    @IBOutlet weak var servicesLabel: UILabel!
+   @IBOutlet weak var addServicesButton: UIButton!
    @IBOutlet weak var saveButton: UIButton!
    
    lazy var inOutTransition = {
@@ -78,6 +79,8 @@ class NewEmployeeViewController: UIViewController {
       self.employeeEmailFloatingTextField.delegate = self
       self.employeeEmailFloatingTextField.tag = 3
       self.addEmployeeWorkingHoursButton.layer.cornerRadius = 5.0
+      self.addServicesButton.setImage(#imageLiteral(resourceName: "on_boarding_plus"), for: .normal)
+      self.addServicesButton.setImage(#imageLiteral(resourceName: "on_boarding_plus_disabled"), for: .disabled)
       self.saveButton.layer.cornerRadius = 3.0
       self.saveButton.isEnabled = false
       self.saveButton.setBackgroundColor(color: UIColor.amBlue, forState: .normal)

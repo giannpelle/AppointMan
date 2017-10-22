@@ -44,27 +44,46 @@ class VerticallyButton: UIButton {
 
 class ThumbnailVerticallyButton: UIButton {
    
+   lazy var checkLayer: CAShapeLayer = {
+      let circleLayer = CAShapeLayer()
+      circleLayer.fillColor = UIColor.amBlue.cgColor
+      let circlePath = UIBezierPath(ovalIn: CGRect(x: 0.0, y: 0.0, width: 16.0, height: 16.0))
+      circleLayer.path = circlePath.cgPath
+      circleLayer.frame = CGRect(x: self.bounds.size.width - 29.0, y: 6.0, width: 16.0, height: 16.0)
+      
+      let checkLayer = CAShapeLayer()
+      checkLayer.fillColor = UIColor.clear.cgColor
+      let checkPath = UIBezierPath()
+      checkPath.move(to: CGPoint(x: 4.0, y: 7.0))
+      checkPath.addLine(to: CGPoint(x: 7.0, y: 10.0))
+      checkPath.addLine(to: CGPoint(x: 12.0, y: 5.0))
+      checkLayer.path = checkPath.cgPath
+      checkLayer.strokeColor = UIColor.white.cgColor
+      checkLayer.lineWidth = 2.0
+      checkLayer.frame = circleLayer.bounds
+      circleLayer.addSublayer(checkLayer)
+      
+      return circleLayer
+   }()
+   
    override var isSelected: Bool {
       didSet {
          if self.isSelected {
-            for view in self.subviews {
-               if view.tag == 1 {
-                  view.removeFromSuperview()
+            if let sublayers = self.layer.sublayers {
+               for layer in sublayers {
+                  if layer == self.checkLayer {
+                     layer.removeFromSuperlayer()
+                  }
                }
             }
             
-            let checkImageView = UIImageView(image: #imageLiteral(resourceName: "check"))
-            checkImageView.tag = 1
-            self.insertSubview(checkImageView, aboveSubview: self.imageView!)
-            checkImageView.translatesAutoresizingMaskIntoConstraints = false
-            checkImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8.0).isActive = true
-            checkImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16.0).isActive = true
-            checkImageView.widthAnchor.constraint(equalToConstant: 16.0).isActive = true
-            checkImageView.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
+            self.layer.addSublayer(self.checkLayer)
          } else {
-            for view in self.subviews {
-               if view.tag == 1 {
-                  view.removeFromSuperview()
+            if let sublayers = self.layer.sublayers {
+               for layer in sublayers {
+                  if layer == self.checkLayer {
+                     layer.removeFromSuperlayer()
+                  }
                }
             }
          }

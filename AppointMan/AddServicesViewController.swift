@@ -11,6 +11,7 @@ import UIKit
 class AddServicesViewController: UIViewController {
    
    @IBOutlet weak var servicesLabel: UILabel!
+   @IBOutlet weak var addServiceButton: UIButton!
    @IBOutlet weak var sortLabel: UILabel!
    @IBOutlet weak var sortSegmentedControl: UISegmentedControl!
    @IBOutlet weak var servicesCollectionView: UICollectionView!
@@ -65,6 +66,11 @@ class AddServicesViewController: UIViewController {
       self.servicesLabel.heightAnchor.constraint(equalToConstant: 26.0).isActive = true
       self.sortLabel.attributedText = UILabel.attributedString(withText: "Ordina", andTextColor: UIColor.amOnBoardingHeaderTextLightGrey, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
       self.sortLabel.heightAnchor.constraint(equalToConstant: 14.0).isActive = true
+   }
+   
+   func setupUI() {
+      self.addServiceButton.setImage(#imageLiteral(resourceName: "on_boarding_plus"), for: .normal)
+      self.addServiceButton.setImage(#imageLiteral(resourceName: "on_boarding_plus_disabled"), for: .disabled)
    }
    
    func setupCurrentNavigationItem() {

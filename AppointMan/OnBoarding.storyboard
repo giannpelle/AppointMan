@@ -154,6 +154,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="16F-hC-B4I"/>
                     <connections>
+                        <outlet property="addServiceButton" destination="P9y-n8-DNX" id="Gqb-T7-SS2"/>
                         <outlet property="servicesCollectionView" destination="BFK-dY-Qwj" id="8pj-Ws-dvF"/>
                         <outlet property="servicesLabel" destination="Vag-QC-un2" id="Pov-w9-46q"/>
                         <outlet property="sortLabel" destination="MNW-JV-peN" id="BwD-c9-rOk"/>
@@ -371,6 +372,7 @@
                     <size key="freeformSize" width="540" height="645"/>
                     <connections>
                         <outlet property="addEmployeeWorkingHoursButton" destination="jSR-Wp-RVy" id="gpp-65-yQU"/>
+                        <outlet property="addServicesButton" destination="FcL-sI-UPH" id="5le-0M-blG"/>
                         <outlet property="containerScrollView" destination="f1i-Qi-hbG" id="Xal-NR-uhy"/>
                         <outlet property="employeeCellPhoneNumberFloatingTextField" destination="b1F-wN-Cdb" id="Z3J-DG-551"/>
                         <outlet property="employeeEmailFloatingTextField" destination="Vu8-MO-6Aq" id="xld-UW-fBm"/>
@@ -567,6 +569,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addEmployeeButton" destination="2Vw-3w-xZ2" id="4Y0-gd-bpC"/>
                         <outlet property="employeesCollectionView" destination="s0P-1E-aAy" id="fuW-po-G6a"/>
                         <outlet property="employeesLabel" destination="GI7-CI-JQ6" id="hNw-4I-g64"/>
                     </connections>
