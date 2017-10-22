@@ -21,6 +21,7 @@ class NewEmployeeViewController: UIViewController {
    @IBOutlet weak var addEmployeeWorkingHoursButton: UIButton!
    @IBOutlet weak var servicesLabel: UILabel!
    @IBOutlet weak var addServicesButton: UIButton!
+   @IBOutlet weak var employeeServicesCollectionView: UICollectionView!
    @IBOutlet weak var saveButton: UIButton!
    
    lazy var inOutTransition = {
@@ -81,6 +82,10 @@ class NewEmployeeViewController: UIViewController {
       self.addEmployeeWorkingHoursButton.layer.cornerRadius = 5.0
       self.addServicesButton.setImage(#imageLiteral(resourceName: "on_boarding_plus"), for: .normal)
       self.addServicesButton.setImage(#imageLiteral(resourceName: "on_boarding_plus_disabled"), for: .disabled)
+      self.employeeServicesCollectionView.dataSource = self
+      self.employeeServicesCollectionView.delegate = self
+      self.employeeServicesCollectionView.contentInset = UIEdgeInsetsMake(7.0, 20.0, 7.0, 20.0)
+      (self.employeeServicesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.estimatedItemSize = CGSize(width: 100.0, height: 30.0)
       self.saveButton.layer.cornerRadius = 3.0
       self.saveButton.isEnabled = false
       self.saveButton.setBackgroundColor(color: UIColor.amBlue, forState: .normal)
@@ -218,6 +223,40 @@ extension NewEmployeeViewController: ServicesInputViewDelegate {
          self.containerScrollView.contentOffset.y = 0.0
       }
    }
+}
+
+extension NewEmployeeViewController: UICollectionViewDataSource {
+   
+   func numberOfSections(in collectionView: UICollectionView) -> Int {
+      return 1
+   }
+   
+   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+      return 6
+   }
+   
+   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "employeeServiceCellId", for: indexPath) as? EmployeeServiceCollectionViewCell else {
+         return UICollectionViewCell()
+      }
+      
+      return cell
+   }
+}
+
+extension NewEmployeeViewController: UICollectionViewDelegateFlowLayout {
+   
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+      return 10.0
+   }
+   
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+      return 14.0
+   }
+}
+
+extension NewEmployeeViewController: UICollectionViewDelegate {
+   
 }
 
 extension NewEmployeeViewController: UITextFieldDelegate {

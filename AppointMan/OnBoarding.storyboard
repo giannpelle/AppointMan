@@ -278,25 +278,51 @@
                                                 </connections>
                                             </button>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PmK-Ve-wha">
-                                                <rect key="frame" x="0.0" y="404" width="540" height="89"/>
-                                                <color key="backgroundColor" red="0.60784313729999995" green="0.83137254900000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="0.0" y="404" width="540" height="91"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="89" id="Jba-17-8h1"/>
+                                                    <constraint firstAttribute="height" constant="91" id="Jba-17-8h1"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="81q-g4-0yl">
-                                                    <size key="itemSize" width="50" height="50"/>
+                                                    <size key="itemSize" width="100" height="41"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ymE-la-2Ea">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="employeeServiceCellId" id="ymE-la-2Ea" customClass="EmployeeServiceCollectionViewCell" customModule="AppointMan" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
                                                             <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDt-K4-xqK">
+                                                                    <rect key="frame" x="14" y="7" width="62" height="16"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S3o-69-liP">
+                                                                    <rect key="frame" x="84" y="5" width="8" height="20"/>
+                                                                    <state key="normal" image="delete_service_cross"/>
+                                                                </button>
+                                                            </subviews>
                                                         </view>
+                                                        <constraints>
+                                                            <constraint firstItem="S3o-69-liP" firstAttribute="top" secondItem="ymE-la-2Ea" secondAttribute="top" constant="5" id="Fyv-uC-QmK"/>
+                                                            <constraint firstItem="S3o-69-liP" firstAttribute="leading" secondItem="EDt-K4-xqK" secondAttribute="trailing" constant="8" id="Luc-28-YRh"/>
+                                                            <constraint firstAttribute="trailing" secondItem="S3o-69-liP" secondAttribute="trailing" constant="8" id="Xdw-6r-o9v"/>
+                                                            <constraint firstAttribute="bottom" secondItem="EDt-K4-xqK" secondAttribute="bottom" constant="7" id="ZmD-Uh-edd"/>
+                                                            <constraint firstAttribute="bottom" secondItem="S3o-69-liP" secondAttribute="bottom" constant="5" id="d9a-Qv-4HI"/>
+                                                            <constraint firstItem="EDt-K4-xqK" firstAttribute="top" secondItem="ymE-la-2Ea" secondAttribute="top" constant="7" id="qGE-Y3-kfy"/>
+                                                            <constraint firstItem="EDt-K4-xqK" firstAttribute="leading" secondItem="ymE-la-2Ea" secondAttribute="leading" constant="14" id="uGy-eb-h3d"/>
+                                                        </constraints>
+                                                        <size key="customSize" width="100" height="30"/>
+                                                        <connections>
+                                                            <outlet property="removeServiceButton" destination="S3o-69-liP" id="B4H-om-d2A"/>
+                                                            <outlet property="serviceLabel" destination="EDt-K4-xqK" id="y5t-kU-pT6"/>
+                                                        </connections>
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
@@ -334,7 +360,7 @@
                                             <constraint firstItem="Vu8-MO-6Aq" firstAttribute="leading" secondItem="4lV-NU-U1f" secondAttribute="leading" constant="20" id="WCL-WK-UBg"/>
                                             <constraint firstAttribute="trailing" secondItem="QPd-jf-38p" secondAttribute="trailing" constant="24" id="XCl-ED-yjd"/>
                                             <constraint firstItem="lui-6m-3Uo" firstAttribute="top" secondItem="Vu8-MO-6Aq" secondAttribute="bottom" constant="22" id="aQM-hr-I6e"/>
-                                            <constraint firstItem="AyU-Fu-0Bs" firstAttribute="top" secondItem="PmK-Ve-wha" secondAttribute="bottom" constant="14" id="erh-fF-Dzf"/>
+                                            <constraint firstItem="AyU-Fu-0Bs" firstAttribute="top" secondItem="PmK-Ve-wha" secondAttribute="bottom" constant="12" id="erh-fF-Dzf"/>
                                             <constraint firstItem="FcL-sI-UPH" firstAttribute="leading" secondItem="4lV-NU-U1f" secondAttribute="leading" constant="20" id="hgA-1W-aYi"/>
                                             <constraint firstItem="Vu8-MO-6Aq" firstAttribute="top" secondItem="b1F-wN-Cdb" secondAttribute="bottom" constant="6" id="ivz-7d-DmB"/>
                                             <constraint firstItem="QPd-jf-38p" firstAttribute="leading" secondItem="U9j-L7-6ix" secondAttribute="trailing" constant="26" id="kRD-QI-ByL"/>
@@ -379,6 +405,7 @@
                         <outlet property="employeeFirstNameFloatingTextField" destination="4hM-6E-MfO" id="xAe-rA-LxU"/>
                         <outlet property="employeeImageView" destination="U9j-L7-6ix" id="Qbe-fj-6Z2"/>
                         <outlet property="employeeLastNameFloatingTextField" destination="QPd-jf-38p" id="wx5-Aq-yFy"/>
+                        <outlet property="employeeServicesCollectionView" destination="PmK-Ve-wha" id="LPW-SP-XvS"/>
                         <outlet property="employeeWorkingHoursLabel" destination="lui-6m-3Uo" id="KjZ-CO-BHT"/>
                         <outlet property="newEmployeeLabel" destination="nuE-lx-hEA" id="Hin-8E-XeH"/>
                         <outlet property="saveButton" destination="AyU-Fu-0Bs" id="Yhh-dE-c3P"/>
@@ -387,7 +414,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kMP-Mc-sUB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-649" y="-624"/>
+            <point key="canvasLocation" x="-649.21875" y="-624.609375"/>
         </scene>
         <!--Add Employees View Controller-->
         <scene sceneID="DEA-dL-CoV">
@@ -419,7 +446,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="s0P-1E-aAy">
-                                <rect key="frame" x="0.0" y="140" width="1024" height="628"/>
+                                <rect key="frame" x="0.0" y="134" width="1024" height="634"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="18" minimumInteritemSpacing="13" id="2ZJ-bk-MUB">
                                     <size key="itemSize" width="397" height="465"/>
@@ -561,7 +588,7 @@
                             <constraint firstItem="GI7-CI-JQ6" firstAttribute="top" secondItem="UTb-2S-5PT" secondAttribute="bottom" constant="24" id="31g-aY-eJA"/>
                             <constraint firstItem="s0P-1E-aAy" firstAttribute="leading" secondItem="Mp6-lF-gL9" secondAttribute="leading" id="ACb-vI-NsY"/>
                             <constraint firstItem="2Vw-3w-xZ2" firstAttribute="top" secondItem="GI7-CI-JQ6" secondAttribute="bottom" constant="14" id="AIv-U9-Dnn"/>
-                            <constraint firstItem="s0P-1E-aAy" firstAttribute="top" secondItem="2Vw-3w-xZ2" secondAttribute="bottom" constant="26" id="Asj-Aj-va6"/>
+                            <constraint firstItem="s0P-1E-aAy" firstAttribute="top" secondItem="2Vw-3w-xZ2" secondAttribute="bottom" constant="20" id="Asj-Aj-va6"/>
                             <constraint firstAttribute="trailing" secondItem="s0P-1E-aAy" secondAttribute="trailing" id="DHl-5x-GHK"/>
                             <constraint firstItem="CBC-yV-6B4" firstAttribute="top" secondItem="s0P-1E-aAy" secondAttribute="bottom" id="bZc-jF-ijY"/>
                             <constraint firstItem="GI7-CI-JQ6" firstAttribute="leading" secondItem="Mp6-lF-gL9" secondAttribute="leading" constant="24" id="mxS-iB-5FK"/>
@@ -898,6 +925,7 @@
     </scenes>
     <resources>
         <image name="avatar_man" width="100" height="100"/>
+        <image name="delete_service_cross" width="8" height="8"/>
         <image name="icona_aggiung_orario" width="22" height="20"/>
         <image name="icona_x" width="15" height="15"/>
         <image name="iconcina_matita" width="17" height="17"/>

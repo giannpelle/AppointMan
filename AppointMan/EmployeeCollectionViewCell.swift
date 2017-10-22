@@ -20,14 +20,17 @@ class EmployeeCollectionViewCell: UICollectionViewCell {
    override func draw(_ rect: CGRect) {
       super.draw(rect)
       
-      self.contentView.layer.masksToBounds = false
       self.layer.masksToBounds = false
-      
-      self.layer.cornerRadius = 5.0
-      self.layer.shadowColor = UIColor(red: 116/255.0, green: 141/255.0, blue: 176/255.0, alpha: 1.0).cgColor
-      self.layer.shadowOpacity = 0.25
-      self.layer.shadowRadius = 6.0
-      self.layer.shadowOffset = .zero
+      let shadowLayer = CAShapeLayer()
+      shadowLayer.fillColor = UIColor.white.cgColor
+      let shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: 5.0)
+      shadowLayer.shadowColor = UIColor(red: 116/255.0, green: 141/255.0, blue: 176/255.0, alpha: 1.0).cgColor
+      shadowLayer.shadowOpacity = 0.25
+      shadowLayer.shadowRadius = 6.0
+      shadowLayer.shadowOffset = .zero
+      shadowLayer.path = shadowPath.cgPath
+      shadowLayer.frame = self.bounds
+      self.layer.insertSublayer(shadowLayer, at: 0)
    }
    
    override func awakeFromNib() {
@@ -35,7 +38,6 @@ class EmployeeCollectionViewCell: UICollectionViewCell {
       
       self.applyTypography()
       self.setupUI()
-      
    }
    
    func applyTypography() {

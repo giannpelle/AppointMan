@@ -78,7 +78,7 @@ class AddEmployeesViewController: UIViewController {
       
       self.employeesCollectionView.dataSource = self
       self.employeesCollectionView.delegate = self
-      self.employeesCollectionView.contentInset = UIEdgeInsetsMake(6.0, 26.0, 6.0, 26.0)
+      self.employeesCollectionView.contentInset = UIEdgeInsetsMake(12.0, 26.0, 12.0, 26.0)
       
    }
    
