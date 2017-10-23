@@ -114,6 +114,8 @@
 		EF2A93FE1F9ABD22001FB319 /* ServicesInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2A93FD1F9ABD22001FB319 /* ServicesInputView.swift */; };
 		EF3290951F927C0F008BB930 /* ClosingDaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3290941F927C0F008BB930 /* ClosingDaysViewController.swift */; };
 		EF348CCD1F990388007E5FB5 /* NewEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF348CCC1F990388007E5FB5 /* NewEmployeeViewController.swift */; };
+		EF37718A1F9E6DAF00D363B5 /* OkPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF3771891F9E6DAF00D363B5 /* OkPopupView.xib */; };
+		EF37718C1F9E700E00D363B5 /* OkPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF37718B1F9E700E00D363B5 /* OkPopupView.swift */; };
 		EF5FA4BE1F9E327000F9086F /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5FA4BD1F9E327000F9086F /* ColorPickerViewController.swift */; };
 		EF5FA4C01F9E3A6800F9086F /* ColorPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */; };
 		EF5FA4C21F9E3B3B00F9086F /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */; };
@@ -258,6 +260,8 @@
 		EF2A93FD1F9ABD22001FB319 /* ServicesInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesInputView.swift; sourceTree = "<group>"; };
 		EF3290941F927C0F008BB930 /* ClosingDaysViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosingDaysViewController.swift; sourceTree = "<group>"; };
 		EF348CCC1F990388007E5FB5 /* NewEmployeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEmployeeViewController.swift; sourceTree = "<group>"; };
+		EF3771891F9E6DAF00D363B5 /* OkPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OkPopupView.xib; sourceTree = "<group>"; };
+		EF37718B1F9E700E00D363B5 /* OkPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkPopupView.swift; sourceTree = "<group>"; };
 		EF5FA4BD1F9E327000F9086F /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorPickerView.xib; sourceTree = "<group>"; };
 		EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
@@ -306,6 +310,8 @@
 				234A536F1ED59C1500B5FAF8 /* UnderlinedTextField.swift */,
 				2330859D1EDEB2C300D4FB8C /* SmartDeleteTextField.swift */,
 				EF0EAF191F99560A0092F810 /* InOutAnimator.swift */,
+				EF3771891F9E6DAF00D363B5 /* OkPopupView.xib */,
+				EF37718B1F9E700E00D363B5 /* OkPopupView.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -720,6 +726,7 @@
 				23E63C911F41B15A0084EA75 /* SF-Pro-Display-Thin.otf in Resources */,
 				23E63C881F41B15A0084EA75 /* SF-Pro-Display-HeavyItalic.otf in Resources */,
 				236DF5081F58753E00A48C73 /* WorkingHoursPlannerView.xib in Resources */,
+				EF37718A1F9E6DAF00D363B5 /* OkPopupView.xib in Resources */,
 				237C52701EC4B6CB00D98DD9 /* Assets.xcassets in Resources */,
 				23E63C9F1F41B15A0084EA75 /* SF-Pro-Text-Semibold.otf in Resources */,
 				23E63CA01F41B15A0084EA75 /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
@@ -777,6 +784,7 @@
 				2304A6141F40597C00E1FB7E /* DipendentiViewController.swift in Sources */,
 				238B1BAF1F52976C00A1F6CA /* GPCalendarView.swift in Sources */,
 				236DF5041F586C4F00A48C73 /* WorkingHoursPlannerView.swift in Sources */,
+				EF37718C1F9E700E00D363B5 /* OkPopupView.swift in Sources */,
 				23801A641F55745200847830 /* GPFloatingTextField.swift in Sources */,
 				2330859E1EDEB2C300D4FB8C /* SmartDeleteTextField.swift in Sources */,
 				EFE309091F98A2ED006247B2 /* EmployeeCollectionViewCell.swift in Sources */,
