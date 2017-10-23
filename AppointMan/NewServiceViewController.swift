@@ -23,6 +23,13 @@ class NewServiceViewController: UIViewController {
    @IBOutlet weak var womanCheckboxButton: UIButton!
    @IBOutlet weak var womanDurationPickerView: UIPickerView!
    
+   lazy var colorPickerView: ColorPickerView? = {
+      guard let colorPickerView = Bundle.main.loadNibNamed("ColorPickerView", owner: nil, options: nil)?.first as? ColorPickerView else {
+         return nil
+      }
+      
+      return colorPickerView
+   }()
    var isManBoxEnabled: Bool = false {
       didSet {
          self.manCheckboxButton.isSelected = self.isManBoxEnabled
@@ -66,7 +73,7 @@ class NewServiceViewController: UIViewController {
    
    func setupUI() {
       self.serviceColorButton.layer.cornerRadius = self.serviceColorButton.bounds.size.height / 2.0
-      self.serviceColorButton.addTarget(self, action: #selector(self.openColorPicker), for: .touchUpInside)
+      self.serviceColorButton.addTarget(self, action: #selector(self.openColorPicker(sender:)), for: .touchUpInside)
 
       self.serviceNameTextField.setPlaceholderText(placeholderText: "Nome servizio")
       self.serviceNameTextField.delegate = self
@@ -124,6 +131,7 @@ class NewServiceViewController: UIViewController {
    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
       super.touchesBegan(touches, with: event)
       
+      self.closeColorPickerView()
       self.view.endEditing(true)
    }
    
@@ -131,8 +139,34 @@ class NewServiceViewController: UIViewController {
       self.dismiss(animated: true, completion: nil)
    }
    
-   @objc func openColorPicker() {
-      
+   @objc func openColorPicker(sender: UIButton) {
+      if let colorPickerView = self.colorPickerView {
+         colorPickerView.alpha = 0.0
+         
+         self.view.addSubview(colorPickerView)
+         colorPickerView.translatesAutoresizingMaskIntoConstraints = false
+         colorPickerView.topAnchor.constraint(equalTo: self.serviceColorButton.bottomAnchor, constant: 6.0).isActive = true
+         colorPickerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10.0).isActive = true
+         colorPickerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10.0).isActive = true
+         
+         UIView.animate(withDuration: 0.5) {
+            colorPickerView.alpha = 1.0
+         }
+      }
+   }
+   
+   func closeColorPickerView() {
+      for view in self.view.subviews {
+         if let colorPickerView = view as? ColorPickerView {
+            UIView.animate(withDuration: 0.5, animations: {
+               colorPickerView.alpha = 0.0
+            }, completion: { (success) in
+               if success {
+                  colorPickerView.removeFromSuperview()
+               }
+            })
+         }
+      }
    }
    
    @objc func manBoxViewTapped(sender: UITapGestureRecognizer) {

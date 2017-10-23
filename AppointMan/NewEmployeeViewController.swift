@@ -154,16 +154,18 @@ class NewEmployeeViewController: UIViewController {
    }
    
    func hideBottomImagePickerView() {
-      if let bottomImagePickerView = self.bottomImagePickerView {
-         bottomImagePickerView.bottomImagePickerViewBottomAnchor.constant = -158.0
-         UIView.animate(withDuration: 0.7, animations: {
-            bottomImagePickerView.layoutIfNeeded()
-            bottomImagePickerView.alpha = 0.0
-         }, completion: { (success) in
-            if success {
-               bottomImagePickerView.removeFromSuperview()
-            }
-         })
+      for view in self.view.subviews {
+         if let bottomImagePickerView = view as? BottomImagePickerView {
+            bottomImagePickerView.bottomImagePickerViewBottomAnchor.constant = -158.0
+            UIView.animate(withDuration: 0.7, animations: {
+               bottomImagePickerView.layoutIfNeeded()
+               bottomImagePickerView.alpha = 0.0
+            }, completion: { (success) in
+               if success {
+                  bottomImagePickerView.removeFromSuperview()
+               }
+            })
+         }
       }
    }
    

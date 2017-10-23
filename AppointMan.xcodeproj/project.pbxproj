@@ -114,6 +114,9 @@
 		EF2A93FE1F9ABD22001FB319 /* ServicesInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2A93FD1F9ABD22001FB319 /* ServicesInputView.swift */; };
 		EF3290951F927C0F008BB930 /* ClosingDaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3290941F927C0F008BB930 /* ClosingDaysViewController.swift */; };
 		EF348CCD1F990388007E5FB5 /* NewEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF348CCC1F990388007E5FB5 /* NewEmployeeViewController.swift */; };
+		EF5FA4BE1F9E327000F9086F /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5FA4BD1F9E327000F9086F /* ColorPickerViewController.swift */; };
+		EF5FA4C01F9E3A6800F9086F /* ColorPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */; };
+		EF5FA4C21F9E3B3B00F9086F /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */; };
 		EF649D5D1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */; };
 		EFBB49881F8C41890011698E /* NewServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBB49871F8C41890011698E /* NewServiceViewController.swift */; };
 		EFD86F951F92953E00E92425 /* ServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */; };
@@ -255,6 +258,9 @@
 		EF2A93FD1F9ABD22001FB319 /* ServicesInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesInputView.swift; sourceTree = "<group>"; };
 		EF3290941F927C0F008BB930 /* ClosingDaysViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosingDaysViewController.swift; sourceTree = "<group>"; };
 		EF348CCC1F990388007E5FB5 /* NewEmployeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEmployeeViewController.swift; sourceTree = "<group>"; };
+		EF5FA4BD1F9E327000F9086F /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
+		EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorPickerView.xib; sourceTree = "<group>"; };
+		EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeServiceCollectionViewCell.swift; sourceTree = "<group>"; };
 		EFBB49871F8C41890011698E /* NewServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewServiceViewController.swift; sourceTree = "<group>"; };
 		EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -401,6 +407,7 @@
 			children = (
 				23C80E3E1F7D27A700C4CACE /* AddServicesViewController.swift */,
 				EFBB49871F8C41890011698E /* NewServiceViewController.swift */,
+				EF5FA4BD1F9E327000F9086F /* ColorPickerViewController.swift */,
 				23C80E401F7D694900C4CACE /* AddEmployeesViewController.swift */,
 				EF348CCC1F990388007E5FB5 /* NewEmployeeViewController.swift */,
 				236DF4FF1F585BC100A48C73 /* WorkingHoursViewController.swift */,
@@ -414,6 +421,8 @@
 			children = (
 				EFD86F961F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift */,
 				EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */,
+				EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */,
+				EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */,
 				EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */,
 				EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */,
 				EFE309081F98A2ED006247B2 /* EmployeeCollectionViewCell.swift */,
@@ -726,6 +735,7 @@
 				EF1E99F71F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib in Resources */,
 				23E63C8D1F41B15A0084EA75 /* SF-Pro-Display-Regular.otf in Resources */,
 				23E63CA31F41B15A0084EA75 /* SFDisplay-Heavy.otf in Resources */,
+				EF5FA4C01F9E3A6800F9086F /* ColorPickerView.xib in Resources */,
 				23E63C921F41B15A0084EA75 /* SF-Pro-Display-ThinItalic.otf in Resources */,
 				23E63CA11F41B15A0084EA75 /* SFDisplay-Black.otf in Resources */,
 				23E63C841F41B15A0084EA75 /* SF-Pro-Display-BlackItalic.otf in Resources */,
@@ -777,8 +787,10 @@
 				23C80E3F1F7D27A700C4CACE /* AddServicesViewController.swift in Sources */,
 				234A536E1ED599DF00B5FAF8 /* TagsTextField.swift in Sources */,
 				238BA8081EC9D9F4002F9F0A /* CalendarView.swift in Sources */,
+				EF5FA4C21F9E3B3B00F9086F /* ColorPickerView.swift in Sources */,
 				237C52991EC4BF1800D98DD9 /* FilterViewController.swift in Sources */,
 				EFD86F951F92953E00E92425 /* ServiceCollectionViewCell.swift in Sources */,
+				EF5FA4BE1F9E327000F9086F /* ColorPickerViewController.swift in Sources */,
 				EF1E99F91F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift in Sources */,
 				237C52971EC4BE5C00D98DD9 /* HomeSplitViewController.swift in Sources */,
 				EF649D5D1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift in Sources */,
