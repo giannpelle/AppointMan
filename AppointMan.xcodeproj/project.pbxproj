@@ -44,7 +44,7 @@
 		237C529B1EC4BF3200D98DD9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237C529A1EC4BF3200D98DD9 /* HomeViewController.swift */; };
 		237C529D1EC4C11700D98DD9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237C529C1EC4C11700D98DD9 /* Extensions.swift */; };
 		23801A641F55745200847830 /* GPFloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23801A631F55745200847830 /* GPFloatingTextField.swift */; };
-		238B1BAF1F52976C00A1F6CA /* GPCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238B1BAE1F52976C00A1F6CA /* GPCalendarView.swift */; };
+		238B1BAF1F52976C00A1F6CA /* GPCalendarDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238B1BAE1F52976C00A1F6CA /* GPCalendarDatePickerView.swift */; };
 		238B1BB11F52977400A1F6CA /* CalendarDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238B1BB01F52977400A1F6CA /* CalendarDayCollectionViewCell.swift */; };
 		238BA8041EC9CD03002F9F0A /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238BA8031EC9CD03002F9F0A /* Const.swift */; };
 		238BA8061EC9D9E5002F9F0A /* CalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 238BA8051EC9D9E5002F9F0A /* CalendarView.xib */; };
@@ -193,7 +193,7 @@
 		237C529A1EC4BF3200D98DD9 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		237C529C1EC4C11700D98DD9 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		23801A631F55745200847830 /* GPFloatingTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPFloatingTextField.swift; sourceTree = "<group>"; };
-		238B1BAE1F52976C00A1F6CA /* GPCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPCalendarView.swift; sourceTree = "<group>"; };
+		238B1BAE1F52976C00A1F6CA /* GPCalendarDatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPCalendarDatePickerView.swift; sourceTree = "<group>"; };
 		238B1BB01F52977400A1F6CA /* CalendarDayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDayCollectionViewCell.swift; sourceTree = "<group>"; };
 		238BA8031EC9CD03002F9F0A /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		238BA8051EC9D9E5002F9F0A /* CalendarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarView.xib; sourceTree = "<group>"; };
@@ -372,14 +372,14 @@
 			name = MAIN;
 			sourceTree = "<group>";
 		};
-		236DF4B21F58067A00A48C73 /* GPCalendar */ = {
+		236DF4B21F58067A00A48C73 /* GPCalendarDatePicker */ = {
 			isa = PBXGroup;
 			children = (
-				238B1BAE1F52976C00A1F6CA /* GPCalendarView.swift */,
+				238B1BAE1F52976C00A1F6CA /* GPCalendarDatePickerView.swift */,
 				238B1BB01F52977400A1F6CA /* CalendarDayCollectionViewCell.swift */,
 				236DF4F01F5813CE00A48C73 /* CalendarDayButton.swift */,
 			);
-			name = GPCalendar;
+			name = GPCalendarDatePicker;
 			sourceTree = "<group>";
 		};
 		236DF4B31F58068200A48C73 /* GPFloatingTextField */ = {
@@ -513,7 +513,7 @@
 			children = (
 				236DF4B31F58068200A48C73 /* GPFloatingTextField */,
 				236DF4F41F58152900A48C73 /* GPSegmentedControl */,
-				236DF4B21F58067A00A48C73 /* GPCalendar */,
+				236DF4B21F58067A00A48C73 /* GPCalendarDatePicker */,
 				236DF4F91F5825E900A48C73 /* GPSliderDatePicker */,
 			);
 			name = Libraries;
@@ -793,7 +793,7 @@
 				234A53701ED59C1500B5FAF8 /* UnderlinedTextField.swift in Sources */,
 				236DF4F81F5825E200A48C73 /* SliderDatePickerDayCollectionViewCell.swift in Sources */,
 				2304A6141F40597C00E1FB7E /* DipendentiViewController.swift in Sources */,
-				238B1BAF1F52976C00A1F6CA /* GPCalendarView.swift in Sources */,
+				238B1BAF1F52976C00A1F6CA /* GPCalendarDatePickerView.swift in Sources */,
 				236DF5041F586C4F00A48C73 /* WorkingHoursPlannerView.swift in Sources */,
 				EF37718C1F9E700E00D363B5 /* OkPopupView.swift in Sources */,
 				23801A641F55745200847830 /* GPFloatingTextField.swift in Sources */,

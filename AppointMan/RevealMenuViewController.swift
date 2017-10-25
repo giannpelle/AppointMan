@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol RevealMenuDelegate {
+protocol RevealMenuDelegate: class {
    func openRevealMenu()
    func closeRevealMenu()
    func enableSmallMousePad()
@@ -62,12 +62,12 @@ class RevealMenuViewController: UIViewController {
             break
          case 1:
             let dipendentiVC = UIStoryboard.dipendentiVC()
-            //dipendentiVC.revealMenuDelegate = self
+            dipendentiVC.revealMenuDelegate = self
             viewControllerToBePresented = dipendentiVC
             break
          case 2:
             let clientiVC = UIStoryboard.clientiVC()
-            //clientiVC.revealMenuDelegate = self
+            clientiVC.revealMenuDelegate = self
             viewControllerToBePresented = clientiVC
             break
          case 3:

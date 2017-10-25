@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol GPCalendarViewDelegate {
-   func calendarView(calendarView: GPCalendarView, didSelectDate: Date)
+protocol GPCalendarDatePickerViewDelegate {
+   func calendarView(calendarView: GPCalendarDatePickerView, didSelectDate: Date)
 }
 
-class GPCalendarView: UIView {
+class GPCalendarDatePickerView: UIView {
    
    // TOP BAR
    var topBar: UIView!
@@ -25,7 +25,7 @@ class GPCalendarView: UIView {
    var weekDaysStackView: UIStackView!
    var daysCollectionView: UICollectionView!
    
-   var delegate: GPCalendarViewDelegate?
+   var delegate: GPCalendarDatePickerViewDelegate?
    
    var currentIndexPathSelected: Int?
    var currentDateSelected: Date = Date() {
@@ -224,7 +224,7 @@ class GPCalendarView: UIView {
    
 }
 
-extension GPCalendarView: UICollectionViewDataSource {
+extension GPCalendarDatePickerView: UICollectionViewDataSource {
    
    func numberOfSections(in collectionView: UICollectionView) -> Int {
       return 1
@@ -258,7 +258,7 @@ extension GPCalendarView: UICollectionViewDataSource {
    
 }
 
-extension GPCalendarView: UICollectionViewDelegate {
+extension GPCalendarDatePickerView: UICollectionViewDelegate {
    
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
       guard indexPath.row >= self.previousMonthDays.count else {

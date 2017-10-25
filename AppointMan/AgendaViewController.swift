@@ -26,8 +26,8 @@ class AgendaViewController: UIViewController {
    @IBOutlet weak var newAppointmentButton: VerticallyButton!
    
    // DATE PICKER
-   @IBOutlet weak var calendarView: GPCalendarView!
-   @IBOutlet weak var calendarViewTrailingAnchor: NSLayoutConstraint!
+   @IBOutlet weak var calendarDatePickerView: GPCalendarDatePickerView!
+   @IBOutlet weak var calendarDatePickerViewTrailingAnchor: NSLayoutConstraint!
    
    // FILTRA APPUNTAMENTI controller
    @IBOutlet weak var filterAppointmentsContainerView: UIView!
@@ -35,19 +35,19 @@ class AgendaViewController: UIViewController {
    
    // BOTTOM BAR
    @IBOutlet weak var bottomBarView: UIView!
-   @IBOutlet weak var calendarButton: UIButton!
+   @IBOutlet weak var calendarDatePickerButton: UIButton!
    @IBOutlet weak var filterButton: UIButton!
    
-   var revealMenuDelegate: RevealMenuDelegate?
+   weak var revealMenuDelegate: RevealMenuDelegate?
    var currentPanGestureTranslationX: CGFloat = 0.0
    var isBubbleMenuOpen: Bool = false {
       didSet {
          self.triangolinoDisclosureIndicatorButton.setImage(self.isBubbleMenuOpen ? #imageLiteral(resourceName: "triangolino_close_disclosure_indicator") : #imageLiteral(resourceName: "triangolino_open_disclosure_indicator"), for: .normal)
       }
    }
-   var isCalendarViewOpen: Bool = false {
+   var isCalendarDatePickerViewOpen: Bool = false {
       didSet {
-         if self.isCalendarViewOpen {
+         if self.isCalendarDatePickerViewOpen {
             self.revealMenuDelegate?.disableSmallMousePad()
          } else {
             self.revealMenuDelegate?.enableSmallMousePad()
@@ -59,8 +59,18 @@ class AgendaViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      self.view.clipsToBounds = true
+      self.applyTypography()
+      self.setupUI()
       
+      //FIX ME: shadow needs refactoring
+//      self.bottomBarView.layer.shadowColor = UIColor.black.withAlphaComponent(0.15).cgColor
+//      self.bottomBarView.layer.shadowOpacity = 1.0
+//      self.bottomBarView.layer.shadowOffset = CGSize(width: 0.0, height: -5.0)
+//      self.bottomBarView.layer.shadowRadius = 24.0
+//      self.bottomBarView.layer.masksToBounds = false
+   }
+   
+   func applyTypography() {
       self.todayNumberLabel.attributedText = UILabel.attributedString(withText: "\(Calendar.current.component(.day, from: Date()))", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 26)!, andCharacterSpacing: -1.46)
       let monthFormatter = DateFormatter()
       monthFormatter.dateFormat = "MMMM"
@@ -70,75 +80,160 @@ class AgendaViewController: UIViewController {
       yearFormatter.locale = Locale(identifier: "it_IT")
       self.todayMonthLabel.attributedText = UILabel.attributedString(withText: monthFormatter.string(from: Date()).uppercased() + " " + yearFormatter.string(from: Date()), andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 11)!, andCharacterSpacing: 1.38)
       
-      // BUBBLE MENU setup
+      self.cancelButton.setAttributedTitle(UILabel.attributedString(withText: "Annulla", andTextColor: UIColor.white.withAlphaComponent(0.5), andFont: UIFont.init(name: "SFUIText-Bold", size: 10.0)!, andCharacterSpacing: nil, isCentered: true), for: .normal)
+      self.takeNoteButton.setAttributedTitle(UILabel.attributedString(withText: "Annota", andTextColor: UIColor.white.withAlphaComponent(0.5), andFont: UIFont.init(name: "SFUIText-Bold", size: 10.0)!, andCharacterSpacing: nil, isCentered: true), for: .normal)
+      self.newAppointmentButton.setAttributedTitle(UILabel.attributedString(withText: "Nuovo", andTextColor: UIColor.white.withAlphaComponent(0.5), andFont: UIFont.init(name: "SFUIText-Bold", size: 10.0)!, andCharacterSpacing: nil, isCentered: true), for: .normal)
+   }
+   
+   func setupUI() {
       
       self.bubbleMenuView.layer.roundCorners(corners: [.topLeft, .bottomLeft], radius: self.bubbleMenuView.bounds.size.height / 2.0, viewBounds: bubbleMenuView.bounds)
-      
       let bubbleMenuViewPanGestureRec = UIPanGestureRecognizer(target: self, action: #selector(self.bubbleMenuPanGestureRecognized(sender:)))
       self.bubbleMenuView.addGestureRecognizer(bubbleMenuViewPanGestureRec)
+      self.triangolinoDisclosureIndicatorButton.addTarget(self, action: #selector(self.bubbleMenuDisclosureButtonPressed(sender:)), for: .touchUpInside)
       
       self.cancelButton.setImage(#imageLiteral(resourceName: "icona_agenda_annulla"), for: .normal)
-      self.cancelButton.setAttributedTitle(UILabel.attributedString(withText: " Annulla ", andTextColor: UIColor.white.withAlphaComponent(0.5), andFont: UIFont.init(name: "SFUIText-Bold", size: 10.0)!, andCharacterSpacing: nil, isCentered: true), for: .normal)
+      self.cancelButton.addTarget(self, action: #selector(self.cancelButtonPressed(sender:)), for: .touchUpInside)
       
       self.takeNoteButton.setImage(#imageLiteral(resourceName: "icona_agenda_annota"), for: .normal)
-      self.takeNoteButton.setAttributedTitle(UILabel.attributedString(withText: " Annota ", andTextColor: UIColor.white.withAlphaComponent(0.5), andFont: UIFont.init(name: "SFUIText-Bold", size: 10.0)!, andCharacterSpacing: nil, isCentered: true), for: .normal)
+      self.takeNoteButton.addTarget(self, action: #selector(self.takeNoteButtonPressed(sender:)), for: .touchUpInside)
       
       self.newAppointmentButton.setImage(#imageLiteral(resourceName: "icona_agenda_nuovo"), for: .normal)
-      self.newAppointmentButton.setAttributedTitle(UILabel.attributedString(withText: "  Nuovo  ", andTextColor: UIColor.white.withAlphaComponent(0.5), andFont: UIFont.init(name: "SFUIText-Bold", size: 10.0)!, andCharacterSpacing: nil, isCentered: true), for: .normal)
+      self.newAppointmentButton.addTarget(self, action: #selector(self.newAppointmentButtonPressed(sender:)), for: .touchUpInside)
       
+      self.calendarDatePickerButton.addTarget(self, action: #selector(self.calendarDatePickerButtonPressed(sender:)), for: .touchUpInside)
+      self.calendarDatePickerButton.setBackgroundColor(color: UIColor.amDarkBlue, forState: .normal)
+      self.calendarDatePickerButton.setBackgroundColor(color: UIColor.amBlue, forState: .selected)
       
-      // BOTTOM BAR setup
-      
-      //FIX ME: shadow needs refactoring
-//      self.bottomBarView.layer.shadowColor = UIColor.black.withAlphaComponent(0.15).cgColor
-//      self.bottomBarView.layer.shadowOpacity = 1.0
-//      self.bottomBarView.layer.shadowOffset = CGSize(width: 0.0, height: -5.0)
-//      self.bottomBarView.layer.shadowRadius = 24.0
-//      self.bottomBarView.layer.masksToBounds = false
-      
-      self.calendarButton.setBackgroundColor(color: UIColor.amDarkBlue, forState: .normal)
-      self.calendarButton.setBackgroundColor(color: UIColor.amBlue, forState: .selected)
-      
+      self.filterButton.addTarget(self, action: #selector(self.filterButtonPressed(sender:)), for: .touchUpInside)
       self.filterButton.setBackgroundColor(color: UIColor.amDarkBlue, forState: .normal)
       self.filterButton.setBackgroundColor(color: UIColor.amBlue, forState: .selected)
-      
+   }
+   
+   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+      super.touchesBegan(touches, with: event)
+      if let touch = touches.first, let view = touch.view, view == self.bubbleMenuActionsStackView || touch.view == self.bubbleMenuView {} else {
+         self.closeBubbleMenu()
+      }
+      if let touch = touches.first, let view = touch.view, view == self.filterAppointmentsContainerView || touch.view == self.filterButton {} else {
+         self.closeFilterAppointmentsContainerView()
+      }
+      if let touch = touches.first, let view = touch.view, view == self.calendarDatePickerView || touch.view == self.calendarDatePickerButton {} else {
+         self.closeCalendarDatePickerView()
+      }
    }
    
    func cleanViewControllerView() {
       self.closeBubbleMenu()
       self.closeFilterAppointmentsContainerView()
-      self.closeCalendarView()
+      self.closeCalendarDatePickerView()
    }
-   
-   // MARK: REVEAL MENU delegate
    
    @IBAction func hamburgerMenuButtonPressed(sender: UIButton) {
       self.cleanViewControllerView()
       self.revealMenuDelegate?.openRevealMenu()
    }
    
-   // MARK: BUBBLE MENU working part
+}
+
+// MARK: CalendarDatePickerView handler
+
+extension AgendaViewController {
    
-   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-      super.touchesBegan(touches, with: event)
-      
-      if let touch = touches.first, let view = touch.view, view == self.bubbleMenuActionsStackView || touch.view == self.bubbleMenuView {
-         
+   @objc func calendarDatePickerButtonPressed(sender: UIButton) {
+      if self.isCalendarDatePickerViewOpen {
+         self.closeCalendarDatePickerView()
       } else {
-         self.closeBubbleMenu()
+         self.openCalendarDatePickerView()
+      }
+   }
+   
+   func openCalendarDatePickerView() {
+      guard !self.isCalendarDatePickerViewOpen else {
+         return
       }
       
-      if let touch = touches.first, let view = touch.view, view == self.filterAppointmentsContainerView || touch.view == self.filterButton {
-         
-      } else {
+      self.calendarDatePickerView.currentMonthIndex = Calendar.current.dateComponents([.month], from: Date(), to: self.calendarDatePickerView.currentDateSelected).month!
+      self.calendarDatePickerViewTrailingAnchor.constant = 292.0
+      UIView.animate(withDuration: 0.6, animations: {
+         self.view.layoutIfNeeded()
+      }) { (success) in
+         self.isCalendarDatePickerViewOpen = true
+         self.calendarDatePickerButton.isSelected = true
+      }
+   }
+   
+   func closeCalendarDatePickerView() {
+      guard self.isCalendarDatePickerViewOpen else {
+         return
+      }
+      
+      self.calendarDatePickerViewTrailingAnchor.constant = 0.0
+      UIView.animate(withDuration: 0.6, animations: {
+         self.view.layoutIfNeeded()
+      }) { (success) in
+         self.isCalendarDatePickerViewOpen = false
+         self.calendarDatePickerButton.isSelected = false
+      }
+   }
+}
+
+// MARK: FilterVC handler
+
+extension AgendaViewController {
+   
+   func openFilterAppointmentsContainerView() {
+      guard !self.isFilterAppointmentsContainerViewOpen else {
+         return
+      }
+      
+      self.filterAppointmentsContainerViewLeadingAnchor.constant = -UIScreen.main.bounds.size.width * 4/10.0
+      UIView.animate(withDuration: 0.6, animations: {
+         self.view.layoutIfNeeded()
+      }) { (success) in
+         self.isFilterAppointmentsContainerViewOpen = true
+         self.filterButton.isSelected = true
+      }
+   }
+   
+   func closeFilterAppointmentsContainerView() {
+      guard self.isFilterAppointmentsContainerViewOpen else {
+         return
+      }
+      
+      self.filterAppointmentsContainerViewLeadingAnchor.constant = 0.0
+      UIView.animate(withDuration: 0.6, animations: {
+         self.view.layoutIfNeeded()
+      }) { (success) in
+         self.isFilterAppointmentsContainerViewOpen = false
+         self.filterButton.isSelected = false
+      }
+   }
+   
+   @objc func filterButtonPressed(sender: UIButton) {
+      if self.isFilterAppointmentsContainerViewOpen {
          self.closeFilterAppointmentsContainerView()
-      }
-      
-      if let touch = touches.first, let view = touch.view, view == self.calendarView || touch.view == self.calendarButton {
-         
       } else {
-         self.closeCalendarView()
+         self.openFilterAppointmentsContainerView()
       }
+   }
+}
+
+// MARK: BubbleMenu handler
+
+extension AgendaViewController {
+   
+   @objc func cancelButtonPressed(sender: UIButton) {
+      
+   }
+   
+   @objc func takeNoteButtonPressed(sender: UIButton) {
+      self.closeBubbleMenu()
+      let takeNotesVC = UIStoryboard.takeNotesVC()
+      self.present(takeNotesVC, animated: true, completion: nil)
+   }
+   
+   @objc func newAppointmentButtonPressed(sender: UIButton) {
       
    }
    
@@ -278,7 +373,7 @@ class AgendaViewController: UIViewController {
       
    }
    
-   @IBAction func bubbleMenuDisclosureButtonPressed(sender: UIButton) {
+   @objc func bubbleMenuDisclosureButtonPressed(sender: UIButton) {
       
       if self.isBubbleMenuOpen {
          self.closeBubbleMenu()
@@ -287,84 +382,4 @@ class AgendaViewController: UIViewController {
       }
       
    }
-   
-   // MARK: DATE PICKER working part
-   
-   func openCalendarView() {
-      guard !self.isCalendarViewOpen else {
-         return
-      }
-      
-      self.calendarView.currentMonthIndex = Calendar.current.dateComponents([.month], from: Date(), to: self.calendarView.currentDateSelected).month!
-      self.calendarViewTrailingAnchor.constant = 292.0
-      UIView.animate(withDuration: 0.6, animations: {
-         self.view.layoutIfNeeded()
-      }) { (success) in
-         self.isCalendarViewOpen = true
-         self.calendarButton.isSelected = true
-      }
-   }
-   
-   func closeCalendarView() {
-      guard self.isCalendarViewOpen else {
-         return
-      }
-      
-      self.calendarViewTrailingAnchor.constant = 0.0
-      UIView.animate(withDuration: 0.6, animations: {
-         self.view.layoutIfNeeded()
-      }) { (success) in
-         self.isCalendarViewOpen = false
-         self.calendarButton.isSelected = false
-      }
-   }
-   
-   // MARK: FILTRA APPUNTAMENTI working part
-   
-   func openFilterAppointmentsContainerView() {
-      guard !self.isFilterAppointmentsContainerViewOpen else {
-         return
-      }
-      
-      self.filterAppointmentsContainerViewLeadingAnchor.constant = -UIScreen.main.bounds.size.width * 4/10.0
-      UIView.animate(withDuration: 0.6, animations: {
-         self.view.layoutIfNeeded()
-      }) { (success) in
-         self.isFilterAppointmentsContainerViewOpen = true
-         self.filterButton.isSelected = true
-      }
-   }
-   
-   func closeFilterAppointmentsContainerView() {
-      guard self.isFilterAppointmentsContainerViewOpen else {
-         return
-      }
-      
-      self.filterAppointmentsContainerViewLeadingAnchor.constant = 0.0
-      UIView.animate(withDuration: 0.6, animations: {
-         self.view.layoutIfNeeded()
-      }) { (success) in
-         self.isFilterAppointmentsContainerViewOpen = false
-         self.filterButton.isSelected = false
-      }
-   }
-   
-   // MARK: BOTTOM BAR working part
-   
-   @IBAction func calendarButtonPressed(sender: UIButton) {
-      if self.isCalendarViewOpen {
-         self.closeCalendarView()
-      } else {
-         self.openCalendarView()
-      }
-   }
-   
-   @IBAction func filterButtonPressed(sender: UIButton) {
-      if self.isFilterAppointmentsContainerViewOpen {
-         self.closeFilterAppointmentsContainerView()
-      } else {
-         self.openFilterAppointmentsContainerView()
-      }
-   }
-   
 }

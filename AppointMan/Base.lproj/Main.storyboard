@@ -577,7 +577,7 @@
                         <viewControllerLayoutGuide type="top" id="oSL-Fx-ex0"/>
                         <viewControllerLayoutGuide type="bottom" id="e7w-Uo-obc"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="IWE-jj-MFG">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="IWE-jj-MFG">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -600,11 +600,11 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qec-bT-QnZ">
                                 <rect key="frame" x="988" y="31" width="225" height="54"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="SaA-b8-At9">
-                                        <rect key="frame" x="56" y="15" width="151" height="24"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="SaA-b8-At9">
+                                        <rect key="frame" x="40" y="0.0" width="167" height="54"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chE-XK-VnW" customClass="VerticallyButton" customModule="AppointMan" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="41" height="24"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="55.5" height="54"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" title="Button">
@@ -612,7 +612,7 @@
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4X9-as-nD0" customClass="VerticallyButton" customModule="AppointMan" customModuleProvider="target">
-                                                <rect key="frame" x="55" y="0.0" width="41" height="24"/>
+                                                <rect key="frame" x="55.5" y="0.0" width="56" height="54"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" title="Button">
@@ -620,7 +620,7 @@
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ex-un-owz" customClass="VerticallyButton" customModule="AppointMan" customModuleProvider="target">
-                                                <rect key="frame" x="110" y="0.0" width="41" height="24"/>
+                                                <rect key="frame" x="111.5" y="0.0" width="55.5" height="54"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" title="Button">
@@ -636,19 +636,17 @@
                                             <constraint firstAttribute="height" constant="50" id="r2V-qo-Nyk"/>
                                         </constraints>
                                         <state key="normal" image="triangolino_open_disclosure_indicator"/>
-                                        <connections>
-                                            <action selector="bubbleMenuDisclosureButtonPressedWithSender:" destination="xMm-vC-Tl1" eventType="touchUpInside" id="HjG-29-4le"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="SaA-b8-At9" secondAttribute="trailing" constant="18" id="5sy-pq-aht"/>
                                     <constraint firstItem="p9b-yR-Ifu" firstAttribute="centerY" secondItem="Qec-bT-QnZ" secondAttribute="centerY" id="Khk-eU-qHu"/>
-                                    <constraint firstItem="SaA-b8-At9" firstAttribute="centerY" secondItem="Qec-bT-QnZ" secondAttribute="centerY" id="RP9-f4-Sif"/>
                                     <constraint firstAttribute="height" constant="54" id="Uvz-kV-srr"/>
                                     <constraint firstItem="p9b-yR-Ifu" firstAttribute="leading" secondItem="Qec-bT-QnZ" secondAttribute="leading" id="ahZ-Iz-pcS"/>
-                                    <constraint firstItem="SaA-b8-At9" firstAttribute="leading" relation="lessThanOrEqual" secondItem="p9b-yR-Ifu" secondAttribute="trailing" constant="24" id="kFd-qd-Wjo"/>
+                                    <constraint firstAttribute="bottom" secondItem="SaA-b8-At9" secondAttribute="bottom" id="blW-EM-U7H"/>
+                                    <constraint firstItem="SaA-b8-At9" firstAttribute="top" secondItem="Qec-bT-QnZ" secondAttribute="top" id="hQg-ef-ISV"/>
+                                    <constraint firstItem="SaA-b8-At9" firstAttribute="leading" relation="lessThanOrEqual" secondItem="p9b-yR-Ifu" secondAttribute="trailing" constant="8" id="kFd-qd-Wjo"/>
                                     <constraint firstAttribute="width" constant="225" id="mqD-9f-26g"/>
                                 </constraints>
                             </view>
@@ -661,9 +659,6 @@
                                             <constraint firstAttribute="width" constant="78" id="xI9-dZ-xcB"/>
                                         </constraints>
                                         <state key="normal" image="icona_agenda_filtri"/>
-                                        <connections>
-                                            <action selector="filterButtonPressedWithSender:" destination="xMm-vC-Tl1" eventType="touchUpInside" id="eXu-CT-Sfn"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wuo-s4-jhY">
                                         <rect key="frame" x="0.0" y="0.0" width="78" height="50"/>
@@ -671,9 +666,6 @@
                                             <constraint firstAttribute="width" constant="78" id="If2-xf-Etv"/>
                                         </constraints>
                                         <state key="normal" image="icona_agenda_date_picker"/>
-                                        <connections>
-                                            <action selector="calendarButtonPressedWithSender:" destination="xMm-vC-Tl1" eventType="touchUpInside" id="Es5-XJ-gR9"/>
-                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IqN-eq-lyt" customClass="GPSliderDatePickerView" customModule="AppointMan" customModuleProvider="target">
                                         <rect key="frame" x="325" y="0.0" width="374" height="50"/>
@@ -731,7 +723,7 @@
                                     <constraint firstAttribute="bottom" secondItem="374-vw-C9A" secondAttribute="bottom" id="vZy-Ij-QCg"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="shE-RO-OnW" customClass="GPCalendarView" customModule="AppointMan" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="shE-RO-OnW" customClass="GPCalendarDatePickerView" customModule="AppointMan" customModuleProvider="target">
                                 <rect key="frame" x="-292" y="406" width="292" height="312"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -764,9 +756,9 @@
                         <outlet property="bubbleMenuActionsStackView" destination="SaA-b8-At9" id="98U-77-75d"/>
                         <outlet property="bubbleMenuView" destination="Qec-bT-QnZ" id="BFl-dZ-DOE"/>
                         <outlet property="bubbleMenuViewTrailingAnchor" destination="pBg-Xv-y5F" id="hZT-rK-se3"/>
-                        <outlet property="calendarButton" destination="Wuo-s4-jhY" id="u5M-iX-Rni"/>
-                        <outlet property="calendarView" destination="shE-RO-OnW" id="US8-Ol-DI3"/>
-                        <outlet property="calendarViewTrailingAnchor" destination="l3b-sO-oma" id="HBD-Qg-IaF"/>
+                        <outlet property="calendarDatePickerButton" destination="Wuo-s4-jhY" id="ybT-ZW-UZp"/>
+                        <outlet property="calendarDatePickerView" destination="shE-RO-OnW" id="sKP-en-FoD"/>
+                        <outlet property="calendarDatePickerViewTrailingAnchor" destination="l3b-sO-oma" id="B0M-B3-UNO"/>
                         <outlet property="cancelButton" destination="chE-XK-VnW" id="UIH-B7-Byn"/>
                         <outlet property="filterAppointmentsContainerView" destination="wdk-hP-abS" id="5Aw-aA-1oZ"/>
                         <outlet property="filterAppointmentsContainerViewLeadingAnchor" destination="3he-3F-uzg" id="xHf-4I-LVe"/>
@@ -1165,8 +1157,33 @@
                     <view key="view" contentMode="scaleToFill" id="Pvp-qg-mb4">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3FE-zf-ikb">
+                                <rect key="frame" x="491" y="41" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XyZ-Kh-7yR">
+                                <rect key="frame" x="20" y="32" width="40" height="40"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="icona_agenda_hamburger"/>
+                                <connections>
+                                    <action selector="hamburgerMenuButtonPressedWithSender:" destination="QIP-mC-HuK" eventType="touchUpInside" id="SVv-ep-4al"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.047058823530000002" green="0.32156862749999998" blue="0.69411764710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="3FE-zf-ikb" firstAttribute="centerX" secondItem="Pvp-qg-mb4" secondAttribute="centerX" id="1KU-fw-7rb"/>
+                            <constraint firstItem="XyZ-Kh-7yR" firstAttribute="leading" secondItem="Pvp-qg-mb4" secondAttribute="leading" constant="20" id="B27-04-Ay2"/>
+                            <constraint firstItem="XyZ-Kh-7yR" firstAttribute="top" secondItem="aDp-dd-JrP" secondAttribute="bottom" constant="12" id="M9k-An-HzB"/>
+                            <constraint firstItem="3FE-zf-ikb" firstAttribute="top" secondItem="aDp-dd-JrP" secondAttribute="bottom" constant="21" id="tgn-5H-Bjh"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="employeesLabel" destination="3FE-zf-ikb" id="j48-Lf-60X"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="trx-pN-UUB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1183,8 +1200,33 @@
                     <view key="view" contentMode="scaleToFill" id="Xh0-bd-zpX">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRp-n8-fY2">
+                                <rect key="frame" x="20" y="32" width="40" height="40"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="icona_agenda_hamburger"/>
+                                <connections>
+                                    <action selector="hamburgerMenuButtonPressedWithSender:" destination="Kh0-ic-e1a" eventType="touchUpInside" id="SDz-lE-da6"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LOi-Z1-aMz">
+                                <rect key="frame" x="491" y="41" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.047058823530000002" green="0.32156862749999998" blue="0.69411764710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="PRp-n8-fY2" firstAttribute="leading" secondItem="Xh0-bd-zpX" secondAttribute="leading" constant="20" id="1Yd-TH-CYK"/>
+                            <constraint firstItem="LOi-Z1-aMz" firstAttribute="top" secondItem="A3J-S0-vej" secondAttribute="bottom" constant="21" id="3xI-xe-VhK"/>
+                            <constraint firstItem="LOi-Z1-aMz" firstAttribute="centerX" secondItem="Xh0-bd-zpX" secondAttribute="centerX" id="L4c-jW-Y4M"/>
+                            <constraint firstItem="PRp-n8-fY2" firstAttribute="top" secondItem="A3J-S0-vej" secondAttribute="bottom" constant="12" id="Z8B-2g-aiS"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="customersLabel" destination="LOi-Z1-aMz" id="mVr-q6-PRT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ex7-Wy-UEq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
