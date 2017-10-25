@@ -15,7 +15,7 @@ class TakeNotesViewController: UIViewController {
    @IBOutlet weak var addMemoButton: UIButton!
    @IBOutlet weak var memoCollectionView: UICollectionView!
    
-   var newMemoTextViewHeight: CGFloat?
+   var newMemoTextViewContentSizeHeight: CGFloat?
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -50,7 +50,6 @@ class TakeNotesViewController: UIViewController {
       self.dismiss(animated: true, completion: nil)
    }
    
-   
 }
 
 extension TakeNotesViewController: UICollectionViewDataSource {
@@ -80,8 +79,8 @@ extension TakeNotesViewController: UICollectionViewDelegate {
 
 extension TakeNotesViewController: MemoCollectionViewCellDelegate {
    
-   func invalidateLayout(withNewTextViewHeight height: CGFloat) {
-      self.newMemoTextViewHeight = height
+   func invalidateLayout(withNewTextViewContentSizeHeight height: CGFloat) {
+      self.newMemoTextViewContentSizeHeight = height
       (self.memoCollectionView.collectionViewLayout as? MasonryLayout)?.emptyCache()
       self.memoCollectionView.collectionViewLayout.invalidateLayout()
    }
@@ -91,12 +90,16 @@ extension TakeNotesViewController: MasonryLayoutDelegate {
    
    func collectionView(_ collectionView: UICollectionView, heightForTextViewAtIndexPath indexPath: IndexPath) -> CGFloat {
       
-      if let height = self.newMemoTextViewHeight {
+      if let height = self.newMemoTextViewContentSizeHeight {
          print(height)
          return height
       }
       print("17")
       return 17.0
+      
+      // SOLO SE PROPRIO SENZA SPERANZE calcolare altezza programmaticamente
+      //let constrainedSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+      //let height = self.memoTextView.text.boundingRect(with: constrainedSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: UIFont.init(name: "SFUIText-Regular", size: 14.0)!], context: nil).height.rounded(.up)
       
    }
 }

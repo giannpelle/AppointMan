@@ -1083,7 +1083,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8Gk-jN-MED" customClass="MemoTextView" customModule="AppointMan" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="45" width="257" height="189"/>
+                                                    <rect key="frame" x="16" y="45" width="265" height="189"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1107,31 +1107,23 @@
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" image="iconcina_annota_preferiti"/>
                                                 </button>
-                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WTP-Y9-0bt">
-                                                    <rect key="frame" x="20" y="45" width="257" height="27"/>
-                                                    <color key="backgroundColor" red="1" green="0.0" blue="0.024272643905661084" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="27" id="w3B-7g-zra"/>
-                                                    </constraints>
-                                                </view>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="8Gk-jN-MED" secondAttribute="trailing" constant="20" id="4GA-Nf-xNm"/>
+                                            <constraint firstAttribute="trailing" secondItem="8Gk-jN-MED" secondAttribute="trailing" constant="16" id="4GA-Nf-xNm"/>
                                             <constraint firstItem="7iB-yl-GdK" firstAttribute="top" secondItem="SfX-nA-YDd" secondAttribute="top" constant="12" id="4se-tL-deN"/>
-                                            <constraint firstItem="WTP-Y9-0bt" firstAttribute="leading" secondItem="SfX-nA-YDd" secondAttribute="leading" constant="20" id="O51-iz-HBh"/>
-                                            <constraint firstAttribute="trailing" secondItem="WTP-Y9-0bt" secondAttribute="trailing" constant="20" id="QQu-k6-Fdx"/>
                                             <constraint firstAttribute="trailing" secondItem="7iB-yl-GdK" secondAttribute="trailing" constant="12" id="e5C-aZ-lsy"/>
                                             <constraint firstItem="7iB-yl-GdK" firstAttribute="leading" secondItem="6m6-hC-Di1" secondAttribute="trailing" constant="14" id="fwM-Ss-zGg"/>
                                             <constraint firstItem="6m6-hC-Di1" firstAttribute="top" secondItem="SfX-nA-YDd" secondAttribute="top" constant="12" id="imb-bx-OOg"/>
                                             <constraint firstAttribute="bottom" secondItem="8Gk-jN-MED" secondAttribute="bottom" constant="100" id="pAE-4Q-rsf"/>
-                                            <constraint firstItem="8Gk-jN-MED" firstAttribute="leading" secondItem="SfX-nA-YDd" secondAttribute="leading" constant="20" id="qIo-oF-8Gx"/>
+                                            <constraint firstItem="8Gk-jN-MED" firstAttribute="leading" secondItem="SfX-nA-YDd" secondAttribute="leading" constant="16" id="qIo-oF-8Gx"/>
                                             <constraint firstItem="8Gk-jN-MED" firstAttribute="top" secondItem="SfX-nA-YDd" secondAttribute="top" constant="45" id="vrd-Ng-uzq"/>
-                                            <constraint firstItem="WTP-Y9-0bt" firstAttribute="top" secondItem="SfX-nA-YDd" secondAttribute="top" constant="45" id="y2x-oV-DnY"/>
                                         </constraints>
                                         <size key="customSize" width="297" height="334"/>
                                         <connections>
+                                            <outlet property="bookmarkButton" destination="6m6-hC-Di1" id="Dc3-fr-VGj"/>
+                                            <outlet property="editButton" destination="7iB-yl-GdK" id="wuY-nl-SHb"/>
                                             <outlet property="memoTextView" destination="8Gk-jN-MED" id="MWO-EH-eEH"/>
                                         </connections>
                                     </collectionViewCell>
