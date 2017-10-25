@@ -77,7 +77,16 @@ class MasonryLayout: UICollectionViewLayout {
          contentHeight = max(contentHeight, frame.maxY)
          yOffset[column] = yOffset[column] + height
          
-         column = column < (numberOfColumns - 1) ? (column + 1) : 0
+         // 7. the next colomn will be in the shorter column
+         var minColumnIndex = 0
+         var minColumnHeight = yOffset[0]
+         for index in 1..<yOffset.count {
+            if yOffset[index] < minColumnHeight {
+               minColumnIndex = index
+               minColumnHeight = yOffset[index]
+            }
+         }
+         column = minColumnIndex
       }
    }
    

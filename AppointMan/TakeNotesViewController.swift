@@ -59,7 +59,7 @@ extension TakeNotesViewController: UICollectionViewDataSource {
    }
    
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return 1
+      return 5
    }
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -95,7 +95,9 @@ extension TakeNotesViewController: MasonryLayoutDelegate {
          return height
       }
       print("17")
-      return 17.0
+      
+      let values = [17.0, 153.0, 85.0, 17.0, 34.0]
+      return CGFloat(values[indexPath.row])
       
       // SOLO SE PROPRIO SENZA SPERANZE calcolare altezza programmaticamente
       //let constrainedSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
