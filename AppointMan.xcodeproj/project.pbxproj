@@ -116,6 +116,9 @@
 		EF348CCD1F990388007E5FB5 /* NewEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF348CCC1F990388007E5FB5 /* NewEmployeeViewController.swift */; };
 		EF37718A1F9E6DAF00D363B5 /* OkPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF3771891F9E6DAF00D363B5 /* OkPopupView.xib */; };
 		EF37718C1F9E700E00D363B5 /* OkPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF37718B1F9E700E00D363B5 /* OkPopupView.swift */; };
+		EF4BDC261F9F8BEC000F10A2 /* TakeNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4BDC251F9F8BEC000F10A2 /* TakeNotesViewController.swift */; };
+		EF4BDC281F9FB80A000F10A2 /* MemoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4BDC271F9FB80A000F10A2 /* MemoCollectionViewCell.swift */; };
+		EF4BDC2A1F9FB8A9000F10A2 /* MasonryLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4BDC291F9FB8A9000F10A2 /* MasonryLayout.swift */; };
 		EF5FA4BE1F9E327000F9086F /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5FA4BD1F9E327000F9086F /* ColorPickerViewController.swift */; };
 		EF5FA4C01F9E3A6800F9086F /* ColorPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */; };
 		EF5FA4C21F9E3B3B00F9086F /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */; };
@@ -262,6 +265,9 @@
 		EF348CCC1F990388007E5FB5 /* NewEmployeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEmployeeViewController.swift; sourceTree = "<group>"; };
 		EF3771891F9E6DAF00D363B5 /* OkPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OkPopupView.xib; sourceTree = "<group>"; };
 		EF37718B1F9E700E00D363B5 /* OkPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkPopupView.swift; sourceTree = "<group>"; };
+		EF4BDC251F9F8BEC000F10A2 /* TakeNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeNotesViewController.swift; sourceTree = "<group>"; };
+		EF4BDC271F9FB80A000F10A2 /* MemoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCollectionViewCell.swift; sourceTree = "<group>"; };
+		EF4BDC291F9FB8A9000F10A2 /* MasonryLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasonryLayout.swift; sourceTree = "<group>"; };
 		EF5FA4BD1F9E327000F9086F /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorPickerView.xib; sourceTree = "<group>"; };
 		EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
@@ -310,6 +316,7 @@
 				234A536F1ED59C1500B5FAF8 /* UnderlinedTextField.swift */,
 				2330859D1EDEB2C300D4FB8C /* SmartDeleteTextField.swift */,
 				EF0EAF191F99560A0092F810 /* InOutAnimator.swift */,
+				EF4BDC291F9FB8A9000F10A2 /* MasonryLayout.swift */,
 				EF3771891F9E6DAF00D363B5 /* OkPopupView.xib */,
 				EF37718B1F9E700E00D363B5 /* OkPopupView.swift */,
 			);
@@ -322,6 +329,7 @@
 				2304A60F1F40589400E1FB7E /* RevealMenuViewController.swift */,
 				2304A6111F4058D300E1FB7E /* AgendaViewController.swift */,
 				23E63C4B1F41A37E0084EA75 /* FiltraAppuntamentiViewController.swift */,
+				EF4BDC251F9F8BEC000F10A2 /* TakeNotesViewController.swift */,
 				23B1E8B41F44890F00BE5BB6 /* ThumbnailCollectionViewCell.swift */,
 				23347C491F5096570080E355 /* FilterAppointmentTableViewCell.swift */,
 				2304A6131F40597C00E1FB7E /* DipendentiViewController.swift */,
@@ -342,6 +350,7 @@
 		2303DD231ECC49E900C24113 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EF4BDC271F9FB80A000F10A2 /* MemoCollectionViewCell.swift */,
 				237500631EE69EF800B99CF5 /* ScheduleItemView.swift */,
 				238BA8051EC9D9E5002F9F0A /* CalendarView.xib */,
 				238BA8071EC9D9F4002F9F0A /* CalendarView.swift */,
@@ -775,10 +784,12 @@
 				23B1E8B51F44890F00BE5BB6 /* ThumbnailCollectionViewCell.swift in Sources */,
 				EF23F1F01F977517007661BC /* DeleteServicePopupView.swift in Sources */,
 				237A135E1ECB890200DF0182 /* AddAppointmentViewController.swift in Sources */,
+				EF4BDC2A1F9FB8A9000F10A2 /* MasonryLayout.swift in Sources */,
 				23E63C4C1F41A37E0084EA75 /* FiltraAppuntamentiViewController.swift in Sources */,
 				23C80E411F7D694900C4CACE /* AddEmployeesViewController.swift in Sources */,
 				237C529D1EC4C11700D98DD9 /* Extensions.swift in Sources */,
 				EFD86F971F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift in Sources */,
+				EF4BDC261F9F8BEC000F10A2 /* TakeNotesViewController.swift in Sources */,
 				234A53701ED59C1500B5FAF8 /* UnderlinedTextField.swift in Sources */,
 				236DF4F81F5825E200A48C73 /* SliderDatePickerDayCollectionViewCell.swift in Sources */,
 				2304A6141F40597C00E1FB7E /* DipendentiViewController.swift in Sources */,
@@ -804,6 +815,7 @@
 				EF649D5D1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift in Sources */,
 				2304A6201F4060A700E1FB7E /* Gadgets.swift in Sources */,
 				236DF5001F585BC100A48C73 /* WorkingHoursViewController.swift in Sources */,
+				EF4BDC281F9FB80A000F10A2 /* MemoCollectionViewCell.swift in Sources */,
 				237C52691EC4B6CB00D98DD9 /* AppDelegate.swift in Sources */,
 				236DF4F71F5825E200A48C73 /* GPSliderDatePickerView.swift in Sources */,
 				234D404B1ED2DD11008F4AA9 /* SuggestionCollectionViewCell.swift in Sources */,
