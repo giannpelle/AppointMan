@@ -126,6 +126,43 @@ class ThumbnailVerticallyButton: UIButton {
    }
 }
 
+class ThumbnailVerticallyStaticButton: UIButton {
+   
+   func setup(withImage image: UIImage, andText text: String) {
+      self.isUserInteractionEnabled = false
+      self.setAttributedTitle(UILabel.attributedString(withText: text, andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 16.0)!, andCharacterSpacing: 1.14, isCentered: true), for: .normal)
+      self.setImage(image.scale(toSize: CGSize(width: 48.0, height: 48.0)), for: .normal)
+   }
+   
+   var padding: CGFloat = 30.0 {
+      didSet {
+         setNeedsLayout()
+      }
+   }
+   
+   override var intrinsicContentSize: CGSize {
+      let maxSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
+      
+      if let titleSize = titleLabel?.sizeThatFits(maxSize), let imageSize = imageView?.sizeThatFits(maxSize) {
+         let width = ceil(max(imageSize.width, titleSize.width))
+         let height = ceil(imageSize.height + titleSize.height + padding)
+         return CGSize(width: width, height: height)
+      }
+      return super.intrinsicContentSize
+   }
+   
+   override func layoutSubviews() {
+      if let image = imageView?.image, let title = titleLabel?.attributedText {
+         let imageSize = image.size
+         let titleSize = title.size()
+         titleEdgeInsets = UIEdgeInsetsMake(0.0, -imageSize.width, -(imageSize.height + padding) + 22.0, 0.0)
+         imageEdgeInsets = UIEdgeInsetsMake(-(titleSize.height + padding) + 23.0, 0.0, 0.0, -titleSize.width)
+      }
+      super.layoutSubviews()
+      self.imageView?.layer.cornerRadius = (self.imageView?.bounds.size.height ?? 0.0) / 2.0
+   }
+}
+
 protocol BoxViewDelegate {
    func didRemove(view: BoxView, atColomnIndex colomnIndex: Int)
 }

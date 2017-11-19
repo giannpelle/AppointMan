@@ -184,6 +184,7 @@ class GPCalendarDatePickerView: UIView {
       }
       
       self.weekDaysStackView = UIStackView(arrangedSubviews: weekDayLabels)
+      self.weekDaysStackView.alignment = .center
       self.weekDaysStackView.axis = .horizontal
       self.weekDaysStackView.distribution = .fillEqually
       self.calendarBoxView.addSubview(self.weekDaysStackView)

@@ -42,7 +42,7 @@ class SliderDatePickerDayCollectionViewCell: UICollectionViewCell {
       self.dayLabel.translatesAutoresizingMaskIntoConstraints = false
       self.dayLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
       self.dayLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-      self.dayLabel.lastBaselineAnchor.constraint(equalTo: self.bottomAnchor, constant: -18.0).isActive = true
+      self.dayLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -18.0).isActive = true
       
       self.dotLayer = CAShapeLayer()
       let path = UIBezierPath(ovalIn: CGRect(x: self.bounds.size.width / 2.0 - (6.0 / 2.0), y: 38.0, width: 6.0, height: 6.0))

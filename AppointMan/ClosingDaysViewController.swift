@@ -59,8 +59,8 @@ class ClosingDaysViewController: UIViewController {
    }
    
    @objc func nextBarButtonItemPressed(sender: UIBarButtonItem) {
-      //let nextVC = UIStoryboard.addEmployeesVC()
-      //self.navigationController?.pushViewController(nextVC, animated: true)
+      let homeVC = UIStoryboard.revealMenuVC()
+      self.present(homeVC, animated: true, completion: nil)
       //nextVC.navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "on_boarding_back_button"), style: .plain, target: self, action: nil)
    }
    

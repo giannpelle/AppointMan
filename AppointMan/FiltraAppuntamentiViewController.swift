@@ -54,7 +54,6 @@ class FiltraAppuntamentiViewController: UIViewController {
       self.filterAppointmentsScrollView.delegate = self
       
       self.filterAppointmentsLabel.attributedText = UILabel.attributedString(withText: "FILTRA APPUNTAMENTI", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86, isCentered: true)
-      self.filterAppointmentsLabel.heightAnchor.constraint(equalToConstant: 14.0).isActive = true
       self.employeesLabel.attributedText = UILabel.attributedString(withText: "DIPENDENTE/I", andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
       self.employeesLabel.heightAnchor.constraint(equalToConstant: 14.0).isActive = true
       

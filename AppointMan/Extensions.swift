@@ -17,6 +17,14 @@ func *(lhs: CGFloat, rhs: Int) -> CGFloat {
    return lhs * CGFloat(rhs)
 }
 
+func /(lhs: Int, rhs: CGFloat) -> CGFloat {
+   return CGFloat(lhs) / rhs
+}
+
+func /(lhs: CGFloat, rhs: Int) -> CGFloat {
+   return lhs / CGFloat(rhs)
+}
+
 protocol Overlayable {
    func drawOverlay(_ rect: CGRect)
 }
@@ -124,6 +132,11 @@ extension UIStoryboard {
    class func closingDaysVC() -> ClosingDaysViewController {
       let closingDaysVC = UIStoryboard(name: "OnBoarding", bundle: Bundle.main).instantiateViewController(withIdentifier: "closingDaysVC") as! ClosingDaysViewController
       return closingDaysVC
+   }
+   
+   class func revealMenuVC() -> RevealMenuViewController {
+      let revealMenuVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "revealMenuVC") as! RevealMenuViewController
+      return revealMenuVC
    }
    
    class func agendaVC() -> AgendaViewController {
@@ -378,12 +391,12 @@ extension UILabel {
       let attrString = NSMutableAttributedString(string: text)
       let style = NSMutableParagraphStyle()
       style.alignment = isCentered ? .center : .natural
-      attrString.addAttribute(NSAttributedStringKey.paragraphStyle, value: style, range: NSRange(location: 0, length: text.characters.count))
+      attrString.addAttribute(NSAttributedStringKey.paragraphStyle, value: style, range: NSRange(location: 0, length: text.count))
       if let characterSpacing = characterSpacing {
-         attrString.addAttribute(NSAttributedStringKey.kern, value: characterSpacing, range: NSRange(location: 0, length: text.characters.count))
+         attrString.addAttribute(NSAttributedStringKey.kern, value: characterSpacing, range: NSRange(location: 0, length: text.count))
       }
-      attrString.addAttribute(NSAttributedStringKey.font, value: font, range: NSRange(location: 0, length: text.characters.count))
-      attrString.addAttribute(NSAttributedStringKey.foregroundColor, value: textColor, range: NSRange(location: 0, length: text.characters.count))
+      attrString.addAttribute(NSAttributedStringKey.font, value: font, range: NSRange(location: 0, length: text.count))
+      attrString.addAttribute(NSAttributedStringKey.foregroundColor, value: textColor, range: NSRange(location: 0, length: text.count))
       return attrString
    }
    

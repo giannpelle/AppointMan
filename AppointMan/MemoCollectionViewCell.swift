@@ -28,7 +28,7 @@ class MemoTextView: UITextView {
    override var text: String! {
       willSet {
          if let placeholderLabel = self.placeholderLabel {
-            placeholderLabel.isHidden = !newValue.characters.isEmpty
+            placeholderLabel.isHidden = !newValue.isEmpty
          }
       }
    }
@@ -129,7 +129,7 @@ extension MemoCollectionViewCell: UITextViewDelegate {
    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
       let futureStr = (textView.text as NSString).replacingCharacters(in: range, with: text)
       if let memoTextView = textView as? MemoTextView {
-         memoTextView.placeholderLabel?.isHidden = !futureStr.characters.isEmpty
+         memoTextView.placeholderLabel?.isHidden = !futureStr.isEmpty
       }
       
       return true

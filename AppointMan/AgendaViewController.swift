@@ -25,6 +25,12 @@ class AgendaViewController: UIViewController {
    @IBOutlet weak var takeNoteButton: VerticallyButton!
    @IBOutlet weak var newAppointmentButton: VerticallyButton!
    
+   // AGENDA CONTEXT
+   @IBOutlet weak var agendaContextStackView: UIStackView!
+   @IBOutlet weak var accessoryTimetableAgendaScrollView: UIScrollView!
+   @IBOutlet weak var accessoryEmployeesAgendaScrollView: UIScrollView!
+   @IBOutlet weak var agendaScrollView: UIScrollView!
+   
    // DATE PICKER
    @IBOutlet weak var calendarDatePickerView: GPCalendarDatePickerView!
    @IBOutlet weak var calendarDatePickerViewTrailingAnchor: NSLayoutConstraint!
@@ -101,6 +107,8 @@ class AgendaViewController: UIViewController {
       self.newAppointmentButton.setImage(#imageLiteral(resourceName: "icona_agenda_nuovo"), for: .normal)
       self.newAppointmentButton.addTarget(self, action: #selector(self.newAppointmentButtonPressed(sender:)), for: .touchUpInside)
       
+      self.setupAgenda()
+      
       self.calendarDatePickerButton.addTarget(self, action: #selector(self.calendarDatePickerButtonPressed(sender:)), for: .touchUpInside)
       self.calendarDatePickerButton.setBackgroundColor(color: UIColor.amDarkBlue, forState: .normal)
       self.calendarDatePickerButton.setBackgroundColor(color: UIColor.amBlue, forState: .selected)
@@ -108,6 +116,97 @@ class AgendaViewController: UIViewController {
       self.filterButton.addTarget(self, action: #selector(self.filterButtonPressed(sender:)), for: .touchUpInside)
       self.filterButton.setBackgroundColor(color: UIColor.amDarkBlue, forState: .normal)
       self.filterButton.setBackgroundColor(color: UIColor.amBlue, forState: .selected)
+   }
+   
+   func setupAgenda() {
+      self.setupAccessoryTimetable()
+      self.setupAccessoryEmployee()
+      
+      let agendaView = AgendaView(frame: CGRect(x: 0.0, y: 0.0, width: 240.0 * 5, height: 16 * 120.0))
+      agendaView.backgroundColor = UIColor.amBlue
+      agendaView.delegate = self
+      self.agendaScrollView.contentSize = agendaView.bounds.size
+      self.agendaScrollView.delegate = self
+      self.agendaScrollView.layer.borderWidth = 2.0
+      self.agendaScrollView.layer.borderColor = UIColor.amDarkBlue.withAlphaComponent(0.3).cgColor
+      self.agendaScrollView.bounces = false
+      self.agendaScrollView.showsVerticalScrollIndicator = false
+      self.agendaScrollView.showsHorizontalScrollIndicator = false
+      self.agendaScrollView.addSubview(agendaView)
+      agendaView.translatesAutoresizingMaskIntoConstraints = false
+      agendaView.topAnchor.constraint(equalTo: self.agendaScrollView.topAnchor, constant: 0.0).isActive = true
+      agendaView.leadingAnchor.constraint(equalTo: self.agendaScrollView.leadingAnchor, constant: 0.0).isActive = true
+      agendaView.widthAnchor.constraint(equalToConstant: agendaView.bounds.size.width).isActive = true
+      agendaView.heightAnchor.constraint(equalToConstant: agendaView.bounds.size.height).isActive = true
+   }
+   
+   func setupAccessoryTimetable() {
+      let placeholderInsetHeight: CGFloat = 10.0
+      
+      self.accessoryTimetableAgendaScrollView.showsVerticalScrollIndicator = false
+      self.accessoryTimetableAgendaScrollView.isScrollEnabled = false
+      self.accessoryTimetableAgendaScrollView.contentSize = CGSize(width: self.accessoryTimetableAgendaScrollView.bounds.size.width, height: placeholderInsetHeight + (16 * 120.0) + placeholderInsetHeight)
+      
+      let topInsetView = UIView()
+      topInsetView.backgroundColor = UIColor.clear
+      topInsetView.widthAnchor.constraint(equalToConstant: self.accessoryTimetableAgendaScrollView.bounds.size.width).isActive = true
+      topInsetView.heightAnchor.constraint(equalToConstant: placeholderInsetHeight).isActive = true
+      
+      var hourLabels = [UIView]()
+      for index in 0..<16 {
+         let myLabel = UILabel()
+         myLabel.widthAnchor.constraint(equalToConstant: self.accessoryTimetableAgendaScrollView.bounds.size.width).isActive = true
+         myLabel.heightAnchor.constraint(equalToConstant: 120.0).isActive = true
+         myLabel.attributedText = UILabel.attributedString(withText: "\(index + 6):00", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: nil, isCentered: true)
+         hourLabels.append(myLabel)
+      }
+      
+      let bottomInsetView = UIView()
+      bottomInsetView.widthAnchor.constraint(equalToConstant: self.accessoryTimetableAgendaScrollView.bounds.size.width).isActive = true
+      bottomInsetView.heightAnchor.constraint(equalToConstant: placeholderInsetHeight).isActive = true
+      bottomInsetView.backgroundColor = UIColor.clear
+      
+      let arrangedSubview = [topInsetView] + hourLabels + [bottomInsetView]
+      let hoursStackView = UIStackView(arrangedSubviews: arrangedSubview)
+      hoursStackView.axis = .vertical
+      hoursStackView.alignment = .center
+      hoursStackView.spacing = 0.0
+      hoursStackView.distribution = .fill
+      
+      self.accessoryTimetableAgendaScrollView.addSubview(hoursStackView)
+      hoursStackView.translatesAutoresizingMaskIntoConstraints = false
+      hoursStackView.leadingAnchor.constraint(equalTo: self.accessoryTimetableAgendaScrollView.leadingAnchor, constant: 0.0).isActive = true
+      hoursStackView.topAnchor.constraint(equalTo: self.accessoryTimetableAgendaScrollView.topAnchor, constant: 0.0).isActive = true
+      hoursStackView.widthAnchor.constraint(equalToConstant: self.accessoryTimetableAgendaScrollView.bounds.size.width).isActive = true
+      hoursStackView.heightAnchor.constraint(equalToConstant: placeholderInsetHeight + (16 * 120) + placeholderInsetHeight).isActive = true
+   }
+   
+   func setupAccessoryEmployee() {
+      self.accessoryEmployeesAgendaScrollView.showsHorizontalScrollIndicator = false
+      self.accessoryEmployeesAgendaScrollView.isScrollEnabled = false
+      self.accessoryEmployeesAgendaScrollView.contentSize = CGSize(width: 240.0 * 5, height: self.accessoryEmployeesAgendaScrollView.bounds.size.height)
+      
+      var employeeButtons = [ThumbnailVerticallyStaticButton]()
+      for _ in 0..<5 {
+         let myButton = ThumbnailVerticallyStaticButton()
+         myButton.widthAnchor.constraint(equalToConstant: 240.0).isActive = true
+         myButton.heightAnchor.constraint(equalToConstant: 92.0).isActive = true
+         myButton.setup(withImage: #imageLiteral(resourceName: "thumbnail_1"), andText: "Luciano")
+         employeeButtons.append(myButton)
+      }
+      
+      let hoursStackView = UIStackView(arrangedSubviews: employeeButtons)
+      hoursStackView.axis = .horizontal
+      hoursStackView.distribution = .fill
+      hoursStackView.spacing = 0.0
+      hoursStackView.alignment = .center
+      
+      self.accessoryEmployeesAgendaScrollView.addSubview(hoursStackView)
+      hoursStackView.translatesAutoresizingMaskIntoConstraints = false
+      hoursStackView.leadingAnchor.constraint(equalTo: self.accessoryEmployeesAgendaScrollView.leadingAnchor, constant: 0.0).isActive = true
+      hoursStackView.topAnchor.constraint(equalTo: self.accessoryEmployeesAgendaScrollView.topAnchor, constant: 0.0).isActive = true
+      hoursStackView.widthAnchor.constraint(equalToConstant: 240.0 * 5).isActive = true
+      hoursStackView.heightAnchor.constraint(equalToConstant: self.accessoryEmployeesAgendaScrollView.bounds.size.height).isActive = true
    }
    
    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -134,6 +233,31 @@ class AgendaViewController: UIViewController {
       self.revealMenuDelegate?.openRevealMenu()
    }
    
+}
+
+// MARK: UIScrollViewDelegate
+
+extension AgendaViewController: UIScrollViewDelegate {
+   
+   func scrollViewDidScroll(_ scrollView: UIScrollView) {
+      self.accessoryTimetableAgendaScrollView.contentOffset.y = scrollView.contentOffset.y
+      self.accessoryEmployeesAgendaScrollView.contentOffset.x = scrollView.contentOffset.x
+   }
+}
+
+// MARK: AgendaViewDelegate
+
+extension AgendaViewController: AgendaViewDelegate {
+   func scrollAgenda(to: Direction) {
+      switch to {
+      case .up:
+         UIView.animate(withDuration: 0.1, animations: {
+            self.agendaScrollView.contentOffset.y -= 10.0
+         })
+      case .down, .right, .left:
+         break
+      }
+   }
 }
 
 // MARK: CalendarDatePickerView handler

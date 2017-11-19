@@ -15,12 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
       
-//      self.window = UIWindow(frame: UIScreen.main.bounds)
-//      let mainController = UIStoryboard.addServicesVC()
-//      let navigationController = UINavigationController(rootViewController: mainController)
-//      navigationController.isNavigationBarHidden = true
-//      self.window?.rootViewController = navigationController
-//      self.window?.makeKeyAndVisible()
+      self.window = UIWindow(frame: UIScreen.main.bounds)
+      let mainController = UIStoryboard.addServicesVC()
+      let navigationController = UINavigationController(rootViewController: mainController)
+      navigationController.isNavigationBarHidden = true
+      self.window?.rootViewController = navigationController
+      self.window?.makeKeyAndVisible()
       return true
    }
 

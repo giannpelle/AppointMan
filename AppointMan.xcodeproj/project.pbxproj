@@ -111,6 +111,7 @@
 		EF1E99F91F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1E99F81F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift */; };
 		EF23F1EE1F977503007661BC /* DeleteServicePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */; };
 		EF23F1F01F977517007661BC /* DeleteServicePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */; };
+		EF2A39D31FBF05DD006F186F /* AgendaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2A39D21FBF05DD006F186F /* AgendaView.swift */; };
 		EF2A93FE1F9ABD22001FB319 /* ServicesInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2A93FD1F9ABD22001FB319 /* ServicesInputView.swift */; };
 		EF3290951F927C0F008BB930 /* ClosingDaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3290941F927C0F008BB930 /* ClosingDaysViewController.swift */; };
 		EF348CCD1F990388007E5FB5 /* NewEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF348CCC1F990388007E5FB5 /* NewEmployeeViewController.swift */; };
@@ -123,6 +124,7 @@
 		EF5FA4C01F9E3A6800F9086F /* ColorPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */; };
 		EF5FA4C21F9E3B3B00F9086F /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */; };
 		EF649D5D1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */; };
+		EF73462D1FC0A9E6001DDDB1 /* BorderLineAgendaHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF73462C1FC0A9E6001DDDB1 /* BorderLineAgendaHandler.swift */; };
 		EFBB49881F8C41890011698E /* NewServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBB49871F8C41890011698E /* NewServiceViewController.swift */; };
 		EFD86F951F92953E00E92425 /* ServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */; };
 		EFD86F971F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD86F961F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift */; };
@@ -260,6 +262,7 @@
 		EF1E99F81F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInputViewCollectionViewCell.swift; sourceTree = "<group>"; };
 		EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeleteServicePopupView.xib; sourceTree = "<group>"; };
 		EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteServicePopupView.swift; sourceTree = "<group>"; };
+		EF2A39D21FBF05DD006F186F /* AgendaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaView.swift; sourceTree = "<group>"; };
 		EF2A93FD1F9ABD22001FB319 /* ServicesInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesInputView.swift; sourceTree = "<group>"; };
 		EF3290941F927C0F008BB930 /* ClosingDaysViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosingDaysViewController.swift; sourceTree = "<group>"; };
 		EF348CCC1F990388007E5FB5 /* NewEmployeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEmployeeViewController.swift; sourceTree = "<group>"; };
@@ -272,6 +275,7 @@
 		EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorPickerView.xib; sourceTree = "<group>"; };
 		EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeServiceCollectionViewCell.swift; sourceTree = "<group>"; };
+		EF73462C1FC0A9E6001DDDB1 /* BorderLineAgendaHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderLineAgendaHandler.swift; sourceTree = "<group>"; };
 		EFBB49871F8C41890011698E /* NewServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewServiceViewController.swift; sourceTree = "<group>"; };
 		EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCollectionViewCell.swift; sourceTree = "<group>"; };
 		EFD86F961F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -319,6 +323,7 @@
 				EF4BDC291F9FB8A9000F10A2 /* MasonryLayout.swift */,
 				EF3771891F9E6DAF00D363B5 /* OkPopupView.xib */,
 				EF37718B1F9E700E00D363B5 /* OkPopupView.swift */,
+				EF73462C1FC0A9E6001DDDB1 /* BorderLineAgendaHandler.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 		2303DD231ECC49E900C24113 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EF2A39D21FBF05DD006F186F /* AgendaView.swift */,
 				EF4BDC271F9FB80A000F10A2 /* MemoCollectionViewCell.swift */,
 				237500631EE69EF800B99CF5 /* ScheduleItemView.swift */,
 				238BA8051EC9D9E5002F9F0A /* CalendarView.xib */,
@@ -820,6 +826,7 @@
 				236DF4F71F5825E200A48C73 /* GPSliderDatePickerView.swift in Sources */,
 				234D404B1ED2DD11008F4AA9 /* SuggestionCollectionViewCell.swift in Sources */,
 				236DF4F11F5813CE00A48C73 /* CalendarDayButton.swift in Sources */,
+				EF2A39D31FBF05DD006F186F /* AgendaView.swift in Sources */,
 				2304A61A1F40599A00E1FB7E /* StatisticheViewController.swift in Sources */,
 				EF348CCD1F990388007E5FB5 /* NewEmployeeViewController.swift in Sources */,
 				EFBB49881F8C41890011698E /* NewServiceViewController.swift in Sources */,
@@ -832,6 +839,7 @@
 				2304A6101F40589400E1FB7E /* RevealMenuViewController.swift in Sources */,
 				2304A6181F40599300E1FB7E /* ProdottiViewController.swift in Sources */,
 				233085A01EDEC4A500D4FB8C /* DragAndDropViewController.swift in Sources */,
+				EF73462D1FC0A9E6001DDDB1 /* BorderLineAgendaHandler.swift in Sources */,
 				2304A6121F4058D300E1FB7E /* AgendaViewController.swift in Sources */,
 				2304A61E1F4059B900E1FB7E /* ImpostazioniViewController.swift in Sources */,
 				2304A61C1F4059AA00E1FB7E /* BilancioViewController.swift in Sources */,

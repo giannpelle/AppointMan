@@ -22,7 +22,7 @@ class DipendentiViewController: UIViewController {
    }
    
    func applyTypography() {
-      self.employeesLabel.attributedText = UILabel.attributedString(withText: "Clienti", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 16.0)!, andCharacterSpacing: nil, isCentered: true)
+      self.employeesLabel.attributedText = UILabel.attributedString(withText: "Dipendenti", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 16.0)!, andCharacterSpacing: nil, isCentered: true)
    }
    
    func setupUI() {
