@@ -17,7 +17,6 @@
 		2304A61E1F4059B900E1FB7E /* ImpostazioniViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2304A61D1F4059B900E1FB7E /* ImpostazioniViewController.swift */; };
 		2304A6201F4060A700E1FB7E /* Gadgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2304A61F1F4060A700E1FB7E /* Gadgets.swift */; };
 		2330859E1EDEB2C300D4FB8C /* SmartDeleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2330859D1EDEB2C300D4FB8C /* SmartDeleteTextField.swift */; };
-		233085A01EDEC4A500D4FB8C /* DragAndDropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2330859F1EDEC4A500D4FB8C /* DragAndDropViewController.swift */; };
 		23347C4A1F5096570080E355 /* FilterAppointmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23347C491F5096570080E355 /* FilterAppointmentTableViewCell.swift */; };
 		234A536E1ED599DF00B5FAF8 /* TagsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234A536D1ED599DF00B5FAF8 /* TagsTextField.swift */; };
 		234A53701ED59C1500B5FAF8 /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234A536F1ED59C1500B5FAF8 /* UnderlinedTextField.swift */; };
@@ -31,7 +30,6 @@
 		236DF5001F585BC100A48C73 /* WorkingHoursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236DF4FF1F585BC100A48C73 /* WorkingHoursViewController.swift */; };
 		236DF5041F586C4F00A48C73 /* WorkingHoursPlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236DF5031F586C4F00A48C73 /* WorkingHoursPlannerView.swift */; };
 		236DF5081F58753E00A48C73 /* WorkingHoursPlannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 236DF5071F58753E00A48C73 /* WorkingHoursPlannerView.xib */; };
-		237500641EE69EF800B99CF5 /* ScheduleItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237500631EE69EF800B99CF5 /* ScheduleItemView.swift */; };
 		237A135E1ECB890200DF0182 /* AddAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237A135D1ECB890200DF0182 /* AddAppointmentViewController.swift */; };
 		237C52691EC4B6CB00D98DD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237C52681EC4B6CB00D98DD9 /* AppDelegate.swift */; };
 		237C526E1EC4B6CB00D98DD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 237C526C1EC4B6CB00D98DD9 /* Main.storyboard */; };
@@ -39,16 +37,11 @@
 		237C52731EC4B6CB00D98DD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 237C52711EC4B6CB00D98DD9 /* LaunchScreen.storyboard */; };
 		237C527E1EC4B6CB00D98DD9 /* AppointManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237C527D1EC4B6CB00D98DD9 /* AppointManTests.swift */; };
 		237C52891EC4B6CB00D98DD9 /* AppointManUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237C52881EC4B6CB00D98DD9 /* AppointManUITests.swift */; };
-		237C52971EC4BE5C00D98DD9 /* HomeSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237C52961EC4BE5C00D98DD9 /* HomeSplitViewController.swift */; };
-		237C52991EC4BF1800D98DD9 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237C52981EC4BF1800D98DD9 /* FilterViewController.swift */; };
-		237C529B1EC4BF3200D98DD9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237C529A1EC4BF3200D98DD9 /* HomeViewController.swift */; };
 		237C529D1EC4C11700D98DD9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237C529C1EC4C11700D98DD9 /* Extensions.swift */; };
 		23801A641F55745200847830 /* GPFloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23801A631F55745200847830 /* GPFloatingTextField.swift */; };
 		238B1BAF1F52976C00A1F6CA /* GPCalendarDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238B1BAE1F52976C00A1F6CA /* GPCalendarDatePickerView.swift */; };
 		238B1BB11F52977400A1F6CA /* CalendarDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238B1BB01F52977400A1F6CA /* CalendarDayCollectionViewCell.swift */; };
 		238BA8041EC9CD03002F9F0A /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238BA8031EC9CD03002F9F0A /* Const.swift */; };
-		238BA8061EC9D9E5002F9F0A /* CalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 238BA8051EC9D9E5002F9F0A /* CalendarView.xib */; };
-		238BA8081EC9D9F4002F9F0A /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238BA8071EC9D9F4002F9F0A /* CalendarView.swift */; };
 		23B1E8B51F44890F00BE5BB6 /* ThumbnailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B1E8B41F44890F00BE5BB6 /* ThumbnailCollectionViewCell.swift */; };
 		23C80E3F1F7D27A700C4CACE /* AddServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C80E3E1F7D27A700C4CACE /* AddServicesViewController.swift */; };
 		23C80E411F7D694900C4CACE /* AddEmployeesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C80E401F7D694900C4CACE /* AddEmployeesViewController.swift */; };
@@ -162,7 +155,6 @@
 		2304A61D1F4059B900E1FB7E /* ImpostazioniViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImpostazioniViewController.swift; sourceTree = "<group>"; };
 		2304A61F1F4060A700E1FB7E /* Gadgets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gadgets.swift; sourceTree = "<group>"; };
 		2330859D1EDEB2C300D4FB8C /* SmartDeleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartDeleteTextField.swift; sourceTree = "<group>"; };
-		2330859F1EDEC4A500D4FB8C /* DragAndDropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragAndDropViewController.swift; sourceTree = "<group>"; };
 		23347C491F5096570080E355 /* FilterAppointmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterAppointmentTableViewCell.swift; sourceTree = "<group>"; };
 		234A536D1ED599DF00B5FAF8 /* TagsTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTextField.swift; sourceTree = "<group>"; };
 		234A536F1ED59C1500B5FAF8 /* UnderlinedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
@@ -176,7 +168,6 @@
 		236DF4FF1F585BC100A48C73 /* WorkingHoursViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkingHoursViewController.swift; sourceTree = "<group>"; };
 		236DF5031F586C4F00A48C73 /* WorkingHoursPlannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkingHoursPlannerView.swift; sourceTree = "<group>"; };
 		236DF5071F58753E00A48C73 /* WorkingHoursPlannerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkingHoursPlannerView.xib; sourceTree = "<group>"; };
-		237500631EE69EF800B99CF5 /* ScheduleItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleItemView.swift; sourceTree = "<group>"; };
 		237A135D1ECB890200DF0182 /* AddAppointmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAppointmentViewController.swift; sourceTree = "<group>"; };
 		237C52651EC4B6CB00D98DD9 /* AppointMan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppointMan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		237C52681EC4B6CB00D98DD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -190,16 +181,11 @@
 		237C52841EC4B6CB00D98DD9 /* AppointManUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppointManUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		237C52881EC4B6CB00D98DD9 /* AppointManUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointManUITests.swift; sourceTree = "<group>"; };
 		237C528A1EC4B6CB00D98DD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		237C52961EC4BE5C00D98DD9 /* HomeSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSplitViewController.swift; sourceTree = "<group>"; };
-		237C52981EC4BF1800D98DD9 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
-		237C529A1EC4BF3200D98DD9 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		237C529C1EC4C11700D98DD9 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		23801A631F55745200847830 /* GPFloatingTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPFloatingTextField.swift; sourceTree = "<group>"; };
 		238B1BAE1F52976C00A1F6CA /* GPCalendarDatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPCalendarDatePickerView.swift; sourceTree = "<group>"; };
 		238B1BB01F52977400A1F6CA /* CalendarDayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDayCollectionViewCell.swift; sourceTree = "<group>"; };
 		238BA8031EC9CD03002F9F0A /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
-		238BA8051EC9D9E5002F9F0A /* CalendarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarView.xib; sourceTree = "<group>"; };
-		238BA8071EC9D9F4002F9F0A /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		23B1E8B41F44890F00BE5BB6 /* ThumbnailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailCollectionViewCell.swift; sourceTree = "<group>"; };
 		23C80E3E1F7D27A700C4CACE /* AddServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddServicesViewController.swift; sourceTree = "<group>"; };
 		23C80E401F7D694900C4CACE /* AddEmployeesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEmployeesViewController.swift; sourceTree = "<group>"; };
@@ -343,11 +329,7 @@
 				2304A6191F40599A00E1FB7E /* StatisticheViewController.swift */,
 				2304A61B1F4059AA00E1FB7E /* BilancioViewController.swift */,
 				2304A61D1F4059B900E1FB7E /* ImpostazioniViewController.swift */,
-				237C52961EC4BE5C00D98DD9 /* HomeSplitViewController.swift */,
-				237C52981EC4BF1800D98DD9 /* FilterViewController.swift */,
-				237C529A1EC4BF3200D98DD9 /* HomeViewController.swift */,
 				237A135D1ECB890200DF0182 /* AddAppointmentViewController.swift */,
-				2330859F1EDEC4A500D4FB8C /* DragAndDropViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -357,9 +339,6 @@
 			children = (
 				EF2A39D21FBF05DD006F186F /* AgendaView.swift */,
 				EF4BDC271F9FB80A000F10A2 /* MemoCollectionViewCell.swift */,
-				237500631EE69EF800B99CF5 /* ScheduleItemView.swift */,
-				238BA8051EC9D9E5002F9F0A /* CalendarView.xib */,
-				238BA8071EC9D9F4002F9F0A /* CalendarView.swift */,
 				234D40481ED2DCC3008F4AA9 /* SuggestionCell.xib */,
 				234D404A1ED2DD11008F4AA9 /* SuggestionCollectionViewCell.swift */,
 				23FEE87A1EE4B3DB0062192C /* AppointmentBox.xib */,
@@ -746,7 +725,6 @@
 				23E63C9F1F41B15A0084EA75 /* SF-Pro-Text-Semibold.otf in Resources */,
 				23E63CA01F41B15A0084EA75 /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
 				23E63CB41F41B15A0084EA75 /* SFText-Semibold.otf in Resources */,
-				238BA8061EC9D9E5002F9F0A /* CalendarView.xib in Resources */,
 				237C526E1EC4B6CB00D98DD9 /* Main.storyboard in Resources */,
 				23E63CB51F41B15A0084EA75 /* SFText-SemiboldItalic.otf in Resources */,
 				23E63CAB1F41B15A0084EA75 /* SFText-BoldItalic.otf in Resources */,
@@ -786,7 +764,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF2A93FE1F9ABD22001FB319 /* ServicesInputView.swift in Sources */,
-				237500641EE69EF800B99CF5 /* ScheduleItemView.swift in Sources */,
 				23B1E8B51F44890F00BE5BB6 /* ThumbnailCollectionViewCell.swift in Sources */,
 				EF23F1F01F977517007661BC /* DeleteServicePopupView.swift in Sources */,
 				237A135E1ECB890200DF0182 /* AddAppointmentViewController.swift in Sources */,
@@ -811,13 +788,10 @@
 				2304A6161F40598D00E1FB7E /* ClientiViewController.swift in Sources */,
 				23C80E3F1F7D27A700C4CACE /* AddServicesViewController.swift in Sources */,
 				234A536E1ED599DF00B5FAF8 /* TagsTextField.swift in Sources */,
-				238BA8081EC9D9F4002F9F0A /* CalendarView.swift in Sources */,
 				EF5FA4C21F9E3B3B00F9086F /* ColorPickerView.swift in Sources */,
-				237C52991EC4BF1800D98DD9 /* FilterViewController.swift in Sources */,
 				EFD86F951F92953E00E92425 /* ServiceCollectionViewCell.swift in Sources */,
 				EF5FA4BE1F9E327000F9086F /* ColorPickerViewController.swift in Sources */,
 				EF1E99F91F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift in Sources */,
-				237C52971EC4BE5C00D98DD9 /* HomeSplitViewController.swift in Sources */,
 				EF649D5D1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift in Sources */,
 				2304A6201F4060A700E1FB7E /* Gadgets.swift in Sources */,
 				236DF5001F585BC100A48C73 /* WorkingHoursViewController.swift in Sources */,
@@ -830,7 +804,6 @@
 				2304A61A1F40599A00E1FB7E /* StatisticheViewController.swift in Sources */,
 				EF348CCD1F990388007E5FB5 /* NewEmployeeViewController.swift in Sources */,
 				EFBB49881F8C41890011698E /* NewServiceViewController.swift in Sources */,
-				237C529B1EC4BF3200D98DD9 /* HomeViewController.swift in Sources */,
 				236DF4F31F58152300A48C73 /* GPSegmentedControl.swift in Sources */,
 				238BA8041EC9CD03002F9F0A /* Const.swift in Sources */,
 				EFF22EA11F99F15200C7E052 /* BottomImagePickerView.swift in Sources */,
@@ -838,7 +811,6 @@
 				EF0EAF1A1F99560A0092F810 /* InOutAnimator.swift in Sources */,
 				2304A6101F40589400E1FB7E /* RevealMenuViewController.swift in Sources */,
 				2304A6181F40599300E1FB7E /* ProdottiViewController.swift in Sources */,
-				233085A01EDEC4A500D4FB8C /* DragAndDropViewController.swift in Sources */,
 				EF73462D1FC0A9E6001DDDB1 /* BorderLineAgendaHandler.swift in Sources */,
 				2304A6121F4058D300E1FB7E /* AgendaViewController.swift in Sources */,
 				2304A61E1F4059B900E1FB7E /* ImpostazioniViewController.swift in Sources */,

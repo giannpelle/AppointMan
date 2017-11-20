@@ -44,13 +44,24 @@ class AgendaViewController: UIViewController {
    @IBOutlet weak var calendarDatePickerButton: UIButton!
    @IBOutlet weak var filterButton: UIButton!
    
+   var numberOfEmployees: Int = 5
+   var startHourToDisplay: Int = 6
+   var endHourToDisplay: Int = 22
    weak var revealMenuDelegate: RevealMenuDelegate?
    var currentPanGestureTranslationX: CGFloat = 0.0
+   var isFilterAppointmentsContainerViewOpen: Bool = false
+   var timetableAccessoryStackView: UIStackView?
+   
+   var numberOfHoursToDisplay: Int {
+      return endHourToDisplay - startHourToDisplay + 1
+   }
+   
    var isBubbleMenuOpen: Bool = false {
       didSet {
          self.triangolinoDisclosureIndicatorButton.setImage(self.isBubbleMenuOpen ? #imageLiteral(resourceName: "triangolino_close_disclosure_indicator") : #imageLiteral(resourceName: "triangolino_open_disclosure_indicator"), for: .normal)
       }
    }
+   
    var isCalendarDatePickerViewOpen: Bool = false {
       didSet {
          if self.isCalendarDatePickerViewOpen {
@@ -60,7 +71,6 @@ class AgendaViewController: UIViewController {
          }
       }
    }
-   var isFilterAppointmentsContainerViewOpen: Bool = false
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -120,7 +130,7 @@ class AgendaViewController: UIViewController {
    
    func setupAgenda() {
       self.setupAccessoryTimetable()
-      self.setupAccessoryEmployee()
+      self.setupAccessoryEmployees()
       
       let agendaView = AgendaView(frame: CGRect(x: 0.0, y: 0.0, width: 240.0 * 5, height: 16 * 120.0))
       agendaView.backgroundColor = UIColor.amBlue
@@ -141,47 +151,36 @@ class AgendaViewController: UIViewController {
    }
    
    func setupAccessoryTimetable() {
-      let placeholderInsetHeight: CGFloat = 10.0
-      
       self.accessoryTimetableAgendaScrollView.showsVerticalScrollIndicator = false
       self.accessoryTimetableAgendaScrollView.isScrollEnabled = false
-      self.accessoryTimetableAgendaScrollView.contentSize = CGSize(width: self.accessoryTimetableAgendaScrollView.bounds.size.width, height: placeholderInsetHeight + (16 * 120.0) + placeholderInsetHeight)
-      
-      let topInsetView = UIView()
-      topInsetView.backgroundColor = UIColor.clear
-      topInsetView.widthAnchor.constraint(equalToConstant: self.accessoryTimetableAgendaScrollView.bounds.size.width).isActive = true
-      topInsetView.heightAnchor.constraint(equalToConstant: placeholderInsetHeight).isActive = true
+      self.accessoryTimetableAgendaScrollView.contentSize = CGSize(width: self.accessoryTimetableAgendaScrollView.bounds.size.width, height: Const.hourUnitHeight * self.numberOfHoursToDisplay + Const.quarterHourUnitHeight)
       
       var hourLabels = [UIView]()
-      for index in 0..<16 {
+      for index in 0...(self.numberOfHoursToDisplay * 4 + 1) {
          let myLabel = UILabel()
          myLabel.widthAnchor.constraint(equalToConstant: self.accessoryTimetableAgendaScrollView.bounds.size.width).isActive = true
-         myLabel.heightAnchor.constraint(equalToConstant: 120.0).isActive = true
-         myLabel.attributedText = UILabel.attributedString(withText: "\(index + 6):00", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: nil, isCentered: true)
+         myLabel.heightAnchor.constraint(equalToConstant: Const.quarterHourUnitHeight).isActive = true
+         myLabel.attributedText = UILabel.attributedString(withText: self.timetableStrigForLabel(at: index), andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: nil, isCentered: true)
+         myLabel.alpha = index % 4 == 2 ? 1.0 : 0.0
          hourLabels.append(myLabel)
       }
       
-      let bottomInsetView = UIView()
-      bottomInsetView.widthAnchor.constraint(equalToConstant: self.accessoryTimetableAgendaScrollView.bounds.size.width).isActive = true
-      bottomInsetView.heightAnchor.constraint(equalToConstant: placeholderInsetHeight).isActive = true
-      bottomInsetView.backgroundColor = UIColor.clear
-      
-      let arrangedSubview = [topInsetView] + hourLabels + [bottomInsetView]
-      let hoursStackView = UIStackView(arrangedSubviews: arrangedSubview)
+      let hoursStackView = UIStackView(arrangedSubviews: hourLabels)
       hoursStackView.axis = .vertical
       hoursStackView.alignment = .center
       hoursStackView.spacing = 0.0
       hoursStackView.distribution = .fill
+      self.timetableAccessoryStackView = hoursStackView
       
       self.accessoryTimetableAgendaScrollView.addSubview(hoursStackView)
       hoursStackView.translatesAutoresizingMaskIntoConstraints = false
       hoursStackView.leadingAnchor.constraint(equalTo: self.accessoryTimetableAgendaScrollView.leadingAnchor, constant: 0.0).isActive = true
       hoursStackView.topAnchor.constraint(equalTo: self.accessoryTimetableAgendaScrollView.topAnchor, constant: 0.0).isActive = true
       hoursStackView.widthAnchor.constraint(equalToConstant: self.accessoryTimetableAgendaScrollView.bounds.size.width).isActive = true
-      hoursStackView.heightAnchor.constraint(equalToConstant: placeholderInsetHeight + (16 * 120) + placeholderInsetHeight).isActive = true
+      hoursStackView.heightAnchor.constraint(equalToConstant: Const.hourUnitHeight * self.numberOfHoursToDisplay + Const.quarterHourUnitHeight).isActive = true
    }
    
-   func setupAccessoryEmployee() {
+   func setupAccessoryEmployees() {
       self.accessoryEmployeesAgendaScrollView.showsHorizontalScrollIndicator = false
       self.accessoryEmployeesAgendaScrollView.isScrollEnabled = false
       self.accessoryEmployeesAgendaScrollView.contentSize = CGSize(width: 240.0 * 5, height: self.accessoryEmployeesAgendaScrollView.bounds.size.height)
@@ -195,18 +194,18 @@ class AgendaViewController: UIViewController {
          employeeButtons.append(myButton)
       }
       
-      let hoursStackView = UIStackView(arrangedSubviews: employeeButtons)
-      hoursStackView.axis = .horizontal
-      hoursStackView.distribution = .fill
-      hoursStackView.spacing = 0.0
-      hoursStackView.alignment = .center
+      let employeesStackView = UIStackView(arrangedSubviews: employeeButtons)
+      employeesStackView.axis = .horizontal
+      employeesStackView.distribution = .fill
+      employeesStackView.spacing = 0.0
+      employeesStackView.alignment = .center
       
-      self.accessoryEmployeesAgendaScrollView.addSubview(hoursStackView)
-      hoursStackView.translatesAutoresizingMaskIntoConstraints = false
-      hoursStackView.leadingAnchor.constraint(equalTo: self.accessoryEmployeesAgendaScrollView.leadingAnchor, constant: 0.0).isActive = true
-      hoursStackView.topAnchor.constraint(equalTo: self.accessoryEmployeesAgendaScrollView.topAnchor, constant: 0.0).isActive = true
-      hoursStackView.widthAnchor.constraint(equalToConstant: 240.0 * 5).isActive = true
-      hoursStackView.heightAnchor.constraint(equalToConstant: self.accessoryEmployeesAgendaScrollView.bounds.size.height).isActive = true
+      self.accessoryEmployeesAgendaScrollView.addSubview(employeesStackView)
+      employeesStackView.translatesAutoresizingMaskIntoConstraints = false
+      employeesStackView.leadingAnchor.constraint(equalTo: self.accessoryEmployeesAgendaScrollView.leadingAnchor, constant: 0.0).isActive = true
+      employeesStackView.topAnchor.constraint(equalTo: self.accessoryEmployeesAgendaScrollView.topAnchor, constant: 0.0).isActive = true
+      employeesStackView.widthAnchor.constraint(equalToConstant: 240.0 * 5).isActive = true
+      employeesStackView.heightAnchor.constraint(equalToConstant: self.accessoryEmployeesAgendaScrollView.bounds.size.height).isActive = true
    }
    
    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -233,6 +232,22 @@ class AgendaViewController: UIViewController {
       self.revealMenuDelegate?.openRevealMenu()
    }
    
+   func timetableStrigForLabel(at index: Int) -> String {
+      let hour = (index + 2) / 4 + self.startHourToDisplay - 1
+      switch index % 4 {
+      case 0:
+         return "\(hour):30"
+      case 1:
+         return "\(hour):45"
+      case 2:
+         return "\(hour):00"
+      case 3:
+         return "\(hour):15"
+      default:
+         return ""
+      }
+   }
+   
 }
 
 // MARK: UIScrollViewDelegate
@@ -248,14 +263,28 @@ extension AgendaViewController: UIScrollViewDelegate {
 // MARK: AgendaViewDelegate
 
 extension AgendaViewController: AgendaViewDelegate {
-   func scrollAgenda(to: Direction) {
-      switch to {
-      case .up:
-         UIView.animate(withDuration: 0.1, animations: {
-            self.agendaScrollView.contentOffset.y -= 10.0
-         })
-      case .down, .right, .left:
-         break
+   func highlightAccessoryTimetable(at index: Int) {
+      
+      if let hourLabels = self.timetableAccessoryStackView?.arrangedSubviews as? [UILabel] {
+         for (index, hourLabel) in hourLabels.enumerated() {
+            hourLabel.attributedText = UILabel.attributedString(withText: hourLabel.text ?? "", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: nil, isCentered: true)
+            if index % 4 == 2 { continue }
+            hourLabel.alpha = 0.0
+         }
+         
+         hourLabels[index].attributedText = UILabel.attributedString(withText: hourLabels[index].text ?? "", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 16.0)!, andCharacterSpacing: nil, isCentered: true)
+         hourLabels[index].alpha = 1.0
+         
+      }
+   }
+   
+   func resetHighlightStateOnAccessoryTimetable() {
+      if let hourLabels = self.timetableAccessoryStackView?.arrangedSubviews as? [UILabel] {
+         for (index, hourLabel) in hourLabels.enumerated() {
+            hourLabel.attributedText = UILabel.attributedString(withText: hourLabels[index].text ?? "", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: nil, isCentered: true)
+            if index % 4 == 2 { continue }
+            hourLabel.alpha = 0.0
+         }
       }
    }
 }

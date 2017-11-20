@@ -174,24 +174,9 @@ extension UIStoryboard {
       return impostazioniVC
    }
    
-   class func filterVC() -> FilterViewController {
-      let filterVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "filterVC") as! FilterViewController
-      return filterVC
-   }
-   
    class func takeNotesVC() -> TakeNotesViewController {
       let takeNotesVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "takeNotesVC") as! TakeNotesViewController
       return takeNotesVC
-   }
-   
-   class func addAppointmentVC() -> AddAppointmentViewController {
-      let addAppointmentVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "addAppointmentVC") as! AddAppointmentViewController
-      return addAppointmentVC
-   }
-   
-   class func dragAndDropVC() -> DragAndDropViewController {
-      let dragAndDropVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "dragAndDropVC") as! DragAndDropViewController
-      return dragAndDropVC
    }
    
 }

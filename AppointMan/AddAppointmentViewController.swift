@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AddAppointmentViewControllerDelegate {
+/*protocol AddAppointmentViewControllerDelegate {
    func hideOverlayView() -> Void
 }
 
@@ -345,5 +345,5 @@ extension AddAppointmentViewController: UICollectionViewDataSource {
 extension AddAppointmentViewController: UICollectionViewDelegate {
    
 }
-
+*/
 
