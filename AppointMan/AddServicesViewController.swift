@@ -18,34 +18,7 @@ class AddServicesViewController: UIViewController {
    @IBOutlet weak var sortSegmentedControl: UISegmentedControl!
    @IBOutlet weak var servicesCollectionView: UICollectionView!
    
-   var tapOverlayGesture: UITapGestureRecognizer!
-   
-   override func viewDidAppear(_ animated: Bool) {
-      super.viewDidAppear(animated)
-      
-      self.tapOverlayGesture = UITapGestureRecognizer(target: self, action: #selector(self.overlayTapped(sender:)))
-      self.tapOverlayGesture.delegate = self
-      self.tapOverlayGesture.numberOfTapsRequired = 1
-      self.tapOverlayGesture.cancelsTouchesInView = false
-      self.view.window?.addGestureRecognizer(self.tapOverlayGesture)
-   }
-   
-   @objc func overlayTapped(sender: UITapGestureRecognizer) {
-      if sender.state == .ended {
-         guard let presentedView = presentedViewController?.view else {
-            return
-         }
-         if !presentedView.bounds.contains(sender.location(in: presentedView)) {
-            self.dismiss(animated: true, completion: nil)
-         }
-      }
-   }
-   
-   override func viewWillDisappear(_ animated: Bool) {
-      super.viewWillDisappear(animated)
-      
-      self.view.window?.removeGestureRecognizer(tapOverlayGesture)
-   }
+   var services: [(name: String, duration: CGFloat, targetGender: Gender)] = []
    
    override func viewDidLoad() {
       super.viewDidLoad()

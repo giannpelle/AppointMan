@@ -15,6 +15,7 @@ enum Direction: Int {
 protocol AgendaViewDelegate: class {
    func highlightAccessoryTimetable(at index: Int)
    func resetHighlightStateOnAccessoryTimetable()
+   func showAddAppointmentController()
 }
 
 class AgendaView: UIView {
@@ -26,7 +27,8 @@ class AgendaView: UIView {
    
    var borderLineAgendaTimer: Timer?
    var isBorderLineAgendaTimerRunning: Bool = false
-   var borderlineAgendaTimerIsGoing: Direction?
+   var borderLineAgendaTimerDirection: Direction?
+   var borderLineAgendaTimerVelocity: Int?
    weak var delegate: AgendaViewDelegate?
    var currentNewAppointmentView: UIView?
    var longPressCancelledOutOfBounds: Bool = false
@@ -85,7 +87,9 @@ class AgendaView: UIView {
       for index in 0...self.numberOfEmployees {
          var originX = Const.agendaEmployeeColomnWidth * index
          if index == 0 {
-            originX += 1.0
+            // because i draw the border with layers on top of the scroll view instead
+            continue
+            //originX += 1.0
          } else if index == self.numberOfEmployees {
             originX -= 1.0
          }
@@ -148,9 +152,8 @@ class AgendaView: UIView {
          self.currentNewAppointmentView = appointmentView
          self.addSubview(appointmentView)
          
-         self.timeIndicatorTopLineView.frame.origin.y = appointmentView.frame.origin.y
-         self.timeIndicatorTopLineView.bounds.size.width = locationInView.x
-         //self.addSubview(self.timeIndicatorTopLineView)
+         self.timeIndicatorTopLineView.frame = CGRect(x: 0.0, y: appointmentView.frame.origin.y, width: appointmentView.frame.origin.x, height: 1.0)
+         self.addSubview(self.timeIndicatorTopLineView)
          
          self.delegate?.highlightAccessoryTimetable(at: Int((appointmentView.frame.origin.y + 15.0) / Const.quarterHourUnitHeight))
          
@@ -161,25 +164,41 @@ class AgendaView: UIView {
          self.delegate?.highlightAccessoryTimetable(at: Int((self.currentNewAppointmentView!.frame.origin.y + 15.0) / Const.quarterHourUnitHeight))
          
          if let agendaScrollView = self.superview as? UIScrollView {
-            
-            let locationInAgendaScrollView = locationInView - agendaScrollView.contentOffset
-            if locationInAgendaScrollView.y < 0 || locationInAgendaScrollView.x < 0 {
-               self.outOfBoundsReset()
-            } else if locationInAgendaScrollView.y < Const.hourUnitHeight {
-               self.startBorderLineAgendaTimer(going: .up)
-            } else if locationInAgendaScrollView.y > agendaScrollView.bounds.size.height - Const.hourUnitHeight {
-               self.startBorderLineAgendaTimer(going: .down)
-            } else if locationInAgendaScrollView.x < Const.halfHourUnitHeight {
-               self.startBorderLineAgendaTimer(going: .left)
-            } else if locationInAgendaScrollView.x > agendaScrollView.bounds.size.width - Const.halfHourUnitHeight {
-               self.startBorderLineAgendaTimer(going: .right)
-            } else {
-               self.stopBorderLineAgendaTimer()
-            }
-            if let currentNewAppointmentView = self.currentNewAppointmentView {
-               currentNewAppointmentView.center = locationInView
-               self.timeIndicatorTopLineView.frame.origin.y = currentNewAppointmentView.frame.origin.y
-               self.timeIndicatorTopLineView.bounds.size.width = locationInView.x
+            if let currentAppointmentView = self.currentNewAppointmentView {
+               let locationInAgendaScrollView = locationInView - agendaScrollView.contentOffset
+               if locationInAgendaScrollView.y < 0 || locationInAgendaScrollView.x < 0 {
+                  self.outOfBoundsReset()
+               } else if locationInAgendaScrollView.y < currentAppointmentView.bounds.size.height / 2.0 + Const.quarterHourUnitHeight {
+                  let total = currentAppointmentView.bounds.size.height / 2.0 + Const.quarterHourUnitHeight
+                  let part = total - locationInAgendaScrollView.y
+                  let speed = part / total
+                  let speedRate = Int(speed * 10.0)
+                  self.startBorderLineAgendaTimer(going: .up, with: speedRate)
+               } else if locationInAgendaScrollView.y > agendaScrollView.bounds.size.height - (currentAppointmentView.bounds.size.height / 2.0 + Const.quarterHourUnitHeight) {
+                  let total = currentAppointmentView.bounds.size.height / 2.0 + Const.quarterHourUnitHeight
+                  let part = total - (agendaScrollView.bounds.size.height - locationInAgendaScrollView.y)
+                  let speed = part / total
+                  let speedRate = Int(speed * 10.0)
+                  self.startBorderLineAgendaTimer(going: .down, with: speedRate)
+               } else if locationInAgendaScrollView.x < currentAppointmentView.bounds.size.width / 2.0 + Const.agendaEmployeeColomnWidth / 5.0 {
+                  let total = currentAppointmentView.bounds.size.width / 2.0 + Const.agendaEmployeeColomnWidth / 5.0
+                  let part = locationInAgendaScrollView.x
+                  let speed = part / total
+                  let speedRate = Int((1 - speed) * 10.0)
+                  self.startBorderLineAgendaTimer(going: .left, with: speedRate)
+               } else if locationInAgendaScrollView.x > agendaScrollView.bounds.size.width - (currentAppointmentView.bounds.size.width / 2.0 + Const.agendaEmployeeColomnWidth / 5.0) {
+                  let total = currentAppointmentView.bounds.size.width / 2.0 + Const.agendaEmployeeColomnWidth / 5.0
+                  let part = total - (agendaScrollView.bounds.size.width - locationInAgendaScrollView.x)
+                  let speed = part / total
+                  let speedRate = Int(speed * 10.0)
+                  self.startBorderLineAgendaTimer(going: .right, with: speedRate)
+               } else {
+                  self.stopBorderLineAgendaTimer()
+               }
+               if let currentNewAppointmentView = self.currentNewAppointmentView {
+                  currentNewAppointmentView.center = locationInView
+                  self.timeIndicatorTopLineView.frame = CGRect(x: 0.0, y: currentNewAppointmentView.frame.origin.y, width: currentNewAppointmentView.frame.origin.x, height: 1.0)
+               }
             }
          }
          
@@ -192,14 +211,21 @@ class AgendaView: UIView {
          
          self.delegate?.resetHighlightStateOnAccessoryTimetable()
          
+         self.timeIndicatorTopLineView.removeFromSuperview()
+         self.timeIndicatorTopLineView.frame = CGRect(x: 0.0, y: 0.0, width: 0.0, height: 1.0)
+         
          if let currentNewAppointmentView = self.currentNewAppointmentView {
             if let isHoveringColomnIndex = self.isHoveringColomnIndex {
                UIView.animate(withDuration: 0.25, animations: {
-                  currentNewAppointmentView.frame = CGRect(x: isHoveringColomnIndex * Const.agendaEmployeeColomnWidth, y: 0.0, width: Const.agendaEmployeeColomnWidth, height: Const.hourUnitHeight)
-                  currentNewAppointmentView.center.y = locationInView.y
+                  currentNewAppointmentView.frame.origin = CGPoint(x: isHoveringColomnIndex * Const.agendaEmployeeColomnWidth, y: self.nearestCorrectPositionFor(appointmentAt: currentNewAppointmentView.frame.origin))
+                  self.stopBorderLineAgendaTimer()
                }) { success in
                   if success {
                      self.removeColomnHoveringLayer()
+                     
+                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                        self.delegate?.showAddAppointmentController()
+                     })
                   }
                }
             }
@@ -213,6 +239,17 @@ class AgendaView: UIView {
       }
    }
    
+   func nearestCorrectPositionFor(appointmentAt position: CGPoint) -> CGFloat {
+      let quartersBefore = Int(position.y / Const.quarterHourUnitHeight)
+      let distanceBetweenBefore = abs(position.y - (quartersBefore * Const.quarterHourUnitHeight))
+      let distanceBetweenAfter = abs(position.y - ((quartersBefore + 1) * Const.quarterHourUnitHeight))
+      if distanceBetweenBefore < distanceBetweenAfter {
+         return quartersBefore * Const.quarterHourUnitHeight
+      } else {
+         return (quartersBefore + 1) * Const.quarterHourUnitHeight
+      }
+   }
+   
    func outOfBoundsReset() {
       self.stopBorderLineAgendaTimer()
       self.currentNewAppointmentView?.removeFromSuperview()
@@ -222,9 +259,10 @@ class AgendaView: UIView {
       self.longPressCancelledOutOfBounds = true
    }
    
-   func startBorderLineAgendaTimer(going: Direction) {
+   func startBorderLineAgendaTimer(going: Direction, with speedRate: Int) {
       self.isBorderLineAgendaTimerRunning = true
-      self.borderlineAgendaTimerIsGoing = going
+      self.borderLineAgendaTimerDirection = going
+      self.borderLineAgendaTimerVelocity = speedRate
       guard borderLineAgendaTimer == nil else { return }
       
       self.borderLineAgendaTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(self.updateScrollViewContentOffset), userInfo: nil, repeats: true)
@@ -239,15 +277,17 @@ class AgendaView: UIView {
    }
    
    @objc func updateScrollViewContentOffset(from locationInView: CGPoint) {
-      if let going = self.borderlineAgendaTimerIsGoing {
-         self.scrollAgenda(to: going)
+      if let going = self.borderLineAgendaTimerDirection, let speedRate = self.borderLineAgendaTimerVelocity {
+         self.scrollAgenda(to: going, with: speedRate)
       }
    }
    
-   func scrollAgenda(to: Direction) {
+   func scrollAgenda(to: Direction, with speedRate: Int) {
+      let offsetToUpdate = 5.0 + speedRate * 3.0
+      
       switch to {
       case .up:
-         guard let agendaScrollView = self.agendaScrollView, agendaScrollView.contentOffset.y > 5 else {
+         guard let agendaScrollView = self.agendaScrollView, agendaScrollView.contentOffset.y > offsetToUpdate else {
             let contentOffset = self.agendaScrollView?.contentOffset.y ?? 0.0
             UIView.animate(withDuration: 0.05, animations: {
                self.agendaScrollView?.contentOffset.y = 0.0
@@ -257,11 +297,12 @@ class AgendaView: UIView {
             return
          }
          UIView.animate(withDuration: 0.05, animations: {
-            agendaScrollView.contentOffset.y -= 5.0
-            self.currentNewAppointmentView?.frame.origin.y -= 5.0
+            agendaScrollView.contentOffset.y -= offsetToUpdate
+            self.currentNewAppointmentView?.frame.origin.y -= offsetToUpdate
+            self.timeIndicatorTopLineView.frame.origin.y -= offsetToUpdate
          })
       case .down:
-         guard let agendaScrollView = self.agendaScrollView, agendaScrollView.contentOffset.y < agendaScrollView.contentSize.height - 5.0 - agendaScrollView.bounds.size.height else {
+         guard let agendaScrollView = self.agendaScrollView, agendaScrollView.contentOffset.y < agendaScrollView.contentSize.height - offsetToUpdate - agendaScrollView.bounds.size.height else {
             UIView.animate(withDuration: 0.05, animations: {
                if let agendaScrollView = self.agendaScrollView {
                   agendaScrollView.contentOffset.y = self.bounds.size.height - agendaScrollView.bounds.size.height
@@ -270,12 +311,12 @@ class AgendaView: UIView {
             return
          }
          UIView.animate(withDuration: 0.05, animations: {
-            self.agendaScrollView?.contentOffset.y += 5.0
-            self.currentNewAppointmentView?.frame.origin.y += 5.0
-            self.timeIndicatorTopLineView.frame.origin.y += 5
+            agendaScrollView.contentOffset.y += offsetToUpdate
+            self.currentNewAppointmentView?.frame.origin.y += offsetToUpdate
+            self.timeIndicatorTopLineView.frame.origin.y += offsetToUpdate
          })
       case .right:
-         guard let agendaScrollView = self.agendaScrollView, agendaScrollView.contentOffset.x < agendaScrollView.contentSize.width - 5.0 - agendaScrollView.bounds.size.width else {
+         guard let agendaScrollView = self.agendaScrollView, agendaScrollView.contentOffset.x < agendaScrollView.contentSize.width - offsetToUpdate - agendaScrollView.bounds.size.width else {
             UIView.animate(withDuration: 0.05, animations: {
                if let agendaScrollView = self.agendaScrollView {
                   agendaScrollView.contentOffset.x = self.bounds.size.width - agendaScrollView.bounds.size.width
@@ -284,12 +325,12 @@ class AgendaView: UIView {
             return
          }
          UIView.animate(withDuration: 0.05, animations: {
-            self.agendaScrollView?.contentOffset.x += 5.0
-            self.currentNewAppointmentView?.frame.origin.x += 5.0
-            self.timeIndicatorTopLineView.frame.origin.x += 5.0
+            agendaScrollView.contentOffset.x += offsetToUpdate
+            self.currentNewAppointmentView?.frame.origin.x += offsetToUpdate
+            self.timeIndicatorTopLineView.frame.origin.x += offsetToUpdate
          })
       case .left:
-         guard let agendaScrollView = self.agendaScrollView, agendaScrollView.contentOffset.x > 5 else {
+         guard let agendaScrollView = self.agendaScrollView, agendaScrollView.contentOffset.x > offsetToUpdate else {
             let contentOffset = self.agendaScrollView?.contentOffset.x ?? 0.0
             UIView.animate(withDuration: 0.05, animations: {
                self.agendaScrollView?.contentOffset.x = 0.0
@@ -298,13 +339,12 @@ class AgendaView: UIView {
             return
          }
          UIView.animate(withDuration: 0.05, animations: {
-            self.agendaScrollView?.contentOffset.x -= 5.0
-            self.currentNewAppointmentView?.frame.origin.x -= 5.0
-            self.timeIndicatorTopLineView.frame.origin.x -= 5.0
+            agendaScrollView.contentOffset.x -= offsetToUpdate
+            self.currentNewAppointmentView?.frame.origin.x -= offsetToUpdate
+            self.timeIndicatorTopLineView.frame.origin.x -= offsetToUpdate
          })
       }
       
       self.delegate?.highlightAccessoryTimetable(at: Int((self.currentNewAppointmentView!.frame.origin.y + 15.0) / Const.quarterHourUnitHeight))
    }
-   
 }

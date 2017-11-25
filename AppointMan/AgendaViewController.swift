@@ -53,7 +53,7 @@ class AgendaViewController: UIViewController {
    var timetableAccessoryStackView: UIStackView?
    
    var numberOfHoursToDisplay: Int {
-      return endHourToDisplay - startHourToDisplay + 1
+      return endHourToDisplay - startHourToDisplay
    }
    
    var isBubbleMenuOpen: Bool = false {
@@ -137,8 +137,6 @@ class AgendaViewController: UIViewController {
       agendaView.delegate = self
       self.agendaScrollView.contentSize = agendaView.bounds.size
       self.agendaScrollView.delegate = self
-      self.agendaScrollView.layer.borderWidth = 2.0
-      self.agendaScrollView.layer.borderColor = UIColor.amDarkBlue.withAlphaComponent(0.3).cgColor
       self.agendaScrollView.bounces = false
       self.agendaScrollView.showsVerticalScrollIndicator = false
       self.agendaScrollView.showsHorizontalScrollIndicator = false
@@ -148,6 +146,21 @@ class AgendaViewController: UIViewController {
       agendaView.leadingAnchor.constraint(equalTo: self.agendaScrollView.leadingAnchor, constant: 0.0).isActive = true
       agendaView.widthAnchor.constraint(equalToConstant: agendaView.bounds.size.width).isActive = true
       agendaView.heightAnchor.constraint(equalToConstant: agendaView.bounds.size.height).isActive = true
+      
+      let borderWidth: CGFloat = 2.0
+      
+      let topBorderLayer = CALayer()
+      topBorderLayer.frame = CGRect(x: self.agendaScrollView.frame.origin.x - borderWidth, y: self.agendaScrollView.frame.origin.y - borderWidth, width: self.agendaScrollView.bounds.size.width + borderWidth, height: borderWidth)
+      topBorderLayer.backgroundColor = UIColor.amDarkBlue.withAlphaComponent(0.3).cgColor
+      
+      let leadingBorderLayer = CALayer()
+      leadingBorderLayer.frame = CGRect(x: self.agendaScrollView.frame.origin.x - borderWidth, y: self.agendaScrollView.frame.origin.y, width: borderWidth, height: self.agendaScrollView.bounds.size.height)
+      leadingBorderLayer.backgroundColor = UIColor.amDarkBlue.withAlphaComponent(0.3).cgColor
+      
+      if let agendaContainerView = self.agendaContextStackView.arrangedSubviews.last {
+         agendaContainerView.layer.addSublayer(topBorderLayer)
+         agendaContainerView.layer.addSublayer(leadingBorderLayer)
+      }
    }
    
    func setupAccessoryTimetable() {
@@ -156,7 +169,7 @@ class AgendaViewController: UIViewController {
       self.accessoryTimetableAgendaScrollView.contentSize = CGSize(width: self.accessoryTimetableAgendaScrollView.bounds.size.width, height: Const.hourUnitHeight * self.numberOfHoursToDisplay + Const.quarterHourUnitHeight)
       
       var hourLabels = [UIView]()
-      for index in 0...(self.numberOfHoursToDisplay * 4 + 1) {
+      for index in 0...(self.numberOfHoursToDisplay * 4) {
          let myLabel = UILabel()
          myLabel.widthAnchor.constraint(equalToConstant: self.accessoryTimetableAgendaScrollView.bounds.size.width).isActive = true
          myLabel.heightAnchor.constraint(equalToConstant: Const.quarterHourUnitHeight).isActive = true
@@ -286,6 +299,13 @@ extension AgendaViewController: AgendaViewDelegate {
             hourLabel.alpha = 0.0
          }
       }
+   }
+   
+   func showAddAppointmentController() {
+      let addAppointmentVC = UIStoryboard.addAppointmentVC()
+      addAppointmentVC.modalPresentationStyle = .formSheet
+      addAppointmentVC.preferredContentSize = CGSize(width: 540.0, height: 580.0)
+      self.present(addAppointmentVC, animated: true, completion: nil)
    }
 }
 

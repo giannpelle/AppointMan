@@ -168,6 +168,69 @@
             </objects>
             <point key="canvasLocation" x="-1329" y="2530"/>
         </scene>
+        <!--Add Appointment View Controller-->
+        <scene sceneID="kSx-6Z-FTQ">
+            <objects>
+                <viewController storyboardIdentifier="addAppointmentVC" id="6MW-jM-e6B" customClass="AddAppointmentViewController" customModule="AppointMan" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="p1w-eA-Lyq"/>
+                        <viewControllerLayoutGuide type="bottom" id="QMb-eE-Vra"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ssv-9P-C0N">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tWq-Ju-eKH">
+                                <rect key="frame" x="0.0" y="0.0" width="540" height="67"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQi-vP-RVT">
+                                        <rect key="frame" x="249" y="23" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h31-pl-Nrj">
+                                        <rect key="frame" x="495" y="22.5" width="35" height="22"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                        <state key="normal" image="icona_x"/>
+                                        <connections>
+                                            <action selector="closeButtonPressedWithSender:" destination="6MW-jM-e6B" eventType="touchUpInside" id="FND-PJ-cgB"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.047058823530000002" green="0.32156862749999998" blue="0.69411764710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="yQi-vP-RVT" firstAttribute="centerY" secondItem="tWq-Ju-eKH" secondAttribute="centerY" id="2Vg-1e-yCa"/>
+                                    <constraint firstItem="h31-pl-Nrj" firstAttribute="centerY" secondItem="tWq-Ju-eKH" secondAttribute="centerY" id="6cd-55-FUg"/>
+                                    <constraint firstItem="yQi-vP-RVT" firstAttribute="centerX" secondItem="tWq-Ju-eKH" secondAttribute="centerX" id="Knf-Yc-rhb"/>
+                                    <constraint firstAttribute="trailing" secondItem="h31-pl-Nrj" secondAttribute="trailing" constant="10" id="cN6-iE-Xxc"/>
+                                    <constraint firstAttribute="height" constant="67" id="tdu-nJ-yko"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bp1-4b-dVU">
+                                <rect key="frame" x="21" y="95" width="495" height="47"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="bOK-mT-Ddw"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="tWq-Ju-eKH" secondAttribute="trailing" id="P2t-Mq-EX7"/>
+                            <constraint firstItem="tWq-Ju-eKH" firstAttribute="leading" secondItem="ssv-9P-C0N" secondAttribute="leading" id="YIg-at-ScB"/>
+                            <constraint firstAttribute="trailing" secondItem="bp1-4b-dVU" secondAttribute="trailing" constant="24" id="cuT-dN-Ket"/>
+                            <constraint firstItem="bp1-4b-dVU" firstAttribute="top" secondItem="tWq-Ju-eKH" secondAttribute="bottom" constant="28" id="inz-8s-HTN"/>
+                            <constraint firstItem="bp1-4b-dVU" firstAttribute="leading" secondItem="ssv-9P-C0N" secondAttribute="leading" constant="21" id="mSN-ss-tGU"/>
+                            <constraint firstItem="tWq-Ju-eKH" firstAttribute="top" secondItem="ssv-9P-C0N" secondAttribute="top" id="wLr-bh-PBC"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="540" height="768"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="krf-1I-Koy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-496" y="1788"/>
+        </scene>
         <!--Agenda View Controller-->
         <scene sceneID="TFr-6G-MtR">
             <objects>
@@ -383,13 +446,13 @@
                             <constraint firstItem="zoJ-9j-Ued" firstAttribute="top" secondItem="shE-RO-OnW" secondAttribute="bottom" id="Rjm-EC-fWW"/>
                             <constraint firstItem="e7w-Uo-obc" firstAttribute="top" secondItem="zoJ-9j-Ued" secondAttribute="bottom" id="XiE-n7-pl4"/>
                             <constraint firstItem="4Un-Vx-EcW" firstAttribute="top" secondItem="oSL-Fx-ex0" secondAttribute="bottom" constant="12" id="YrZ-9T-AEQ"/>
+                            <constraint firstAttribute="trailing" secondItem="xwN-Qq-OY7" secondAttribute="trailing" id="a9U-Dl-ov0"/>
                             <constraint firstItem="wdk-hP-abS" firstAttribute="top" secondItem="oSL-Fx-ex0" secondAttribute="bottom" id="cRw-n7-aHO"/>
                             <constraint firstItem="zoJ-9j-Ued" firstAttribute="top" secondItem="wdk-hP-abS" secondAttribute="bottom" id="cVr-It-pZ9"/>
-                            <constraint firstItem="xwN-Qq-OY7" firstAttribute="leading" secondItem="shE-RO-OnW" secondAttribute="trailing" id="jmm-5M-fru"/>
                             <constraint firstItem="shE-RO-OnW" firstAttribute="trailing" secondItem="IWE-jj-MFG" secondAttribute="leading" id="l3b-sO-oma"/>
+                            <constraint firstItem="xwN-Qq-OY7" firstAttribute="leading" secondItem="IWE-jj-MFG" secondAttribute="leading" id="n9b-jq-NH0"/>
                             <constraint firstAttribute="trailing" secondItem="Qec-bT-QnZ" secondAttribute="trailing" constant="-189" id="pBg-Xv-y5F"/>
                             <constraint firstItem="EwP-g3-5Dg" firstAttribute="centerX" secondItem="IWE-jj-MFG" secondAttribute="centerX" id="s1U-V0-4HP"/>
-                            <constraint firstItem="wdk-hP-abS" firstAttribute="leading" secondItem="xwN-Qq-OY7" secondAttribute="trailing" id="s4H-Vm-htX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1007,6 +1070,7 @@
         <image name="icona_menu_impostazioni" width="40" height="40"/>
         <image name="icona_menu_prodotti" width="40" height="40"/>
         <image name="icona_menu_statistiche" width="40" height="40"/>
+        <image name="icona_x" width="15" height="15"/>
         <image name="iconcina_annota_modifica" width="20" height="20"/>
         <image name="iconcina_annota_preferiti" width="20" height="20"/>
         <image name="triangolino_open_disclosure_indicator" width="8" height="10"/>
