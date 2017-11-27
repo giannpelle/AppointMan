@@ -15,7 +15,7 @@ class TakeNotesViewController: UIViewController {
    @IBOutlet weak var addMemoButton: UIButton!
    @IBOutlet weak var memoCollectionView: UICollectionView!
    
-   var newMemoTextViewContentSizeHeight: CGFloat?
+   var myMemos: [Memo] = [Memo(text: "Ciao", isFavorite: true, latestMemoTextViewHeight: 17.0), Memo(text: "Ciao quest è una prova per vedere se ci sta su due righe", isFavorite: false, latestMemoTextViewHeight: 34.0), Memo(text: "Ciao prova tre", isFavorite: false, latestMemoTextViewHeight: 17.0)]
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -40,10 +40,19 @@ class TakeNotesViewController: UIViewController {
       self.addMemoButton.setBackgroundColor(color: UIColor.amDarkBlue, forState: .normal)
       self.addMemoButton.contentEdgeInsets = UIEdgeInsetsMake(0.0, 19.0, 0.0, 29.0)
       self.addMemoButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, -10.0)
+      self.addMemoButton.addTarget(self, action: #selector(self.addNewMemo(sender:)), for: .touchUpInside)
       
       self.memoCollectionView.dataSource = self
       self.memoCollectionView.delegate = self
       (self.memoCollectionView.collectionViewLayout as? MasonryLayout)?.delegate = self
+   }
+   
+   @objc func addNewMemo(sender: UIButton) {
+      let newMemo = Memo()
+      self.myMemos.insert(newMemo, at: 0)
+      self.memoCollectionView.reloadData()
+      (self.memoCollectionView.collectionViewLayout as? MasonryLayout)?.emptyCache()
+      self.memoCollectionView.collectionViewLayout.invalidateLayout()
    }
    
    @objc func doneButtonPressed(sender: UIButton) {
@@ -59,7 +68,7 @@ extension TakeNotesViewController: UICollectionViewDataSource {
    }
    
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return 5
+      return self.myMemos.count
    }
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,6 +76,7 @@ extension TakeNotesViewController: UICollectionViewDataSource {
          return UICollectionViewCell()
       }
      
+      cell.memo = self.myMemos[indexPath.row]
       cell.delegate = self
       return cell
    }
@@ -79,8 +89,8 @@ extension TakeNotesViewController: UICollectionViewDelegate {
 
 extension TakeNotesViewController: MemoCollectionViewCellDelegate {
    
-   func invalidateLayout(withNewTextViewContentSizeHeight height: CGFloat) {
-      self.newMemoTextViewContentSizeHeight = height
+   func invalidateLayout(withNewTextViewContentSizeHeight height: CGFloat, forCellAt indexPath: IndexPath) {
+      self.myMemos[indexPath.row].latestMemoTextViewHeight = Int(height / 17.0) * 17.0
       (self.memoCollectionView.collectionViewLayout as? MasonryLayout)?.emptyCache()
       self.memoCollectionView.collectionViewLayout.invalidateLayout()
    }
@@ -90,14 +100,12 @@ extension TakeNotesViewController: MasonryLayoutDelegate {
    
    func collectionView(_ collectionView: UICollectionView, heightForTextViewAtIndexPath indexPath: IndexPath) -> CGFloat {
       
-      if let height = self.newMemoTextViewContentSizeHeight {
+      if let height = self.myMemos[indexPath.row].latestMemoTextViewHeight {
          print(height)
          return height
       }
-      print("17")
       
-      let values = [17.0, 153.0, 85.0, 17.0, 34.0]
-      return CGFloat(values[indexPath.row])
+      return UIFont.init(name: "SFUIText-Regular", size: 14.0)!.lineHeight.rounded(.up)
       
       // SOLO SE PROPRIO SENZA SPERANZE calcolare altezza programmaticamente
       //let constrainedSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)

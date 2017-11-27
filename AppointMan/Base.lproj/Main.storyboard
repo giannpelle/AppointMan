@@ -783,23 +783,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8Gk-jN-MED" customClass="MemoTextView" customModule="AppointMan" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="45" width="265" height="189"/>
+                                                    <rect key="frame" x="16" y="45" width="265" height="199"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7iB-yl-GdK">
-                                                    <rect key="frame" x="265" y="12" width="20" height="20"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="aV0-oJ-VLz"/>
-                                                        <constraint firstAttribute="height" constant="20" id="fLD-eu-qGz"/>
-                                                    </constraints>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <state key="normal" image="iconcina_annota_modifica"/>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6m6-hC-Di1">
-                                                    <rect key="frame" x="231" y="12" width="20" height="20"/>
+                                                    <rect key="frame" x="265" y="12" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="R4X-fd-Ams"/>
                                                         <constraint firstAttribute="height" constant="20" id="ug3-M6-zXy"/>
@@ -807,23 +798,42 @@
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" image="iconcina_annota_preferiti"/>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3w-GE-Or5">
+                                                    <rect key="frame" x="18" y="294" width="17" height="22"/>
+                                                    <state key="normal" image="memo_notifica_off"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ECK-ju-y0i">
+                                                    <rect key="frame" x="18" y="265" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mNv-tP-402">
+                                                    <rect key="frame" x="41" y="294.5" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="B3w-GE-Or5" firstAttribute="top" secondItem="ECK-ju-y0i" secondAttribute="bottom" constant="8" id="4FL-Rx-X9X"/>
                                             <constraint firstAttribute="trailing" secondItem="8Gk-jN-MED" secondAttribute="trailing" constant="16" id="4GA-Nf-xNm"/>
-                                            <constraint firstItem="7iB-yl-GdK" firstAttribute="top" secondItem="SfX-nA-YDd" secondAttribute="top" constant="12" id="4se-tL-deN"/>
-                                            <constraint firstAttribute="trailing" secondItem="7iB-yl-GdK" secondAttribute="trailing" constant="12" id="e5C-aZ-lsy"/>
-                                            <constraint firstItem="7iB-yl-GdK" firstAttribute="leading" secondItem="6m6-hC-Di1" secondAttribute="trailing" constant="14" id="fwM-Ss-zGg"/>
+                                            <constraint firstItem="mNv-tP-402" firstAttribute="leading" secondItem="B3w-GE-Or5" secondAttribute="trailing" constant="6" id="4ds-qC-ZSS"/>
+                                            <constraint firstItem="B3w-GE-Or5" firstAttribute="leading" secondItem="ECK-ju-y0i" secondAttribute="leading" id="CIy-1R-AZX"/>
+                                            <constraint firstItem="B3w-GE-Or5" firstAttribute="leading" secondItem="SfX-nA-YDd" secondAttribute="leading" constant="18" id="CUF-HF-790"/>
+                                            <constraint firstAttribute="trailing" secondItem="6m6-hC-Di1" secondAttribute="trailing" constant="12" id="Joq-A7-uOI"/>
                                             <constraint firstItem="6m6-hC-Di1" firstAttribute="top" secondItem="SfX-nA-YDd" secondAttribute="top" constant="12" id="imb-bx-OOg"/>
-                                            <constraint firstAttribute="bottom" secondItem="8Gk-jN-MED" secondAttribute="bottom" constant="100" id="pAE-4Q-rsf"/>
+                                            <constraint firstItem="mNv-tP-402" firstAttribute="centerY" secondItem="B3w-GE-Or5" secondAttribute="centerY" id="j0N-Fd-7H9"/>
+                                            <constraint firstAttribute="bottom" secondItem="8Gk-jN-MED" secondAttribute="bottom" constant="90" id="pAE-4Q-rsf"/>
                                             <constraint firstItem="8Gk-jN-MED" firstAttribute="leading" secondItem="SfX-nA-YDd" secondAttribute="leading" constant="16" id="qIo-oF-8Gx"/>
                                             <constraint firstItem="8Gk-jN-MED" firstAttribute="top" secondItem="SfX-nA-YDd" secondAttribute="top" constant="45" id="vrd-Ng-uzq"/>
+                                            <constraint firstAttribute="bottom" secondItem="B3w-GE-Or5" secondAttribute="bottom" constant="18" id="xri-aa-Cmb"/>
                                         </constraints>
                                         <size key="customSize" width="297" height="334"/>
                                         <connections>
-                                            <outlet property="bookmarkButton" destination="6m6-hC-Di1" id="Dc3-fr-VGj"/>
-                                            <outlet property="editButton" destination="7iB-yl-GdK" id="wuY-nl-SHb"/>
+                                            <outlet property="favoriteButton" destination="6m6-hC-Di1" id="xiU-K0-zYr"/>
                                             <outlet property="memoTextView" destination="8Gk-jN-MED" id="MWO-EH-eEH"/>
                                         </connections>
                                     </collectionViewCell>
@@ -1071,8 +1081,8 @@
         <image name="icona_menu_prodotti" width="40" height="40"/>
         <image name="icona_menu_statistiche" width="40" height="40"/>
         <image name="icona_x" width="15" height="15"/>
-        <image name="iconcina_annota_modifica" width="20" height="20"/>
         <image name="iconcina_annota_preferiti" width="20" height="20"/>
+        <image name="memo_notifica_off" width="17" height="18"/>
         <image name="triangolino_open_disclosure_indicator" width="8" height="10"/>
     </resources>
 </document>

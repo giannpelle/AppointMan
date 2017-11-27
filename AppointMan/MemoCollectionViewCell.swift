@@ -9,10 +9,25 @@
 import UIKit
 
 // MODEL must be
-struct Memo {
+class Memo {
    var text: String
-   var subtitleText: String? // if let subtitle -> verticalStackView = full ELSE subtitle.isHidden SO verticalStackView not full
-   var latestContentSizeHeight: CGFloat? // in textViewHeight forRowAtIndexPath if let height -> return height ELSE calculate it
+   var isFavorite: Bool
+   var notificationDate: Date?
+   var latestMemoTextViewHeight: CGFloat? // in textViewHeight forRowAtIndexPath if let height -> return height ELSE calculate it
+   
+   init() {
+      self.text = ""
+      self.isFavorite = false
+      self.notificationDate = nil
+      self.latestMemoTextViewHeight = UIFont.init(name: "SFUIText-Regular", size: 14.0)!.lineHeight.rounded(.up)
+   }
+   
+   init(text: String, isFavorite: Bool, latestMemoTextViewHeight: CGFloat?, notificationDate: Date? = nil) {
+      self.text = text
+      self.isFavorite = isFavorite
+      self.latestMemoTextViewHeight = latestMemoTextViewHeight
+      self.notificationDate = notificationDate
+   }
 }
 
 protocol MemoTextViewDelegate: class {
@@ -75,16 +90,21 @@ class MemoTextView: UITextView {
 }
 
 protocol MemoCollectionViewCellDelegate: class {
-   func invalidateLayout(withNewTextViewContentSizeHeight height: CGFloat)
+   func invalidateLayout(withNewTextViewContentSizeHeight height: CGFloat, forCellAt indexPath: IndexPath)
 }
 
 class MemoCollectionViewCell: UICollectionViewCell {
    
-   @IBOutlet weak var bookmarkButton: UIButton!
-   @IBOutlet weak var editButton: UIButton!
+   @IBOutlet weak var favoriteButton: UIButton!
    @IBOutlet weak var memoTextView: MemoTextView!
    
    weak var delegate: MemoCollectionViewCellDelegate?
+   var memo: Memo! {
+      didSet {
+         self.memoTextView.text = self.memo.text
+         self.favoriteButton.isSelected = self.memo.isFavorite
+      }
+   }
    
    override func awakeFromNib() {
       super.awakeFromNib()
@@ -101,8 +121,9 @@ class MemoCollectionViewCell: UICollectionViewCell {
       self.clipsToBounds = true
       self.layer.cornerRadius = 3.0
       
-      self.bookmarkButton.setImage(#imageLiteral(resourceName: "iconcina_annota_preferiti"), for: .normal)
-      self.bookmarkButton.setImage(#imageLiteral(resourceName: "iconcina_annota_preferiti_selected"), for: .selected)
+      self.favoriteButton.setImage(#imageLiteral(resourceName: "iconcina_annota_preferiti"), for: .normal)
+      self.favoriteButton.setImage(#imageLiteral(resourceName: "iconcina_annota_preferiti_selected"), for: .selected)
+      self.favoriteButton.addTarget(self, action: #selector(self.favoriteButtonPressed(sender:)), for: .touchUpInside)
       
       self.memoTextView.delegate = self
       self.memoTextView.memoDelegate = self
@@ -121,6 +142,11 @@ class MemoCollectionViewCell: UICollectionViewCell {
       
       self.endEditing(true)
    }
+   
+   @objc func favoriteButtonPressed(sender: UIButton) {
+      sender.isSelected = !sender.isSelected
+      self.memo.isFavorite = sender.isSelected
+   }
     
 }
 
@@ -132,13 +158,56 @@ extension MemoCollectionViewCell: UITextViewDelegate {
          memoTextView.placeholderLabel?.isHidden = !futureStr.isEmpty
       }
       
+      if futureStr.hasSuffix("\n\n") {
+         textView.text.removeLast()
+         self.updateTextView(withContentSizeHeight: textView.contentSize.height - UIFont.init(name: "SFUIText-Regular", size: 14.0)!.lineHeight.rounded(.up))
+         if let underlineLayer = self.memoTextView.underlineLayer {
+            underlineLayer.frame.origin.y = textView.contentSize.height + 2.0
+         }
+         textView.endEditing(true)
+         self.memo.text = textView.text
+         return false
+      }
+      
+      self.memo.text = futureStr
       return true
    }
+   
+   func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+      if let memoCollectionView = self.collectionView, let indexPath = self.indexPath {
+         let layoutAttributes = memoCollectionView.layoutAttributesForItem(at: indexPath)
+         memoCollectionView.setContentOffset(CGPoint(x: 0.0, y: layoutAttributes?.frame.origin.y), animated: true)
+      }
+      return true
+   }
+   
 }
 
 extension MemoCollectionViewCell: MemoTextViewDelegate {
    
    func updateTextView(withContentSizeHeight height: CGFloat) {
-      self.delegate?.invalidateLayout(withNewTextViewContentSizeHeight: height)
+      if let indexPath = self.indexPath {
+         self.delegate?.invalidateLayout(withNewTextViewContentSizeHeight: height, forCellAt: indexPath)
+      }
+   }
+}
+
+// MARK: to get the indexPath from within the cell
+
+extension UIResponder {
+   
+   func next<T: UIResponder>(_ type: T.Type) -> T? {
+      return next as? T ?? next?.next(type)
+   }
+}
+
+extension UICollectionViewCell {
+   
+   var collectionView: UICollectionView? {
+      return next(UICollectionView.self)
+   }
+   
+   var indexPath: IndexPath? {
+      return collectionView?.indexPath(for: self)
    }
 }
