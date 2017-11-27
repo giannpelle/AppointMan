@@ -48,6 +48,13 @@ class MasonryLayout: UICollectionViewLayout {
       guard cache.isEmpty == true, let collectionView = collectionView else {
          return
       }
+      
+      let headerHeight: CGFloat = 98.0
+      // calculate header layout attributes
+      let attrs = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, with: IndexPath(row: 0, section: 0))
+      attrs.frame = CGRect(x: 0.0, y: 0.0, width: contentWidth, height: headerHeight)
+      cache.append(attrs)
+      
       // 2. Pre-Calculates the X Offset for every column and adds an array to increment the currently max Y Offset for each column
       let columnWidth = contentWidth / CGFloat(numberOfColumns)
       var xOffset = [CGFloat]()
@@ -55,7 +62,7 @@ class MasonryLayout: UICollectionViewLayout {
          xOffset.append(CGFloat(column) * columnWidth)
       }
       var column = 0
-      var yOffset = [CGFloat](repeating: 0, count: numberOfColumns)
+      var yOffset = [CGFloat](repeating: headerHeight, count: numberOfColumns)
       
       // 3. Iterates through the list of items in the first section
       for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
@@ -88,6 +95,7 @@ class MasonryLayout: UICollectionViewLayout {
          }
          column = minColumnIndex
       }
+      
    }
    
    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -105,6 +113,12 @@ class MasonryLayout: UICollectionViewLayout {
    
    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
       return cache[indexPath.item]
+   }
+   
+   override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+      let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, with: indexPath)
+      attributes.frame = CGRect(x: 0, y: 0, width: contentWidth, height: 98)
+      return attributes
    }
    
 }

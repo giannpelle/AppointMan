@@ -99,6 +99,8 @@ class MemoCollectionViewCell: UICollectionViewCell {
    @IBOutlet weak var memoTextView: MemoTextView!
    
    weak var delegate: MemoCollectionViewCellDelegate?
+   var beforeEditingContentOffset: CGPoint?
+   
    var memo: Memo! {
       didSet {
          self.memoTextView.text = self.memo.text
@@ -174,9 +176,21 @@ extension MemoCollectionViewCell: UITextViewDelegate {
    }
    
    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-      if let memoCollectionView = self.collectionView, let indexPath = self.indexPath {
-         let layoutAttributes = memoCollectionView.layoutAttributesForItem(at: indexPath)
-         memoCollectionView.setContentOffset(CGPoint(x: 0.0, y: layoutAttributes?.frame.origin.y), animated: true)
+      if let memoCollectionView = self.collectionView, let indexPath = self.indexPath, let layoutAttributes = memoCollectionView.layoutAttributesForItem(at: indexPath) {
+         self.beforeEditingContentOffset = memoCollectionView.contentOffset
+         UIView.animate(withDuration: 0.45, animations: {
+            memoCollectionView.contentOffset = CGPoint(x: 0.0, y: layoutAttributes.frame.origin.y - 14.0)
+         })
+         //memoCollectionView.setContentOffset(CGPoint(x: 0.0, y: layoutAttributes.frame.origin.y - 14.0), animated: true)
+      }
+      return true
+   }
+   
+   func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+      if let memoCollectionView = self.collectionView, let beforeEditingContentOffset = self.beforeEditingContentOffset {
+         UIView.animate(withDuration: 0.45, animations: {
+            memoCollectionView.contentOffset = beforeEditingContentOffset
+         })
       }
       return true
    }

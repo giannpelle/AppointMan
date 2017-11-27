@@ -761,17 +761,8 @@
                                     <constraint firstItem="UyU-ra-zCR" firstAttribute="top" secondItem="iUL-jE-Z5q" secondAttribute="top" constant="28" id="e2O-YW-50k"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksA-z8-uHz">
-                                <rect key="frame" x="50" y="116" width="54" height="32"/>
-                                <color key="backgroundColor" red="0.031372549020000001" green="0.20392156859999999" blue="0.45098039220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="2Ig-l7-qMl"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gVw-ed-9Z9">
-                                <rect key="frame" x="40" y="178" width="944" height="590"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gVw-ed-9Z9">
+                                <rect key="frame" x="40" y="80" width="944" height="688"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewLayout key="collectionViewLayout" id="eqT-HR-x0K" customClass="MasonryLayout" customModule="AppointMan" customModuleProvider="target"/>
                                 <cells>
@@ -842,19 +833,16 @@
                         </subviews>
                         <color key="backgroundColor" red="0.047058823530000002" green="0.32156862749999998" blue="0.69411764710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ksA-z8-uHz" firstAttribute="top" secondItem="iUL-jE-Z5q" secondAttribute="bottom" constant="36" id="BZg-Xb-ceg"/>
                             <constraint firstAttribute="trailing" secondItem="iUL-jE-Z5q" secondAttribute="trailing" id="Fvp-kt-YMd"/>
-                            <constraint firstItem="gVw-ed-9Z9" firstAttribute="top" secondItem="ksA-z8-uHz" secondAttribute="bottom" constant="30" id="X2v-od-M4x"/>
+                            <constraint firstItem="gVw-ed-9Z9" firstAttribute="top" secondItem="iUL-jE-Z5q" secondAttribute="bottom" id="gcv-Cd-ALP"/>
                             <constraint firstItem="iUL-jE-Z5q" firstAttribute="leading" secondItem="Z8Q-M5-l1t" secondAttribute="leading" id="lYg-HW-LJp"/>
                             <constraint firstAttribute="trailing" secondItem="gVw-ed-9Z9" secondAttribute="trailing" constant="40" id="olY-xA-1EV"/>
                             <constraint firstItem="gVw-ed-9Z9" firstAttribute="leading" secondItem="Z8Q-M5-l1t" secondAttribute="leading" constant="40" id="qw0-Vo-1qg"/>
                             <constraint firstItem="iUL-jE-Z5q" firstAttribute="top" secondItem="Z8Q-M5-l1t" secondAttribute="top" id="r24-8s-5OH"/>
-                            <constraint firstItem="ksA-z8-uHz" firstAttribute="leading" secondItem="Z8Q-M5-l1t" secondAttribute="leading" constant="50" id="suv-vW-uyK"/>
                             <constraint firstItem="Z2S-WC-cMC" firstAttribute="top" secondItem="gVw-ed-9Z9" secondAttribute="bottom" id="wvx-uh-lKy"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addMemoButton" destination="ksA-z8-uHz" id="nSB-1w-ksD"/>
                         <outlet property="memoCollectionView" destination="gVw-ed-9Z9" id="Sfd-HW-JOE"/>
                         <outlet property="navigationRightBarButton" destination="UyU-ra-zCR" id="zcY-2G-pjT"/>
                         <outlet property="navigationTitleViewLabel" destination="dHk-y9-Smx" id="eIO-Uc-bT1"/>

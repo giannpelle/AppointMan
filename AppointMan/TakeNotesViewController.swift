@@ -12,7 +12,6 @@ class TakeNotesViewController: UIViewController {
    
    @IBOutlet weak var navigationTitleViewLabel: UILabel!
    @IBOutlet weak var navigationRightBarButton: UIButton!
-   @IBOutlet weak var addMemoButton: UIButton!
    @IBOutlet weak var memoCollectionView: UICollectionView!
    
    var myMemos: [Memo] = [Memo(text: "Ciao", isFavorite: true, latestMemoTextViewHeight: 17.0), Memo(text: "Ciao quest è una prova per vedere se ci sta su due righe", isFavorite: false, latestMemoTextViewHeight: 34.0), Memo(text: "Ciao prova tre", isFavorite: false, latestMemoTextViewHeight: 17.0)]
@@ -32,27 +31,10 @@ class TakeNotesViewController: UIViewController {
    func setupUI() {
       self.navigationRightBarButton.addTarget(self, action: #selector(self.doneButtonPressed(sender:)), for: .touchUpInside)
       
-      self.addMemoButton.clipsToBounds = true
-      self.addMemoButton.layer.cornerRadius = 5.0
-      self.addMemoButton.setBackgroundColor(color: UIColor.amDarkBlue, forState: .normal)
-      self.addMemoButton.setImage(#imageLiteral(resourceName: "icona_piu"), for: .normal)
-      self.addMemoButton.setAttributedTitle(UILabel.attributedString(withText: "AGGIUNGI MEMO", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.0, isCentered: true), for: .normal)
-      self.addMemoButton.setBackgroundColor(color: UIColor.amDarkBlue, forState: .normal)
-      self.addMemoButton.contentEdgeInsets = UIEdgeInsetsMake(0.0, 19.0, 0.0, 29.0)
-      self.addMemoButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, -10.0)
-      self.addMemoButton.addTarget(self, action: #selector(self.addNewMemo(sender:)), for: .touchUpInside)
-      
       self.memoCollectionView.dataSource = self
       self.memoCollectionView.delegate = self
       (self.memoCollectionView.collectionViewLayout as? MasonryLayout)?.delegate = self
-   }
-   
-   @objc func addNewMemo(sender: UIButton) {
-      let newMemo = Memo()
-      self.myMemos.insert(newMemo, at: 0)
-      self.memoCollectionView.reloadData()
-      (self.memoCollectionView.collectionViewLayout as? MasonryLayout)?.emptyCache()
-      self.memoCollectionView.collectionViewLayout.invalidateLayout()
+      self.memoCollectionView.register(UINib(nibName: "HeaderMemoCollectionReusableView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "Header")
    }
    
    @objc func doneButtonPressed(sender: UIButton) {
@@ -81,6 +63,26 @@ extension TakeNotesViewController: UICollectionViewDataSource {
       return cell
    }
    
+   func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+      switch kind {
+      case UICollectionElementKindSectionHeader:
+         if let memoHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as? HeaderMemoCollectionReusableView {
+            memoHeaderView.delegate = self
+            return memoHeaderView
+         }
+         return UICollectionReusableView()
+      default:
+         return UICollectionReusableView()
+      }
+   }
+   
+}
+
+extension TakeNotesViewController: UICollectionViewDelegateFlowLayout {
+   
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+      return CGSize(width: 100.0, height: 100.0)
+   }
 }
 
 extension TakeNotesViewController: UICollectionViewDelegate {
@@ -90,7 +92,18 @@ extension TakeNotesViewController: UICollectionViewDelegate {
 extension TakeNotesViewController: MemoCollectionViewCellDelegate {
    
    func invalidateLayout(withNewTextViewContentSizeHeight height: CGFloat, forCellAt indexPath: IndexPath) {
-      self.myMemos[indexPath.row].latestMemoTextViewHeight = Int(height / 17.0) * 17.0
+      self.myMemos[indexPath.row].latestMemoTextViewHeight = height
+      (self.memoCollectionView.collectionViewLayout as? MasonryLayout)?.emptyCache()
+      self.memoCollectionView.collectionViewLayout.invalidateLayout()
+   }
+}
+
+extension TakeNotesViewController: HeaderMemoDelegate {
+   
+   func addNewMemo() {
+      let newMemo = Memo()
+      self.myMemos.insert(newMemo, at: 0)
+      self.memoCollectionView.reloadData()
       (self.memoCollectionView.collectionViewLayout as? MasonryLayout)?.emptyCache()
       self.memoCollectionView.collectionViewLayout.invalidateLayout()
    }
