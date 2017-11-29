@@ -16,7 +16,6 @@ class CardView: UIView {
    override func draw(_ rect: CGRect) {
       super.draw(rect)
       
-      self.backgroundColor = UIColor.white
       self.clipsToBounds = true
       self.layer.cornerRadius = 3.0
    }
@@ -64,8 +63,9 @@ class WorkingHoursPlannerView: UIView {
 //   var currentBoxView: BoxView?
    var topPlaceholderView: PlaceholderOverlayableView!
    var bottomPlaceholderView: PlaceholderOverlayableView!
-   var newlyAddedCardView: CardView?
-   var newlyAddedCardViewColomn: Int?
+   var currentStartFrame: CGRect?
+   var currentCardView: CardView?
+   var currentCardViewColomn: Int?
 //
 //   var currentColomnIndex: Int = 0
 //   var initialHalfHourViewIndex: Int = 0
@@ -184,22 +184,33 @@ class WorkingHoursPlannerView: UIView {
       
       switch sender.state {
       case .began:
+         
          if self.halfHourViewAlreadyExist(atPoint: currentFingerLocation) {
             
          } else {
             let cardView = CardView(frame: self.getHalfHourFrame(from: currentFingerLocation))
+            cardView.backgroundColor = UIColor.white
+            cardView.topHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getStartTime(forIndex: self.getRowIndex(forLocation: currentFingerLocation)), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+            cardView.bottomHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getEndTime(forIndex: self.getRowIndex(forLocation: currentFingerLocation)), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
             self.addSubview(cardView)
-            self.newlyAddedCardView = cardView
-            self.newlyAddedCardViewColomn = Int(currentFingerLocation.y / self.colomnWidth)
+            self.currentStartFrame = self.getHalfHourFrame(from: currentFingerLocation)
+            self.currentCardView = cardView
+            self.currentCardViewColomn = Int(currentFingerLocation.x / self.colomnWidth)
          }
+         
       case .changed:
-         if let currentCardView = self.newlyAddedCardView, let colomn = self.newlyAddedCardViewColomn {
-            if currentFingerLocation.y > currentCardView.frame.maxY || currentFingerLocation.y < currentCardView.frame.minY {
-               currentCardView.frame = currentCardView.frame.union(self.getHalfHourFrame(fromY: currentFingerLocation.y, in: colomn))
-            } else {
-               currentCardView.frame.size.height = self.resultigFrame(fromCardViewFrame: currentCardView.frame, andHoveringHalfHourViewFrame: self.getHalfHourFrame(fromY: currentFingerLocation.y, in: Int(colomn))).height
+         if let currentCardView = self.currentCardView, let colomn = self.currentCardViewColomn {
+            let endFrame = self.getHalfHourFrame(from: currentFingerLocation, forColomn: colomn)
+            if let startFrame = self.currentStartFrame {
+               currentCardView.frame = startFrame.union(endFrame)
+               if endFrame.origin.y > startFrame.origin.y {
+                  currentCardView.topHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getStartTime(forIndex: self.getRowIndex(forLocation: CGPoint(x: startFrame.midX, y: startFrame.midY))), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+                  currentCardView.bottomHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getEndTime(forIndex: self.getRowIndex(forLocation: CGPoint(x: endFrame.midX, y: endFrame.midY))), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+               } else {
+                  currentCardView.topHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getStartTime(forIndex: self.getRowIndex(forLocation: CGPoint(x: endFrame.midX, y: endFrame.midY)) ), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+                  currentCardView.bottomHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getEndTime(forIndex: self.getRowIndex(forLocation: CGPoint(x: startFrame.midX, y: startFrame.midY))), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+               }
             }
-            
          }
       case .ended:
          break
@@ -264,15 +275,19 @@ class WorkingHoursPlannerView: UIView {
 //      }
    }
    
-   func getHalfHourFrame(from currentPoint: CGPoint) -> CGRect {
-      let colomnIndex = Int(currentPoint.x / self.colomnWidth)
-      let rowIndex = Int(currentPoint.y / self.halfHourUnitHeight)
-      return CGRect(x: self.colomnWidth * colomnIndex, y: self.halfHourUnitHeight * rowIndex, width: self.colomnWidth, height: self.halfHourUnitHeight)
+   func getHalfHourFrame(from currentLocation: CGPoint, forColomn colomn: Int? = nil) -> CGRect {
+      if let colomn = colomn {
+         let rowIndex = Int(currentLocation.y / self.halfHourUnitHeight)
+         return CGRect(x: self.colomnWidth * colomn, y: self.halfHourUnitHeight * rowIndex, width: self.colomnWidth, height: self.halfHourUnitHeight)
+      } else {
+         let colomnIndex = Int(currentLocation.x / self.colomnWidth)
+         let rowIndex = Int(currentLocation.y / self.halfHourUnitHeight)
+         return CGRect(x: self.colomnWidth * colomnIndex, y: self.halfHourUnitHeight * rowIndex, width: self.colomnWidth, height: self.halfHourUnitHeight)
+      }
    }
    
-   func getHalfHourFrame(fromY currentY: CGFloat, in colomn: Int) -> CGRect {
-      let rowIndex = Int(currentY / self.halfHourUnitHeight)
-      return CGRect(x: self.colomnWidth * colomn, y: self.halfHourUnitHeight * rowIndex, width: self.colomnWidth, height: self.halfHourUnitHeight)
+   func getRowIndex(forLocation location: CGPoint) -> Int {
+      return Int(location.y / self.halfHourUnitHeight)
    }
    
    func halfHourViewAlreadyExist(atPoint point: CGPoint) -> Bool {
@@ -284,11 +299,6 @@ class WorkingHoursPlannerView: UIView {
          }
       }
       return false
-   }
-   
-   func resultigFrame(fromCardViewFrame cardViewFrame: CGRect, andHoveringHalfHourViewFrame hoveringRect: CGRect) -> CGRect {
-      
-      return .zero
    }
    
    
@@ -324,19 +334,19 @@ class WorkingHoursPlannerView: UIView {
 //      return []
 //   }
    
-   func getStartTime(fromIndex index: Int) -> String {
+   func getStartTime(forIndex index: Int) -> String {
       if index % 2 == 0 {
-         return "\(Int(CGFloat(index) * 0.5 + 6.0)):00"
+         return "\(Int(CGFloat(index) * 0.5 + 5.5)):30"
       } else {
-         return "\(Int(CGFloat(index) * 0.5 + 6.0)):30"
+         return "\(Int(CGFloat(index) * 0.5 + 5.5)):00"
       }
    }
    
-   func getEndTime(fromIndex index: Int) -> String {
+   func getEndTime(forIndex index: Int) -> String {
       if index % 2 == 0 {
-         return "\(Int(CGFloat(index + 1) * 0.5 + 6.0)):30"
+         return "\(Int(CGFloat(index + 1) * 0.5 + 5.5)):00"
       } else {
-         return "\(Int(CGFloat(index + 1) * 0.5 + 6.0)):00"
+         return "\(Int(CGFloat(index + 1) * 0.5 + 5.5)):30"
       }
    }
       
