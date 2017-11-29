@@ -207,11 +207,11 @@
                                     <constraint firstAttribute="height" constant="67" id="tdu-nJ-yko"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bp1-4b-dVU">
-                                <rect key="frame" x="21" y="95" width="495" height="47"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bp1-4b-dVU" customClass="TagsTextField" customModule="TagsTextField">
+                                <rect key="frame" x="21" y="95" width="495" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="47" id="bOK-mT-Ddw"/>
+                                    <constraint firstAttribute="height" constant="40" id="bOK-mT-Ddw"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -226,6 +226,9 @@
                         </constraints>
                     </view>
                     <size key="freeformSize" width="540" height="768"/>
+                    <connections>
+                        <outlet property="customersTagsTextField" destination="bp1-4b-dVU" id="SkC-VV-Y0y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="krf-1I-Koy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -783,7 +786,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8Gk-jN-MED" customClass="MemoTextView" customModule="AppointMan" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="45" width="265" height="189"/>
+                                                    <rect key="frame" x="16" y="45" width="265" height="199"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -807,16 +810,34 @@
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" image="iconcina_annota_preferiti"/>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMB-9g-IeL">
+                                                    <rect key="frame" x="17" y="294" width="82" height="22"/>
+                                                    <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="6" maxY="0.0"/>
+                                                    <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    <state key="normal" title="Button" image="memo_notifica_off">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="98z-2L-nL3">
+                                                    <rect key="frame" x="20" y="261" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="MMB-9g-IeL" firstAttribute="leading" secondItem="SfX-nA-YDd" secondAttribute="leading" constant="17" id="1bF-lN-nQG"/>
                                             <constraint firstAttribute="trailing" secondItem="8Gk-jN-MED" secondAttribute="trailing" constant="16" id="4GA-Nf-xNm"/>
                                             <constraint firstItem="7iB-yl-GdK" firstAttribute="top" secondItem="SfX-nA-YDd" secondAttribute="top" constant="12" id="4se-tL-deN"/>
+                                            <constraint firstItem="MMB-9g-IeL" firstAttribute="leading" secondItem="98z-2L-nL3" secondAttribute="leading" constant="-3" id="4y4-5J-RMe"/>
+                                            <constraint firstAttribute="bottom" secondItem="MMB-9g-IeL" secondAttribute="bottom" constant="18" id="CNg-8f-Wcg"/>
+                                            <constraint firstItem="MMB-9g-IeL" firstAttribute="top" secondItem="98z-2L-nL3" secondAttribute="bottom" constant="12" id="Jec-YG-Wa6"/>
                                             <constraint firstAttribute="trailing" secondItem="7iB-yl-GdK" secondAttribute="trailing" constant="12" id="e5C-aZ-lsy"/>
                                             <constraint firstItem="7iB-yl-GdK" firstAttribute="leading" secondItem="6m6-hC-Di1" secondAttribute="trailing" constant="14" id="fwM-Ss-zGg"/>
                                             <constraint firstItem="6m6-hC-Di1" firstAttribute="top" secondItem="SfX-nA-YDd" secondAttribute="top" constant="12" id="imb-bx-OOg"/>
-                                            <constraint firstAttribute="bottom" secondItem="8Gk-jN-MED" secondAttribute="bottom" constant="100" id="pAE-4Q-rsf"/>
+                                            <constraint firstAttribute="bottom" secondItem="8Gk-jN-MED" secondAttribute="bottom" constant="90" id="pAE-4Q-rsf"/>
                                             <constraint firstItem="8Gk-jN-MED" firstAttribute="leading" secondItem="SfX-nA-YDd" secondAttribute="leading" constant="16" id="qIo-oF-8Gx"/>
                                             <constraint firstItem="8Gk-jN-MED" firstAttribute="top" secondItem="SfX-nA-YDd" secondAttribute="top" constant="45" id="vrd-Ng-uzq"/>
                                         </constraints>
@@ -1073,6 +1094,7 @@
         <image name="icona_x" width="15" height="15"/>
         <image name="iconcina_annota_modifica" width="20" height="20"/>
         <image name="iconcina_annota_preferiti" width="20" height="20"/>
+        <image name="memo_notifica_off" width="22" height="22"/>
         <image name="triangolino_open_disclosure_indicator" width="8" height="10"/>
     </resources>
 </document>

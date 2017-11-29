@@ -17,8 +17,6 @@
 		2304A61E1F4059B900E1FB7E /* ImpostazioniViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2304A61D1F4059B900E1FB7E /* ImpostazioniViewController.swift */; };
 		2304A6201F4060A700E1FB7E /* Gadgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2304A61F1F4060A700E1FB7E /* Gadgets.swift */; };
 		23347C4A1F5096570080E355 /* FilterAppointmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23347C491F5096570080E355 /* FilterAppointmentTableViewCell.swift */; };
-		234D40491ED2DCC3008F4AA9 /* SuggestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 234D40481ED2DCC3008F4AA9 /* SuggestionCell.xib */; };
-		234D404B1ED2DD11008F4AA9 /* SuggestionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234D404A1ED2DD11008F4AA9 /* SuggestionCollectionViewCell.swift */; };
 		236DF4F11F5813CE00A48C73 /* CalendarDayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236DF4F01F5813CE00A48C73 /* CalendarDayButton.swift */; };
 		236DF4F31F58152300A48C73 /* GPSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236DF4F21F58152300A48C73 /* GPSegmentedControl.swift */; };
 		236DF4F71F5825E200A48C73 /* GPSliderDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236DF4F51F5825E200A48C73 /* GPSliderDatePickerView.swift */; };
@@ -114,7 +112,11 @@
 		EF5FA4C01F9E3A6800F9086F /* ColorPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */; };
 		EF5FA4C21F9E3B3B00F9086F /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */; };
 		EF649D5D1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */; };
+		EF9D3F231FCD808500BCC6FD /* AddAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43A7B41FC4DDE500938ABA /* AddAppointmentViewController.swift */; };
+		EF9D3F241FCD808500BCC6FD /* AddAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43A7B41FC4DDE500938ABA /* AddAppointmentViewController.swift */; };
 		EFBB49881F8C41890011698E /* NewServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBB49871F8C41890011698E /* NewServiceViewController.swift */; };
+		EFCDC5951FCD8FB500F327D0 /* TagsTextField.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF9D3F6C1FCD8BE200BCC6FD /* TagsTextField.framework */; };
+		EFCDC5961FCD8FB500F327D0 /* TagsTextField.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EF9D3F6C1FCD8BE200BCC6FD /* TagsTextField.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EFD86F951F92953E00E92425 /* ServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */; };
 		EFD86F971F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD86F961F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift */; };
 		EFE309091F98A2ED006247B2 /* EmployeeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE309081F98A2ED006247B2 /* EmployeeCollectionViewCell.swift */; };
@@ -140,7 +142,35 @@
 			remoteGlobalIDString = 237C52641EC4B6CA00D98DD9;
 			remoteInfo = AppointMan;
 		};
+		EF9D3F6B1FCD8BE200BCC6FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF9D3F671FCD8BE200BCC6FD /* TagsTextField.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EF9D3F4A1FCD8B5800BCC6FD;
+			remoteInfo = TagsTextField;
+		};
+		EFCDC5971FCD8FB500F327D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF9D3F671FCD8BE200BCC6FD /* TagsTextField.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EF9D3F491FCD8B5800BCC6FD;
+			remoteInfo = TagsTextField;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EF9D3F211FCD7C3600BCC6FD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EFCDC5961FCD8FB500F327D0 /* TagsTextField.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2304A60F1F40589400E1FB7E /* RevealMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealMenuViewController.swift; sourceTree = "<group>"; };
@@ -153,8 +183,6 @@
 		2304A61D1F4059B900E1FB7E /* ImpostazioniViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImpostazioniViewController.swift; sourceTree = "<group>"; };
 		2304A61F1F4060A700E1FB7E /* Gadgets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gadgets.swift; sourceTree = "<group>"; };
 		23347C491F5096570080E355 /* FilterAppointmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterAppointmentTableViewCell.swift; sourceTree = "<group>"; };
-		234D40481ED2DCC3008F4AA9 /* SuggestionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuggestionCell.xib; sourceTree = "<group>"; };
-		234D404A1ED2DD11008F4AA9 /* SuggestionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestionCollectionViewCell.swift; sourceTree = "<group>"; };
 		236DF4F01F5813CE00A48C73 /* CalendarDayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDayButton.swift; sourceTree = "<group>"; };
 		236DF4F21F58152300A48C73 /* GPSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPSegmentedControl.swift; sourceTree = "<group>"; };
 		236DF4F51F5825E200A48C73 /* GPSliderDatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPSliderDatePickerView.swift; sourceTree = "<group>"; };
@@ -256,6 +284,7 @@
 		EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorPickerView.xib; sourceTree = "<group>"; };
 		EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeServiceCollectionViewCell.swift; sourceTree = "<group>"; };
+		EF9D3F671FCD8BE200BCC6FD /* TagsTextField.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TagsTextField.xcodeproj; path = "../../GP frameworks/TagsTextField/TagsTextField.xcodeproj"; sourceTree = "<group>"; };
 		EFBB49871F8C41890011698E /* NewServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewServiceViewController.swift; sourceTree = "<group>"; };
 		EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCollectionViewCell.swift; sourceTree = "<group>"; };
 		EFD86F961F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -272,6 +301,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFCDC5951FCD8FB500F327D0 /* TagsTextField.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,8 +363,6 @@
 				EFF2C6821FC98ED8008CE050 /* AppointmentView.xib */,
 				EFF2C6841FC996B3008CE050 /* AppointmentView.swift */,
 				EF4BDC271F9FB80A000F10A2 /* MemoCollectionViewCell.swift */,
-				234D40481ED2DCC3008F4AA9 /* SuggestionCell.xib */,
-				234D404A1ED2DD11008F4AA9 /* SuggestionCollectionViewCell.swift */,
 				23FEE87A1EE4B3DB0062192C /* AppointmentBox.xib */,
 				23FEE8781EE4B3C00062192C /* AppointmentBox.swift */,
 			);
@@ -436,6 +464,7 @@
 		237C525C1EC4B6CA00D98DD9 = {
 			isa = PBXGroup;
 			children = (
+				EF9D3F671FCD8BE200BCC6FD /* TagsTextField.xcodeproj */,
 				237C52671EC4B6CB00D98DD9 /* AppointMan */,
 				237C527C1EC4B6CB00D98DD9 /* AppointManTests */,
 				237C52871EC4B6CB00D98DD9 /* AppointManUITests */,
@@ -556,6 +585,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		EF9D3F681FCD8BE200BCC6FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF9D3F6C1FCD8BE200BCC6FD /* TagsTextField.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -566,10 +603,12 @@
 				237C52611EC4B6CA00D98DD9 /* Sources */,
 				237C52621EC4B6CA00D98DD9 /* Frameworks */,
 				237C52631EC4B6CA00D98DD9 /* Resources */,
+				EF9D3F211FCD7C3600BCC6FD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EFCDC5981FCD8FB500F327D0 /* PBXTargetDependency */,
 			);
 			name = AppointMan;
 			productName = AppointMan;
@@ -655,6 +694,12 @@
 			mainGroup = 237C525C1EC4B6CA00D98DD9;
 			productRefGroup = 237C52661EC4B6CB00D98DD9 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EF9D3F681FCD8BE200BCC6FD /* Products */;
+					ProjectRef = EF9D3F671FCD8BE200BCC6FD /* TagsTextField.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				237C52641EC4B6CA00D98DD9 /* AppointMan */,
@@ -663,6 +708,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EF9D3F6C1FCD8BE200BCC6FD /* TagsTextField.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TagsTextField.framework;
+			remoteRef = EF9D3F6B1FCD8BE200BCC6FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		237C52631EC4B6CA00D98DD9 /* Resources */ = {
@@ -704,7 +759,6 @@
 				23E63CA51F41B15A0084EA75 /* SFDisplay-Medium.otf in Resources */,
 				23E63CA81F41B15A0084EA75 /* SFDisplay-Thin.otf in Resources */,
 				23E63CA41F41B15A0084EA75 /* SFDisplay-Light.otf in Resources */,
-				234D40491ED2DCC3008F4AA9 /* SuggestionCell.xib in Resources */,
 				EF23F1EE1F977503007661BC /* DeleteServicePopupView.xib in Resources */,
 				23E63CA91F41B15A0084EA75 /* SFDisplay-Ultralight.otf in Resources */,
 				23E63C8B1F41B15A0084EA75 /* SF-Pro-Display-Medium.otf in Resources */,
@@ -791,7 +845,6 @@
 				EF4BDC281F9FB80A000F10A2 /* MemoCollectionViewCell.swift in Sources */,
 				237C52691EC4B6CB00D98DD9 /* AppDelegate.swift in Sources */,
 				236DF4F71F5825E200A48C73 /* GPSliderDatePickerView.swift in Sources */,
-				234D404B1ED2DD11008F4AA9 /* SuggestionCollectionViewCell.swift in Sources */,
 				236DF4F11F5813CE00A48C73 /* CalendarDayButton.swift in Sources */,
 				EF2A39D31FBF05DD006F186F /* AgendaView.swift in Sources */,
 				2304A61A1F40599A00E1FB7E /* StatisticheViewController.swift in Sources */,
@@ -814,6 +867,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF9D3F231FCD808500BCC6FD /* AddAppointmentViewController.swift in Sources */,
 				237C527E1EC4B6CB00D98DD9 /* AppointManTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -822,6 +876,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF9D3F241FCD808500BCC6FD /* AddAppointmentViewController.swift in Sources */,
 				237C52891EC4B6CB00D98DD9 /* AppointManUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -838,6 +893,11 @@
 			isa = PBXTargetDependency;
 			target = 237C52641EC4B6CA00D98DD9 /* AppointMan */;
 			targetProxy = 237C52851EC4B6CB00D98DD9 /* PBXContainerItemProxy */;
+		};
+		EFCDC5981FCD8FB500F327D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TagsTextField;
+			targetProxy = EFCDC5971FCD8FB500F327D0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -971,6 +1031,7 @@
 		237C528E1EC4B6CB00D98DD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZGBRK2HS2K;
@@ -988,6 +1049,7 @@
 		237C528F1EC4B6CB00D98DD9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZGBRK2HS2K;

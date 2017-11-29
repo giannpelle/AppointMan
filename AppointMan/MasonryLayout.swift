@@ -64,7 +64,7 @@ class MasonryLayout: UICollectionViewLayout {
          
          // 4. Asks the delegate for the height of the picture and the annotation and calculates the cell frame.
          let textViewHeight = delegate.collectionView(collectionView, heightForTextViewAtIndexPath: indexPath)
-         let height = cellPadding * 2 + 4.0 + textViewHeight + 6.0 + 145 + UIFont.init(name: "SFUIText-Regular", size: 14.0)!.lineHeight.rounded(.up)
+         let height = cellPadding * 2 + 4.0 + textViewHeight + 6.0 + 135 + UIFont.init(name: "SFUIText-Regular", size: 14.0)!.lineHeight.rounded(.up)
          let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
          let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
          

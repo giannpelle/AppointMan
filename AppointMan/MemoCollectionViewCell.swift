@@ -83,6 +83,8 @@ class MemoCollectionViewCell: UICollectionViewCell {
    @IBOutlet weak var bookmarkButton: UIButton!
    @IBOutlet weak var editButton: UIButton!
    @IBOutlet weak var memoTextView: MemoTextView!
+   @IBOutlet weak var notificationLabel: UILabel!
+   @IBOutlet weak var notificationButton: UIButton!
    
    weak var delegate: MemoCollectionViewCellDelegate?
    
