@@ -726,6 +726,134 @@
             </objects>
             <point key="canvasLocation" x="166" y="2530"/>
         </scene>
+        <!--Add Memo View Controller-->
+        <scene sceneID="Yo8-c0-e7W">
+            <objects>
+                <viewController storyboardIdentifier="addMemoVC" id="X94-c7-7Da" customClass="AddMemoViewController" customModule="AppointMan" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Plv-wy-cna"/>
+                        <viewControllerLayoutGuide type="bottom" id="eX6-Fb-dfU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="500-Ul-mGV">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="645"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f2h-gP-DeR">
+                                <rect key="frame" x="0.0" y="0.0" width="540" height="67"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8o-SB-Dn2">
+                                        <rect key="frame" x="249" y="23.5" width="42" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUK-JD-lWZ">
+                                        <rect key="frame" x="489" y="7.5" width="45" height="52"/>
+                                        <inset key="contentEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
+                                        <state key="normal" image="icona_x"/>
+                                        <connections>
+                                            <action selector="closeButtonPressedWithSender:" destination="X94-c7-7Da" eventType="touchUpInside" id="EB5-dk-5lm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.047058823530000002" green="0.32156862749999998" blue="0.69411764710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="V8o-SB-Dn2" firstAttribute="centerX" secondItem="f2h-gP-DeR" secondAttribute="centerX" id="469-zT-zdn"/>
+                                    <constraint firstItem="V8o-SB-Dn2" firstAttribute="centerY" secondItem="f2h-gP-DeR" secondAttribute="centerY" id="LiY-zL-EUW"/>
+                                    <constraint firstAttribute="trailing" secondItem="BUK-JD-lWZ" secondAttribute="trailing" constant="6" id="R5y-eb-Ilb"/>
+                                    <constraint firstAttribute="height" constant="67" id="eTy-Kh-lqk"/>
+                                    <constraint firstItem="BUK-JD-lWZ" firstAttribute="centerY" secondItem="f2h-gP-DeR" secondAttribute="centerY" id="v3b-oT-u2J"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OD0-MJ-T5w">
+                                <rect key="frame" x="429" y="87" width="82" height="22"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                                <inset key="titleEdgeInsets" minX="8" minY="2" maxX="-8" maxY="0.0"/>
+                                <state key="normal" title="Button" image="stellina_in_evidenza_off">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="p38-W9-JEH" customClass="PlaceholderTextView" customModule="AppointMan" customModuleProvider="target">
+                                <rect key="frame" x="26" y="126" width="485" height="230"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="230" id="p76-Wm-oEm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wCq-8w-ZA5">
+                                <rect key="frame" x="26" y="393" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y91-co-mN6">
+                                <rect key="frame" x="26" y="425.5" width="181" height="38"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Y5-a1-Fiw">
+                                        <rect key="frame" x="0.0" y="0.0" width="105" height="38"/>
+                                        <color key="backgroundColor" red="0.047058823530000002" green="0.32156862749999998" blue="0.69411764710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <inset key="contentEdgeInsets" minX="14" minY="8" maxX="19" maxY="8"/>
+                                        <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="-5" maxY="0.0"/>
+                                        <state key="normal" title="Button" image="imposta_notifica">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBr-A6-kh3">
+                                        <rect key="frame" x="105" y="0.0" width="76" height="38"/>
+                                        <state key="normal" title="Button" image="memo_notifica_on">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UX7-GM-hRz">
+                                <rect key="frame" x="205" y="566" width="130" height="50"/>
+                                <color key="backgroundColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="SsJ-DF-9Cl"/>
+                                    <constraint firstAttribute="height" constant="50" id="mRH-kj-8Hq"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="f2h-gP-DeR" firstAttribute="top" secondItem="500-Ul-mGV" secondAttribute="top" id="2AF-Zy-0tn"/>
+                            <constraint firstItem="wCq-8w-ZA5" firstAttribute="leading" secondItem="p38-W9-JEH" secondAttribute="leading" id="6kD-XX-awh"/>
+                            <constraint firstItem="p38-W9-JEH" firstAttribute="leading" secondItem="500-Ul-mGV" secondAttribute="leading" constant="26" id="HJU-K7-vUW"/>
+                            <constraint firstItem="f2h-gP-DeR" firstAttribute="leading" secondItem="500-Ul-mGV" secondAttribute="leading" id="HlN-D3-pPK"/>
+                            <constraint firstAttribute="trailing" secondItem="p38-W9-JEH" secondAttribute="trailing" constant="29" id="MMw-Ly-PEs"/>
+                            <constraint firstItem="wCq-8w-ZA5" firstAttribute="top" secondItem="p38-W9-JEH" secondAttribute="bottom" constant="37" id="Zgq-oK-pe4"/>
+                            <constraint firstItem="Y91-co-mN6" firstAttribute="leading" secondItem="wCq-8w-ZA5" secondAttribute="leading" id="a7Q-rf-gUA"/>
+                            <constraint firstAttribute="trailing" secondItem="OD0-MJ-T5w" secondAttribute="trailing" constant="29" id="bYT-dK-SG2"/>
+                            <constraint firstItem="Y91-co-mN6" firstAttribute="top" secondItem="wCq-8w-ZA5" secondAttribute="bottom" constant="12" id="gzm-yf-0nk"/>
+                            <constraint firstAttribute="trailing" secondItem="f2h-gP-DeR" secondAttribute="trailing" id="i90-10-fzS"/>
+                            <constraint firstItem="OD0-MJ-T5w" firstAttribute="top" secondItem="f2h-gP-DeR" secondAttribute="bottom" constant="20" id="s3H-bh-HIq"/>
+                            <constraint firstItem="UX7-GM-hRz" firstAttribute="centerX" secondItem="500-Ul-mGV" secondAttribute="centerX" id="sqX-xb-2Of"/>
+                            <constraint firstItem="p38-W9-JEH" firstAttribute="top" secondItem="OD0-MJ-T5w" secondAttribute="bottom" constant="17" id="tPN-eT-hGP"/>
+                            <constraint firstItem="eX6-Fb-dfU" firstAttribute="top" secondItem="UX7-GM-hRz" secondAttribute="bottom" constant="29" id="xj1-O5-N8C"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="540" height="645"/>
+                    <connections>
+                        <outlet property="addMemoLabel" destination="V8o-SB-Dn2" id="0dL-Cp-BpB"/>
+                        <outlet property="isFavoriteButton" destination="OD0-MJ-T5w" id="Yv2-Nj-dGu"/>
+                        <outlet property="memoTextView" destination="p38-W9-JEH" id="L2y-b2-R3o"/>
+                        <outlet property="notificationButton" destination="aBr-A6-kh3" id="iwH-uA-Tc2"/>
+                        <outlet property="notificationLabel" destination="wCq-8w-ZA5" id="CcQ-Rg-XSb"/>
+                        <outlet property="saveButton" destination="UX7-GM-hRz" id="J4o-nN-5xj"/>
+                        <outlet property="setNotificationButton" destination="3Y5-a1-Fiw" id="C4R-vh-9LQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hpf-n2-AYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="806.8359375" y="1882.421875"/>
+        </scene>
         <!--Take Notes View Controller-->
         <scene sceneID="qjO-Bk-ZZB">
             <objects>
@@ -1094,7 +1222,10 @@
         <image name="icona_x" width="15" height="15"/>
         <image name="iconcina_annota_modifica" width="20" height="20"/>
         <image name="iconcina_annota_preferiti" width="20" height="20"/>
+        <image name="imposta_notifica" width="18" height="18"/>
         <image name="memo_notifica_off" width="22" height="22"/>
+        <image name="memo_notifica_on" width="22" height="22"/>
+        <image name="stellina_in_evidenza_off" width="20" height="19"/>
         <image name="triangolino_open_disclosure_indicator" width="8" height="10"/>
     </resources>
 </document>

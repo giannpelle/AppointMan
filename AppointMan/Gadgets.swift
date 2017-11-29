@@ -300,3 +300,63 @@ class PlaceholderOverlayableView: UIView, Overlayable {
       self.drawOverlay(rect)
    }
 }
+
+class PlaceholderTextView: UITextView, UITextViewDelegate {
+   
+   private let placeholderColor: UIColor = UIColor(white: 0.78, alpha: 1)
+   private var placeholderLabel: UILabel!
+   
+   var placeholder: String = "" {
+      didSet {
+         self.placeholderLabel.text = placeholder
+      }
+   }
+   
+   lazy var textAttributes: [String: Any] = {
+      let style = NSMutableParagraphStyle()
+      style.lineSpacing = 4.0
+      style.alignment = .natural
+      let attributes: [String: Any] = [NSAttributedStringKey.paragraphStyle.rawValue: style, NSAttributedStringKey.kern.rawValue: 0.0, NSAttributedStringKey.font.rawValue: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, NSAttributedStringKey.foregroundColor.rawValue: UIColor.grayWith(value: 152.0)]
+      return attributes
+   }()
+   
+   override var text: String! {
+      didSet {
+         textViewDidChange(self)
+      }
+   }
+   
+   override init(frame: CGRect, textContainer: NSTextContainer?) {
+      super.init(frame: frame, textContainer: textContainer)
+      self.configurePlaceholderLabel()
+   }
+   
+   required init?(coder aDecoder: NSCoder) {
+      super.init(coder: aDecoder)
+      self.configurePlaceholderLabel()
+   }
+   
+   func configurePlaceholderLabel() {
+      self.typingAttributes = self.textAttributes
+      self.textContainerInset = UIEdgeInsetsMake(14.0, 15.0, 14.0, 15.0)
+      self.delegate = self
+      
+      self.placeholderLabel = UILabel()
+      self.placeholderLabel.font = font
+      self.placeholderLabel.textColor = self.placeholderColor
+      self.placeholderLabel.text = self.placeholder
+      self.placeholderLabel.numberOfLines = 0
+      self.placeholderLabel.isHidden = !self.text.isEmpty
+      self.placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+      
+      self.addSubview(self.placeholderLabel)
+      self.placeholderLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: self.textContainerInset.top).isActive = true
+      self.placeholderLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: self.textContainerInset.left + 5.0).isActive = true
+
+   }
+   
+   func textViewDidChange(_ textView: UITextView) {
+      self.placeholderLabel.isHidden = !textView.text.isEmpty
+   }
+   
+}

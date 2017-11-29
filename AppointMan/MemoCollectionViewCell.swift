@@ -8,13 +8,6 @@
 
 import UIKit
 
-// MODEL must be
-struct Memo {
-   var text: String
-   var subtitleText: String? // if let subtitle -> verticalStackView = full ELSE subtitle.isHidden SO verticalStackView not full
-   var latestContentSizeHeight: CGFloat? // in textViewHeight forRowAtIndexPath if let height -> return height ELSE calculate it
-}
-
 protocol MemoTextViewDelegate: class {
    func updateTextView(withContentSizeHeight height: CGFloat)
 }

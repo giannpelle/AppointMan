@@ -112,6 +112,8 @@
 		EF5FA4C01F9E3A6800F9086F /* ColorPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */; };
 		EF5FA4C21F9E3B3B00F9086F /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */; };
 		EF649D5D1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */; };
+		EF85C6911FCECF8C00E52EBC /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF85C6901FCECF8C00E52EBC /* Memo.swift */; };
+		EF8897FB1FCE3DA50012808E /* AddMemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8897FA1FCE3DA50012808E /* AddMemoViewController.swift */; };
 		EF9D3F231FCD808500BCC6FD /* AddAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43A7B41FC4DDE500938ABA /* AddAppointmentViewController.swift */; };
 		EF9D3F241FCD808500BCC6FD /* AddAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43A7B41FC4DDE500938ABA /* AddAppointmentViewController.swift */; };
 		EFBB49881F8C41890011698E /* NewServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBB49871F8C41890011698E /* NewServiceViewController.swift */; };
@@ -284,6 +286,8 @@
 		EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorPickerView.xib; sourceTree = "<group>"; };
 		EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeServiceCollectionViewCell.swift; sourceTree = "<group>"; };
+		EF85C6901FCECF8C00E52EBC /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
+		EF8897FA1FCE3DA50012808E /* AddMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoViewController.swift; sourceTree = "<group>"; };
 		EF9D3F671FCD8BE200BCC6FD /* TagsTextField.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TagsTextField.xcodeproj; path = "../../GP frameworks/TagsTextField/TagsTextField.xcodeproj"; sourceTree = "<group>"; };
 		EFBB49871F8C41890011698E /* NewServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewServiceViewController.swift; sourceTree = "<group>"; };
 		EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -344,6 +348,7 @@
 				EF43A7B41FC4DDE500938ABA /* AddAppointmentViewController.swift */,
 				23E63C4B1F41A37E0084EA75 /* FiltraAppuntamentiViewController.swift */,
 				EF4BDC251F9F8BEC000F10A2 /* TakeNotesViewController.swift */,
+				EF8897FA1FCE3DA50012808E /* AddMemoViewController.swift */,
 				23B1E8B41F44890F00BE5BB6 /* ThumbnailCollectionViewCell.swift */,
 				23347C491F5096570080E355 /* FilterAppointmentTableViewCell.swift */,
 				2304A6131F40597C00E1FB7E /* DipendentiViewController.swift */,
@@ -365,6 +370,7 @@
 				EF4BDC271F9FB80A000F10A2 /* MemoCollectionViewCell.swift */,
 				23FEE87A1EE4B3DB0062192C /* AppointmentBox.xib */,
 				23FEE8781EE4B3C00062192C /* AppointmentBox.swift */,
+				EF85C6901FCECF8C00E52EBC /* Memo.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -823,6 +829,7 @@
 				EF4BDC261F9F8BEC000F10A2 /* TakeNotesViewController.swift in Sources */,
 				236DF4F81F5825E200A48C73 /* SliderDatePickerDayCollectionViewCell.swift in Sources */,
 				EFF2C6851FC996B3008CE050 /* AppointmentView.swift in Sources */,
+				EF8897FB1FCE3DA50012808E /* AddMemoViewController.swift in Sources */,
 				2304A6141F40597C00E1FB7E /* DipendentiViewController.swift in Sources */,
 				EF43A7B51FC4DDE500938ABA /* AddAppointmentViewController.swift in Sources */,
 				238B1BAF1F52976C00A1F6CA /* GPCalendarDatePickerView.swift in Sources */,
@@ -850,6 +857,7 @@
 				2304A61A1F40599A00E1FB7E /* StatisticheViewController.swift in Sources */,
 				EF348CCD1F990388007E5FB5 /* NewEmployeeViewController.swift in Sources */,
 				EFBB49881F8C41890011698E /* NewServiceViewController.swift in Sources */,
+				EF85C6911FCECF8C00E52EBC /* Memo.swift in Sources */,
 				236DF4F31F58152300A48C73 /* GPSegmentedControl.swift in Sources */,
 				238BA8041EC9CD03002F9F0A /* Const.swift in Sources */,
 				EFF22EA11F99F15200C7E052 /* BottomImagePickerView.swift in Sources */,

@@ -184,6 +184,11 @@ extension UIStoryboard {
       return takeNotesVC
    }
    
+   class func addMemoVC() -> AddMemoViewController {
+      let addMemoVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "addMemoVC") as! AddMemoViewController
+      return addMemoVC
+   }
+   
 }
 
 extension Date {

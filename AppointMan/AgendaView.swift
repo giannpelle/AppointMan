@@ -347,4 +347,20 @@ class AgendaView: UIView {
       
       self.delegate?.highlightAccessoryTimetable(at: Int((self.currentNewAppointmentView!.frame.origin.y + 15.0) / Const.quarterHourUnitHeight))
    }
+   
+   /*
+   func colomnIndex(for employee: Employee) -> Int {
+      return employees.index(where: { $0 == employee })
+   }
+   */
+   
+//   func draw(appointment: (time: String, service: String, duration: AppointmentDuration, serviceColor: UIColor, customer: String, description: String?)) {
+//      if let appointmentView = UINib(nibName: "AppointmentView", bundle: Bundle.main).instantiate(withOwner: self, options: nil).first as? AppointmentView {
+//         appointmentView.appointment = appointment
+//         let colomnIndex = 0//self.colomnIndex(for: .Francesca)
+//         appointmentView.frame = CGRect(x: Const.agendaEmployeeColomnWidth * colomnIndex, y: <#T##CGFloat#>, width: Const.agendaEmployeeColomnWidth, height: appointment.duration.rawValue / 5.0 * 10.0)
+//      }
+//   }
 }
+
+

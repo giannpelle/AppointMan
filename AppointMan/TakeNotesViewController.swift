@@ -40,6 +40,7 @@ class TakeNotesViewController: UIViewController {
       self.addMemoButton.setBackgroundColor(color: UIColor.amDarkBlue, forState: .normal)
       self.addMemoButton.contentEdgeInsets = UIEdgeInsetsMake(0.0, 19.0, 0.0, 29.0)
       self.addMemoButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, -10.0)
+      self.addMemoButton.addTarget(self, action: #selector(self.addNewMemoButtonPressed(sender:)), for: .touchUpInside)
       
       self.memoCollectionView.dataSource = self
       self.memoCollectionView.delegate = self
@@ -48,6 +49,13 @@ class TakeNotesViewController: UIViewController {
    
    @objc func doneButtonPressed(sender: UIButton) {
       self.dismiss(animated: true, completion: nil)
+   }
+   
+   @objc func addNewMemoButtonPressed(sender: UIButton) {
+      let addMemoVC = UIStoryboard.addMemoVC()
+      addMemoVC.modalPresentationStyle = .formSheet
+      addMemoVC.preferredContentSize = CGSize(width: 540.0, height: 600.0)
+      self.present(addMemoVC, animated: true, completion: nil)
    }
    
 }
