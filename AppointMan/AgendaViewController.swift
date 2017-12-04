@@ -103,7 +103,7 @@ class AgendaViewController: UIViewController {
    
    func setupUI() {
       
-      self.bubbleMenuView.layer.roundCorners(corners: [.topLeft, .bottomLeft], radius: self.bubbleMenuView.bounds.size.height / 2.0, viewBounds: bubbleMenuView.bounds)
+      self.bubbleMenuView.layer.roundCornersWithShadow(corners: [.topLeft, .bottomLeft], radius: self.bubbleMenuView.bounds.size.height / 2.0, viewBounds: bubbleMenuView.bounds)
       let bubbleMenuViewPanGestureRec = UIPanGestureRecognizer(target: self, action: #selector(self.bubbleMenuPanGestureRecognized(sender:)))
       self.bubbleMenuView.addGestureRecognizer(bubbleMenuViewPanGestureRec)
       self.triangolinoDisclosureIndicatorButton.addTarget(self, action: #selector(self.bubbleMenuDisclosureButtonPressed(sender:)), for: .touchUpInside)

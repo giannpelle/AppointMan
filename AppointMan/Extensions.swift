@@ -310,7 +310,7 @@ extension UIView {
 
 extension CALayer {
    
-   func roundCorners(corners: UIRectCorner, radius: CGFloat, viewBounds: CGRect) {
+   func roundCornersWithShadow(corners: UIRectCorner, radius: CGFloat, viewBounds: CGRect) {
       let maskPath = UIBezierPath(roundedRect: viewBounds,
                                   byRoundingCorners: corners,
                                   cornerRadii: CGSize(width: radius, height: radius))
@@ -326,11 +326,21 @@ extension CALayer {
       self.insertSublayer(shape, at: 0)
    }
    
+   func roundCorners(corners: UIRectCorner, radius: CGFloat, viewBounds: CGRect) {
+      let maskPath = UIBezierPath(roundedRect: viewBounds,
+                                  byRoundingCorners: corners,
+                                  cornerRadii: CGSize(width: radius, height: radius))
+      let shape = CAShapeLayer()
+      shape.path = maskPath.cgPath
+      self.masksToBounds = false
+      self.mask = shape
+   }
+   
 }
 
 extension UIImage {
    
-   func scale(toSize newSize:CGSize) -> UIImage{
+   func scale(toSize newSize:CGSize) -> UIImage {
       UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
       self.draw(in: CGRect(origin: CGPoint.zero, size: CGSize(width: newSize.width, height: newSize.height)))
       let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!

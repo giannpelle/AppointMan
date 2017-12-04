@@ -96,6 +96,7 @@
 		EF0EAF1A1F99560A0092F810 /* InOutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0EAF191F99560A0092F810 /* InOutAnimator.swift */; };
 		EF1E99F71F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF1E99F61F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib */; };
 		EF1E99F91F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1E99F81F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift */; };
+		EF2172BA1FD17EC30019900B /* Service+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2172B81FD17EC30019900B /* Service+CoreDataClass.swift */; };
 		EF23F1EE1F977503007661BC /* DeleteServicePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */; };
 		EF23F1F01F977517007661BC /* DeleteServicePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */; };
 		EF2A39D31FBF05DD006F186F /* AgendaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2A39D21FBF05DD006F186F /* AgendaView.swift */; };
@@ -108,7 +109,6 @@
 		EF4BDC261F9F8BEC000F10A2 /* TakeNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4BDC251F9F8BEC000F10A2 /* TakeNotesViewController.swift */; };
 		EF4BDC281F9FB80A000F10A2 /* MemoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4BDC271F9FB80A000F10A2 /* MemoCollectionViewCell.swift */; };
 		EF4BDC2A1F9FB8A9000F10A2 /* MasonryLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4BDC291F9FB8A9000F10A2 /* MasonryLayout.swift */; };
-		EF5FA4BE1F9E327000F9086F /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5FA4BD1F9E327000F9086F /* ColorPickerViewController.swift */; };
 		EF5FA4C01F9E3A6800F9086F /* ColorPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */; };
 		EF5FA4C21F9E3B3B00F9086F /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */; };
 		EF649D5D1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */; };
@@ -122,6 +122,12 @@
 		EFD86F951F92953E00E92425 /* ServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */; };
 		EFD86F971F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD86F961F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift */; };
 		EFE309091F98A2ED006247B2 /* EmployeeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE309081F98A2ED006247B2 /* EmployeeCollectionViewCell.swift */; };
+		EFE341001FD0256400854F3A /* AppointMan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EFE340FE1FD0256400854F3A /* AppointMan.xcdatamodeld */; };
+		EFE341031FD025C800854F3A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE341021FD025C800854F3A /* CoreDataStack.swift */; };
+		EFE341131FD06A5900854F3A /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE341121FD06A5900854F3A /* ServiceManager.swift */; };
+		EFE341191FD07AF500854F3A /* ServiceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE341181FD07AF500854F3A /* ServiceColor.swift */; };
+		EFEAD2F71FD43120005C09C7 /* AreYouSurePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFEAD2F61FD43120005C09C7 /* AreYouSurePopupView.xib */; };
+		EFEAD2F91FD43305005C09C7 /* AreYouSurePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEAD2F81FD43305005C09C7 /* AreYouSurePopupView.swift */; };
 		EFF22E9F1F99F11600C7E052 /* BottomImagePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFF22E9E1F99F11600C7E052 /* BottomImagePickerView.xib */; };
 		EFF22EA11F99F15200C7E052 /* BottomImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF22EA01F99F15200C7E052 /* BottomImagePickerView.swift */; };
 		EFF22EA51F9A49F600C7E052 /* ServicesInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFF22EA41F9A49F600C7E052 /* ServicesInputView.xib */; };
@@ -270,6 +276,7 @@
 		EF0EAF191F99560A0092F810 /* InOutAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutAnimator.swift; sourceTree = "<group>"; };
 		EF1E99F61F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceInputViewCollectionViewCell.xib; sourceTree = "<group>"; };
 		EF1E99F81F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInputViewCollectionViewCell.swift; sourceTree = "<group>"; };
+		EF2172B81FD17EC30019900B /* Service+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeleteServicePopupView.xib; sourceTree = "<group>"; };
 		EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteServicePopupView.swift; sourceTree = "<group>"; };
 		EF2A39D21FBF05DD006F186F /* AgendaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaView.swift; sourceTree = "<group>"; };
@@ -282,7 +289,6 @@
 		EF4BDC251F9F8BEC000F10A2 /* TakeNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeNotesViewController.swift; sourceTree = "<group>"; };
 		EF4BDC271F9FB80A000F10A2 /* MemoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCollectionViewCell.swift; sourceTree = "<group>"; };
 		EF4BDC291F9FB8A9000F10A2 /* MasonryLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasonryLayout.swift; sourceTree = "<group>"; };
-		EF5FA4BD1F9E327000F9086F /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorPickerView.xib; sourceTree = "<group>"; };
 		EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeServiceCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -293,6 +299,12 @@
 		EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCollectionViewCell.swift; sourceTree = "<group>"; };
 		EFD86F961F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		EFE309081F98A2ED006247B2 /* EmployeeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCollectionViewCell.swift; sourceTree = "<group>"; };
+		EFE340FF1FD0256400854F3A /* AppointMan.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppointMan.xcdatamodel; sourceTree = "<group>"; };
+		EFE341021FD025C800854F3A /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		EFE341121FD06A5900854F3A /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
+		EFE341181FD07AF500854F3A /* ServiceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceColor.swift; sourceTree = "<group>"; };
+		EFEAD2F61FD43120005C09C7 /* AreYouSurePopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AreYouSurePopupView.xib; sourceTree = "<group>"; };
+		EFEAD2F81FD43305005C09C7 /* AreYouSurePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreYouSurePopupView.swift; sourceTree = "<group>"; };
 		EFF22E9E1F99F11600C7E052 /* BottomImagePickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomImagePickerView.xib; sourceTree = "<group>"; };
 		EFF22EA01F99F15200C7E052 /* BottomImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomImagePickerView.swift; sourceTree = "<group>"; };
 		EFF22EA41F9A49F600C7E052 /* ServicesInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServicesInputView.xib; sourceTree = "<group>"; };
@@ -334,8 +346,6 @@
 				2304A61F1F4060A700E1FB7E /* Gadgets.swift */,
 				EF0EAF191F99560A0092F810 /* InOutAnimator.swift */,
 				EF4BDC291F9FB8A9000F10A2 /* MasonryLayout.swift */,
-				EF3771891F9E6DAF00D363B5 /* OkPopupView.xib */,
-				EF37718B1F9E700E00D363B5 /* OkPopupView.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -435,7 +445,6 @@
 			children = (
 				23C80E3E1F7D27A700C4CACE /* AddServicesViewController.swift */,
 				EFBB49871F8C41890011698E /* NewServiceViewController.swift */,
-				EF5FA4BD1F9E327000F9086F /* ColorPickerViewController.swift */,
 				23C80E401F7D694900C4CACE /* AddEmployeesViewController.swift */,
 				EF348CCC1F990388007E5FB5 /* NewEmployeeViewController.swift */,
 				236DF4FF1F585BC100A48C73 /* WorkingHoursViewController.swift */,
@@ -494,8 +503,10 @@
 				237C52681EC4B6CB00D98DD9 /* AppDelegate.swift */,
 				238B1BAD1F52974E00A1F6CA /* Libraries */,
 				2303DD211ECC49C900C24113 /* Utilities */,
+				EFEAD2F51FD4310C005C09C7 /* VIEW */,
 				236DF4FA1F5859A800A48C73 /* ONBOARDING */,
 				2303DD241ECC4A0200C24113 /* MAIN */,
+				EFE341011FD0256A00854F3A /* MODEL */,
 				237C526F1EC4B6CB00D98DD9 /* Assets.xcassets */,
 				23E63C4F1F41B12D0084EA75 /* Resources */,
 				237C52711EC4B6CB00D98DD9 /* LaunchScreen.storyboard */,
@@ -597,6 +608,29 @@
 				EF9D3F6C1FCD8BE200BCC6FD /* TagsTextField.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EFE341011FD0256A00854F3A /* MODEL */ = {
+			isa = PBXGroup;
+			children = (
+				EFE340FE1FD0256400854F3A /* AppointMan.xcdatamodeld */,
+				EFE341021FD025C800854F3A /* CoreDataStack.swift */,
+				EF2172B81FD17EC30019900B /* Service+CoreDataClass.swift */,
+				EFE341181FD07AF500854F3A /* ServiceColor.swift */,
+				EFE341121FD06A5900854F3A /* ServiceManager.swift */,
+			);
+			name = MODEL;
+			sourceTree = "<group>";
+		};
+		EFEAD2F51FD4310C005C09C7 /* VIEW */ = {
+			isa = PBXGroup;
+			children = (
+				EF3771891F9E6DAF00D363B5 /* OkPopupView.xib */,
+				EF37718B1F9E700E00D363B5 /* OkPopupView.swift */,
+				EFEAD2F61FD43120005C09C7 /* AreYouSurePopupView.xib */,
+				EFEAD2F81FD43305005C09C7 /* AreYouSurePopupView.swift */,
+			);
+			name = VIEW;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -788,6 +822,7 @@
 				EFF22EA51F9A49F600C7E052 /* ServicesInputView.xib in Resources */,
 				23E63C951F41B15A0084EA75 /* SF-Pro-Text-Bold.otf in Resources */,
 				EF1E99F71F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib in Resources */,
+				EFEAD2F71FD43120005C09C7 /* AreYouSurePopupView.xib in Resources */,
 				23E63C8D1F41B15A0084EA75 /* SF-Pro-Display-Regular.otf in Resources */,
 				23E63CA31F41B15A0084EA75 /* SFDisplay-Heavy.otf in Resources */,
 				EF5FA4C01F9E3A6800F9086F /* ColorPickerView.xib in Resources */,
@@ -820,6 +855,7 @@
 			files = (
 				EF2A93FE1F9ABD22001FB319 /* ServicesInputView.swift in Sources */,
 				23B1E8B51F44890F00BE5BB6 /* ThumbnailCollectionViewCell.swift in Sources */,
+				EFEAD2F91FD43305005C09C7 /* AreYouSurePopupView.swift in Sources */,
 				EF23F1F01F977517007661BC /* DeleteServicePopupView.swift in Sources */,
 				EF4BDC2A1F9FB8A9000F10A2 /* MasonryLayout.swift in Sources */,
 				23E63C4C1F41A37E0084EA75 /* FiltraAppuntamentiViewController.swift in Sources */,
@@ -837,6 +873,7 @@
 				EF37718C1F9E700E00D363B5 /* OkPopupView.swift in Sources */,
 				23801A641F55745200847830 /* GPFloatingTextField.swift in Sources */,
 				EFE309091F98A2ED006247B2 /* EmployeeCollectionViewCell.swift in Sources */,
+				EFE341031FD025C800854F3A /* CoreDataStack.swift in Sources */,
 				EF3290951F927C0F008BB930 /* ClosingDaysViewController.swift in Sources */,
 				23347C4A1F5096570080E355 /* FilterAppointmentTableViewCell.swift in Sources */,
 				23FEE8791EE4B3C00062192C /* AppointmentBox.swift in Sources */,
@@ -844,8 +881,8 @@
 				23C80E3F1F7D27A700C4CACE /* AddServicesViewController.swift in Sources */,
 				EF5FA4C21F9E3B3B00F9086F /* ColorPickerView.swift in Sources */,
 				EFD86F951F92953E00E92425 /* ServiceCollectionViewCell.swift in Sources */,
-				EF5FA4BE1F9E327000F9086F /* ColorPickerViewController.swift in Sources */,
 				EF1E99F91F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift in Sources */,
+				EFE341191FD07AF500854F3A /* ServiceColor.swift in Sources */,
 				EF649D5D1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift in Sources */,
 				2304A6201F4060A700E1FB7E /* Gadgets.swift in Sources */,
 				236DF5001F585BC100A48C73 /* WorkingHoursViewController.swift in Sources */,
@@ -855,12 +892,15 @@
 				236DF4F11F5813CE00A48C73 /* CalendarDayButton.swift in Sources */,
 				EF2A39D31FBF05DD006F186F /* AgendaView.swift in Sources */,
 				2304A61A1F40599A00E1FB7E /* StatisticheViewController.swift in Sources */,
+				EFE341001FD0256400854F3A /* AppointMan.xcdatamodeld in Sources */,
 				EF348CCD1F990388007E5FB5 /* NewEmployeeViewController.swift in Sources */,
 				EFBB49881F8C41890011698E /* NewServiceViewController.swift in Sources */,
 				EF85C6911FCECF8C00E52EBC /* Memo.swift in Sources */,
 				236DF4F31F58152300A48C73 /* GPSegmentedControl.swift in Sources */,
+				EFE341131FD06A5900854F3A /* ServiceManager.swift in Sources */,
 				238BA8041EC9CD03002F9F0A /* Const.swift in Sources */,
 				EFF22EA11F99F15200C7E052 /* BottomImagePickerView.swift in Sources */,
+				EF2172BA1FD17EC30019900B /* Service+CoreDataClass.swift in Sources */,
 				238B1BB11F52977400A1F6CA /* CalendarDayCollectionViewCell.swift in Sources */,
 				EF0EAF1A1F99560A0092F810 /* InOutAnimator.swift in Sources */,
 				2304A6101F40589400E1FB7E /* RevealMenuViewController.swift in Sources */,
@@ -1174,6 +1214,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EFE340FE1FD0256400854F3A /* AppointMan.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EFE340FF1FD0256400854F3A /* AppointMan.xcdatamodel */,
+			);
+			currentVersion = EFE340FF1FD0256400854F3A /* AppointMan.xcdatamodel */;
+			path = AppointMan.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 237C525D1EC4B6CA00D98DD9 /* Project object */;
 }

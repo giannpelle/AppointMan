@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol ColorPickerViewDelegate: class {
+   func didSelect(serviceColor: ServiceColor)
+}
+
 class ColorPickerView: UIView {
    
    @IBOutlet weak var serviceColorLabel: UILabel!
    @IBOutlet weak var firstColorsStackView: UIStackView!
    @IBOutlet weak var secondColorsStackView: UIStackView!
+   
+   weak var delegate: ColorPickerViewDelegate?
    
    // Only override draw() if you perform custom drawing.
    // An empty implementation adversely affects performance during animation.
@@ -69,15 +75,30 @@ class ColorPickerView: UIView {
       if let firstColorButtons = self.firstColorsStackView.arrangedSubviews as? [UIButton] {
          for (index, colorButton) in firstColorButtons.enumerated() {
             colorButton.clipsToBounds = true
+            colorButton.tag = index
             colorButton.setBackgroundColor(color: ServiceColor(rawValue: index)!.getColor(), forState: .normal)
             colorButton.layer.cornerRadius = colorButton.bounds.size.width / 2.0
+            colorButton.addTarget(self, action: #selector(self.colorButtonPressed(sender:)), for: .touchUpInside)
          }
       }
       if let secondColorButtons = self.secondColorsStackView.arrangedSubviews as? [UIButton] {
          for (index, colorButton) in secondColorButtons.enumerated() {
             colorButton.clipsToBounds = true
+            colorButton.tag = index
             colorButton.setBackgroundColor(color: ServiceColor(rawValue: index + 10)!.getColor(), forState: .normal)
             colorButton.layer.cornerRadius = colorButton.bounds.size.width / 2.0
+            colorButton.addTarget(self, action: #selector(self.colorButtonPressed(sender:)), for: .touchUpInside)
+         }
+      }
+   }
+   
+   @objc func colorButtonPressed(sender: UIButton) {
+      self.delegate?.didSelect(serviceColor: ServiceColor(rawValue: sender.tag)!)
+      UIView.animate(withDuration: 0.5, animations: {
+         self.alpha = 0.0
+      }) { (success) in
+         if success {
+            self.removeFromSuperview()
          }
       }
    }

@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import CoreData
+
+protocol NewServiceViewControllerDelegate: class {
+   func didUpdateServices()
+}
 
 class NewServiceViewController: UIViewController {
    
@@ -22,6 +27,14 @@ class NewServiceViewController: UIViewController {
    @IBOutlet weak var womanLabel: UILabel!
    @IBOutlet weak var womanCheckboxButton: UIButton!
    @IBOutlet weak var womanDurationPickerView: UIPickerView!
+   @IBOutlet weak var saveButton: UIButton!
+   
+   var coreDataStack: CoreDataStack!
+   var serviceColor: ServiceColor = ServiceColor()
+   weak var delegate: NewServiceViewControllerDelegate?
+   
+   var isOverridingManService: Bool = false
+   var isOverridingWomanService: Bool = false
    
    lazy var colorPickerView: ColorPickerView? = {
       guard let colorPickerView = Bundle.main.loadNibNamed("ColorPickerView", owner: nil, options: nil)?.first as? ColorPickerView else {
@@ -30,6 +43,9 @@ class NewServiceViewController: UIViewController {
       
       return colorPickerView
    }()
+   
+   var services: [Service]?
+   
    var isManBoxEnabled: Bool = false {
       didSet {
          self.manCheckboxButton.isSelected = self.isManBoxEnabled
@@ -39,6 +55,7 @@ class NewServiceViewController: UIViewController {
          self.manDurationPickerView.reloadAllComponents()
       }
    }
+   
    var isWomanBoxEnabled: Bool = false {
       didSet {
          self.womanCheckboxButton.isSelected = self.isWomanBoxEnabled
@@ -54,6 +71,7 @@ class NewServiceViewController: UIViewController {
       
       self.applyTypography()
       self.setupUI()
+      self.loadServicesData()
    }
    
    func applyTypography() {
@@ -69,9 +87,11 @@ class NewServiceViewController: UIViewController {
       self.womanLabel.attributedText = UILabel.attributedString(withText: "DONNA", andTextColor: UIColor.grayWith(value: 214), andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
       self.womanLabel.heightAnchor.constraint(equalToConstant: 14.0).isActive = true
       
+      self.saveButton.setAttributedTitle(UILabel.attributedString(withText: "SALVA", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 16.0)!, andCharacterSpacing: 1.14, isCentered: true), for: .normal)
    }
    
    func setupUI() {
+      self.serviceColorButton.backgroundColor = self.serviceColor.getColor()
       self.serviceColorButton.layer.cornerRadius = self.serviceColorButton.bounds.size.height / 2.0
       self.serviceColorButton.addTarget(self, action: #selector(self.openColorPicker(sender:)), for: .touchUpInside)
 
@@ -118,14 +138,15 @@ class NewServiceViewController: UIViewController {
       self.manDurationPickerView.isUserInteractionEnabled = false
       self.manDurationPickerView.dataSource = self
       self.manDurationPickerView.delegate = self
-      self.manDurationPickerView.selectRow(30, inComponent: 2, animated: false)
+      self.manDurationPickerView.selectRow(6, inComponent: 2, animated: false)
       
       self.womanDurationPickerView.tag = 1
       self.womanDurationPickerView.isUserInteractionEnabled = false
       self.womanDurationPickerView.dataSource = self
       self.womanDurationPickerView.delegate = self
-      self.womanDurationPickerView.selectRow(30, inComponent: 2, animated: false)
+      self.womanDurationPickerView.selectRow(6, inComponent: 2, animated: false)
       
+      self.saveButton.layer.cornerRadius = 3.0
    }
    
    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -135,12 +156,53 @@ class NewServiceViewController: UIViewController {
       self.view.endEditing(true)
    }
    
+   func loadServicesData() {
+      if let firstService = services?.first, let serviceName = firstService.name, let serviceColor = ServiceColor(rawValue: Int(firstService.color)) {
+         self.serviceColorButton.backgroundColor = serviceColor.getColor()
+         self.serviceColor = serviceColor
+         self.serviceNameTextField.text = serviceName
+         if firstService.gender == Int16(Gender.male.rawValue) {
+            self.isManBoxEnabled = true
+            let duration = Int(firstService.duration)
+            let hourIndex = duration / 60
+            let minIndex = (duration - (hourIndex * 60)) / 5
+            self.manDurationPickerView.selectRow(hourIndex, inComponent: 0, animated: false)
+            self.manDurationPickerView.selectRow(minIndex, inComponent: 2, animated: false)
+         } else {
+            self.isWomanBoxEnabled = true
+            let duration = Int(firstService.duration)
+            let hourIndex = duration / 60
+            let minIndex = (duration - (hourIndex * 60)) / 5
+            self.womanDurationPickerView.selectRow(hourIndex, inComponent: 0, animated: false)
+            self.womanDurationPickerView.selectRow(minIndex, inComponent: 2, animated: false)
+         }
+      }
+      if let secondService = services?.last {
+         if secondService.gender == Int16(Gender.male.rawValue) {
+            self.isManBoxEnabled = true
+            let duration = Int(secondService.duration)
+            let hourIndex = duration / 60
+            let minIndex = (duration - (hourIndex * 60)) / 5
+            self.manDurationPickerView.selectRow(hourIndex, inComponent: 0, animated: false)
+            self.manDurationPickerView.selectRow(minIndex, inComponent: 2, animated: false)
+         } else {
+            self.isWomanBoxEnabled = true
+            let duration = Int(secondService.duration)
+            let hourIndex = duration / 60
+            let minIndex = (duration - (hourIndex * 60)) / 5
+            self.womanDurationPickerView.selectRow(hourIndex, inComponent: 0, animated: false)
+            self.womanDurationPickerView.selectRow(minIndex, inComponent: 2, animated: false)
+         }
+      }
+   }
+   
    @IBAction func closeButtonPressed(sender: UIButton) {
       self.dismiss(animated: true, completion: nil)
    }
    
    @objc func openColorPicker(sender: UIButton) {
       if let colorPickerView = self.colorPickerView {
+         colorPickerView.delegate = self
          colorPickerView.alpha = 0.0
          
          self.view.addSubview(colorPickerView)
@@ -193,6 +255,216 @@ class NewServiceViewController: UIViewController {
       self.isWomanBoxEnabled = !self.isWomanBoxEnabled
    }
    
+   @IBAction func saveButtonPressed(sender: UIButton) {
+      if let serviceName = self.serviceNameTextField.text, !serviceName.isEmpty {
+         if self.isManBoxEnabled || self.isWomanBoxEnabled {
+            
+            let fetchRequest = NSFetchRequest<Service>(entityName: "Service")
+            fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Service.name), serviceName)
+            var currentServices: [Service] = []
+            if let services = try? self.coreDataStack.managedContext.fetch(fetchRequest), services.count > 0 {
+               currentServices = services
+            }
+            
+            if (currentServices.filter { $0.gender == Int16(Gender.male.rawValue) }).count > 0 && self.isManBoxEnabled || (currentServices.filter { $0.gender == Int16(Gender.female.rawValue) }).count > 0 && self.isWomanBoxEnabled {
+               self.isOverridingManService = (currentServices.filter { $0.gender == Int16(Gender.male.rawValue) }).count > 0 && self.isManBoxEnabled
+               self.isOverridingWomanService = (currentServices.filter { $0.gender == Int16(Gender.female.rawValue) }).count > 0 && self.isWomanBoxEnabled
+               
+               if let areYouSurePopupView = UINib(nibName: "AreYouSurePopupView", bundle: Bundle.main).instantiate(withOwner: self, options: nil).first as? AreYouSurePopupView {
+                  areYouSurePopupView.alpha = 0.0
+                  areYouSurePopupView.setupPopupMessage(withTitle: "ATTENZIONE", andMessage: "Hai già inserito un servizio con questo nome, vuoi sovrascrivere i dati del serivizio?", andConfirmText: "CONFERMA")
+                  areYouSurePopupView.onConfirmButtonPressed = self.overrideService
+                  self.view.addSubview(areYouSurePopupView)
+                  areYouSurePopupView.translatesAutoresizingMaskIntoConstraints = false
+                  areYouSurePopupView.widthAnchor.constraint(equalToConstant: 300.0).isActive = true
+                  areYouSurePopupView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+                  areYouSurePopupView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+                  
+                  UIView.animate(withDuration: 0.4, animations: {
+                     areYouSurePopupView.alpha = 1.0
+                  })
+               }
+            } else {
+               self.saveNewService()
+            }
+            
+         } else {
+            //POPUP -> "Devi specificare a chi è rivolto questo servizio"
+            if let okPopupView = UINib(nibName: "OkPopupView", bundle: Bundle.main).instantiate(withOwner: self, options: nil).first as? OkPopupView {
+               okPopupView.alpha = 0.0
+               okPopupView.setupPopupMessage(withTitle: "ATTENZIONE", andMessage: "Devi specificare a chi è rivolto il servizio per poterlo inserire")
+               self.view.addSubview(okPopupView)
+               okPopupView.translatesAutoresizingMaskIntoConstraints = false
+               okPopupView.widthAnchor.constraint(equalToConstant: 300.0).isActive = true
+               okPopupView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+               okPopupView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+               UIView.animate(withDuration: 0.4, animations: {
+                  okPopupView.alpha = 1.0
+               })
+            }
+         }
+      } else {
+         //POPUP custom -> "Devi inserire il nome del servizio per poterlo salvare"
+         if let okPopupView = UINib(nibName: "OkPopupView", bundle: Bundle.main).instantiate(withOwner: self, options: nil).first as? OkPopupView {
+            okPopupView.alpha = 0.0
+            okPopupView.setupPopupMessage(withTitle: "ATTENZIONE", andMessage: "Devi specificare il nome del servizio per poterlo aggiungere")
+            self.view.addSubview(okPopupView)
+            okPopupView.translatesAutoresizingMaskIntoConstraints = false
+            okPopupView.widthAnchor.constraint(equalToConstant: 300.0).isActive = true
+            okPopupView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            okPopupView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+            UIView.animate(withDuration: 0.4, animations: {
+               okPopupView.alpha = 1.0
+            })
+         }
+      }
+   }
+   
+   func saveNewService() {
+      if let serviceName = self.serviceNameTextField.text, !serviceName.isEmpty {
+         if self.isManBoxEnabled {
+            
+            let manService = NSEntityDescription.insertNewObject(forEntityName: "Service", into: self.coreDataStack.managedContext) as! Service
+            manService.name = serviceName
+            manService.color = Int16(self.serviceColor.rawValue)
+            manService.gender = Int16(Gender.male.rawValue)
+            manService.duration = Int16(self.getDuration(fromFirstComponent: self.manDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.manDurationPickerView.selectedRow(inComponent: 2)))
+            
+            do {
+               try self.coreDataStack.saveContext()
+            } catch let error as NSError {
+               print(error.localizedDescription)
+               //POPUP "Si è verificato un errore durante il salvataggio del servizio, riprovare"
+               return
+            }
+            
+            let batchUpdate = NSBatchUpdateRequest(entityName: "Service")
+            batchUpdate.predicate = NSPredicate(format: "%K == %@", #keyPath(Service.name), serviceName)
+            batchUpdate.propertiesToUpdate = [#keyPath(Service.color): Int16(self.serviceColor.rawValue)]
+            batchUpdate.affectedStores = self.coreDataStack.managedContext.persistentStoreCoordinator?.persistentStores
+            batchUpdate.resultType = .updatedObjectIDsResultType
+            if let batchResult = try? self.coreDataStack.managedContext.execute(batchUpdate), let result = (batchResult as? NSBatchUpdateResult)?.result as? [NSManagedObjectID] {
+               let changes = [NSUpdatedObjectsKey : result]
+               NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [self.coreDataStack.managedContext])
+               print("\(result) records updated")
+            }
+            
+            self.delegate?.didUpdateServices()
+            self.dismiss(animated: true, completion: nil)
+         }
+         
+         if self.isWomanBoxEnabled {
+            
+            let womanService = NSEntityDescription.insertNewObject(forEntityName: "Service", into: self.coreDataStack.managedContext) as! Service
+            womanService.name = serviceName
+            womanService.color = Int16(self.serviceColor.rawValue)
+            womanService.gender = Int16(Gender.female.rawValue)
+            womanService.duration = Int16(self.getDuration(fromFirstComponent: self.womanDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.womanDurationPickerView.selectedRow(inComponent: 2)))
+            
+            do {
+               try self.coreDataStack.saveContext()
+            } catch let error as NSError {
+               print(error.localizedDescription)
+               //POPUP "Si è verificato un errore durante il salvataggio del servizio, riprovare"
+               return
+            }
+            
+            let batchUpdate = NSBatchUpdateRequest(entityName: "Service")
+            batchUpdate.predicate = NSPredicate(format: "%K == %@", #keyPath(Service.name), serviceName)
+            batchUpdate.propertiesToUpdate = [#keyPath(Service.color): Int16(self.serviceColor.rawValue)]
+            batchUpdate.affectedStores = self.coreDataStack.managedContext.persistentStoreCoordinator?.persistentStores
+            batchUpdate.resultType = .updatedObjectIDsResultType
+            if let batchResult = try? self.coreDataStack.managedContext.execute(batchUpdate), let result = (batchResult as? NSBatchUpdateResult)?.result as? [NSManagedObjectID] {
+               let changes = [NSUpdatedObjectsKey : result]
+               NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [self.coreDataStack.managedContext])
+               print("\(result) records updated")
+            }
+            
+            self.delegate?.didUpdateServices()
+            self.dismiss(animated: true, completion: nil)
+         }
+      }
+   }
+   
+   func overrideService() {
+      if let serviceName = self.serviceNameTextField.text, !serviceName.isEmpty {
+         if self.isManBoxEnabled {
+            if self.isOverridingManService {
+               let batchUpdate = NSBatchUpdateRequest(entityName: "Service")
+               batchUpdate.predicate = NSPredicate(format: "%K == %@", #keyPath(Service.name), serviceName)
+               batchUpdate.propertiesToUpdate = [#keyPath(Service.color): Int16(self.serviceColor.rawValue), #keyPath(Service.duration): Int16(self.getDuration(fromFirstComponent: self.manDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.manDurationPickerView.selectedRow(inComponent: 2)))]
+               batchUpdate.affectedStores = self.coreDataStack.managedContext.persistentStoreCoordinator?.persistentStores
+               batchUpdate.resultType = .updatedObjectIDsResultType
+               if let batchResult = try? self.coreDataStack.managedContext.execute(batchUpdate), let result = (batchResult as? NSBatchUpdateResult)?.result as? [NSManagedObjectID] {
+                  let changes = [NSUpdatedObjectsKey : result]
+                  NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [self.coreDataStack.managedContext])
+                  print("\(result) records updated")
+               }
+            } else {
+               let manService = NSEntityDescription.insertNewObject(forEntityName: "Service", into: self.coreDataStack.managedContext) as! Service
+               manService.name = serviceName
+               manService.color = Int16(self.serviceColor.rawValue)
+               manService.gender = Int16(Gender.male.rawValue)
+               manService.duration = Int16(self.getDuration(fromFirstComponent: self.manDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.manDurationPickerView.selectedRow(inComponent: 2)))
+               
+               do {
+                  try self.coreDataStack.saveContext()
+               } catch let error as NSError {
+                  print(error.localizedDescription)
+                  //POPUP "Si è verificato un errore durante il salvataggio del servizio, riprovare"
+                  return
+               }
+            }
+            
+            self.delegate?.didUpdateServices()
+            self.dismiss(animated: true, completion: nil)
+         }
+         
+         if self.isWomanBoxEnabled {
+            if self.isOverridingWomanService {
+               let batchUpdate = NSBatchUpdateRequest(entityName: "Service")
+               batchUpdate.predicate = NSPredicate(format: "%K == %@", #keyPath(Service.name), serviceName)
+               batchUpdate.propertiesToUpdate = [#keyPath(Service.color): Int16(self.serviceColor.rawValue), #keyPath(Service.duration): Int16(self.getDuration(fromFirstComponent: self.manDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.manDurationPickerView.selectedRow(inComponent: 2)))]
+               batchUpdate.affectedStores = self.coreDataStack.managedContext.persistentStoreCoordinator?.persistentStores
+               batchUpdate.resultType = .updatedObjectIDsResultType
+               if let batchResult = try? self.coreDataStack.managedContext.execute(batchUpdate), let result = (batchResult as? NSBatchUpdateResult)?.result as? [NSManagedObjectID] {
+                  let changes = [NSUpdatedObjectsKey : result]
+                  NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [self.coreDataStack.managedContext])
+                  print("\(result) records updated")
+               }
+             } else {
+               let womanService = NSEntityDescription.insertNewObject(forEntityName: "Service", into: self.coreDataStack.managedContext) as! Service
+               womanService.name = serviceName
+               womanService.color = Int16(self.serviceColor.rawValue)
+               womanService.gender = Int16(Gender.female.rawValue)
+               womanService.duration = Int16(self.getDuration(fromFirstComponent: self.womanDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.womanDurationPickerView.selectedRow(inComponent: 2)))
+               
+               do {
+                  try self.coreDataStack.saveContext()
+               } catch let error as NSError {
+                  print(error.localizedDescription)
+                  //POPUP "Si è verificato un errore durante il salvataggio del servizio, riprovare"
+                  return
+               }
+            }
+            self.delegate?.didUpdateServices()
+            self.dismiss(animated: true, completion: nil)
+         }
+      }
+   }
+   
+   func getDuration(fromFirstComponent firstComponent: Int, andSecondComponent secondComponent: Int) -> Int {
+      return firstComponent * 60 + secondComponent * 5
+   }
+   
+}
+
+extension NewServiceViewController: ColorPickerViewDelegate {
+   
+   func didSelect(serviceColor: ServiceColor) {
+      self.serviceColor = serviceColor
+      self.serviceColorButton.backgroundColor = serviceColor.getColor()
+   }
 }
 
 extension NewServiceViewController: UIGestureRecognizerDelegate {
@@ -215,7 +487,7 @@ extension NewServiceViewController: UIPickerViewDataSource {
       case 1:
          return 1
       case 2:
-         return 60
+         return 12
       case 3:
          return 1
       default:
@@ -240,11 +512,11 @@ extension NewServiceViewController: UIPickerViewDataSource {
       if pickerView.tag == 0 {
          if component == 1 { return NSAttributedString(string: "h", attributes: [NSAttributedStringKey.foregroundColor : self.isManBoxEnabled ? UIColor.black : UIColor.grayWith(value: 182)]) }
          if component == 3 { return NSAttributedString(string: "min", attributes: [NSAttributedStringKey.foregroundColor : self.isManBoxEnabled ? UIColor.black : UIColor.grayWith(value: 182)]) }
-         return NSAttributedString(string: "\(row)", attributes: [NSAttributedStringKey.foregroundColor : self.isManBoxEnabled ? UIColor.black : UIColor.grayWith(value: 182)])
+         return NSAttributedString(string: "\(component == 0 ? row : row * 5)", attributes: [NSAttributedStringKey.foregroundColor : self.isManBoxEnabled ? UIColor.black : UIColor.grayWith(value: 182)])
       } else {
          if component == 1 { return NSAttributedString(string: "h", attributes: [NSAttributedStringKey.foregroundColor : self.isWomanBoxEnabled ? UIColor.black : UIColor.grayWith(value: 182)]) }
          if component == 3 { return NSAttributedString(string: "min", attributes: [NSAttributedStringKey.foregroundColor : self.isWomanBoxEnabled ? UIColor.black : UIColor.grayWith(value: 182)]) }
-         return NSAttributedString(string: "\(row)", attributes: [NSAttributedStringKey.foregroundColor : self.isWomanBoxEnabled ? UIColor.black : UIColor.grayWith(value: 182)])
+         return NSAttributedString(string: "\(component == 0 ? row : row * 5)", attributes: [NSAttributedStringKey.foregroundColor : self.isWomanBoxEnabled ? UIColor.black : UIColor.grayWith(value: 182)])
       }
    }
 

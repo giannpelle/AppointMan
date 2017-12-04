@@ -8,12 +8,8 @@
 
 import UIKit
 
-enum Gender: Int {
-   case male = 0, female
-}
-
 enum SectionType: Int {
-   case female = 0, male, unisex
+   case male = 0, female, unisex
 }
 
 class ServicesHeaderCollectionReusableView: UICollectionReusableView {
@@ -24,6 +20,11 @@ class ServicesHeaderCollectionReusableView: UICollectionReusableView {
    
    override func draw(_ rect: CGRect) {
       super.draw(rect)
+      
+      for view in self.gendersStackView.arrangedSubviews {
+         self.gendersStackView.removeArrangedSubview(view)
+         view.removeFromSuperview()
+      }
       
       switch self.sectionType {
       case .female:
@@ -63,5 +64,6 @@ class ServicesHeaderCollectionReusableView: UICollectionReusableView {
       UIColor.grayWith(value: 151).setStroke()
       leftAccessoryLinePath.stroke()
       rightAccessoryLinePath.stroke()
+      
    }
 }

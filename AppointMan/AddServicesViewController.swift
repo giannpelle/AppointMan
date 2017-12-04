@@ -18,20 +18,15 @@ class AddServicesViewController: UIViewController {
    @IBOutlet weak var sortSegmentedControl: UISegmentedControl!
    @IBOutlet weak var servicesCollectionView: UICollectionView!
    
-   var services: [(name: String, duration: CGFloat, targetGender: Gender)] = []
+   var coreDataStack: CoreDataStack!
+   
+   var isSortingDuration: Bool = true
    
    override func viewDidLoad() {
       super.viewDidLoad()
       
       self.applyTypography()
       self.setupUI()
-      
-      self.sortSegmentedControl.setup(withOptions: ["DURATA", "A-Z"], isBlueBackground: false)
-      
-      self.servicesCollectionView.delegate = self
-      self.servicesCollectionView.dataSource = self
-      (self.servicesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.sectionHeadersPinToVisibleBounds = true
-      
    }
    
    func applyTypography() {
@@ -47,6 +42,13 @@ class AddServicesViewController: UIViewController {
       self.navigationRightBarButton.addTarget(self, action: #selector(self.nextBarButtonItemPressed(sender:)), for: .touchUpInside)
       self.addServiceButton.setImage(#imageLiteral(resourceName: "on_boarding_plus"), for: .normal)
       self.addServiceButton.setImage(#imageLiteral(resourceName: "on_boarding_plus_disabled"), for: .disabled)
+      
+      self.sortSegmentedControl.setup(withOptions: ["DURATA", "A-Z"], isBlueBackground: false)
+      ServiceManager.shared.sorter = Sorter(withSortingProperty: "name", isAscending: true)
+      
+      self.servicesCollectionView.delegate = self
+      self.servicesCollectionView.dataSource = self
+      (self.servicesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.sectionHeadersPinToVisibleBounds = true
    }
    
    @objc func nextBarButtonItemPressed(sender: UIBarButtonItem) {
@@ -56,27 +58,46 @@ class AddServicesViewController: UIViewController {
    
    @IBAction func newServiceButtonPressed(sender: UIButton) {
       let newServiceVC = UIStoryboard.newServiceVC()
+      newServiceVC.delegate = self
+      newServiceVC.coreDataStack = self.coreDataStack
       newServiceVC.modalPresentationStyle = .formSheet
-      newServiceVC.preferredContentSize = CGSize(width: 540.0, height: 460.0)
+      newServiceVC.preferredContentSize = CGSize(width: 540.0, height: 540.0)
       self.present(newServiceVC, animated: true, completion: nil)
    }
    
+   @IBAction func sortSegmentedControlValueChanged(_ sender: UISegmentedControl) {
+      if self.isSortingDuration != (sender.selectedSegmentIndex == 0) {
+         self.isSortingDuration = sender.selectedSegmentIndex == 0
+         ServiceManager.shared.sorter = Sorter(withSortingProperty: self.isSortingDuration ? "duration" : "name", isAscending: true)
+         self.servicesCollectionView.reloadData()
+      }
+   }
+   
+}
+
+extension AddServicesViewController: NewServiceViewControllerDelegate {
+   
+   func didUpdateServices() {
+      self.servicesCollectionView.reloadData()
+   }
 }
 
 extension AddServicesViewController: UICollectionViewDataSource {
    
    func numberOfSections(in collectionView: UICollectionView) -> Int {
-      return 3
+      return ServiceManager.shared.getNumberOfSections()
    }
    
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return 8
+      return ServiceManager.shared.getNumberOfRows(for: section)
    }
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "serviceCellId", for: indexPath) as? ServiceCollectionViewCell else {
          return UICollectionViewCell()
       }
+      cell.services = ServiceManager.shared.services(forItemAt: indexPath)
+      cell.delegate = self
       return cell
    }
    
@@ -85,19 +106,19 @@ extension AddServicesViewController: UICollectionViewDataSource {
          return UICollectionReusableView()
       }
       
-      header.sectionType = SectionType(rawValue: indexPath.section)
+      header.sectionType = SectionType(rawValue: ServiceManager.shared.sectionHeaderIndex(for: indexPath))
+      header.setNeedsDisplay()
       return header
    }
 }
 
 extension AddServicesViewController: UICollectionViewDelegateFlowLayout {
-   
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
       return CGSize(width: 160.0, height: 78.0)
    }
    
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-      return CGSize(width: UIScreen.main.bounds.size.width, height: 64.0)
+      return CGSize(width: UIScreen.main.bounds.size.width, height: 44.0)
    }
    
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -106,13 +127,28 @@ extension AddServicesViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension AddServicesViewController: UICollectionViewDelegate {
-   
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
       if let currentCell = collectionView.cellForItem(at: indexPath) as? ServiceCollectionViewCell {
          currentCell.showOverlayMenu()
       }
    }
+}
+
+extension AddServicesViewController: ServiceCollectionViewCellDelegate {
+   func editServices(services: [Service]) {
+      let newServiceVC = UIStoryboard.newServiceVC()
+      newServiceVC.delegate = self
+      newServiceVC.coreDataStack = self.coreDataStack
+      newServiceVC.services = services
+      newServiceVC.modalPresentationStyle = .formSheet
+      newServiceVC.preferredContentSize = CGSize(width: 540.0, height: 540.0)
+      self.present(newServiceVC, animated: true, completion: nil)
+   }
    
+   func deleteServices(services: [Service]) {
+      ServiceManager.shared.deleteServices(services: services)
+      self.servicesCollectionView.reloadData()
+   }
 }
 
 extension AddServicesViewController: UIGestureRecognizerDelegate {

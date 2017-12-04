@@ -65,7 +65,7 @@ class GPFloatingTextField: UITextField {
       self.autocorrectionType = .no
       self.inputAssistantItem.leadingBarButtonGroups.removeAll()
       self.inputAssistantItem.trailingBarButtonGroups.removeAll()
-      
+      self.autocapitalizationType = .sentences
       self.borderStyle = .none
       
       self.underlineLayer = CALayer()
