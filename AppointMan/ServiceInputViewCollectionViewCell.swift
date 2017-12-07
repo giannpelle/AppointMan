@@ -14,6 +14,23 @@ class ServiceInputViewCollectionViewCell: UICollectionViewCell {
    @IBOutlet weak var serviceDurationLabel: UILabel!
    @IBOutlet weak var gendersStackView: UIStackView!
    
+   var isServiceSelected: Bool = false
+   
+   var service: Service! {
+      didSet {
+         if let service = self.service, let serviceName = service.name, let serviceColor = ServiceColor(withInt16: service.color) {
+            self.leadingAccessoryRectLayer.fillColor = serviceColor.getColor().cgColor
+            self.serviceNameLabel.attributedText = UILabel.attributedString(withText: serviceName, andTextColor: serviceColor.getColor(dark: true), andFont: UIFont.init(name: "SFUIText-Semibold", size: 14.0)!, andCharacterSpacing: 0.0)
+            self.serviceDurationLabel.attributedText = UILabel.attributedString(withText: "\(service.duration) minuti", andTextColor:
+               serviceColor.getColor(), andFont: UIFont.init(name: "SFUIText-Semibold", size: 11.0)!, andCharacterSpacing: 0.0)
+            let genderImageView = UIImageView(image: Gender(rawValue: Int(service.gender))?.getGenderMiniature())
+            self.gendersStackView.addArrangedSubview(genderImageView)
+         }
+      }
+   }
+   
+   var leadingAccessoryRectLayer: CAShapeLayer!
+   
    lazy var selectionBorderLayer: CAShapeLayer = {
       let selectionBorderLayer = CAShapeLayer()
       selectionBorderLayer.fillColor = UIColor.clear.cgColor
@@ -65,40 +82,51 @@ class ServiceInputViewCollectionViewCell: UICollectionViewCell {
       shadowLayer.shadowRadius = 6.0
       shadowLayer.shadowOffset = .zero
       self.layer.insertSublayer(shadowLayer, at: 0)
-      
-      // drawing the accessory rect
-      let leadingAccessoryRectLayer = CAShapeLayer()
-      let leadingAccessoryRectPath = UIBezierPath(rect: CGRect(x: 0.0, y: 0.0, width: 3.0, height: rect.size.height))
-      leadingAccessoryRectLayer.fillColor = ServiceColor.getRandomColor(dark: true).cgColor
-      leadingAccessoryRectLayer.path = leadingAccessoryRectPath.cgPath
-      leadingAccessoryRectLayer.frame = CGRect(x: 0.0, y: 0.0, width: 3.0, height: self.bounds.size.height)
-      self.layer.addSublayer(leadingAccessoryRectLayer)
    }
    
    override func awakeFromNib() {
       super.awakeFromNib()
       
+      self.drawLeadingAccessoryLayer()
       self.applyTypography()
       self.setupUI()
    }
    
+   func drawLeadingAccessoryLayer() {
+      self.leadingAccessoryRectLayer = CAShapeLayer()
+      let leadingAccessoryRectPath = UIBezierPath(rect: CGRect(x: 0.0, y: 0.0, width: 3.0, height: self.bounds.size.height))
+      self.leadingAccessoryRectLayer.path = leadingAccessoryRectPath.cgPath
+      self.leadingAccessoryRectLayer.frame = CGRect(x: 0.0, y: 0.0, width: 3.0, height: self.bounds.size.height)
+      self.layer.addSublayer(self.leadingAccessoryRectLayer)
+   }
+   
    func applyTypography() {
-      self.serviceNameLabel.attributedText = UILabel.attributedString(withText: "Nome servizio", andTextColor: ServiceColor.getRandomColor(dark: true), andFont: UIFont.init(name: "SFUIText-Semibold", size: 14.0)!, andCharacterSpacing: 0.0)
       self.serviceNameLabel.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
-      
-      self.serviceDurationLabel.attributedText = UILabel.attributedString(withText: "45 minuti", andTextColor:
-         ServiceColor.getRandomColor(), andFont: UIFont.init(name: "SFUIText-Semibold", size: 11.0)!, andCharacterSpacing: 0.0)
       self.serviceDurationLabel.heightAnchor.constraint(equalToConstant: 13.0).isActive = true
    }
    
    func setupUI() {
-      
-      let maleImageView = UIImageView(image: #imageLiteral(resourceName: "iconcina_sesso_uomo"))
-      self.gendersStackView.addArrangedSubview(maleImageView)
+      for view in self.gendersStackView.arrangedSubviews {
+         self.gendersStackView.removeArrangedSubview(view)
+         view.removeFromSuperview()
+      }
    }
    
    func showSelectionBorderLayer() {
+      self.removeSelectionBorderLayer()
+      self.isServiceSelected = true
       self.layer.addSublayer(self.selectionBorderLayer)
+   }
+   
+   func removeSelectionBorderLayer() {
+      self.isServiceSelected = false
+      if let sublayers = self.layer.sublayers {
+         for layer in sublayers {
+            if layer == self.selectionBorderLayer {
+               layer.removeFromSuperlayer()
+            }
+         }
+      }
    }
    
 }

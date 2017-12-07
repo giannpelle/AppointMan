@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import CoreData
+
+protocol NewEmployeeViewControllerDelegate: class {
+   func didUpdateEmployees()
+}
 
 class NewEmployeeViewController: UIViewController {
    
@@ -25,6 +30,11 @@ class NewEmployeeViewController: UIViewController {
    @IBOutlet weak var addServicesButton: UIButton!
    @IBOutlet weak var employeeServicesCollectionView: UICollectionView!
    @IBOutlet weak var saveButton: UIButton!
+   
+   weak var delegate: NewEmployeeViewControllerDelegate?
+   
+   var employee: Employee?
+   var employeeServices: [Service] = []
    
    lazy var addEmployeeWorkingHoursButtonLeadingAnchor: NSLayoutConstraint = {
       return self.addEmployeeWorkingHoursButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20.0)
@@ -117,9 +127,22 @@ class NewEmployeeViewController: UIViewController {
       self.employeeServicesCollectionView.contentInset = UIEdgeInsetsMake(7.0, 20.0, 7.0, 20.0)
       (self.employeeServicesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.estimatedItemSize = CGSize(width: 100.0, height: 30.0)
       self.saveButton.layer.cornerRadius = 3.0
-      self.saveButton.isEnabled = false
+      //self.saveButton.isEnabled = false
       self.saveButton.setBackgroundColor(color: UIColor.amBlue, forState: .normal)
       self.saveButton.setBackgroundColor(color: UIColor.grayWith(value: 236), forState: .disabled)
+   }
+   
+   func loadEmployeeData() {
+      if let employee = self.employee {
+         self.employeeFirstNameFloatingTextField.text = employee.firstName
+         self.employeeLastNameFloatingTextField.text = employee.lastName
+         self.employeeCellPhoneNumberFloatingTextField.text = employee.phoneNumber
+         self.employeeEmailFloatingTextField.text = employee.email
+         
+         if let employeeIMageData = employee.picture?.pictureData, let employeeImage = UIImage(data: employeeIMageData as Data) {
+            self.employeeImageView.image = employeeImage
+         }
+      }
    }
    
    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -180,6 +203,7 @@ class NewEmployeeViewController: UIViewController {
    @IBAction func addServicesButtonPressed(sender: UIButton) {
       
       if let servicesInputView = self.servicesInputView, let window = UIApplication.shared.keyWindow {
+         servicesInputView.services = self.employeeServices
          servicesInputView.frame = CGRect(x: 0.0, y: UIScreen.main.bounds.size.height, width: UIScreen.main.bounds.size.width, height: (UIScreen.main.bounds.size.height / 2.0) + 10.0)
          window.addSubview(servicesInputView)
          
@@ -193,7 +217,38 @@ class NewEmployeeViewController: UIViewController {
    }
    
    @IBAction func saveButtonPressed(sender: UIButton) {
-      self.dismiss(animated: true, completion: nil)
+      if let firstName = employeeFirstNameFloatingTextField.text, !firstName.isEmpty, let lastName = self.employeeLastNameFloatingTextField.text, !lastName.isEmpty {
+         
+         var newEmployee = EmployeeTuple(firstName: firstName, lastName: lastName, cellPhoneNumber: self.employeeCellPhoneNumberFloatingTextField.text, email: self.employeeEmailFloatingTextField.text, pictureData: nil, services: self.employeeServices)
+         if let pictureImage = self.employeeImageView.image {
+            newEmployee.pictureData = UIImagePNGRepresentation(pictureImage) as NSData?
+         }
+         
+         do {
+            try EmployeeManager.shared.saveEmployee(with: newEmployee)
+         } catch let error as NSError {
+            print(error.localizedDescription)
+            //POPUP "Si è verificato un errore durante il salvataggio del servizio, riprovare"
+            return
+         }
+         
+         self.delegate?.didUpdateEmployees()
+         self.dismiss(animated: true, completion: nil)
+      } else {
+         //POPUP custom -> "Devi inserire il nome e il cognome del dipendente per poterlo salvare"
+         if let okPopupView = UINib(nibName: "OkPopupView", bundle: Bundle.main).instantiate(withOwner: self, options: nil).first as? OkPopupView {
+            okPopupView.alpha = 0.0
+            okPopupView.setupPopupMessage(withTitle: "ATTENZIONE", andMessage: "Devi specificare il nome e il cognome del dipendente per poterlo aggiungere")
+            self.view.addSubview(okPopupView)
+            okPopupView.translatesAutoresizingMaskIntoConstraints = false
+            okPopupView.widthAnchor.constraint(equalToConstant: 300.0).isActive = true
+            okPopupView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            okPopupView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+            UIView.animate(withDuration: 0.4, animations: {
+               okPopupView.alpha = 1.0
+            })
+         }
+      }
    }
    
 }
@@ -250,6 +305,12 @@ extension UIImagePickerController {
 
 extension NewEmployeeViewController: ServicesInputViewDelegate {
    
+   func didUpdateServices(services: [Service]) {
+      self.employeeServices = services
+      self.employeeServicesCollectionView.collectionViewLayout.invalidateLayout()
+      self.employeeServicesCollectionView.reloadData()
+   }
+   
    func resetContentOffset() {
       UIView.animate(withDuration: 0.7) {
          self.containerScrollView.contentOffset.y = 0.0
@@ -264,7 +325,7 @@ extension NewEmployeeViewController: UICollectionViewDataSource {
    }
    
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return 6
+      return self.employeeServices.count
    }
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -272,6 +333,7 @@ extension NewEmployeeViewController: UICollectionViewDataSource {
          return UICollectionViewCell()
       }
       
+      cell.service = self.employeeServices[indexPath.row]
       return cell
    }
 }

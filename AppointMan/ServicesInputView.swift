@@ -10,6 +10,7 @@ import UIKit
 
 protocol ServicesInputViewDelegate: class {
    func resetContentOffset()
+   func didUpdateServices(services: [Service])
 }
 
 class ServicesInputView: UIView {
@@ -22,6 +23,8 @@ class ServicesInputView: UIView {
    
    weak var delegate: ServicesInputViewDelegate?
    
+   var services: [Service] = []
+   
    override func awakeFromNib() {
       super.awakeFromNib()
       
@@ -32,7 +35,7 @@ class ServicesInputView: UIView {
    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
       super.touchesBegan(touches, with: event)
       
-      print("Eccomi")
+      
    }
    
    func applyTypography() {
@@ -50,7 +53,6 @@ class ServicesInputView: UIView {
       self.servicesCollectionView.delegate = self
       self.servicesCollectionView.contentInset = UIEdgeInsetsMake(15.0, 18.0, 15.0, 18.0)
       self.servicesCollectionView.register(UINib(nibName: "ServiceInputViewCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "serviceInputViewCellId")
-      
    }
    
    @IBAction func cancelButtonPressed(sender: UIButton) {
@@ -82,7 +84,7 @@ extension ServicesInputView: UICollectionViewDataSource {
    }
    
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return 14
+      return ServiceManager.shared.getNumberOfServices()
    }
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -90,6 +92,10 @@ extension ServicesInputView: UICollectionViewDataSource {
          return UICollectionViewCell()
       }
       
+      if let currentService = ServiceManager.shared.getInputViewService(forItemAt: indexPath) {
+         cell.isSelected = self.services.contains(currentService)
+         cell.service = currentService
+      }
       return cell
    }
 }
@@ -114,7 +120,19 @@ extension ServicesInputView: UICollectionViewDelegate {
    
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
       if let currentCell = collectionView.cellForItem(at: indexPath) as? ServiceInputViewCollectionViewCell {
-         currentCell.showSelectionBorderLayer()
+         if currentCell.isServiceSelected {
+            currentCell.removeSelectionBorderLayer()
+            if let serviceIndex = self.services.index(where: { (service) -> Bool in
+               return service.name == currentCell.service.name && service.gender == currentCell.service.gender
+            }) {
+               self.services.remove(at: serviceIndex)
+            }
+            self.delegate?.didUpdateServices(services: self.services)
+         } else {
+            currentCell.showSelectionBorderLayer()
+            self.services.append(currentCell.service)
+            self.delegate?.didUpdateServices(services: self.services)
+         }
       }
    }
 }

@@ -29,23 +29,27 @@ class ServiceCollectionViewCell: UICollectionViewCell {
          }
          
          if self.services.count == 2 {
-            var durationText: String = ""
 
-            if let firstService = self.services.first, let serviceName = firstService.name, let serviceColor = ServiceColor(rawValue: Int(firstService.color)) {
-               self.leadingAccessoryRectLayer.fillColor = serviceColor.getColor().cgColor
+            if let firstService = self.services.first, let serviceName = firstService.name, let serviceColor = ServiceColor(withInt16: firstService.color) {
                self.serviceNameLabel.attributedText = UILabel.attributedString(withText: serviceName, andTextColor: serviceColor.getColor(dark: true), andFont: UIFont.init(name: "SFUIText-Semibold", size: 14.0)!, andCharacterSpacing: 0.0)
-               durationText = "\(firstService.duration) -"
-               let genderImageView = UIImageView(image: Gender(rawValue: Int(firstService.gender))?.getGenderMiniature())
-               self.gendersStackView.addArrangedSubview(genderImageView)
+               self.leadingAccessoryRectLayer.fillColor = serviceColor.getColor().cgColor
+               
+               if let firstServiceDuration = self.services.first?.duration, let secondServiceDuration = self.services.last?.duration, firstServiceDuration > secondServiceDuration {
+                  self.serviceDurationLabel.attributedText = UILabel.attributedString(withText: "\(secondServiceDuration) - \(firstServiceDuration) minuti", andTextColor:
+                     serviceColor.getColor(), andFont: UIFont.init(name: "SFUIText-Semibold", size: 11.0)!, andCharacterSpacing: 0.0)
+               } else if let firstServiceDuration = self.services.first?.duration, let secondServiceDuration = self.services.last?.duration, firstServiceDuration < secondServiceDuration {
+                  self.serviceDurationLabel.attributedText = UILabel.attributedString(withText: "\(firstServiceDuration) - \(secondServiceDuration) minuti", andTextColor:
+                     serviceColor.getColor(), andFont: UIFont.init(name: "SFUIText-Semibold", size: 11.0)!, andCharacterSpacing: 0.0)
+               }
             }
-            if let secondService = self.services.last, let serviceColor = ServiceColor(rawValue: Int(secondService.color)) {
-               self.serviceDurationLabel.attributedText = UILabel.attributedString(withText: "\(durationText) \(secondService.duration) minuti", andTextColor:
-                  serviceColor.getColor(), andFont: UIFont.init(name: "SFUIText-Semibold", size: 11.0)!, andCharacterSpacing: 0.0)
-               let genderImageView = UIImageView(image: Gender(rawValue: Int(secondService.gender))?.getGenderMiniature())
-               self.gendersStackView.addArrangedSubview(genderImageView)
-            }
+            
+            let maleImageView = UIImageView(image: Gender.male.getGenderMiniature())
+            self.gendersStackView.addArrangedSubview(maleImageView)
+            let femaleImageView = UIImageView(image: Gender.female.getGenderMiniature())
+            self.gendersStackView.addArrangedSubview(femaleImageView)
+            
          } else {
-            if let service = self.services.first, let serviceName = service.name, let serviceColor = ServiceColor(rawValue: Int(service.color)) {
+            if let service = self.services.first, let serviceName = service.name, let serviceColor = ServiceColor(withInt16: service.color) {
                self.leadingAccessoryRectLayer.fillColor = serviceColor.getColor().cgColor
                self.serviceNameLabel.attributedText = UILabel.attributedString(withText: serviceName, andTextColor: serviceColor.getColor(dark: true), andFont: UIFont.init(name: "SFUIText-Semibold", size: 14.0)!, andCharacterSpacing: 0.0)
                self.serviceDurationLabel.attributedText = UILabel.attributedString(withText: "\(service.duration) minuti", andTextColor:

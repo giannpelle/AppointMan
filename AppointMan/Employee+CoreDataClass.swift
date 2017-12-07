@@ -1,5 +1,5 @@
 //
-//  Service+CoreDataClass.swift
+//  Employee+CoreDataClass.swift
 //  AppointMan
 //
 //  Created by Gianluigi Pelle on 12/5/17.
@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-@objc(Service)
-public class Service: NSManagedObject {
+@objc(Employee)
+public class Employee: NSManagedObject {
 
 }

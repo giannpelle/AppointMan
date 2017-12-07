@@ -17,49 +17,6 @@ class AddEmployeesViewController: UIViewController {
    @IBOutlet weak var addEmployeeButton: UIButton!
    @IBOutlet weak var employeesCollectionView: UICollectionView!
    
-   var tapOverlayGesture: UITapGestureRecognizer!
-   
-   override func viewDidAppear(_ animated: Bool) {
-      super.viewDidAppear(animated)
-      
-      self.tapOverlayGesture = UITapGestureRecognizer(target: self, action: #selector(self.overlayTapped(sender:)))
-      self.tapOverlayGesture.delegate = self
-      self.tapOverlayGesture.numberOfTapsRequired = 1
-      self.tapOverlayGesture.cancelsTouchesInView = false
-      self.view.window?.addGestureRecognizer(self.tapOverlayGesture)
-   }
-   
-   @objc func overlayTapped(sender: UITapGestureRecognizer) {
-      if sender.state == .ended {
-         guard let presentedView = presentedViewController?.view else {
-            return
-         }
-         if let inputView = UIApplication.shared.keyWindow?.subviews.last as? ServicesInputView, sender.location(in: inputView).y > 0 {
-            return
-         }
-         if !presentedView.bounds.contains(sender.location(in: presentedView)) {
-            if let inputView = UIApplication.shared.keyWindow?.subviews.last as? ServicesInputView, let presentedVC = self.presentedViewController as? NewEmployeeViewController {
-               UIView.animate(withDuration: 0.7, animations: {
-                  presentedVC.containerScrollView.contentOffset.y = 0.0
-                  inputView.frame.origin.y = UIScreen.main.bounds.size.height
-               }, completion: { (success) in
-                  if success {
-                     inputView.removeFromSuperview()
-                  }
-               })
-            } else {
-               self.dismiss(animated: true, completion: nil)
-            }
-         }
-      }
-   }
-   
-   override func viewWillDisappear(_ animated: Bool) {
-      super.viewWillDisappear(animated)
-      
-      self.view.window?.removeGestureRecognizer(tapOverlayGesture)
-   }
-   
    override func viewDidLoad() {
       super.viewDidLoad()
       
@@ -79,12 +36,12 @@ class AddEmployeesViewController: UIViewController {
       self.navigationBackButton.addTarget(self, action: #selector(self.backBarButtonItemPressed(sender:)), for: .touchUpInside)
       
       self.addEmployeeButton.setImage(#imageLiteral(resourceName: "on_boarding_plus"), for: .normal)
+      self.addEmployeeButton.setImage(#imageLiteral(resourceName: "on_boarding_plus"), for: .highlighted)
       self.addEmployeeButton.setImage(#imageLiteral(resourceName: "on_boarding_plus_disabled"), for: .disabled)
       
       self.employeesCollectionView.dataSource = self
       self.employeesCollectionView.delegate = self
       self.employeesCollectionView.contentInset = UIEdgeInsetsMake(12.0, 26.0, 12.0, 26.0)
-      
    }
    
    @objc func nextBarButtonItemPressed(sender: UIBarButtonItem) {
@@ -112,7 +69,7 @@ extension AddEmployeesViewController: UICollectionViewDataSource {
    }
    
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return 5
+      return EmployeeManager.shared.getNumberOfRows()
    }
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -120,9 +77,7 @@ extension AddEmployeesViewController: UICollectionViewDataSource {
          return UICollectionViewCell()
       }
       
-      let images = [#imageLiteral(resourceName: "thumbnail_1"), #imageLiteral(resourceName: "thumbnail_2"), #imageLiteral(resourceName: "thumbnail_3"), #imageLiteral(resourceName: "thumbnail_4"), #imageLiteral(resourceName: "thumbnail_5")]
-      cell.employeeImageView.image = images[indexPath.row]
-      
+      cell.employee = EmployeeManager.shared.employee(forItemAt: indexPath)
       return cell
    }
 }
@@ -136,11 +91,4 @@ extension AddEmployeesViewController: UICollectionViewDelegateFlowLayout {
 
 extension AddEmployeesViewController: UICollectionViewDelegate {
    
-}
-
-extension AddEmployeesViewController: UIGestureRecognizerDelegate {
-   
-   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-      return true
-   }
 }

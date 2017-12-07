@@ -10,6 +10,7 @@ import UIKit
 
 class OkPopupView: UIView {
    
+   @IBOutlet weak var navigationBarView: UIView!
    @IBOutlet weak var popupTitleLabel: UILabel!
    @IBOutlet weak var closePopupButton: UIButton!
    @IBOutlet weak var popupMessageLabel: UILabel!
@@ -37,8 +38,24 @@ class OkPopupView: UIView {
    }
    
    func setupUI() {
+      self.navigationBarView.layer.roundCorners(corners: [.topLeft, .topRight], radius: 5.0, viewBounds: self.navigationBarView.bounds)
+      self.okButton.layer.cornerRadius = 5.0
       self.okButton.addTarget(self, action: #selector(self.okButtonPressed(sender:)), for: .touchUpInside)
       self.closePopupButton.addTarget(self, action:#selector(self.closePopupButtonPressed(sender:)), for: .touchUpInside)
+   }
+   
+   override func layoutSubviews() {
+      super.layoutSubviews()
+      
+      let shadowLayer = CAShapeLayer()
+      shadowLayer.path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: 5.0, height: 5.0)).cgPath
+      shadowLayer.fillColor = UIColor.white.cgColor
+      shadowLayer.shadowColor = UIColor.black.cgColor
+      shadowLayer.shadowOffset = CGSize.zero
+      shadowLayer.shadowRadius = 16.0
+      shadowLayer.shadowOpacity = 0.45
+      self.layer.insertSublayer(shadowLayer, at: 0)
+      self.layer.cornerRadius = 5.0
    }
    
    func setupPopupMessage(withTitle title: String, andMessage message: String) {

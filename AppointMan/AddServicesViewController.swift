@@ -85,18 +85,18 @@ extension AddServicesViewController: NewServiceViewControllerDelegate {
 extension AddServicesViewController: UICollectionViewDataSource {
    
    func numberOfSections(in collectionView: UICollectionView) -> Int {
-      return ServiceManager.shared.getNumberOfSections()
+      return ServiceManager.shared.getAddServicesNumberOfSections()
    }
    
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return ServiceManager.shared.getNumberOfRows(for: section)
+      return ServiceManager.shared.getAddServicesNumberOfRows(for: section)
    }
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "serviceCellId", for: indexPath) as? ServiceCollectionViewCell else {
          return UICollectionViewCell()
       }
-      cell.services = ServiceManager.shared.services(forItemAt: indexPath)
+      cell.services = ServiceManager.shared.addServicesServices(forItemAt: indexPath)
       cell.delegate = self
       return cell
    }
@@ -106,7 +106,7 @@ extension AddServicesViewController: UICollectionViewDataSource {
          return UICollectionReusableView()
       }
       
-      header.sectionType = SectionType(rawValue: ServiceManager.shared.sectionHeaderIndex(for: indexPath))
+      header.sectionType = SectionType(rawValue: ServiceManager.shared.addServicesSectionHeaderIndex(for: indexPath))
       header.setNeedsDisplay()
       return header
    }
@@ -148,12 +148,5 @@ extension AddServicesViewController: ServiceCollectionViewCellDelegate {
    func deleteServices(services: [Service]) {
       ServiceManager.shared.deleteServices(services: services)
       self.servicesCollectionView.reloadData()
-   }
-}
-
-extension AddServicesViewController: UIGestureRecognizerDelegate {
-   
-   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-      return true
    }
 }

@@ -96,12 +96,17 @@
 		EF0EAF1A1F99560A0092F810 /* InOutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0EAF191F99560A0092F810 /* InOutAnimator.swift */; };
 		EF1E99F71F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF1E99F61F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib */; };
 		EF1E99F91F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1E99F81F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift */; };
-		EF2172BA1FD17EC30019900B /* Service+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2172B81FD17EC30019900B /* Service+CoreDataClass.swift */; };
 		EF23F1EE1F977503007661BC /* DeleteServicePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */; };
 		EF23F1F01F977517007661BC /* DeleteServicePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */; };
 		EF2A39D31FBF05DD006F186F /* AgendaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2A39D21FBF05DD006F186F /* AgendaView.swift */; };
 		EF2A93FE1F9ABD22001FB319 /* ServicesInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2A93FD1F9ABD22001FB319 /* ServicesInputView.swift */; };
 		EF3290951F927C0F008BB930 /* ClosingDaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3290941F927C0F008BB930 /* ClosingDaysViewController.swift */; };
+		EF34781E1FD7137000F5AB0E /* Employee+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3478181FD7137000F5AB0E /* Employee+CoreDataClass.swift */; };
+		EF34781F1FD7137000F5AB0E /* EmployeePicture+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3478191FD7137000F5AB0E /* EmployeePicture+CoreDataProperties.swift */; };
+		EF3478201FD7137000F5AB0E /* Service+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF34781A1FD7137000F5AB0E /* Service+CoreDataClass.swift */; };
+		EF3478211FD7137000F5AB0E /* Service+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF34781B1FD7137000F5AB0E /* Service+CoreDataProperties.swift */; };
+		EF3478221FD7137000F5AB0E /* Employee+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF34781C1FD7137000F5AB0E /* Employee+CoreDataProperties.swift */; };
+		EF3478231FD7137000F5AB0E /* EmployeePicture+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF34781D1FD7137000F5AB0E /* EmployeePicture+CoreDataClass.swift */; };
 		EF348CCD1F990388007E5FB5 /* NewEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF348CCC1F990388007E5FB5 /* NewEmployeeViewController.swift */; };
 		EF37718A1F9E6DAF00D363B5 /* OkPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF3771891F9E6DAF00D363B5 /* OkPopupView.xib */; };
 		EF37718C1F9E700E00D363B5 /* OkPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF37718B1F9E700E00D363B5 /* OkPopupView.swift */; };
@@ -112,6 +117,7 @@
 		EF5FA4C01F9E3A6800F9086F /* ColorPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */; };
 		EF5FA4C21F9E3B3B00F9086F /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */; };
 		EF649D5D1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */; };
+		EF7346EE1FD5F63100051C48 /* EmployeeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7346ED1FD5F63100051C48 /* EmployeeManager.swift */; };
 		EF85C6911FCECF8C00E52EBC /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF85C6901FCECF8C00E52EBC /* Memo.swift */; };
 		EF8897FB1FCE3DA50012808E /* AddMemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8897FA1FCE3DA50012808E /* AddMemoViewController.swift */; };
 		EF9D3F231FCD808500BCC6FD /* AddAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43A7B41FC4DDE500938ABA /* AddAppointmentViewController.swift */; };
@@ -276,12 +282,17 @@
 		EF0EAF191F99560A0092F810 /* InOutAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutAnimator.swift; sourceTree = "<group>"; };
 		EF1E99F61F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceInputViewCollectionViewCell.xib; sourceTree = "<group>"; };
 		EF1E99F81F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInputViewCollectionViewCell.swift; sourceTree = "<group>"; };
-		EF2172B81FD17EC30019900B /* Service+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeleteServicePopupView.xib; sourceTree = "<group>"; };
 		EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteServicePopupView.swift; sourceTree = "<group>"; };
 		EF2A39D21FBF05DD006F186F /* AgendaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaView.swift; sourceTree = "<group>"; };
 		EF2A93FD1F9ABD22001FB319 /* ServicesInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesInputView.swift; sourceTree = "<group>"; };
 		EF3290941F927C0F008BB930 /* ClosingDaysViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosingDaysViewController.swift; sourceTree = "<group>"; };
+		EF3478181FD7137000F5AB0E /* Employee+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EF3478191FD7137000F5AB0E /* EmployeePicture+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EmployeePicture+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EF34781A1FD7137000F5AB0E /* Service+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Service+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EF34781B1FD7137000F5AB0E /* Service+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Service+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EF34781C1FD7137000F5AB0E /* Employee+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EF34781D1FD7137000F5AB0E /* EmployeePicture+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EmployeePicture+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EF348CCC1F990388007E5FB5 /* NewEmployeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEmployeeViewController.swift; sourceTree = "<group>"; };
 		EF3771891F9E6DAF00D363B5 /* OkPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OkPopupView.xib; sourceTree = "<group>"; };
 		EF37718B1F9E700E00D363B5 /* OkPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkPopupView.swift; sourceTree = "<group>"; };
@@ -292,6 +303,7 @@
 		EF5FA4BF1F9E3A6800F9086F /* ColorPickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorPickerView.xib; sourceTree = "<group>"; };
 		EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeServiceCollectionViewCell.swift; sourceTree = "<group>"; };
+		EF7346ED1FD5F63100051C48 /* EmployeeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeManager.swift; sourceTree = "<group>"; };
 		EF85C6901FCECF8C00E52EBC /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		EF8897FA1FCE3DA50012808E /* AddMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoViewController.swift; sourceTree = "<group>"; };
 		EF9D3F671FCD8BE200BCC6FD /* TagsTextField.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TagsTextField.xcodeproj; path = "../../GP frameworks/TagsTextField/TagsTextField.xcodeproj"; sourceTree = "<group>"; };
@@ -614,10 +626,16 @@
 			isa = PBXGroup;
 			children = (
 				EFE340FE1FD0256400854F3A /* AppointMan.xcdatamodeld */,
+				EF3478181FD7137000F5AB0E /* Employee+CoreDataClass.swift */,
+				EF34781C1FD7137000F5AB0E /* Employee+CoreDataProperties.swift */,
+				EF34781D1FD7137000F5AB0E /* EmployeePicture+CoreDataClass.swift */,
+				EF3478191FD7137000F5AB0E /* EmployeePicture+CoreDataProperties.swift */,
+				EF34781A1FD7137000F5AB0E /* Service+CoreDataClass.swift */,
+				EF34781B1FD7137000F5AB0E /* Service+CoreDataProperties.swift */,
 				EFE341021FD025C800854F3A /* CoreDataStack.swift */,
-				EF2172B81FD17EC30019900B /* Service+CoreDataClass.swift */,
 				EFE341181FD07AF500854F3A /* ServiceColor.swift */,
 				EFE341121FD06A5900854F3A /* ServiceManager.swift */,
+				EF7346ED1FD5F63100051C48 /* EmployeeManager.swift */,
 			);
 			name = MODEL;
 			sourceTree = "<group>";
@@ -858,6 +876,7 @@
 				EFEAD2F91FD43305005C09C7 /* AreYouSurePopupView.swift in Sources */,
 				EF23F1F01F977517007661BC /* DeleteServicePopupView.swift in Sources */,
 				EF4BDC2A1F9FB8A9000F10A2 /* MasonryLayout.swift in Sources */,
+				EF3478211FD7137000F5AB0E /* Service+CoreDataProperties.swift in Sources */,
 				23E63C4C1F41A37E0084EA75 /* FiltraAppuntamentiViewController.swift in Sources */,
 				23C80E411F7D694900C4CACE /* AddEmployeesViewController.swift in Sources */,
 				237C529D1EC4C11700D98DD9 /* Extensions.swift in Sources */,
@@ -872,6 +891,7 @@
 				236DF5041F586C4F00A48C73 /* WorkingHoursPlannerView.swift in Sources */,
 				EF37718C1F9E700E00D363B5 /* OkPopupView.swift in Sources */,
 				23801A641F55745200847830 /* GPFloatingTextField.swift in Sources */,
+				EF34781E1FD7137000F5AB0E /* Employee+CoreDataClass.swift in Sources */,
 				EFE309091F98A2ED006247B2 /* EmployeeCollectionViewCell.swift in Sources */,
 				EFE341031FD025C800854F3A /* CoreDataStack.swift in Sources */,
 				EF3290951F927C0F008BB930 /* ClosingDaysViewController.swift in Sources */,
@@ -888,22 +908,26 @@
 				236DF5001F585BC100A48C73 /* WorkingHoursViewController.swift in Sources */,
 				EF4BDC281F9FB80A000F10A2 /* MemoCollectionViewCell.swift in Sources */,
 				237C52691EC4B6CB00D98DD9 /* AppDelegate.swift in Sources */,
+				EF7346EE1FD5F63100051C48 /* EmployeeManager.swift in Sources */,
+				EF34781F1FD7137000F5AB0E /* EmployeePicture+CoreDataProperties.swift in Sources */,
 				236DF4F71F5825E200A48C73 /* GPSliderDatePickerView.swift in Sources */,
 				236DF4F11F5813CE00A48C73 /* CalendarDayButton.swift in Sources */,
 				EF2A39D31FBF05DD006F186F /* AgendaView.swift in Sources */,
+				EF3478201FD7137000F5AB0E /* Service+CoreDataClass.swift in Sources */,
 				2304A61A1F40599A00E1FB7E /* StatisticheViewController.swift in Sources */,
 				EFE341001FD0256400854F3A /* AppointMan.xcdatamodeld in Sources */,
 				EF348CCD1F990388007E5FB5 /* NewEmployeeViewController.swift in Sources */,
 				EFBB49881F8C41890011698E /* NewServiceViewController.swift in Sources */,
 				EF85C6911FCECF8C00E52EBC /* Memo.swift in Sources */,
 				236DF4F31F58152300A48C73 /* GPSegmentedControl.swift in Sources */,
+				EF3478221FD7137000F5AB0E /* Employee+CoreDataProperties.swift in Sources */,
 				EFE341131FD06A5900854F3A /* ServiceManager.swift in Sources */,
 				238BA8041EC9CD03002F9F0A /* Const.swift in Sources */,
 				EFF22EA11F99F15200C7E052 /* BottomImagePickerView.swift in Sources */,
-				EF2172BA1FD17EC30019900B /* Service+CoreDataClass.swift in Sources */,
 				238B1BB11F52977400A1F6CA /* CalendarDayCollectionViewCell.swift in Sources */,
 				EF0EAF1A1F99560A0092F810 /* InOutAnimator.swift in Sources */,
 				2304A6101F40589400E1FB7E /* RevealMenuViewController.swift in Sources */,
+				EF3478231FD7137000F5AB0E /* EmployeePicture+CoreDataClass.swift in Sources */,
 				2304A6181F40599300E1FB7E /* ProdottiViewController.swift in Sources */,
 				2304A6121F4058D300E1FB7E /* AgendaViewController.swift in Sources */,
 				2304A61E1F4059B900E1FB7E /* ImpostazioniViewController.swift in Sources */,

@@ -157,7 +157,7 @@ class NewServiceViewController: UIViewController {
    }
    
    func loadServicesData() {
-      if let firstService = services?.first, let serviceName = firstService.name, let serviceColor = ServiceColor(rawValue: Int(firstService.color)) {
+      if let firstService = services?.first, let serviceName = firstService.name, let serviceColor = ServiceColor(withInt16: firstService.color) {
          self.serviceColorButton.backgroundColor = serviceColor.getColor()
          self.serviceColor = serviceColor
          self.serviceNameTextField.text = serviceName
@@ -201,6 +201,14 @@ class NewServiceViewController: UIViewController {
    }
    
    @objc func openColorPicker(sender: UIButton) {
+      
+      for subview in self.view.subviews {
+         if subview == self.colorPickerView {
+            self.closeColorPickerView()
+            return
+         }
+      }
+      
       if let colorPickerView = self.colorPickerView {
          colorPickerView.delegate = self
          colorPickerView.alpha = 0.0
@@ -323,31 +331,17 @@ class NewServiceViewController: UIViewController {
    func saveNewService() {
       if let serviceName = self.serviceNameTextField.text, !serviceName.isEmpty {
          if self.isManBoxEnabled {
-            
-            let manService = NSEntityDescription.insertNewObject(forEntityName: "Service", into: self.coreDataStack.managedContext) as! Service
-            manService.name = serviceName
-            manService.color = Int16(self.serviceColor.rawValue)
-            manService.gender = Int16(Gender.male.rawValue)
-            manService.duration = Int16(self.getDuration(fromFirstComponent: self.manDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.manDurationPickerView.selectedRow(inComponent: 2)))
-            
+      
+            let manService = ServiceTuple(name: serviceName, color: Int16(self.serviceColor.rawValue), gender: Int16(Gender.male.rawValue), duration: Int16(self.getDuration(fromFirstComponent: self.manDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.manDurationPickerView.selectedRow(inComponent: 2))))
             do {
-               try self.coreDataStack.saveContext()
+               try ServiceManager.shared.saveService(with: manService)
             } catch let error as NSError {
                print(error.localizedDescription)
                //POPUP "Si è verificato un errore durante il salvataggio del servizio, riprovare"
                return
             }
             
-            let batchUpdate = NSBatchUpdateRequest(entityName: "Service")
-            batchUpdate.predicate = NSPredicate(format: "%K == %@", #keyPath(Service.name), serviceName)
-            batchUpdate.propertiesToUpdate = [#keyPath(Service.color): Int16(self.serviceColor.rawValue)]
-            batchUpdate.affectedStores = self.coreDataStack.managedContext.persistentStoreCoordinator?.persistentStores
-            batchUpdate.resultType = .updatedObjectIDsResultType
-            if let batchResult = try? self.coreDataStack.managedContext.execute(batchUpdate), let result = (batchResult as? NSBatchUpdateResult)?.result as? [NSManagedObjectID] {
-               let changes = [NSUpdatedObjectsKey : result]
-               NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [self.coreDataStack.managedContext])
-               print("\(result) records updated")
-            }
+            ServiceManager.shared.updateServices(withProperty: #keyPath(Service.name), equal: serviceName, withValues: [#keyPath(Service.color): Int16(self.serviceColor.rawValue)])
             
             self.delegate?.didUpdateServices()
             self.dismiss(animated: true, completion: nil)
@@ -355,30 +349,16 @@ class NewServiceViewController: UIViewController {
          
          if self.isWomanBoxEnabled {
             
-            let womanService = NSEntityDescription.insertNewObject(forEntityName: "Service", into: self.coreDataStack.managedContext) as! Service
-            womanService.name = serviceName
-            womanService.color = Int16(self.serviceColor.rawValue)
-            womanService.gender = Int16(Gender.female.rawValue)
-            womanService.duration = Int16(self.getDuration(fromFirstComponent: self.womanDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.womanDurationPickerView.selectedRow(inComponent: 2)))
-            
+            let womanService = (name: serviceName, color: Int16(self.serviceColor.rawValue), gender: Int16(Gender.female.rawValue), duration: Int16(self.getDuration(fromFirstComponent: self.womanDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.womanDurationPickerView.selectedRow(inComponent: 2))))
             do {
-               try self.coreDataStack.saveContext()
+               try ServiceManager.shared.saveService(with: womanService)
             } catch let error as NSError {
                print(error.localizedDescription)
                //POPUP "Si è verificato un errore durante il salvataggio del servizio, riprovare"
                return
             }
             
-            let batchUpdate = NSBatchUpdateRequest(entityName: "Service")
-            batchUpdate.predicate = NSPredicate(format: "%K == %@", #keyPath(Service.name), serviceName)
-            batchUpdate.propertiesToUpdate = [#keyPath(Service.color): Int16(self.serviceColor.rawValue)]
-            batchUpdate.affectedStores = self.coreDataStack.managedContext.persistentStoreCoordinator?.persistentStores
-            batchUpdate.resultType = .updatedObjectIDsResultType
-            if let batchResult = try? self.coreDataStack.managedContext.execute(batchUpdate), let result = (batchResult as? NSBatchUpdateResult)?.result as? [NSManagedObjectID] {
-               let changes = [NSUpdatedObjectsKey : result]
-               NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [self.coreDataStack.managedContext])
-               print("\(result) records updated")
-            }
+            ServiceManager.shared.updateServices(withProperty: #keyPath(Service.name), equal: serviceName, withValues: [#keyPath(Service.color): Int16(self.serviceColor.rawValue)])
             
             self.delegate?.didUpdateServices()
             self.dismiss(animated: true, completion: nil)
@@ -390,25 +370,11 @@ class NewServiceViewController: UIViewController {
       if let serviceName = self.serviceNameTextField.text, !serviceName.isEmpty {
          if self.isManBoxEnabled {
             if self.isOverridingManService {
-               let batchUpdate = NSBatchUpdateRequest(entityName: "Service")
-               batchUpdate.predicate = NSPredicate(format: "%K == %@", #keyPath(Service.name), serviceName)
-               batchUpdate.propertiesToUpdate = [#keyPath(Service.color): Int16(self.serviceColor.rawValue), #keyPath(Service.duration): Int16(self.getDuration(fromFirstComponent: self.manDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.manDurationPickerView.selectedRow(inComponent: 2)))]
-               batchUpdate.affectedStores = self.coreDataStack.managedContext.persistentStoreCoordinator?.persistentStores
-               batchUpdate.resultType = .updatedObjectIDsResultType
-               if let batchResult = try? self.coreDataStack.managedContext.execute(batchUpdate), let result = (batchResult as? NSBatchUpdateResult)?.result as? [NSManagedObjectID] {
-                  let changes = [NSUpdatedObjectsKey : result]
-                  NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [self.coreDataStack.managedContext])
-                  print("\(result) records updated")
-               }
+               ServiceManager.shared.updateServices(withProperty: #keyPath(Service.name), equal: serviceName, withValues: [#keyPath(Service.color): Int16(self.serviceColor.rawValue), #keyPath(Service.duration): Int16(self.getDuration(fromFirstComponent: self.manDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.manDurationPickerView.selectedRow(inComponent: 2)))])
             } else {
-               let manService = NSEntityDescription.insertNewObject(forEntityName: "Service", into: self.coreDataStack.managedContext) as! Service
-               manService.name = serviceName
-               manService.color = Int16(self.serviceColor.rawValue)
-               manService.gender = Int16(Gender.male.rawValue)
-               manService.duration = Int16(self.getDuration(fromFirstComponent: self.manDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.manDurationPickerView.selectedRow(inComponent: 2)))
-               
+               let manService = ServiceTuple(name: serviceName, color: Int16(self.serviceColor.rawValue), gender: Int16(Gender.male.rawValue), duration: Int16(self.getDuration(fromFirstComponent: self.manDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.manDurationPickerView.selectedRow(inComponent: 2))))
                do {
-                  try self.coreDataStack.saveContext()
+                  try ServiceManager.shared.saveService(with: manService)
                } catch let error as NSError {
                   print(error.localizedDescription)
                   //POPUP "Si è verificato un errore durante il salvataggio del servizio, riprovare"
@@ -422,25 +388,11 @@ class NewServiceViewController: UIViewController {
          
          if self.isWomanBoxEnabled {
             if self.isOverridingWomanService {
-               let batchUpdate = NSBatchUpdateRequest(entityName: "Service")
-               batchUpdate.predicate = NSPredicate(format: "%K == %@", #keyPath(Service.name), serviceName)
-               batchUpdate.propertiesToUpdate = [#keyPath(Service.color): Int16(self.serviceColor.rawValue), #keyPath(Service.duration): Int16(self.getDuration(fromFirstComponent: self.manDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.manDurationPickerView.selectedRow(inComponent: 2)))]
-               batchUpdate.affectedStores = self.coreDataStack.managedContext.persistentStoreCoordinator?.persistentStores
-               batchUpdate.resultType = .updatedObjectIDsResultType
-               if let batchResult = try? self.coreDataStack.managedContext.execute(batchUpdate), let result = (batchResult as? NSBatchUpdateResult)?.result as? [NSManagedObjectID] {
-                  let changes = [NSUpdatedObjectsKey : result]
-                  NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [self.coreDataStack.managedContext])
-                  print("\(result) records updated")
-               }
+               ServiceManager.shared.updateServices(withProperty: #keyPath(Service.name), equal: serviceName, withValues: [#keyPath(Service.color): Int16(self.serviceColor.rawValue), #keyPath(Service.duration): Int16(self.getDuration(fromFirstComponent: self.manDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.manDurationPickerView.selectedRow(inComponent: 2)))])
              } else {
-               let womanService = NSEntityDescription.insertNewObject(forEntityName: "Service", into: self.coreDataStack.managedContext) as! Service
-               womanService.name = serviceName
-               womanService.color = Int16(self.serviceColor.rawValue)
-               womanService.gender = Int16(Gender.female.rawValue)
-               womanService.duration = Int16(self.getDuration(fromFirstComponent: self.womanDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.womanDurationPickerView.selectedRow(inComponent: 2)))
-               
+               let womanService = ServiceTuple(name: serviceName, color: Int16(self.serviceColor.rawValue), gender: Int16(Gender.female.rawValue), duration: Int16(self.getDuration(fromFirstComponent: self.womanDurationPickerView.selectedRow(inComponent: 0), andSecondComponent: self.womanDurationPickerView.selectedRow(inComponent: 2))))
                do {
-                  try self.coreDataStack.saveContext()
+                  try ServiceManager.shared.saveService(with: womanService)
                } catch let error as NSError {
                   print(error.localizedDescription)
                   //POPUP "Si è verificato un errore durante il salvataggio del servizio, riprovare"

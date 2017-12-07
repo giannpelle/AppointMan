@@ -17,6 +17,8 @@ class EmployeeCollectionViewCell: UICollectionViewCell {
    @IBOutlet weak var workingHoursStackView: UIStackView!
    @IBOutlet weak var employeeServicesLabel: UILabel!
    
+   var employee: Employee?
+   
    override func draw(_ rect: CGRect) {
       super.draw(rect)
       
@@ -41,14 +43,8 @@ class EmployeeCollectionViewCell: UICollectionViewCell {
    }
    
    func applyTypography() {
-      
-      self.employeeFullNameLabel.attributedText = UILabel.attributedString(withText: "Gianluigi Pelle", andTextColor: UIColor.grayWith(value: 85), andFont: UIFont.init(name: "SFUIText-Semibold", size: 16)!, andCharacterSpacing: 0.0, isCentered: true)
       self.employeeFullNameLabel.heightAnchor.constraint(equalToConstant: 19.0).isActive = true
-      
-      self.employeeCellPhoneNumberLabel.attributedText = UILabel.attributedString(withText: "347 5205469", andTextColor: UIColor.grayWith(value: 85), andFont: UIFont.init(name: "SFUIText-Regular", size: 13.0)!, andCharacterSpacing: 0.0, isCentered: true)
       self.employeeCellPhoneNumberLabel.heightAnchor.constraint(equalToConstant: 15.0).isActive = true
-      
-      self.employeeEmailLabel.attributedText = UILabel.attributedString(withText: "luca.verdde@gmail.com", andTextColor: UIColor.grayWith(value: 85), andFont: UIFont.init(name: "SFUIText-Regular", size: 13.0)!, andCharacterSpacing: 0.0, isCentered: true)
       self.employeeEmailLabel.heightAnchor.constraint(equalToConstant: 15.0).isActive = true
       
       if let weekDayLabels = self.workingHoursStackView.arrangedSubviews as? [UILabel] {
@@ -62,85 +58,117 @@ class EmployeeCollectionViewCell: UICollectionViewCell {
             }
          }
       }
-      
-      let attributedString = NSMutableAttributedString(string: "Taglio Capelli ", attributes: [NSAttributedStringKey.foregroundColor: ServiceColor.getRandomColor()])
+   }
+   
+   func getEmojiiString(from services: [Service]) -> NSAttributedString {
+      let splitServices = self.splitServices(services: services)
       
       let maleAttachment = NSTextAttachment()
       maleAttachment.image = #imageLiteral(resourceName: "emoji_sesso_uomo")
       maleAttachment.bounds = CGRect(x: 0.0, y: 2.0, width: 10.0, height: 10.0)
-      attributedString.append(NSAttributedString(attachment: maleAttachment))
-      
-      attributedString.append(NSAttributedString(string: " "))
       
       let femaleAttachment = NSTextAttachment()
       femaleAttachment.image = #imageLiteral(resourceName: "emoji_sesso_donna")
       femaleAttachment.bounds = CGRect(x: 0.0, y: 1.0, width: 9.0, height: 12.0)
-      attributedString.append(NSAttributedString(attachment: femaleAttachment))
       
-      attributedString.append(NSAttributedString(string: "   Colore ", attributes: [NSAttributedStringKey.foregroundColor: ServiceColor.getRandomColor()]))
+      var isStarted = false
+      let attributedString = NSMutableAttributedString()
       
-      attributedString.append(NSAttributedString(attachment: femaleAttachment))
+      if splitServices.manServices.count > 0 {
+         for service in splitServices.manServices {
+            if let serviceName = service.name, let serviceColor = ServiceColor(withInt16: service.color) {
+               if !isStarted {
+                  isStarted = true
+                  attributedString.append(NSAttributedString(string: serviceName + " ", attributes: [NSAttributedStringKey.foregroundColor: serviceColor.getColor()]))
+                  attributedString.append(NSAttributedString(attachment: maleAttachment))
+               } else {
+                  attributedString.append(NSAttributedString(string: "   " + serviceName + " ", attributes: [NSAttributedStringKey.foregroundColor: serviceColor.getColor()]))
+                  attributedString.append(NSAttributedString(attachment: maleAttachment))
+               }
+            }
+         }
+      }
       
-      attributedString.append(NSAttributedString(string: "   Taglio Barba ", attributes: [NSAttributedStringKey.foregroundColor: ServiceColor.getRandomColor()]))
+      if splitServices.womanServices.count > 0 {
+         for service in splitServices.womanServices {
+            if let serviceName = service.name, let serviceColor = ServiceColor(withInt16: service.color) {
+               if !isStarted {
+                  isStarted = true
+                  attributedString.append(NSAttributedString(string: serviceName + " ", attributes: [NSAttributedStringKey.foregroundColor: serviceColor.getColor()]))
+                  attributedString.append(NSAttributedString(attachment: femaleAttachment))
+               } else {
+                  attributedString.append(NSAttributedString(string: "   " + serviceName + " ", attributes: [NSAttributedStringKey.foregroundColor: serviceColor.getColor()]))
+                  attributedString.append(NSAttributedString(attachment: femaleAttachment))
+               }
+            }
+         }
+      }
       
-      attributedString.append(NSAttributedString(attachment: maleAttachment))
-      
-      attributedString.append(NSAttributedString(string: "   Shampoo Fluo ", attributes: [NSAttributedStringKey.foregroundColor: ServiceColor.getRandomColor()]))
-      
-      attributedString.append(NSAttributedString(attachment: maleAttachment))
-      
-      attributedString.append(NSAttributedString(string: "   Taglio criniera ", attributes: [NSAttributedStringKey.foregroundColor: ServiceColor.getRandomColor()]))
-      
-      attributedString.append(NSAttributedString(attachment: maleAttachment))
+      if splitServices.unisexServices.count > 0 {
+         for services in splitServices.unisexServices {
+            if let serviceName = services.first?.name, let serviceColor = ServiceColor(withInt16: services.first?.color) {
+               if !isStarted {
+                  isStarted = true
+                  attributedString.append(NSAttributedString(string: serviceName + " ", attributes: [NSAttributedStringKey.foregroundColor: serviceColor.getColor()]))
+                  attributedString.append(NSAttributedString(attachment: maleAttachment))
+                  attributedString.append(NSAttributedString(string: " "))
+                  attributedString.append(NSAttributedString(attachment: femaleAttachment))
+               } else {
+                  attributedString.append(NSAttributedString(string: "   " + serviceName + " ", attributes: [NSAttributedStringKey.foregroundColor: serviceColor.getColor()]))
+                  attributedString.append(NSAttributedString(attachment: maleAttachment))
+                  attributedString.append(NSAttributedString(string: " "))
+                  attributedString.append(NSAttributedString(attachment: femaleAttachment))
+               }
+            }
+         }
+      }
       
       let paragraphStyle = NSMutableParagraphStyle()
       paragraphStyle.lineSpacing = 6
       attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
-      
       attributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.init(name: "SFUIText-Semibold", size: 14.0)!, range: NSMakeRange(0, attributedString.length))
+      return attributedString
+   }
+   
+   func splitServices(services: [Service]) -> (manServices: [Service], womanServices: [Service], unisexServices: [[Service]]) {
+      var manServices: [Service] = []
+      var womanServices: [Service] = []
+      var unisexServices: [[Service]] = []
       
-      self.employeeServicesLabel.attributedText = attributedString
+      var pairNames: [String] = []
       
-//      attributedString.append(NSAttributedString(string: " was holdin'\n"))
-//      attributedString.append(NSAttributedString(string: "Ripped "))
-//
-//      let jeansAttachment = NSTextAttachment()
-//      jeansAttachment.image = emojisCollection[1]
-//      jeansAttachment.bounds = iconsSize
-//      attributedString.appendAttributedString(NSAttributedString(attachment: jeansAttachment))
-//
-//      attributedString.appendAttributedString(NSAttributedString(string: " ,\n"))
-//      attributedString.appendAttributedString(NSAttributedString(string: "skin was showin'\n"))
-//
-//      let fireAttachment = NSTextAttachment()
-//      fireAttachment.image = emojisCollection[2]
-//      fireAttachment.bounds = iconsSize
-//      attributedString.appendAttributedString(NSAttributedString(attachment: fireAttachment))
-//
-//      attributedString.appendAttributedString(NSAttributedString(string: " night, wind was "))
-//
-//      let dashAttachment = NSTextAttachment()
-//      dashAttachment.image = emojisCollection[3]
-//      dashAttachment.bounds = iconsSize
-//      attributedString.appendAttributedString(NSAttributedString(attachment: dashAttachment))
-//
-//      attributedString.appendAttributedString(NSAttributedString(string: "\nWhere you think\n"))
-//      attributedString.appendAttributedString(NSAttributedString(string: "you're going, "))
-//
-//      let babyAttachment = NSTextAttachment()
-//      babyAttachment.image = emojisCollection[4]
-//      babyAttachment.bounds = iconsSize
-//      attributedString.appendAttributedString(NSAttributedString(attachment: babyAttachment))
-//
-//      attributedString.appendAttributedString(NSAttributedString(string: " ?"))
-//
-//      label.attributedText = attributedString
+      for service in services {
+         if let serviceName = service.name {
+            if !(pairNames.contains(serviceName)) {
+               if (services.filter { $0.name == service.name }).count > 1 {
+                  unisexServices.append(services.filter { $0.name == service.name })
+                  pairNames.append(serviceName)
+               } else {
+                  if service.gender == Int16(Gender.male.rawValue) {
+                     manServices.append(service)
+                  } else if service.gender == Int16(Gender.female.rawValue) {
+                     womanServices.append(service)
+                  }
+               }
+            }
+         }
+      }
       
-      
+      return (manServices: manServices, womanServices: womanServices, unisexServices: unisexServices)
    }
    
    func setupUI() {
       self.employeeImageView.layer.cornerRadius = self.employeeImageView.bounds.size.width / 2.0
    }
    
+   func loadEmployeeData() {
+      if let employee = self.employee, let firstName = employee.firstName, let lastName = employee.lastName, let cellPhoneNumber = employee.phoneNumber, let email = employee.email, let services = employee.services?.allObjects as? [Service] {
+         self.employeeFullNameLabel.attributedText = UILabel.attributedString(withText: firstName + " " + lastName, andTextColor: UIColor.grayWith(value: 85), andFont: UIFont.init(name: "SFUIText-Semibold", size: 16)!, andCharacterSpacing: 0.0, isCentered: true)
+         self.employeeCellPhoneNumberLabel.attributedText = UILabel.attributedString(withText: cellPhoneNumber, andTextColor: UIColor.grayWith(value: 85), andFont: UIFont.init(name: "SFUIText-Regular", size: 13.0)!, andCharacterSpacing: 0.0, isCentered: true)
+         self.employeeEmailLabel.attributedText = UILabel.attributedString(withText: email, andTextColor: UIColor.grayWith(value: 85), andFont: UIFont.init(name: "SFUIText-Regular", size: 13.0)!, andCharacterSpacing: 0.0, isCentered: true)
+         self.employeeServicesLabel.attributedText = self.getEmojiiString(from: services)
+      }
+   }
+   
 }
+

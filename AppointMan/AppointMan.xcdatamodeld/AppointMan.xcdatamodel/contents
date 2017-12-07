@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="17B1003" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Service" representedClassName="Service" syncable="YES" codeGenerationType="category">
+    <entity name="Employee" representedClassName="Employee" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hiredDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phoneNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="picture" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="EmployeePicture" inverseName="employee" inverseEntity="EmployeePicture" syncable="YES"/>
+        <relationship name="services" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Service" inverseName="employee" inverseEntity="Service" syncable="YES"/>
+    </entity>
+    <entity name="EmployeePicture" representedClassName="EmployeePicture" syncable="YES">
+        <attribute name="pictureData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <relationship name="employee" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Employee" inverseName="picture" inverseEntity="Employee" syncable="YES"/>
+    </entity>
+    <entity name="Service" representedClassName="Service" syncable="YES">
         <attribute name="color" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="duration" attributeType="Integer 16" defaultValueString="30" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="gender" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="employee" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Employee" inverseName="services" inverseEntity="Employee" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Service" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="Employee" positionX="-4637" positionY="-1647" width="128" height="148"/>
+        <element name="Service" positionX="-4448" positionY="-1557" width="128" height="118"/>
+        <element name="EmployeePicture" positionX="-4788" positionY="-1476" width="128" height="75"/>
     </elements>
 </model>

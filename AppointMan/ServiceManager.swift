@@ -10,11 +10,14 @@ import Foundation
 import UIKit
 import CoreData
 
+typealias ServiceTuple = (name: String, color: Int16, gender: Int16, duration: Int16)
+
 class ServiceManager: NSObject {
    static let shared = ServiceManager()
    var coreDataStack: CoreDataStack!
    
    var sorter: Sorter?
+   var cachedInputViewServices: [Service] = []
    var cachedServices: [Service] = [] {
       didSet {
          var manServices: [Service] = []
@@ -63,17 +66,34 @@ class ServiceManager: NSObject {
       }
    }
    
-   func getNumberOfSections() -> Int {
+   func getNumberOfServices() -> Int {
+      self.cachedServices = self.getAllServicesFromPersistentStore()
+      return self.cachedServices.count
+   }
+   
+   func getInputViewService(forItemAt indexPath: IndexPath) -> Service? {
+      if indexPath.section == 0 && indexPath.row == 0 {
+         let allServicesFetchRequest = NSFetchRequest<Service>(entityName: "Service")
+         allServicesFetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+         if let services = try? self.coreDataStack.managedContext.fetch(allServicesFetchRequest) {
+            self.cachedInputViewServices = services
+         }
+      }
+      
+      return self.cachedInputViewServices[indexPath.row]
+   }
+   
+   func getAddServicesNumberOfSections() -> Int {
       self.cachedServices = self.getAllServicesFromPersistentStore()
       return (([self.cachedManServices, self.cachedWomanServices, self.cachedUnisexServices] as [AnyObject]).filter { $0.count > 0 }).count
    }
    
-   func getNumberOfRows(for section: Int) -> Int {
+   func getAddServicesNumberOfRows(for section: Int) -> Int {
       guard self.cachedServices.count > 0 else { return 0 }
       return (([self.cachedManServices, self.cachedWomanServices, self.cachedUnisexServices] as [AnyObject]).filter { $0.count > 0 })[section].count
    }
    
-   func services(forItemAt indexPath: IndexPath) -> [Service] {
+   func addServicesServices(forItemAt indexPath: IndexPath) -> [Service] {
       let services = ([self.cachedManServices, self.cachedWomanServices, self.cachedUnisexServices] as [AnyObject]).filter { $0.count > 0 }
       if let manServices = services[indexPath.section] as? [Service], (manServices.filter { $0.gender == Int16(Gender.male.rawValue) }).count > 0 {
          return [manServices[indexPath.row]]
@@ -86,7 +106,7 @@ class ServiceManager: NSObject {
       return []
    }
    
-   func sectionHeaderIndex(for indexPath: IndexPath) -> Int {
+   func addServicesSectionHeaderIndex(for indexPath: IndexPath) -> Int {
       let services = ([self.cachedManServices, self.cachedWomanServices, self.cachedUnisexServices] as [AnyObject]).filter { $0.count > 0 }
       if let manServices = services[indexPath.section] as? [Service], (manServices.filter { $0.gender == Int16(Gender.male.rawValue) }).count > 0 {
          return 0
@@ -96,6 +116,29 @@ class ServiceManager: NSObject {
          return 2
       }
       return 0
+   }
+   
+   func saveService(with service: ServiceTuple) throws {
+      let newService = NSEntityDescription.insertNewObject(forEntityName: "Service", into: self.coreDataStack.managedContext) as! Service
+      newService.name = service.name
+      newService.color = service.color
+      newService.gender = service.gender
+      newService.duration = service.duration
+      
+      try self.coreDataStack.saveContext()
+   }
+   
+   func updateServices(withProperty property: String, equal: Any, withValues values: [String: Any]) {
+      let batchUpdate = NSBatchUpdateRequest(entityName: "Service")
+      batchUpdate.predicate = NSPredicate(format: "%K == %@", argumentArray: [property, equal])
+      batchUpdate.propertiesToUpdate = values
+      batchUpdate.affectedStores = self.coreDataStack.managedContext.persistentStoreCoordinator?.persistentStores
+      batchUpdate.resultType = .updatedObjectIDsResultType
+      if let batchResult = try? self.coreDataStack.managedContext.execute(batchUpdate), let result = (batchResult as? NSBatchUpdateResult)?.result as? [NSManagedObjectID] {
+         let changes = [NSUpdatedObjectsKey : result]
+         NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [self.coreDataStack.managedContext])
+         print("\(result) records updated")
+      }
    }
    
    func deleteServices(services: [Service]) {

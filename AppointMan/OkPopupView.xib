@@ -74,6 +74,7 @@
             <viewLayoutGuide key="safeArea" id="BDF-LJ-zHD"/>
             <connections>
                 <outlet property="closePopupButton" destination="opp-rK-VZ1" id="pKu-s7-Vcy"/>
+                <outlet property="navigationBarView" destination="S4y-hg-Sax" id="oue-SO-Fys"/>
                 <outlet property="okButton" destination="Nvf-9X-Q9n" id="qYJ-Nb-cGq"/>
                 <outlet property="popupMessageLabel" destination="k6n-i9-tNO" id="aTp-e0-F6p"/>
                 <outlet property="popupTitleLabel" destination="0JG-42-plD" id="2PX-FO-TSN"/>

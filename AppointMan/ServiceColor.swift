@@ -21,6 +21,14 @@ enum ServiceColor: Int {
       }
    }
    
+   init?(withInt16 int16: Int16?) {
+      if let value = int16, value >= 0 && value <= 20 {
+         self = ServiceColor(rawValue: Int(value))!
+         return
+      }
+      return nil
+   }
+   
    func getColor(dark: Bool = false) -> UIColor {
       switch self {
       case .one:
@@ -79,6 +87,14 @@ enum ServiceColor: Int {
 
 enum Gender: Int {
    case male = 0, female
+   
+   init?(withInt16 int16: Int16?) {
+      if let value = int16, value >= 0 && value <= 1 {
+         self = Gender(rawValue: Int(value))!
+         return
+      }
+      return nil
+   }
    
    func getGenderMiniature() -> UIImage {
       switch self {
