@@ -11,6 +11,7 @@ import UIKit
 class EmployeeServiceCollectionViewCell: UICollectionViewCell {
    
    @IBOutlet weak var serviceLabel: UILabel!
+   @IBOutlet weak var serviceLabelMaxWidthConstraint: NSLayoutConstraint!
    @IBOutlet weak var removeServiceButton: UIButton!
    
    var shadowLayer: CAShapeLayer?
@@ -32,7 +33,7 @@ class EmployeeServiceCollectionViewCell: UICollectionViewCell {
    override func awakeFromNib() {
       super.awakeFromNib()
       
-      //self.drawBorder()
+      self.serviceLabelMaxWidthConstraint.constant = UIScreen.main.bounds.size.width - 42.0
       self.applyTypography()
       self.setupUI()
    }

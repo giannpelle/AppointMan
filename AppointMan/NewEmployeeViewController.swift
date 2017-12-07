@@ -33,6 +33,8 @@ class NewEmployeeViewController: UIViewController {
    
    weak var delegate: NewEmployeeViewControllerDelegate?
    
+   var sizingCell: EmployeeServiceCollectionViewCell?
+   
    var employee: Employee?
    var employeeServices: [Service] = []
    
@@ -122,10 +124,16 @@ class NewEmployeeViewController: UIViewController {
       self.addEmployeeWorkingHoursButton.layer.cornerRadius = 5.0
       self.addServicesButton.setImage(#imageLiteral(resourceName: "on_boarding_plus"), for: .normal)
       self.addServicesButton.setImage(#imageLiteral(resourceName: "on_boarding_plus_disabled"), for: .disabled)
+      self.employeeServicesCollectionView.register(UINib(nibName: "EmployeeServiceCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "employeeServiceCellId")
       self.employeeServicesCollectionView.dataSource = self
       self.employeeServicesCollectionView.delegate = self
       self.employeeServicesCollectionView.contentInset = UIEdgeInsetsMake(7.0, 20.0, 7.0, 20.0)
       (self.employeeServicesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.estimatedItemSize = CGSize(width: 100.0, height: 30.0)
+      
+      if let sizingCell = UINib(nibName: "EmployeeServiceCollectionViewCell", bundle: Bundle.main).instantiate(withOwner: self, options: nil).first as? EmployeeServiceCollectionViewCell {
+         self.sizingCell = sizingCell
+      }
+      
       self.saveButton.layer.cornerRadius = 3.0
       //self.saveButton.isEnabled = false
       self.saveButton.setBackgroundColor(color: UIColor.amBlue, forState: .normal)
@@ -339,6 +347,11 @@ extension NewEmployeeViewController: UICollectionViewDataSource {
 }
 
 extension NewEmployeeViewController: UICollectionViewDelegateFlowLayout {
+   
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+      self.sizingCell?.service = self.employeeServices[indexPath.row]
+      return self.sizingCell?.systemLayoutSizeFitting(UILayoutFittingCompressedSize) ?? CGSize.zero
+   }
    
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
       return 10.0

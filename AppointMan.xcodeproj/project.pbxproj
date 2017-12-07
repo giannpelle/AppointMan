@@ -96,6 +96,8 @@
 		EF0EAF1A1F99560A0092F810 /* InOutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0EAF191F99560A0092F810 /* InOutAnimator.swift */; };
 		EF1E99F71F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF1E99F61F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib */; };
 		EF1E99F91F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1E99F81F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift */; };
+		EF1F1E641FD95A1000F03045 /* TagsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1F1E631FD95A1000F03045 /* TagsFlowLayout.swift */; };
+		EF1F1E661FD95B0500F03045 /* EmployeeServiceCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF1F1E651FD95B0500F03045 /* EmployeeServiceCollectionViewCell.xib */; };
 		EF23F1EE1F977503007661BC /* DeleteServicePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */; };
 		EF23F1F01F977517007661BC /* DeleteServicePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */; };
 		EF2A39D31FBF05DD006F186F /* AgendaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2A39D21FBF05DD006F186F /* AgendaView.swift */; };
@@ -282,6 +284,8 @@
 		EF0EAF191F99560A0092F810 /* InOutAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutAnimator.swift; sourceTree = "<group>"; };
 		EF1E99F61F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceInputViewCollectionViewCell.xib; sourceTree = "<group>"; };
 		EF1E99F81F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInputViewCollectionViewCell.swift; sourceTree = "<group>"; };
+		EF1F1E631FD95A1000F03045 /* TagsFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsFlowLayout.swift; sourceTree = "<group>"; };
+		EF1F1E651FD95B0500F03045 /* EmployeeServiceCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeServiceCollectionViewCell.xib; sourceTree = "<group>"; };
 		EF23F1ED1F977503007661BC /* DeleteServicePopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeleteServicePopupView.xib; sourceTree = "<group>"; };
 		EF23F1EF1F977517007661BC /* DeleteServicePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteServicePopupView.swift; sourceTree = "<group>"; };
 		EF2A39D21FBF05DD006F186F /* AgendaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaView.swift; sourceTree = "<group>"; };
@@ -358,6 +362,7 @@
 				2304A61F1F4060A700E1FB7E /* Gadgets.swift */,
 				EF0EAF191F99560A0092F810 /* InOutAnimator.swift */,
 				EF4BDC291F9FB8A9000F10A2 /* MasonryLayout.swift */,
+				EF1F1E631FD95A1000F03045 /* TagsFlowLayout.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -483,6 +488,7 @@
 				EF2A93FD1F9ABD22001FB319 /* ServicesInputView.swift */,
 				EF1E99F61F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib */,
 				EF1E99F81F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift */,
+				EF1F1E651FD95B0500F03045 /* EmployeeServiceCollectionViewCell.xib */,
 				EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */,
 			);
 			name = Views;
@@ -814,6 +820,7 @@
 				23E63CB31F41B15A0084EA75 /* SFText-RegularItalic.otf in Resources */,
 				23E63C8E1F41B15A0084EA75 /* SF-Pro-Display-RegularItalic.otf in Resources */,
 				23FEE87B1EE4B3DB0062192C /* AppointmentBox.xib in Resources */,
+				EF1F1E661FD95B0500F03045 /* EmployeeServiceCollectionViewCell.xib in Resources */,
 				23E63CA51F41B15A0084EA75 /* SFDisplay-Medium.otf in Resources */,
 				23E63CA81F41B15A0084EA75 /* SFDisplay-Thin.otf in Resources */,
 				23E63CA41F41B15A0084EA75 /* SFDisplay-Light.otf in Resources */,
@@ -923,6 +930,7 @@
 				EF3478221FD7137000F5AB0E /* Employee+CoreDataProperties.swift in Sources */,
 				EFE341131FD06A5900854F3A /* ServiceManager.swift in Sources */,
 				238BA8041EC9CD03002F9F0A /* Const.swift in Sources */,
+				EF1F1E641FD95A1000F03045 /* TagsFlowLayout.swift in Sources */,
 				EFF22EA11F99F15200C7E052 /* BottomImagePickerView.swift in Sources */,
 				238B1BB11F52977400A1F6CA /* CalendarDayCollectionViewCell.swift in Sources */,
 				EF0EAF1A1F99560A0092F810 /* InOutAnimator.swift in Sources */,
