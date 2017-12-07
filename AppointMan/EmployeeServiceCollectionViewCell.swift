@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol EmployeeServiceCollectionViewCellDelegate: class {
+   func didRemove(service: Service)
+}
+
 class EmployeeServiceCollectionViewCell: UICollectionViewCell {
    
    @IBOutlet weak var serviceLabel: UILabel!
    @IBOutlet weak var serviceLabelMaxWidthConstraint: NSLayoutConstraint!
    @IBOutlet weak var removeServiceButton: UIButton!
+   
+   weak var delegate: EmployeeServiceCollectionViewCellDelegate?
    
    var shadowLayer: CAShapeLayer?
    
@@ -76,11 +82,16 @@ class EmployeeServiceCollectionViewCell: UICollectionViewCell {
    
    func setupUI() {
       self.removeServiceButton.contentEdgeInsets = UIEdgeInsetsMake(0.0, 6.0, 0.0, 6.0)
+      self.removeServiceButton.addTarget(self, action: #selector(self.removeServiceButtonPressed(sender:)), for: .touchUpInside)
    }
    
    override func layoutSubviews() {
       super.layoutSubviews()
       
       self.drawBorder()
+   }
+   
+   @objc func removeServiceButtonPressed(sender: UIButton) {
+      self.delegate?.didRemove(service: self.service)
    }
 }

@@ -128,7 +128,6 @@ class NewEmployeeViewController: UIViewController {
       self.employeeServicesCollectionView.dataSource = self
       self.employeeServicesCollectionView.delegate = self
       self.employeeServicesCollectionView.contentInset = UIEdgeInsetsMake(7.0, 20.0, 7.0, 20.0)
-      (self.employeeServicesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.estimatedItemSize = CGSize(width: 100.0, height: 30.0)
       
       if let sizingCell = UINib(nibName: "EmployeeServiceCollectionViewCell", bundle: Bundle.main).instantiate(withOwner: self, options: nil).first as? EmployeeServiceCollectionViewCell {
          self.sizingCell = sizingCell
@@ -315,7 +314,6 @@ extension NewEmployeeViewController: ServicesInputViewDelegate {
    
    func didUpdateServices(services: [Service]) {
       self.employeeServices = services
-      self.employeeServicesCollectionView.collectionViewLayout.invalidateLayout()
       self.employeeServicesCollectionView.reloadData()
    }
    
@@ -341,6 +339,7 @@ extension NewEmployeeViewController: UICollectionViewDataSource {
          return UICollectionViewCell()
       }
       
+      cell.delegate = self
       cell.service = self.employeeServices[indexPath.row]
       return cell
    }
@@ -364,6 +363,18 @@ extension NewEmployeeViewController: UICollectionViewDelegateFlowLayout {
 
 extension NewEmployeeViewController: UICollectionViewDelegate {
    
+}
+
+extension NewEmployeeViewController: EmployeeServiceCollectionViewCellDelegate {
+   
+   func didRemove(service: Service) {
+      if let index = self.employeeServices.index(where: { (currentService) -> Bool in
+         return currentService.name == service.name && currentService.gender == service.gender
+      }) {
+         self.employeeServices.remove(at: index)
+         self.employeeServicesCollectionView.reloadData()
+      }
+   }
 }
 
 extension NewEmployeeViewController: UITextFieldDelegate {
