@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol EmployeeCollectionViewCellDelegate: class {
+   func editEmployee(employee: Employee)
+}
+
 class EmployeeCollectionViewCell: UICollectionViewCell {
    
    @IBOutlet weak var employeeImageView: UIImageView!
@@ -17,7 +21,13 @@ class EmployeeCollectionViewCell: UICollectionViewCell {
    @IBOutlet weak var workingHoursStackView: UIStackView!
    @IBOutlet weak var employeeServicesLabel: UILabel!
    
-   var employee: Employee?
+   weak var delegate: EmployeeCollectionViewCellDelegate?
+   
+   var employee: Employee? {
+      didSet {
+         self.loadEmployeeData()
+      }
+   }
    
    override func draw(_ rect: CGRect) {
       super.draw(rect)
@@ -40,6 +50,7 @@ class EmployeeCollectionViewCell: UICollectionViewCell {
       
       self.applyTypography()
       self.setupUI()
+      self.loadEmployeeData()
    }
    
    func applyTypography() {
@@ -65,11 +76,11 @@ class EmployeeCollectionViewCell: UICollectionViewCell {
       
       let maleAttachment = NSTextAttachment()
       maleAttachment.image = #imageLiteral(resourceName: "emoji_sesso_uomo")
-      maleAttachment.bounds = CGRect(x: 0.0, y: 2.0, width: 10.0, height: 10.0)
+      maleAttachment.bounds = CGRect(x: 0.0, y: 0.0, width: 10.0, height: 10.0)
       
       let femaleAttachment = NSTextAttachment()
       femaleAttachment.image = #imageLiteral(resourceName: "emoji_sesso_donna")
-      femaleAttachment.bounds = CGRect(x: 0.0, y: 1.0, width: 9.0, height: 12.0)
+      femaleAttachment.bounds = CGRect(x: 0.0, y: -1.0, width: 9.0, height: 12.0)
       
       var isStarted = false
       let attributedString = NSMutableAttributedString()
@@ -162,11 +173,32 @@ class EmployeeCollectionViewCell: UICollectionViewCell {
    }
    
    func loadEmployeeData() {
-      if let employee = self.employee, let firstName = employee.firstName, let lastName = employee.lastName, let cellPhoneNumber = employee.phoneNumber, let email = employee.email, let services = employee.services?.allObjects as? [Service] {
+      if let employee = self.employee, let firstName = employee.firstName, let lastName = employee.lastName {
          self.employeeFullNameLabel.attributedText = UILabel.attributedString(withText: firstName + " " + lastName, andTextColor: UIColor.grayWith(value: 85), andFont: UIFont.init(name: "SFUIText-Semibold", size: 16)!, andCharacterSpacing: 0.0, isCentered: true)
-         self.employeeCellPhoneNumberLabel.attributedText = UILabel.attributedString(withText: cellPhoneNumber, andTextColor: UIColor.grayWith(value: 85), andFont: UIFont.init(name: "SFUIText-Regular", size: 13.0)!, andCharacterSpacing: 0.0, isCentered: true)
-         self.employeeEmailLabel.attributedText = UILabel.attributedString(withText: email, andTextColor: UIColor.grayWith(value: 85), andFont: UIFont.init(name: "SFUIText-Regular", size: 13.0)!, andCharacterSpacing: 0.0, isCentered: true)
-         self.employeeServicesLabel.attributedText = self.getEmojiiString(from: services)
+         
+         if let employeePictureData = employee.picture?.pictureData as Data? {
+            let employeePicture = UIImage(data: employeePictureData)
+            self.employeeImageView.image = employeePicture
+         }
+         
+         if let cellPhoneNumber = employee.phoneNumber {
+            self.employeeCellPhoneNumberLabel.attributedText = UILabel.attributedString(withText: cellPhoneNumber, andTextColor: UIColor.grayWith(value: 85), andFont: UIFont.init(name: "SFUIText-Regular", size: 13.0)!, andCharacterSpacing: 0.0, isCentered: true)
+         }
+         
+         if let email = employee.email {
+            self.employeeEmailLabel.attributedText = UILabel.attributedString(withText: email, andTextColor: UIColor.grayWith(value: 85), andFont: UIFont.init(name: "SFUIText-Regular", size: 13.0)!, andCharacterSpacing: 0.0, isCentered: true)
+         }
+         
+         if let services = employee.services?.allObjects as? [Service] {
+            self.employeeServicesLabel.attributedText = self.getEmojiiString(from: services)
+         }
+         
+      }
+   }
+   
+   @IBAction func editEmployeeButtonPressed(sender: UIButton) {
+      if let employee = self.employee {
+         self.delegate?.editEmployee(employee: employee)
       }
    }
    

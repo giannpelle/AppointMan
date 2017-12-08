@@ -524,6 +524,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wjB-Ab-vob">
                                                     <rect key="frame" x="283" y="16" width="17" height="22"/>
                                                     <state key="normal" image="iconcina_matita"/>
+                                                    <connections>
+                                                        <action selector="editEmployeeButtonPressedWithSender:" destination="YIk-Cb-gyL" eventType="touchUpInside" id="1GH-zH-E4b"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVb-M6-KEV">
                                                     <rect key="frame" x="136.5" y="104" width="42" height="20.5"/>

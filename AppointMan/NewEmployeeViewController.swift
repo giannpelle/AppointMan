@@ -68,6 +68,7 @@ class NewEmployeeViewController: UIViewController {
       
       self.applyTypography()
       self.setupUI()
+      self.loadEmployeeData()
    }
    
    func applyTypography() {
@@ -141,13 +142,29 @@ class NewEmployeeViewController: UIViewController {
    
    func loadEmployeeData() {
       if let employee = self.employee {
-         self.employeeFirstNameFloatingTextField.text = employee.firstName
-         self.employeeLastNameFloatingTextField.text = employee.lastName
-         self.employeeCellPhoneNumberFloatingTextField.text = employee.phoneNumber
-         self.employeeEmailFloatingTextField.text = employee.email
+         let style = NSMutableParagraphStyle()
+         style.lineSpacing = 14.0
+         style.alignment = .natural
+         let attributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey.paragraphStyle: style, NSAttributedStringKey.kern: 0.0, NSAttributedStringKey.font: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, NSAttributedStringKey.foregroundColor: UIColor.amFloatingTextFieldText]
          
+         if let firstName = employee.firstName {
+            self.employeeFirstNameFloatingTextField.attributedText = NSAttributedString(string: firstName, attributes: attributes)
+         }
+         if let lastName = employee.lastName {
+            self.employeeLastNameFloatingTextField.attributedText = NSAttributedString(string: lastName, attributes: attributes)
+         }
+         if let cellPhoneNumber = employee.phoneNumber {
+            self.employeeCellPhoneNumberFloatingTextField.attributedText = NSAttributedString(string: cellPhoneNumber, attributes: attributes)
+         }
+         if let email = employee.email {
+            self.employeeEmailFloatingTextField.attributedText = NSAttributedString(string: email, attributes: attributes)
+         }
          if let employeeIMageData = employee.picture?.pictureData, let employeeImage = UIImage(data: employeeIMageData as Data) {
             self.employeeImageView.image = employeeImage
+         }
+         
+         if let employeeServices = employee.services, let employeeArray = Array(employeeServices) as? [Service] {
+            self.employeeServices = employeeArray
          }
       }
    }
@@ -231,12 +248,16 @@ class NewEmployeeViewController: UIViewController {
             newEmployee.pictureData = UIImagePNGRepresentation(pictureImage) as NSData?
          }
          
-         do {
-            try EmployeeManager.shared.saveEmployee(with: newEmployee)
-         } catch let error as NSError {
-            print(error.localizedDescription)
-            //POPUP "Si è verificato un errore durante il salvataggio del servizio, riprovare"
-            return
+         if EmployeeManager.shared.needsToUpdateEmployee(employeeTuple: newEmployee) {
+            EmployeeManager.shared.updateEmployee(withFirstName: firstName, andLastName: lastName, withValues: [#keyPath(Employee.phoneNumber): newEmployee.cellPhoneNumber ?? "", #keyPath(Employee.email): newEmployee.email ?? "", #keyPath(Employee.services): self.employeeServices])
+         } else {
+            do {
+               try EmployeeManager.shared.saveEmployee(with: newEmployee)
+            } catch let error as NSError {
+               print(error.localizedDescription)
+               //POPUP "Si è verificato un errore durante il salvataggio del servizio, riprovare"
+               return
+            }
          }
          
          self.delegate?.didUpdateEmployees()

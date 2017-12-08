@@ -160,7 +160,13 @@ class NewServiceViewController: UIViewController {
       if let firstService = services?.first, let serviceName = firstService.name, let serviceColor = ServiceColor(withInt16: firstService.color) {
          self.serviceColorButton.backgroundColor = serviceColor.getColor()
          self.serviceColor = serviceColor
-         self.serviceNameTextField.text = serviceName
+         
+         let style = NSMutableParagraphStyle()
+         style.lineSpacing = 14.0
+         style.alignment = .natural
+         let attributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey.paragraphStyle: style, NSAttributedStringKey.kern: 0.0, NSAttributedStringKey.font: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, NSAttributedStringKey.foregroundColor: UIColor.amFloatingTextFieldText]
+         self.serviceNameTextField.attributedText = NSAttributedString(string: serviceName, attributes: attributes)
+
          if firstService.gender == Int16(Gender.male.rawValue) {
             self.isManBoxEnabled = true
             let duration = Int(firstService.duration)

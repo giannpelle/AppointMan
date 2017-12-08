@@ -54,10 +54,11 @@ class AddEmployeesViewController: UIViewController {
    }
    
    @IBAction func newEmployeeButtonPressed(sender: UIButton) {
-      let newServiceVC = UIStoryboard.newEmployeeVC()
-      newServiceVC.modalPresentationStyle = .formSheet
-      newServiceVC.preferredContentSize = CGSize(width: 540.0, height: 645.0)
-      self.present(newServiceVC, animated: true, completion: nil)
+      let newEmployeeVC = UIStoryboard.newEmployeeVC()
+      newEmployeeVC.delegate = self
+      newEmployeeVC.modalPresentationStyle = .formSheet
+      newEmployeeVC.preferredContentSize = CGSize(width: 540.0, height: 645.0)
+      self.present(newEmployeeVC, animated: true, completion: nil)
    }
    
 }
@@ -77,6 +78,7 @@ extension AddEmployeesViewController: UICollectionViewDataSource {
          return UICollectionViewCell()
       }
       
+      cell.delegate = self
       cell.employee = EmployeeManager.shared.employee(forItemAt: indexPath)
       return cell
    }
@@ -91,4 +93,23 @@ extension AddEmployeesViewController: UICollectionViewDelegateFlowLayout {
 
 extension AddEmployeesViewController: UICollectionViewDelegate {
    
+}
+
+extension AddEmployeesViewController: NewEmployeeViewControllerDelegate {
+   
+   func didUpdateEmployees() {
+      self.employeesCollectionView.reloadData()
+   }
+}
+
+extension AddEmployeesViewController: EmployeeCollectionViewCellDelegate {
+  
+   func editEmployee(employee: Employee) {
+      let newEmployeeVC = UIStoryboard.newEmployeeVC()
+      newEmployeeVC.delegate = self
+      newEmployeeVC.employee = employee
+      newEmployeeVC.modalPresentationStyle = .formSheet
+      newEmployeeVC.preferredContentSize = CGSize(width: 540.0, height: 645.0)
+      self.present(newEmployeeVC, animated: true, completion: nil)
+   }
 }

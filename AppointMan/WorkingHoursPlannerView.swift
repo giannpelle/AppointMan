@@ -201,6 +201,9 @@ class WorkingHoursPlannerView: UIView {
       case .changed:
          if let currentCardView = self.currentCardView, let colomn = self.currentCardViewColomn {
             let endFrame = self.getHalfHourFrame(from: currentFingerLocation, forColomn: colomn)
+            
+            
+            
             if let startFrame = self.currentStartFrame {
                currentCardView.frame = startFrame.union(endFrame)
                if endFrame.origin.y > startFrame.origin.y {
@@ -287,6 +290,13 @@ class WorkingHoursPlannerView: UIView {
    }
    
    func getRowIndex(forLocation location: CGPoint) -> Int {
+      guard location.y > 0 else {
+         return 0
+      }
+      guard location.y < self.bounds.size.height else {
+         return Int((self.bounds.size.height - 4.0) / self.halfHourUnitHeight)
+      }
+      
       return Int(location.y / self.halfHourUnitHeight)
    }
    
