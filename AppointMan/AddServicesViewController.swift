@@ -59,7 +59,6 @@ class AddServicesViewController: UIViewController {
    @IBAction func newServiceButtonPressed(sender: UIButton) {
       let newServiceVC = UIStoryboard.newServiceVC()
       newServiceVC.delegate = self
-      newServiceVC.coreDataStack = self.coreDataStack
       newServiceVC.modalPresentationStyle = .formSheet
       newServiceVC.preferredContentSize = CGSize(width: 540.0, height: 540.0)
       self.present(newServiceVC, animated: true, completion: nil)
@@ -138,7 +137,6 @@ extension AddServicesViewController: ServiceCollectionViewCellDelegate {
    func editServices(services: [Service]) {
       let newServiceVC = UIStoryboard.newServiceVC()
       newServiceVC.delegate = self
-      newServiceVC.coreDataStack = self.coreDataStack
       newServiceVC.services = services
       newServiceVC.modalPresentationStyle = .formSheet
       newServiceVC.preferredContentSize = CGSize(width: 540.0, height: 540.0)

@@ -15,6 +15,7 @@ class GPFloatingTextField: UITextField {
    var underlineLayer: CALayer!
    var titleHeaderLabel: UILabel!
    var titleHeaderLabelTopAnchor: NSLayoutConstraint!
+   var isAnimationEnabled: Bool = true
    
    lazy var textAttributes: [String: Any] = {
       let style = NSMutableParagraphStyle()
@@ -24,11 +25,24 @@ class GPFloatingTextField: UITextField {
       return attributes
    }()
    
+   lazy var txtAttributes: [NSAttributedStringKey: Any] = {
+      let style = NSMutableParagraphStyle()
+      style.lineSpacing = 14.0
+      style.alignment = .natural
+      let attributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey.paragraphStyle: style, NSAttributedStringKey.kern: 0.0, NSAttributedStringKey.font: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, NSAttributedStringKey.foregroundColor: UIColor.amFloatingTextFieldText]
+      return attributes
+   }()
+   
    override var isEditing: Bool {
       get {
          self.typingAttributes = self.textAttributes
          if let text = self.attributedText, text.string != "" {
-            self.showTitleHeaderLabel()
+            if self.isAnimationEnabled {
+               self.showTitleHeaderLabel()
+            } else {
+               self.showTitleHeaderLabelWithoutAnimation()
+               self.isAnimationEnabled = true
+            }
          } else {
             self.hideTitleHeaderLabel()
          }
@@ -88,6 +102,11 @@ class GPFloatingTextField: UITextField {
       self.titleHeaderLabel.heightAnchor.constraint(equalToConstant: 13.0).isActive = true
    }
    
+   func setTextWithoutAnimation(text: String) {
+      self.isAnimationEnabled = false
+      self.attributedText = NSAttributedString(string: text, attributes: self.txtAttributes)
+   }
+   
    private func showTitleHeaderLabel() {
       self.titleHeaderLabelTopAnchor.constant = 0.0
       UIView.animate(withDuration: 0.7, animations: { 
@@ -96,6 +115,12 @@ class GPFloatingTextField: UITextField {
       }) { (success) in
          
       }
+   }
+   
+   private func showTitleHeaderLabelWithoutAnimation() {
+      self.titleHeaderLabelTopAnchor.constant = 0.0
+      self.titleHeaderLabel.alpha = 1.0
+      self.layoutIfNeeded()
    }
    
    private func hideTitleHeaderLabel() {

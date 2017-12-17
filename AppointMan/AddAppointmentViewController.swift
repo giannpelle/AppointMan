@@ -6,6 +6,7 @@
 //  Copyright © 2017 Scratch App. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import TagsTextField
 
@@ -20,7 +21,8 @@ class AddAppointmentViewController: UIViewController {
       
       self.customersTagsTextField.dataSource = self
       self.customersTagsTextField.delegate = self
-      
+      self.customersTagsTextField.setup(withAttributedPlaceholderText: UILabel.attributedString(withText: "Nome cliente", andTextColor: UIColor.grayWith(value: 152.0), andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: 0.0))
+      //self.customersTagsTextField.setup(withAttributedPlaceholderText: UILabel.att)
       
    }
    

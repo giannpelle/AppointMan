@@ -12,6 +12,13 @@ class CardView: UIView {
    
    var topHourIndicatorLabel: UILabel!
    var bottomHourIndicatorLabel: UILabel!
+   var binButton: UIButton!
+   
+   var isEditMode: Bool = false {
+      didSet {
+         self.binButton.isHidden = !self.isEditMode
+      }
+   }
    
    override func draw(_ rect: CGRect) {
       super.draw(rect)
@@ -45,7 +52,15 @@ class CardView: UIView {
       self.addSubview(self.bottomHourIndicatorLabel)
       self.bottomHourIndicatorLabel.translatesAutoresizingMaskIntoConstraints = false
       self.bottomHourIndicatorLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5.0).isActive = true
-      self.bottomHourIndicatorLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15.0).isActive = true
+      self.bottomHourIndicatorLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15.0).isActive = true
+      
+      self.binButton = UIButton()
+      self.binButton.setImage(#imageLiteral(resourceName: "icona_cestino"), for: .normal)
+      self.binButton.isHidden = true
+      self.addSubview(self.binButton)
+      self.binButton.translatesAutoresizingMaskIntoConstraints = false
+      self.binButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 11.0).isActive = true
+      self.binButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5.0).isActive = true
    }
    
 }
@@ -57,18 +72,23 @@ class WorkingHoursPlannerView: UIView {
    let numberOfHours: CGFloat = 17.0
    var colomnWidth: CGFloat!
    
-//   var weekDayRects: [CGRect] = []
-//   var halfHourRects: [CGRect] = []
-//   var boxViews: [[BoxView]] = [[], [], [], [], [], [], []]
-//   var currentBoxView: BoxView?
    var topPlaceholderView: PlaceholderOverlayableView!
    var bottomPlaceholderView: PlaceholderOverlayableView!
    var currentStartFrame: CGRect?
    var currentCardView: CardView?
    var currentCardViewColomn: Int?
-//
-//   var currentColomnIndex: Int = 0
-//   var initialHalfHourViewIndex: Int = 0
+   var borderLineWorkingHoursTimer: Timer?
+   var isBorderLineWorkingHoursTimerRunning: Bool = false
+   var borderLineWorkingHoursTimerDirection: Direction?
+   var borderLineWorkingHoursTimerVelocity: Int?
+   var borderLineWorkingHoursTimerLocationInView: CGPoint?
+   
+   var isLongPressOutOfBounds: Bool = false
+   
+   var workingHoursScrollView: UIScrollView? {
+      return self.superview as? UIScrollView
+   }
+   
 //   var isEditMode: Bool = false {
 //      didSet {
 //         for boxViews in self.boxViews {
@@ -145,17 +165,6 @@ class WorkingHoursPlannerView: UIView {
       self.colomnWidth = self.bounds.size.width / 7.0
    }
    
-//   override func layoutSubviews() {
-//      super.layoutSubviews()
-//
-//      for i in 1..<Int((self.numberOfHours * 2) - 1) {
-//         self.halfHourRects.append(CGRect(x: 0.0, y: CGFloat(i) * (self.hourUnitHeight / 2.0), width: (self.bounds.size.width / 7.0).rounded(.down), height: self.hourUnitHeight / 2.0))
-//      }
-//      for index in 0...6 {
-//         self.weekDayRects.append(CGRect(x: (self.bounds.size.width / 7.0) * CGFloat(index), y: 0.0, width: self.bounds.size.width / 7.0, height: self.bounds.size.height))
-//      }
-//   }
-   
    func setupGrid() {
       let longPressGest = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressGestureRecognized(sender:)))
       longPressGest.minimumPressDuration = 0.7
@@ -180,42 +189,79 @@ class WorkingHoursPlannerView: UIView {
    }
    
    @objc func longPressGestureRecognized(sender: UILongPressGestureRecognizer) {
-      let currentFingerLocation = sender.location(in: self)
+      let locationInView = sender.location(in: self)
+      print(locationInView)
       
       switch sender.state {
       case .began:
+         guard locationInView.y > self.halfHourUnitHeight && locationInView.y < self.bounds.size.height - self.halfHourUnitHeight else {
+            self.isLongPressOutOfBounds = true
+            return
+         }
          
-         if self.halfHourViewAlreadyExist(atPoint: currentFingerLocation) {
+         if self.halfHourViewAlreadyExist(atPoint: locationInView) {
             
          } else {
-            let cardView = CardView(frame: self.getHalfHourFrame(from: currentFingerLocation))
+            let cardView = CardView(frame: self.getHalfHourFrame(from: locationInView))
             cardView.backgroundColor = UIColor.white
-            cardView.topHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getStartTime(forIndex: self.getRowIndex(forLocation: currentFingerLocation)), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
-            cardView.bottomHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getEndTime(forIndex: self.getRowIndex(forLocation: currentFingerLocation)), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+            cardView.topHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getStartTime(forIndex: self.getRowIndex(forLocation: locationInView)), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+            cardView.bottomHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getEndTime(forIndex: self.getRowIndex(forLocation: locationInView)), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
             self.addSubview(cardView)
-            self.currentStartFrame = self.getHalfHourFrame(from: currentFingerLocation)
+            self.currentStartFrame = self.getHalfHourFrame(from: locationInView)
             self.currentCardView = cardView
-            self.currentCardViewColomn = Int(currentFingerLocation.x / self.colomnWidth)
+            self.currentCardViewColomn = Int(locationInView.x / self.colomnWidth)
          }
          
       case .changed:
+         guard !self.isLongPressOutOfBounds else { return }
+         
          if let currentCardView = self.currentCardView, let colomn = self.currentCardViewColomn {
-            let endFrame = self.getHalfHourFrame(from: currentFingerLocation, forColomn: colomn)
+            let endFrame = self.getHalfHourFrame(from: locationInView, forColomn: colomn)
             
-            
-            
-            if let startFrame = self.currentStartFrame {
-               currentCardView.frame = startFrame.union(endFrame)
-               if endFrame.origin.y > startFrame.origin.y {
-                  currentCardView.topHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getStartTime(forIndex: self.getRowIndex(forLocation: CGPoint(x: startFrame.midX, y: startFrame.midY))), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
-                  currentCardView.bottomHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getEndTime(forIndex: self.getRowIndex(forLocation: CGPoint(x: endFrame.midX, y: endFrame.midY))), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+            if let workingHoursScrollView = self.workingHoursScrollView {
+               let locationInWorkingHoursScrollView = locationInView - workingHoursScrollView.contentOffset
+               if locationInWorkingHoursScrollView.y < 0 || locationInWorkingHoursScrollView.x < 0 {
+                  //self.outOfBoundsReset()
+               } else if locationInWorkingHoursScrollView.y < self.hourUnitHeight {
+                  let total = self.hourUnitHeight
+                  let part = total - locationInWorkingHoursScrollView.y
+                  let speed = part / total
+                  let speedRate = Int(speed * 10.0)
+                  self.startBorderLineWorkingHoursTimer(going: .up, with: speedRate, from: locationInView)
+               } else if locationInWorkingHoursScrollView.y > workingHoursScrollView.bounds.size.height - self.hourUnitHeight {
+                  let total = self.hourUnitHeight
+                  let part = total - (workingHoursScrollView.bounds.size.height - locationInWorkingHoursScrollView.y)
+                  let speed = part / total
+                  let speedRate = Int(speed * 10.0)
+                  self.startBorderLineWorkingHoursTimer(going: .down, with: speedRate, from: locationInView)
                } else {
-                  currentCardView.topHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getStartTime(forIndex: self.getRowIndex(forLocation: CGPoint(x: endFrame.midX, y: endFrame.midY)) ), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
-                  currentCardView.bottomHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getEndTime(forIndex: self.getRowIndex(forLocation: CGPoint(x: startFrame.midX, y: startFrame.midY))), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+                  self.stopBorderLineWorkingHoursTimer()
+               }
+               
+               if let startFrame = self.currentStartFrame {
+                  currentCardView.frame = startFrame.union(endFrame)
+                  if endFrame.origin.y > startFrame.origin.y {
+                     currentCardView.topHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getStartTime(forIndex: self.getRowIndex(forLocation: CGPoint(x: startFrame.midX, y: startFrame.midY))), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+                     currentCardView.bottomHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getEndTime(forIndex: self.getRowIndex(forLocation: CGPoint(x: endFrame.midX, y: endFrame.midY))), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+                  } else {
+                     currentCardView.topHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getStartTime(forIndex: self.getRowIndex(forLocation: CGPoint(x: endFrame.midX, y: endFrame.midY)) ), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+                     currentCardView.bottomHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getEndTime(forIndex: self.getRowIndex(forLocation: CGPoint(x: startFrame.midX, y: startFrame.midY))), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+                  }
                }
             }
          }
+         
+         break
       case .ended:
+         guard !self.isLongPressOutOfBounds else {
+            self.isLongPressOutOfBounds = false
+            return
+         }
+         
+         self.currentCardView = nil
+         self.currentCardViewColomn = nil
+         self.currentStartFrame = nil
+         
          break
       default:
          break
@@ -279,6 +325,24 @@ class WorkingHoursPlannerView: UIView {
    }
    
    func getHalfHourFrame(from currentLocation: CGPoint, forColomn colomn: Int? = nil) -> CGRect {
+      guard currentLocation.y > self.halfHourUnitHeight else {
+         if let colomn = colomn {
+            return CGRect(x: self.colomnWidth * colomn, y: self.halfHourUnitHeight * 1, width: self.colomnWidth, height: self.halfHourUnitHeight)
+         } else {
+            let colomnIndex = Int(currentLocation.x / self.colomnWidth)
+            return CGRect(x: self.colomnWidth * colomnIndex, y: self.halfHourUnitHeight * 1, width: self.colomnWidth, height: self.halfHourUnitHeight)
+         }
+      }
+      
+      guard currentLocation.y < self.bounds.size.height - self.halfHourUnitHeight else {
+         if let colomn = colomn {
+            return CGRect(x: self.colomnWidth * colomn, y: self.halfHourUnitHeight * ((self.numberOfHours - 1) * 2), width: self.colomnWidth, height: self.halfHourUnitHeight)
+         } else {
+            let colomnIndex = Int(currentLocation.x / self.colomnWidth)
+            return CGRect(x: self.colomnWidth * colomnIndex, y: self.halfHourUnitHeight * ((self.numberOfHours - 1) * 2), width: self.colomnWidth, height: self.halfHourUnitHeight)
+         }
+      }
+      
       if let colomn = colomn {
          let rowIndex = Int(currentLocation.y / self.halfHourUnitHeight)
          return CGRect(x: self.colomnWidth * colomn, y: self.halfHourUnitHeight * rowIndex, width: self.colomnWidth, height: self.halfHourUnitHeight)
@@ -301,14 +365,95 @@ class WorkingHoursPlannerView: UIView {
    }
    
    func halfHourViewAlreadyExist(atPoint point: CGPoint) -> Bool {
-      if let subviews = self.subviews as? [CardView] {
-         for halfHourCardView in subviews {
-            if halfHourCardView.frame.contains(point) {
+      for subview in self.subviews {
+         if let cardView = subview as? CardView {
+            if cardView.frame.contains(point) {
                return true
             }
          }
       }
       return false
+   }
+   
+   func startBorderLineWorkingHoursTimer(going: Direction, with speedRate: Int, from locationInView: CGPoint) {
+      self.isBorderLineWorkingHoursTimerRunning = true
+      self.borderLineWorkingHoursTimerDirection = going
+      self.borderLineWorkingHoursTimerVelocity = speedRate
+      self.borderLineWorkingHoursTimerLocationInView = locationInView
+      guard borderLineWorkingHoursTimer == nil else { return }
+      
+      self.borderLineWorkingHoursTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(self.updateScrollViewContentOffset), userInfo: nil, repeats: true)
+   }
+   
+   func stopBorderLineWorkingHoursTimer() {
+      self.isBorderLineWorkingHoursTimerRunning = false
+      guard borderLineWorkingHoursTimer != nil else { return }
+      
+      self.borderLineWorkingHoursTimer?.invalidate()
+      self.borderLineWorkingHoursTimer = nil
+      self.borderLineWorkingHoursTimerLocationInView = nil
+      self.borderLineWorkingHoursTimerVelocity = nil
+      self.borderLineWorkingHoursTimerDirection = nil
+      
+   }
+   
+   @objc func updateScrollViewContentOffset(from locationInView: CGPoint) {
+      if let going = self.borderLineWorkingHoursTimerDirection, let speedRate = self.borderLineWorkingHoursTimerVelocity, let locationInView = self.borderLineWorkingHoursTimerLocationInView {
+         self.scrollWorkingHours(to: going, with: speedRate, from: locationInView)
+      }
+   }
+   
+   func scrollWorkingHours(to: Direction, with speedRate: Int, from locationInView: CGPoint) {
+      let offsetToUpdate = 5.0 + speedRate * 3.0
+      
+      switch to {
+      case .up:
+         guard let workingHoursScrollView = self.workingHoursScrollView, workingHoursScrollView.contentOffset.y > offsetToUpdate else {
+            let contentOffset = self.workingHoursScrollView?.contentOffset.y ?? 0.0
+            UIView.animate(withDuration: 0.05, animations: {
+               self.workingHoursScrollView?.contentOffset.y = 0.0
+               //self.borderLineWorkingHoursTimerLocationInView.y -= contentOffset
+               //self.currentCardView?.bounds.size.height += contentOffset
+            })
+            return
+         }
+         UIView.animate(withDuration: 0.05, animations: {
+            workingHoursScrollView.contentOffset.y -= offsetToUpdate
+            self.borderLineWorkingHoursTimerLocationInView?.y -= offsetToUpdate
+            //self.currentCardView?.bounds.size.height += offsetToUpdate
+         })
+      case .down:
+         guard let workingHoursScrollView = self.workingHoursScrollView, workingHoursScrollView.contentOffset.y < workingHoursScrollView.contentSize.height - offsetToUpdate - workingHoursScrollView.bounds.size.height else {
+            UIView.animate(withDuration: 0.05, animations: {
+               if let workingHoursScrollView = self.workingHoursScrollView {
+                  workingHoursScrollView.contentOffset.y = self.bounds.size.height - workingHoursScrollView.bounds.size.height
+               }
+            })
+            return
+         }
+         UIView.animate(withDuration: 0.05, animations: {
+            workingHoursScrollView.contentOffset.y += offsetToUpdate
+            self.borderLineWorkingHoursTimerLocationInView?.y += offsetToUpdate
+            //self.currentCardView?.bounds.size.height += offsetToUpdate
+         })
+      default:
+         break
+      }
+      
+      if let currentCardView = self.currentCardView, let colomn = self.currentCardViewColomn {
+         let endFrame = self.getHalfHourFrame(from: locationInView, forColomn: colomn)
+         
+         if let startFrame = self.currentStartFrame {
+            currentCardView.frame = startFrame.union(endFrame)
+            if endFrame.origin.y > startFrame.origin.y {
+               currentCardView.topHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getStartTime(forIndex: self.getRowIndex(forLocation: CGPoint(x: startFrame.midX, y: startFrame.midY))), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+               currentCardView.bottomHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getEndTime(forIndex: self.getRowIndex(forLocation: CGPoint(x: endFrame.midX, y: endFrame.midY))), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+            } else {
+               currentCardView.topHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getStartTime(forIndex: self.getRowIndex(forLocation: CGPoint(x: endFrame.midX, y: endFrame.midY)) ), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+               currentCardView.bottomHourIndicatorLabel.attributedText = UILabel.attributedString(withText: self.getEndTime(forIndex: self.getRowIndex(forLocation: CGPoint(x: startFrame.midX, y: startFrame.midY))), andTextColor: UIColor.amBlue, andFont: UIFont.init(name: "SFUIText-Semibold", size: 10.0)!, andCharacterSpacing: 0.0)
+            }
+         }
+      }
    }
    
    

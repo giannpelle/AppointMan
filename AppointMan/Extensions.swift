@@ -27,6 +27,7 @@ func /(lhs: CGFloat, rhs: Int) -> CGFloat {
 
 protocol Overlayable {
    func drawOverlay(_ rect: CGRect)
+   func makeOverlay(for rect: CGRect) -> CALayer?
 }
 
 extension Overlayable {
@@ -99,6 +100,84 @@ extension Overlayable {
          }
       }
       context.restoreGState()
+   }
+   
+   func makeOverlay(for rect: CGRect) -> CALayer? {
+      UIGraphicsBeginImageContext(rect.size)
+      guard let context = UIGraphicsGetCurrentContext() else { return nil }
+      context.setLineWidth(3.2)
+      context.setLineCap(.square)
+      context.setStrokeColor(UIColor.amDarkBlue.withAlphaComponent(0.3).cgColor)
+      
+      if rect.size.width == rect.size.height {
+         for i in 0...Int((rect.size.width - 1.6) / 6.2) {
+            context.move(to: CGPoint(x: 1.6 + (6.2 * CGFloat(i)), y: 0.0))
+            context.addLine(to: CGPoint(x: 0.0, y: 1.6 + (6.2 * CGFloat(i))))
+            context.strokePath()
+         }
+         let emptySpaceLength: CGFloat = rect.size.width - (CGFloat(Int((rect.size.width - 1.6) / 6.2)) * 6.2 + 1.6)
+         for i in 0..<Int(rect.size.height / 6.2) {
+            context.move(to: CGPoint(x: rect.maxX, y: (6.2 - emptySpaceLength) + (6.2 * CGFloat(i))))
+            context.addLine(to: CGPoint(x: (6.2 - emptySpaceLength) + (6.2 * CGFloat(i)), y: rect.maxY))
+            context.strokePath()
+         }
+      } else if rect.size.width > rect.size.height {
+         let emptySpaceHeightLength: CGFloat = rect.size.height - (CGFloat(Int((rect.size.height - 1.6) / 6.2)) * 6.2 + 1.6)
+         let emptySpaceWidthLength: CGFloat = rect.size.width - (CGFloat(Int((rect.size.width - 1.6) / 6.2)) * 6.2 + 1.6)
+         
+         var lastXIndex: Int = 0
+         var lastYIndex: Int = 0
+         for i in 0...Int((rect.size.width - 1.6) / 6.2) {
+            if i <= Int((rect.size.height - 1.6) / 6.2) {
+               context.move(to: CGPoint(x: 1.6 + (6.2 * CGFloat(i)), y: 0.0))
+               context.addLine(to: CGPoint(x: 0.0, y: 1.6 + (6.2 * CGFloat(i))))
+               context.strokePath()
+               lastXIndex = i
+            } else {
+               context.move(to: CGPoint(x: 1.6 + (6.2 * CGFloat(i)), y: 0.0))
+               context.addLine(to: CGPoint(x: (6.2 - emptySpaceHeightLength) + (6.2 * CGFloat(i - (lastXIndex + 1))), y: rect.maxY))
+               context.strokePath()
+               lastYIndex = i - (lastXIndex + 1)
+            }
+         }
+         for i in 0...Int(rect.size.height / 6.2) {
+            context.move(to: CGPoint(x: rect.maxX, y: (6.2 - emptySpaceWidthLength) + (6.2 * CGFloat(i))))
+            context.addLine(to: CGPoint(x: (6.2 - emptySpaceHeightLength) + (CGFloat(lastYIndex + 1) * 6.2) + (6.2 * CGFloat(i)), y: rect.maxY))
+            context.strokePath()
+         }
+      } else if rect.size.height > rect.size.width {
+         let emptySpaceHeightLength: CGFloat = rect.size.height - (CGFloat(Int((rect.size.height - 1.6) / 6.2)) * 6.2 + 1.6)
+         let emptySpaceWidthLength: CGFloat = rect.size.width - (CGFloat(Int((rect.size.width - 1.6) / 6.2)) * 6.2 + 1.6)
+         
+         var lastXIndex: Int = 0
+         var lastYIndex: Int = 0
+         for i in 0...Int((rect.size.height - 1.6) / 6.2) {
+            if i <= Int((rect.size.width - 1.6) / 6.2) {
+               context.move(to: CGPoint(x: 1.6 + (6.2 * CGFloat(i)), y: 0.0))
+               context.addLine(to: CGPoint(x: 0.0, y: 1.6 + (6.2 * CGFloat(i))))
+               context.strokePath()
+               lastYIndex = i
+            } else {
+               context.move(to: CGPoint(x: rect.maxX, y: (6.2 - emptySpaceWidthLength) + (6.2 * CGFloat(i - (lastYIndex + 1)))))
+               context.addLine(to: CGPoint(x: 0.0, y: 1.6 + (6.2 * CGFloat(i))))
+               context.strokePath()
+               lastXIndex = i - (lastYIndex + 1)
+            }
+         }
+         for i in 0...Int(rect.size.width / 6.2) {
+            context.move(to: CGPoint(x: rect.maxX, y: (6.2 - emptySpaceWidthLength) + (CGFloat(lastXIndex + 1) * 6.2) + (6.2 * CGFloat(i))))
+            context.addLine(to: CGPoint(x: (6.2 - emptySpaceHeightLength) + (6.2 * CGFloat(i)), y: rect.maxY))
+            context.strokePath()
+         }
+      }
+      
+      let overlayImage = UIGraphicsGetImageFromCurrentImageContext()
+      UIGraphicsEndImageContext()
+      
+      let overlayLayer = CALayer()
+      overlayLayer.frame = rect
+      overlayLayer.contents = overlayImage?.cgImage
+      return overlayLayer
    }
 }
 
@@ -195,9 +274,24 @@ extension Date {
    
    // to get ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"]
    static func weekDays(withShortFormat: Bool = false) -> [String] {
-      var days = withShortFormat ? DateFormatter().shortWeekdaySymbols! : DateFormatter().weekdaySymbols!
+      let dateFormatter = DateFormatter()
+      dateFormatter.locale = Locale(identifier: "it-IT")
+      var days = withShortFormat ? dateFormatter.shortWeekdaySymbols! : dateFormatter.weekdaySymbols!
       days.append(days.remove(at: 0))
+      days = days.map { $0.capitalized }
       return days
+   }
+   
+   static func months(withShortFormat: Bool = false) -> [String] {
+      let dateFormatter = DateFormatter()
+      dateFormatter.locale = Locale(identifier: "it-IT")
+      var months = withShortFormat ? dateFormatter.shortMonthSymbols! : dateFormatter.monthSymbols!
+      months = months.map { $0.capitalized }
+      return months
+   }
+   
+   func monthStr() -> String {
+      return Date.months()[self.getMonth() - 1]
    }
    
    func getNumberOfDaysInMonth() -> Int {
@@ -258,6 +352,10 @@ extension Date {
       dateComponents.month = self.getMonth()
       dateComponents.day = day
       return Calendar.current.date(from: dateComponents)!
+   }
+   
+   func hasSameDMY(as date: Date) -> Bool {
+      return self.getDay() == date.getDay() && self.getMonth() == date.getMonth() && self.getYear() == date.getYear()
    }
    
 }
@@ -405,18 +503,18 @@ extension UILabel {
       return attrString
    }
    
-   class func attributes(forTextColor textColor: UIColor, andFont font: UIFont, andCharacterSpacing characterSpacing: CGFloat?, isCentered: Bool = false) -> [String: Any] {
+   class func attributes(forTextColor textColor: UIColor, andFont font: UIFont, andCharacterSpacing characterSpacing: CGFloat?, isCentered: Bool = false) -> [NSAttributedStringKey: Any] {
       
       let style = NSMutableParagraphStyle()
       style.alignment = isCentered ? .center : .natural
       
-      var attributes: [String: Any] = [
-         NSAttributedStringKey.font.rawValue : font,
-         NSAttributedStringKey.foregroundColor.rawValue : textColor,
-         NSAttributedStringKey.paragraphStyle.rawValue: style
+      var attributes: [NSAttributedStringKey: Any] = [
+         NSAttributedStringKey.font : font,
+         NSAttributedStringKey.foregroundColor : textColor,
+         NSAttributedStringKey.paragraphStyle: style
       ]
       if let characterSpacing = characterSpacing {
-         attributes[NSAttributedStringKey.kern.rawValue] = characterSpacing
+         attributes[NSAttributedStringKey.kern] = characterSpacing
       }
       
       return attributes

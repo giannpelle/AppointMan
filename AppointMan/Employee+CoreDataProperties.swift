@@ -2,7 +2,7 @@
 //  Employee+CoreDataProperties.swift
 //  AppointMan
 //
-//  Created by Gianluigi Pelle on 12/5/17.
+//  Created by Gianluigi Pelle on 12/11/17.
 //  Copyright © 2017 Scratch App. All rights reserved.
 //
 //
@@ -22,6 +22,7 @@ extension Employee {
     @NSManaged public var hiredDate: NSDate?
     @NSManaged public var lastName: String?
     @NSManaged public var phoneNumber: String?
+    @NSManaged public var id: Int16
     @NSManaged public var picture: EmployeePicture?
     @NSManaged public var services: NSSet?
 

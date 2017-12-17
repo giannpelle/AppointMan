@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 protocol NewServiceViewControllerDelegate: class {
    func didUpdateServices()
@@ -29,7 +28,6 @@ class NewServiceViewController: UIViewController {
    @IBOutlet weak var womanDurationPickerView: UIPickerView!
    @IBOutlet weak var saveButton: UIButton!
    
-   var coreDataStack: CoreDataStack!
    var serviceColor: ServiceColor = ServiceColor()
    weak var delegate: NewServiceViewControllerDelegate?
    
@@ -161,11 +159,7 @@ class NewServiceViewController: UIViewController {
          self.serviceColorButton.backgroundColor = serviceColor.getColor()
          self.serviceColor = serviceColor
          
-         let style = NSMutableParagraphStyle()
-         style.lineSpacing = 14.0
-         style.alignment = .natural
-         let attributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey.paragraphStyle: style, NSAttributedStringKey.kern: 0.0, NSAttributedStringKey.font: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, NSAttributedStringKey.foregroundColor: UIColor.amFloatingTextFieldText]
-         self.serviceNameTextField.attributedText = NSAttributedString(string: serviceName, attributes: attributes)
+         self.serviceNameTextField.setTextWithoutAnimation(text: serviceName)
 
          if firstService.gender == Int16(Gender.male.rawValue) {
             self.isManBoxEnabled = true
@@ -273,34 +267,35 @@ class NewServiceViewController: UIViewController {
       if let serviceName = self.serviceNameTextField.text, !serviceName.isEmpty {
          if self.isManBoxEnabled || self.isWomanBoxEnabled {
             
-            let fetchRequest = NSFetchRequest<Service>(entityName: "Service")
-            fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Service.name), serviceName)
-            var currentServices: [Service] = []
-            if let services = try? self.coreDataStack.managedContext.fetch(fetchRequest), services.count > 0 {
-               currentServices = services
-            }
-            
-            if (currentServices.filter { $0.gender == Int16(Gender.male.rawValue) }).count > 0 && self.isManBoxEnabled || (currentServices.filter { $0.gender == Int16(Gender.female.rawValue) }).count > 0 && self.isWomanBoxEnabled {
-               self.isOverridingManService = (currentServices.filter { $0.gender == Int16(Gender.male.rawValue) }).count > 0 && self.isManBoxEnabled
-               self.isOverridingWomanService = (currentServices.filter { $0.gender == Int16(Gender.female.rawValue) }).count > 0 && self.isWomanBoxEnabled
-               
-               if let areYouSurePopupView = UINib(nibName: "AreYouSurePopupView", bundle: Bundle.main).instantiate(withOwner: self, options: nil).first as? AreYouSurePopupView {
-                  areYouSurePopupView.alpha = 0.0
-                  areYouSurePopupView.setupPopupMessage(withTitle: "ATTENZIONE", andMessage: "Hai già inserito un servizio con questo nome, vuoi sovrascrivere i dati del serivizio?", andConfirmText: "CONFERMA")
-                  areYouSurePopupView.onConfirmButtonPressed = self.overrideService
-                  self.view.addSubview(areYouSurePopupView)
-                  areYouSurePopupView.translatesAutoresizingMaskIntoConstraints = false
-                  areYouSurePopupView.widthAnchor.constraint(equalToConstant: 300.0).isActive = true
-                  areYouSurePopupView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-                  areYouSurePopupView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-                  
-                  UIView.animate(withDuration: 0.4, animations: {
-                     areYouSurePopupView.alpha = 1.0
-                  })
-               }
-            } else {
-               self.saveNewService()
-            }
+            //TO BE FIX
+//            let fetchRequest = NSFetchRequest<Service>(entityName: "Service")
+//            fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Service.name), serviceName)
+//            var currentServices: [Service] = []
+//            if let services = try? self.coreDataStack.managedContext.fetch(fetchRequest), services.count > 0 {
+//               currentServices = services
+//            }
+//
+//            if (currentServices.filter { $0.gender == Int16(Gender.male.rawValue) }).count > 0 && self.isManBoxEnabled || (currentServices.filter { $0.gender == Int16(Gender.female.rawValue) }).count > 0 && self.isWomanBoxEnabled {
+//               self.isOverridingManService = (currentServices.filter { $0.gender == Int16(Gender.male.rawValue) }).count > 0 && self.isManBoxEnabled
+//               self.isOverridingWomanService = (currentServices.filter { $0.gender == Int16(Gender.female.rawValue) }).count > 0 && self.isWomanBoxEnabled
+//
+//               if let areYouSurePopupView = UINib(nibName: "AreYouSurePopupView", bundle: Bundle.main).instantiate(withOwner: self, options: nil).first as? AreYouSurePopupView {
+//                  areYouSurePopupView.alpha = 0.0
+//                  areYouSurePopupView.setupPopupMessage(withTitle: "ATTENZIONE", andMessage: "Hai già inserito un servizio con questo nome, vuoi sovrascrivere i dati del serivizio?", andConfirmText: "CONFERMA")
+//                  areYouSurePopupView.onConfirmButtonPressed = self.overrideService
+//                  self.view.addSubview(areYouSurePopupView)
+//                  areYouSurePopupView.translatesAutoresizingMaskIntoConstraints = false
+//                  areYouSurePopupView.widthAnchor.constraint(equalToConstant: 300.0).isActive = true
+//                  areYouSurePopupView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//                  areYouSurePopupView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+//
+//                  UIView.animate(withDuration: 0.4, animations: {
+//                     areYouSurePopupView.alpha = 1.0
+//                  })
+//               }
+//            } else {
+//               self.saveNewService()
+//            }
             
          } else {
             //POPUP -> "Devi specificare a chi è rivolto questo servizio"

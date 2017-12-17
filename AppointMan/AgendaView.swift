@@ -163,7 +163,7 @@ class AgendaView: UIView {
          
          self.delegate?.highlightAccessoryTimetable(at: Int((self.currentNewAppointmentView!.frame.origin.y + 15.0) / Const.quarterHourUnitHeight))
          
-         if let agendaScrollView = self.superview as? UIScrollView {
+         if let agendaScrollView = self.agendaScrollView {
             if let currentAppointmentView = self.currentNewAppointmentView {
                let locationInAgendaScrollView = locationInView - agendaScrollView.contentOffset
                if locationInAgendaScrollView.y < 0 || locationInAgendaScrollView.x < 0 {
@@ -230,9 +230,7 @@ class AgendaView: UIView {
                }
             }
          }
-         
-         // è OPTIONAL
-         //self.stopBorderLineAgendaTimer()
+
          break
       default:
          break
