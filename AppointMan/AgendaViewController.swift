@@ -277,6 +277,9 @@ extension AgendaViewController: UIScrollViewDelegate {
 
 extension AgendaViewController: AgendaViewDelegate {
    func highlightAccessoryTimetable(at index: Int) {
+      guard index > 0 && index < self.numberOfHoursToDisplay * 4 else {
+         return
+      }
       
       if let hourLabels = self.timetableAccessoryStackView?.arrangedSubviews as? [UILabel] {
          for (index, hourLabel) in hourLabels.enumerated() {
