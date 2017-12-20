@@ -75,21 +75,28 @@ class MemoCollectionViewCell: UICollectionViewCell {
    
    @IBOutlet weak var bookmarkButton: UIButton!
    @IBOutlet weak var editButton: UIButton!
-   @IBOutlet weak var memoTextView: MemoTextView!
+   @IBOutlet weak var memoLabel: UILabel!
    @IBOutlet weak var notificationLabel: UILabel!
    @IBOutlet weak var notificationButton: UIButton!
    
    weak var delegate: MemoCollectionViewCellDelegate?
+   
+   var memo: Memo? {
+      didSet {
+         self.loadData()
+      }
+   }
    
    override func awakeFromNib() {
       super.awakeFromNib()
       
       self.applyTypography()
       self.setupUI()
+      self.loadData()
    }
    
    func applyTypography() {
-      
+      self.notificationLabel.attributedText = UILabel.attributedString(withText: "NOTIFICA", andTextColor: UIColor.grayWith(value: 75.0), andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.0)
    }
    
    func setupUI() {
@@ -99,16 +106,34 @@ class MemoCollectionViewCell: UICollectionViewCell {
       self.bookmarkButton.setImage(#imageLiteral(resourceName: "iconcina_annota_preferiti"), for: .normal)
       self.bookmarkButton.setImage(#imageLiteral(resourceName: "iconcina_annota_preferiti_selected"), for: .selected)
       
-      self.memoTextView.delegate = self
-      self.memoTextView.memoDelegate = self
-      self.memoTextView.text = ""
-      self.memoTextView.textColor = UIColor.grayWith(value: 75)
-      self.memoTextView.font = UIFont.init(name: "SFUIText-Regular", size: 14.0)!
-      self.memoTextView.autocorrectionType = .no
-      self.memoTextView.spellCheckingType = .no
-      self.memoTextView.inputAssistantItem.leadingBarButtonGroups = []
-      self.memoTextView.inputAssistantItem.trailingBarButtonGroups = []
-      self.memoTextView.textContainerInset = UIEdgeInsetsMake(4.0, 0.0, 6.0, 0.0)
+      self.notificationButton.setImage(#imageLiteral(resourceName: "memo_notifica_off"), for: .normal)
+      self.notificationButton.setImage(#imageLiteral(resourceName: "memo_notifica_on"), for: .selected)
+      
+//      self.memoTextView.delegate = self
+//      self.memoTextView.memoDelegate = self
+//      self.memoTextView.text = ""
+//      self.memoTextView.textColor = UIColor.grayWith(value: 75)
+//      self.memoTextView.font = UIFont.init(name: "SFUIText-Regular", size: 14.0)!
+//      self.memoTextView.autocorrectionType = .no
+//      self.memoTextView.spellCheckingType = .no
+//      self.memoTextView.inputAssistantItem.leadingBarButtonGroups = []
+//      self.memoTextView.inputAssistantItem.trailingBarButtonGroups = []
+//      self.memoTextView.textContainerInset = UIEdgeInsetsMake(4.0, 0.0, 6.0, 0.0)
+   }
+   
+   func loadData() {
+      if let memo = self.memo {
+         self.bookmarkButton.isSelected = memo.isFavorite
+         self.memoLabel.attributedText = UILabel.attributedString(withText: memo.text, andTextColor: UIColor.grayWith(value: 75.0), andFont: UIFont.init(name: "SFUIText-Regular", size: 14)!, andCharacterSpacing: 0.0)
+         if let notificationDate = memo.notificationDate {
+            self.notificationButton.isSelected = true
+            self.notificationButton.setAttributedTitle(notificationDate.getNotificationDateDescription(), for: .normal)
+         } else {
+            self.notificationButton.isSelected = false
+            self.notificationButton.setTitle("", for: .normal)
+         }
+         
+      }
    }
    
    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -17,6 +17,8 @@ class TakeNotesViewController: UIViewController {
    
    var newMemoTextViewContentSizeHeight: CGFloat?
    
+   var memos = [Memo(withText: "Ciao a tutti io sono Pietro e torno sempre indietro", isFavorite: true, notificationDate: Date().increaseMonth(by: 1)), Memo(withText: "Ciao a tutti", isFavorite: true, notificationDate: Date()), Memo(withText: "Ciao a tutti io sono Pietro e torno sempre indietro ma a volte prenod l'autostrada senza fare danni wjsjs sjsjs sjsjs sjsjs sjsjs sjsjs sjs sjs sjssj sjsj sjsjs sj ssjs sj sjsjsjs sj sjsjs jssj sj", isFavorite: false, notificationDate: nil)]
+   
    override func viewDidLoad() {
       super.viewDidLoad()
       
@@ -67,7 +69,7 @@ extension TakeNotesViewController: UICollectionViewDataSource {
    }
    
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return 5
+      return self.memos.count
    }
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -76,6 +78,7 @@ extension TakeNotesViewController: UICollectionViewDataSource {
       }
      
       cell.delegate = self
+      cell.memo = self.memos[indexPath.row]
       return cell
    }
    
@@ -96,20 +99,8 @@ extension TakeNotesViewController: MemoCollectionViewCellDelegate {
 
 extension TakeNotesViewController: MasonryLayoutDelegate {
    
-   func collectionView(_ collectionView: UICollectionView, heightForTextViewAtIndexPath indexPath: IndexPath) -> CGFloat {
+   func collectionView(_ collectionView: UICollectionView, heightForTextViewAt indexPath: IndexPath) -> CGFloat {
       
-      if let height = self.newMemoTextViewContentSizeHeight {
-         print(height)
-         return height
-      }
-      print("17")
-      
-      let values = [17.0, 153.0, 85.0, 17.0, 34.0]
-      return CGFloat(values[indexPath.row])
-      
-      // SOLO SE PROPRIO SENZA SPERANZE calcolare altezza programmaticamente
-      //let constrainedSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
-      //let height = self.memoTextView.text.boundingRect(with: constrainedSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: UIFont.init(name: "SFUIText-Regular", size: 14.0)!], context: nil).height.rounded(.up)
-      
+      return self.memos[indexPath.row].text.boundingRect(with: CGSize(width: (self.memoCollectionView.bounds.size.width - 40.0) / 3.0 - 32.0, height: 0.0), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: UIFont.init(name: "SFUIText-Regular", size: 14.0)!], context: nil).height
    }
 }

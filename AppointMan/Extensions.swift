@@ -339,6 +339,14 @@ extension Date {
       return Calendar.current.dateComponents([.year], from: self).year!
    }
    
+   func getHour() -> Int {
+      return Calendar.current.dateComponents([.hour], from: self).hour!
+   }
+   
+   func getMinute() -> Int {
+      return Calendar.current.dateComponents([.minute], from: self).minute!
+   }
+   
    func getFullDayDescription() -> String {
       let formatter = DateFormatter()
       formatter.dateFormat = "EEEE d MMMM"
@@ -356,6 +364,15 @@ extension Date {
    
    func hasSameDMY(as date: Date) -> Bool {
       return self.getDay() == date.getDay() && self.getMonth() == date.getMonth() && self.getYear() == date.getYear()
+   }
+   
+   func getNotificationDateDescription() -> NSAttributedString {
+      let attributedString = NSMutableAttributedString()
+      attributedString.append(UILabel.attributedString(withText: "il ", andTextColor: UIColor.grayWith(value: 182.0), andFont: UIFont.init(name: "SFUIText-Regular", size: 13.0)!, andCharacterSpacing: 0.0))
+      attributedString.append(UILabel.attributedString(withText: "\(self.getDay())/\(self.getMonth()) ", andTextColor: UIColor.grayWith(value: 85.0), andFont: UIFont.init(name: "SFUIText-Regular", size: 13.0)!, andCharacterSpacing: 0.0))
+      attributedString.append(UILabel.attributedString(withText: "alle ", andTextColor: UIColor.grayWith(value: 182.0), andFont: UIFont.init(name: "SFUIText-Regular", size: 13.0)!, andCharacterSpacing: 0.0))
+      attributedString.append(UILabel.attributedString(withText: "\(self.getHour()):\(self.getMinute()) ", andTextColor: UIColor.grayWith(value: 85.0), andFont: UIFont.init(name: "SFUIText-Regular", size: 13.0)!, andCharacterSpacing: 0.0))
+      return attributedString
    }
    
 }

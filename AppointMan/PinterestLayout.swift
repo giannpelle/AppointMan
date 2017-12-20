@@ -1,24 +1,24 @@
 //
-//  MasonryLayout.swift
+//  PinterestLayout.swift
 //  AppointMan
 //
-//  Created by Gianluigi Pelle on 10/24/17.
+//  Created by Gianluigi Pelle on 12/20/17.
 //  Copyright © 2017 Scratch App. All rights reserved.
 //
 
 import UIKit
 
-protocol MasonryLayoutDelegate: class {
+protocol PinterestLayoutDelegate: class {
    // 1. Method to ask the delegate for the height of the image
-   func collectionView(_ collectionView: UICollectionView, heightForTextViewAt indexPath:IndexPath) -> CGFloat
+   func collectionView(_ collectionView: UICollectionView, heightForCardViewAt indexPath:IndexPath) -> CGFloat
 }
 
-class MasonryLayout: UICollectionViewLayout {
+class PinterestLayout: UICollectionViewLayout {
    //1. Pinterest Layout Delegate
-   weak var delegate: MasonryLayoutDelegate!
+   weak var delegate: PinterestLayoutDelegate!
    
    //2. Configurable properties
-   fileprivate var numberOfColumns = 3
+   fileprivate var numberOfColumns = 2
    fileprivate var cellPadding: CGFloat = 10.0
    
    //3. Array to keep a cache of attributes.
@@ -63,8 +63,8 @@ class MasonryLayout: UICollectionViewLayout {
          let indexPath = IndexPath(item: item, section: 0)
          
          // 4. Asks the delegate for the height of the picture and the annotation and calculates the cell frame.
-         let textViewHeight = delegate.collectionView(collectionView, heightForTextViewAt: indexPath)
-         let height = cellPadding * 2 + textViewHeight + 135
+         let cardViewHeight = delegate.collectionView(collectionView, heightForCardViewAt: indexPath)
+         let height = cellPadding * 2 + cardViewHeight
          let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
          let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
          

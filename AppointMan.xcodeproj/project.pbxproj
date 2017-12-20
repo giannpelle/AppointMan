@@ -94,6 +94,12 @@
 		23FEE8791EE4B3C00062192C /* AppointmentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEE8781EE4B3C00062192C /* AppointmentBox.swift */; };
 		23FEE87B1EE4B3DB0062192C /* AppointmentBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23FEE87A1EE4B3DB0062192C /* AppointmentBox.xib */; };
 		EF0EAF1A1F99560A0092F810 /* InOutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0EAF191F99560A0092F810 /* InOutAnimator.swift */; };
+		EF13C4B81FE911920008AC0B /* NotificationDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF13C4B71FE911920008AC0B /* NotificationDatePickerView.xib */; };
+		EF13C4BA1FE9156D0008AC0B /* NotificationDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF13C4B91FE9156D0008AC0B /* NotificationDatePickerView.swift */; };
+		EF13C4BC1FE93A650008AC0B /* EmployeeGeneralInfoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF13C4BB1FE93A650008AC0B /* EmployeeGeneralInfoCollectionViewCell.xib */; };
+		EF13C4BE1FE93B710008AC0B /* EmployeeGeneralInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF13C4BD1FE93B710008AC0B /* EmployeeGeneralInfoCollectionViewCell.swift */; };
+		EF13C4C01FE93BDF0008AC0B /* EmployeeWorkingHoursCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF13C4BF1FE93BDF0008AC0B /* EmployeeWorkingHoursCollectionViewCell.xib */; };
+		EF13C4C21FE956090008AC0B /* LastMonthStatsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF13C4C11FE956090008AC0B /* LastMonthStatsCollectionViewCell.xib */; };
 		EF1E99F71F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF1E99F61F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib */; };
 		EF1E99F91F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1E99F81F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift */; };
 		EF1F1E641FD95A1000F03045 /* TagsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1F1E631FD95A1000F03045 /* TagsFlowLayout.swift */; };
@@ -109,6 +115,8 @@
 		EF37718A1F9E6DAF00D363B5 /* OkPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF3771891F9E6DAF00D363B5 /* OkPopupView.xib */; };
 		EF37718C1F9E700E00D363B5 /* OkPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF37718B1F9E700E00D363B5 /* OkPopupView.swift */; };
 		EF43A7B51FC4DDE500938ABA /* AddAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43A7B41FC4DDE500938ABA /* AddAppointmentViewController.swift */; };
+		EF44C7C11FEA71CE0024F819 /* EmployeeWorkingHoursCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF44C7C01FEA71CE0024F819 /* EmployeeWorkingHoursCollectionViewCell.swift */; };
+		EF44C7C51FEA966B0024F819 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF44C7C41FEA966B0024F819 /* PinterestLayout.swift */; };
 		EF4BDC261F9F8BEC000F10A2 /* TakeNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4BDC251F9F8BEC000F10A2 /* TakeNotesViewController.swift */; };
 		EF4BDC281F9FB80A000F10A2 /* MemoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4BDC271F9FB80A000F10A2 /* MemoCollectionViewCell.swift */; };
 		EF4BDC2A1F9FB8A9000F10A2 /* MasonryLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4BDC291F9FB8A9000F10A2 /* MasonryLayout.swift */; };
@@ -286,6 +294,12 @@
 		23FEE8781EE4B3C00062192C /* AppointmentBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppointmentBox.swift; sourceTree = "<group>"; };
 		23FEE87A1EE4B3DB0062192C /* AppointmentBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppointmentBox.xib; sourceTree = "<group>"; };
 		EF0EAF191F99560A0092F810 /* InOutAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutAnimator.swift; sourceTree = "<group>"; };
+		EF13C4B71FE911920008AC0B /* NotificationDatePickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationDatePickerView.xib; sourceTree = "<group>"; };
+		EF13C4B91FE9156D0008AC0B /* NotificationDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDatePickerView.swift; sourceTree = "<group>"; };
+		EF13C4BB1FE93A650008AC0B /* EmployeeGeneralInfoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeGeneralInfoCollectionViewCell.xib; sourceTree = "<group>"; };
+		EF13C4BD1FE93B710008AC0B /* EmployeeGeneralInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeGeneralInfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		EF13C4BF1FE93BDF0008AC0B /* EmployeeWorkingHoursCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeWorkingHoursCollectionViewCell.xib; sourceTree = "<group>"; };
+		EF13C4C11FE956090008AC0B /* LastMonthStatsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LastMonthStatsCollectionViewCell.xib; sourceTree = "<group>"; };
 		EF1E99F61F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceInputViewCollectionViewCell.xib; sourceTree = "<group>"; };
 		EF1E99F81F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInputViewCollectionViewCell.swift; sourceTree = "<group>"; };
 		EF1F1E631FD95A1000F03045 /* TagsFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsFlowLayout.swift; sourceTree = "<group>"; };
@@ -301,6 +315,8 @@
 		EF3771891F9E6DAF00D363B5 /* OkPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OkPopupView.xib; sourceTree = "<group>"; };
 		EF37718B1F9E700E00D363B5 /* OkPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkPopupView.swift; sourceTree = "<group>"; };
 		EF43A7B41FC4DDE500938ABA /* AddAppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAppointmentViewController.swift; sourceTree = "<group>"; };
+		EF44C7C01FEA71CE0024F819 /* EmployeeWorkingHoursCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeWorkingHoursCollectionViewCell.swift; sourceTree = "<group>"; };
+		EF44C7C41FEA966B0024F819 /* PinterestLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
 		EF4BDC251F9F8BEC000F10A2 /* TakeNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeNotesViewController.swift; sourceTree = "<group>"; };
 		EF4BDC271F9FB80A000F10A2 /* MemoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCollectionViewCell.swift; sourceTree = "<group>"; };
 		EF4BDC291F9FB8A9000F10A2 /* MasonryLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasonryLayout.swift; sourceTree = "<group>"; };
@@ -370,6 +386,7 @@
 				2304A61F1F4060A700E1FB7E /* Gadgets.swift */,
 				EF0EAF191F99560A0092F810 /* InOutAnimator.swift */,
 				EF4BDC291F9FB8A9000F10A2 /* MasonryLayout.swift */,
+				EF44C7C41FEA966B0024F819 /* PinterestLayout.swift */,
 				EF1F1E631FD95A1000F03045 /* TagsFlowLayout.swift */,
 			);
 			name = Utilities;
@@ -403,9 +420,16 @@
 				EFF2C6821FC98ED8008CE050 /* AppointmentView.xib */,
 				EFF2C6841FC996B3008CE050 /* AppointmentView.swift */,
 				EF4BDC271F9FB80A000F10A2 /* MemoCollectionViewCell.swift */,
+				EF13C4B71FE911920008AC0B /* NotificationDatePickerView.xib */,
+				EF13C4B91FE9156D0008AC0B /* NotificationDatePickerView.swift */,
 				23FEE87A1EE4B3DB0062192C /* AppointmentBox.xib */,
 				23FEE8781EE4B3C00062192C /* AppointmentBox.swift */,
 				EF85C6901FCECF8C00E52EBC /* Memo.swift */,
+				EF13C4BB1FE93A650008AC0B /* EmployeeGeneralInfoCollectionViewCell.xib */,
+				EF13C4BD1FE93B710008AC0B /* EmployeeGeneralInfoCollectionViewCell.swift */,
+				EF13C4BF1FE93BDF0008AC0B /* EmployeeWorkingHoursCollectionViewCell.xib */,
+				EF44C7C01FEA71CE0024F819 /* EmployeeWorkingHoursCollectionViewCell.swift */,
+				EF13C4C11FE956090008AC0B /* LastMonthStatsCollectionViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -815,6 +839,7 @@
 				23E63C9E1F41B15A0084EA75 /* SF-Pro-Text-RegularItalic.otf in Resources */,
 				23E63C931F41B15A0084EA75 /* SF-Pro-Display-Ultralight.otf in Resources */,
 				23E63CAE1F41B15A0084EA75 /* SFText-Light.otf in Resources */,
+				EF13C4BC1FE93A650008AC0B /* EmployeeGeneralInfoCollectionViewCell.xib in Resources */,
 				23E63C871F41B15A0084EA75 /* SF-Pro-Display-Heavy.otf in Resources */,
 				23E63CB01F41B15A0084EA75 /* SFText-Medium.otf in Resources */,
 				23E63CAD1F41B15A0084EA75 /* SFText-HeavyItalic.otf in Resources */,
@@ -835,6 +860,7 @@
 				23E63C991F41B15A0084EA75 /* SF-Pro-Text-Light.otf in Resources */,
 				23E63C9B1F41B15A0084EA75 /* SF-Pro-Text-Medium.otf in Resources */,
 				EFF2C6831FC98ED8008CE050 /* AppointmentView.xib in Resources */,
+				EF13C4C01FE93BDF0008AC0B /* EmployeeWorkingHoursCollectionViewCell.xib in Resources */,
 				23E63C981F41B15A0084EA75 /* SF-Pro-Text-HeavyItalic.otf in Resources */,
 				23E63C8A1F41B15A0084EA75 /* SF-Pro-Display-LightItalic.otf in Resources */,
 				23E63CAF1F41B15A0084EA75 /* SFText-LightItalic.otf in Resources */,
@@ -854,12 +880,14 @@
 				23E63CAC1F41B15A0084EA75 /* SFText-Heavy.otf in Resources */,
 				23E63C911F41B15A0084EA75 /* SF-Pro-Display-Thin.otf in Resources */,
 				23E63C881F41B15A0084EA75 /* SF-Pro-Display-HeavyItalic.otf in Resources */,
+				EF13C4B81FE911920008AC0B /* NotificationDatePickerView.xib in Resources */,
 				236DF5081F58753E00A48C73 /* WorkingHoursPlannerView.xib in Resources */,
 				EF37718A1F9E6DAF00D363B5 /* OkPopupView.xib in Resources */,
 				237C52701EC4B6CB00D98DD9 /* Assets.xcassets in Resources */,
 				23E63C9F1F41B15A0084EA75 /* SF-Pro-Text-Semibold.otf in Resources */,
 				23E63CA01F41B15A0084EA75 /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
 				23E63CB41F41B15A0084EA75 /* SFText-Semibold.otf in Resources */,
+				EF13C4C21FE956090008AC0B /* LastMonthStatsCollectionViewCell.xib in Resources */,
 				237C526E1EC4B6CB00D98DD9 /* Main.storyboard in Resources */,
 				23E63CB51F41B15A0084EA75 /* SFText-SemiboldItalic.otf in Resources */,
 				23E63CAB1F41B15A0084EA75 /* SFText-BoldItalic.otf in Resources */,
@@ -923,6 +951,7 @@
 				23801A641F55745200847830 /* GPFloatingTextField.swift in Sources */,
 				EFE309091F98A2ED006247B2 /* EmployeeCollectionViewCell.swift in Sources */,
 				EFE341031FD025C800854F3A /* CoreDataStack.swift in Sources */,
+				EF44C7C51FEA966B0024F819 /* PinterestLayout.swift in Sources */,
 				EF3290951F927C0F008BB930 /* ClosingDaysViewController.swift in Sources */,
 				23347C4A1F5096570080E355 /* FilterAppointmentTableViewCell.swift in Sources */,
 				23FEE8791EE4B3C00062192C /* AppointmentBox.swift in Sources */,
@@ -931,6 +960,7 @@
 				EF5FA4C21F9E3B3B00F9086F /* ColorPickerView.swift in Sources */,
 				EFD86F951F92953E00E92425 /* ServiceCollectionViewCell.swift in Sources */,
 				EF1E99F91F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift in Sources */,
+				EF44C7C11FEA71CE0024F819 /* EmployeeWorkingHoursCollectionViewCell.swift in Sources */,
 				EFE341191FD07AF500854F3A /* ServiceColor.swift in Sources */,
 				EF9D092E1FDF027E00EAF3D5 /* ClosingDaysCalendarBackgroundView.swift in Sources */,
 				EF649D5D1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift in Sources */,
@@ -939,6 +969,7 @@
 				EF5635991FDE90290048EB16 /* Employee+CoreDataProperties.swift in Sources */,
 				EF4BDC281F9FB80A000F10A2 /* MemoCollectionViewCell.swift in Sources */,
 				237C52691EC4B6CB00D98DD9 /* AppDelegate.swift in Sources */,
+				EF13C4BE1FE93B710008AC0B /* EmployeeGeneralInfoCollectionViewCell.swift in Sources */,
 				EF7346EE1FD5F63100051C48 /* EmployeeManager.swift in Sources */,
 				EF34781F1FD7137000F5AB0E /* EmployeePicture+CoreDataProperties.swift in Sources */,
 				236DF4F71F5825E200A48C73 /* GPSliderDatePickerView.swift in Sources */,
@@ -961,6 +992,7 @@
 				EF9D09351FE13A7A00EAF3D5 /* FestivityManager.swift in Sources */,
 				EF3478231FD7137000F5AB0E /* EmployeePicture+CoreDataClass.swift in Sources */,
 				2304A6181F40599300E1FB7E /* ProdottiViewController.swift in Sources */,
+				EF13C4BA1FE9156D0008AC0B /* NotificationDatePickerView.swift in Sources */,
 				2304A6121F4058D300E1FB7E /* AgendaViewController.swift in Sources */,
 				2304A61E1F4059B900E1FB7E /* ImpostazioniViewController.swift in Sources */,
 				2304A61C1F4059AA00E1FB7E /* BilancioViewController.swift in Sources */,

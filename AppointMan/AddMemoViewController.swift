@@ -39,7 +39,27 @@ class AddMemoViewController: UIViewController {
       self.memoTextView.layer.borderColor = UIColor.grayWith(value: 243.0).cgColor
       self.memoTextView.placeholder = "Scrivi qualcosa..."
       self.setNotificationButton.layer.cornerRadius = 5.0
+      self.setNotificationButton.addTarget(self, action: #selector(self.notificationButtonPressed(sender:)), for: .touchUpInside)
       self.notificationButton.isHidden = true
+   }
+   
+   @objc func notificationButtonPressed(sender: UIButton) {
+      if let notificationDatePickerView = UINib(nibName: "NotificationDatePickerView", bundle: Bundle.main).instantiate(withOwner: self, options: nil).first as? NotificationDatePickerView {
+         notificationDatePickerView.delegate = self
+         notificationDatePickerView.alpha = 0.0
+         self.view.addSubview(notificationDatePickerView)
+         notificationDatePickerView.translatesAutoresizingMaskIntoConstraints = false
+         notificationDatePickerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+         notificationDatePickerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+         notificationDatePickerView.widthAnchor.constraint(equalToConstant: self.view.bounds.size.width - 210.0).isActive = true
+         UIView.animate(withDuration: 0.4, animations: {
+            notificationDatePickerView.alpha = 1.0
+         }, completion: { (success) in
+            if success {
+               
+            }
+         })
+      }
    }
    
    @IBAction func closeButtonPressed(sender: UIButton) {
@@ -47,4 +67,15 @@ class AddMemoViewController: UIViewController {
    }
    
    
+}
+
+extension AddMemoViewController: NotificationDatePickerViewDelegate {
+   
+   func didDeleteNotification() {
+      
+   }
+   
+   func didUpdateNotification(with date: Date) {
+      
+   }
 }

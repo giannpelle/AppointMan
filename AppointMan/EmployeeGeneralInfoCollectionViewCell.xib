@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="dxo-2s-FOd" customClass="EmployeeGeneralInfoCollectionViewCell" customModule="AppointMan" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="487" height="215"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="487" height="215"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EVE-1A-MQc">
+                        <rect key="frame" x="212.5" y="30" width="62" height="62"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="EVE-1A-MQc" secondAttribute="height" multiplier="1:1" id="qhT-CQ-olg"/>
+                            <constraint firstAttribute="width" constant="62" id="r6n-CT-O7s"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kt7-Mv-TuA">
+                        <rect key="frame" x="439" y="0.0" width="48" height="50"/>
+                        <inset key="contentEdgeInsets" minX="14" minY="14" maxX="14" maxY="14"/>
+                        <state key="normal" image="iconcina_annota_modifica"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ff-E9-Ldl">
+                        <rect key="frame" x="222.5" y="102" width="42" height="27"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggo-eG-RLb">
+                        <rect key="frame" x="222.5" y="139" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ow-fB-EFJ">
+                        <rect key="frame" x="222.5" y="166" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="kt7-Mv-TuA" firstAttribute="top" secondItem="dxo-2s-FOd" secondAttribute="top" id="58Q-a8-MY9"/>
+                <constraint firstItem="9ow-fB-EFJ" firstAttribute="top" secondItem="ggo-eG-RLb" secondAttribute="bottom" constant="6" id="5Zo-YV-yOj"/>
+                <constraint firstItem="ggo-eG-RLb" firstAttribute="centerX" secondItem="dxo-2s-FOd" secondAttribute="centerX" id="8PG-7r-arq"/>
+                <constraint firstItem="EVE-1A-MQc" firstAttribute="top" secondItem="dxo-2s-FOd" secondAttribute="top" constant="30" id="AGU-io-lJE"/>
+                <constraint firstItem="EVE-1A-MQc" firstAttribute="centerX" secondItem="dxo-2s-FOd" secondAttribute="centerX" id="ITF-tS-ZAj"/>
+                <constraint firstItem="ggo-eG-RLb" firstAttribute="top" secondItem="5ff-E9-Ldl" secondAttribute="bottom" constant="10" id="UNd-Op-zAy"/>
+                <constraint firstItem="5ff-E9-Ldl" firstAttribute="top" secondItem="EVE-1A-MQc" secondAttribute="bottom" constant="10" id="VJl-9d-RaV"/>
+                <constraint firstAttribute="trailing" secondItem="kt7-Mv-TuA" secondAttribute="trailing" id="bG3-Tb-3dS"/>
+                <constraint firstItem="5ff-E9-Ldl" firstAttribute="centerX" secondItem="dxo-2s-FOd" secondAttribute="centerX" id="fRa-lv-Lyl"/>
+                <constraint firstItem="9ow-fB-EFJ" firstAttribute="centerX" secondItem="dxo-2s-FOd" secondAttribute="centerX" id="rcS-MQ-7Rr"/>
+                <constraint firstAttribute="bottom" secondItem="9ow-fB-EFJ" secondAttribute="bottom" constant="28" id="tuj-2O-9DX"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="N3Y-6t-8fq"/>
+            <size key="customSize" width="487" height="215"/>
+            <connections>
+                <outlet property="employeeCellPhoneNumberLabel" destination="ggo-eG-RLb" id="09W-p0-F3T"/>
+                <outlet property="employeeImageView" destination="EVE-1A-MQc" id="O8h-Gj-Ac0"/>
+                <outlet property="employeeMailLabel" destination="9ow-fB-EFJ" id="Aud-tF-0JB"/>
+                <outlet property="employeeNameLabel" destination="5ff-E9-Ldl" id="VSd-2c-Wif"/>
+            </connections>
+            <point key="canvasLocation" x="170.5" y="-24.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="iconcina_annota_modifica" width="20" height="20"/>
+    </resources>
+</document>
