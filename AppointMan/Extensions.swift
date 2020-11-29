@@ -9,8 +9,25 @@
 import Foundation
 import UIKit
 
+func *(lhs: Int, rhs: CGFloat) -> CGFloat {
+   return CGFloat(lhs) * rhs
+}
+
+func *(lhs: CGFloat, rhs: Int) -> CGFloat {
+   return lhs * CGFloat(rhs)
+}
+
+func /(lhs: Int, rhs: CGFloat) -> CGFloat {
+   return CGFloat(lhs) / rhs
+}
+
+func /(lhs: CGFloat, rhs: Int) -> CGFloat {
+   return lhs / CGFloat(rhs)
+}
+
 protocol Overlayable {
    func drawOverlay(_ rect: CGRect)
+   func makeOverlay(for rect: CGRect) -> CALayer?
 }
 
 extension Overlayable {
@@ -84,18 +101,96 @@ extension Overlayable {
       }
       context.restoreGState()
    }
+   
+   func makeOverlay(for rect: CGRect) -> CALayer? {
+      UIGraphicsBeginImageContext(rect.size)
+      guard let context = UIGraphicsGetCurrentContext() else { return nil }
+      context.setLineWidth(3.2)
+      context.setLineCap(.square)
+      context.setStrokeColor(UIColor.amDarkBlue.withAlphaComponent(0.3).cgColor)
+      
+      if rect.size.width == rect.size.height {
+         for i in 0...Int((rect.size.width - 1.6) / 6.2) {
+            context.move(to: CGPoint(x: 1.6 + (6.2 * CGFloat(i)), y: 0.0))
+            context.addLine(to: CGPoint(x: 0.0, y: 1.6 + (6.2 * CGFloat(i))))
+            context.strokePath()
+         }
+         let emptySpaceLength: CGFloat = rect.size.width - (CGFloat(Int((rect.size.width - 1.6) / 6.2)) * 6.2 + 1.6)
+         for i in 0..<Int(rect.size.height / 6.2) {
+            context.move(to: CGPoint(x: rect.maxX, y: (6.2 - emptySpaceLength) + (6.2 * CGFloat(i))))
+            context.addLine(to: CGPoint(x: (6.2 - emptySpaceLength) + (6.2 * CGFloat(i)), y: rect.maxY))
+            context.strokePath()
+         }
+      } else if rect.size.width > rect.size.height {
+         let emptySpaceHeightLength: CGFloat = rect.size.height - (CGFloat(Int((rect.size.height - 1.6) / 6.2)) * 6.2 + 1.6)
+         let emptySpaceWidthLength: CGFloat = rect.size.width - (CGFloat(Int((rect.size.width - 1.6) / 6.2)) * 6.2 + 1.6)
+         
+         var lastXIndex: Int = 0
+         var lastYIndex: Int = 0
+         for i in 0...Int((rect.size.width - 1.6) / 6.2) {
+            if i <= Int((rect.size.height - 1.6) / 6.2) {
+               context.move(to: CGPoint(x: 1.6 + (6.2 * CGFloat(i)), y: 0.0))
+               context.addLine(to: CGPoint(x: 0.0, y: 1.6 + (6.2 * CGFloat(i))))
+               context.strokePath()
+               lastXIndex = i
+            } else {
+               context.move(to: CGPoint(x: 1.6 + (6.2 * CGFloat(i)), y: 0.0))
+               context.addLine(to: CGPoint(x: (6.2 - emptySpaceHeightLength) + (6.2 * CGFloat(i - (lastXIndex + 1))), y: rect.maxY))
+               context.strokePath()
+               lastYIndex = i - (lastXIndex + 1)
+            }
+         }
+         for i in 0...Int(rect.size.height / 6.2) {
+            context.move(to: CGPoint(x: rect.maxX, y: (6.2 - emptySpaceWidthLength) + (6.2 * CGFloat(i))))
+            context.addLine(to: CGPoint(x: (6.2 - emptySpaceHeightLength) + (CGFloat(lastYIndex + 1) * 6.2) + (6.2 * CGFloat(i)), y: rect.maxY))
+            context.strokePath()
+         }
+      } else if rect.size.height > rect.size.width {
+         let emptySpaceHeightLength: CGFloat = rect.size.height - (CGFloat(Int((rect.size.height - 1.6) / 6.2)) * 6.2 + 1.6)
+         let emptySpaceWidthLength: CGFloat = rect.size.width - (CGFloat(Int((rect.size.width - 1.6) / 6.2)) * 6.2 + 1.6)
+         
+         var lastXIndex: Int = 0
+         var lastYIndex: Int = 0
+         for i in 0...Int((rect.size.height - 1.6) / 6.2) {
+            if i <= Int((rect.size.width - 1.6) / 6.2) {
+               context.move(to: CGPoint(x: 1.6 + (6.2 * CGFloat(i)), y: 0.0))
+               context.addLine(to: CGPoint(x: 0.0, y: 1.6 + (6.2 * CGFloat(i))))
+               context.strokePath()
+               lastYIndex = i
+            } else {
+               context.move(to: CGPoint(x: rect.maxX, y: (6.2 - emptySpaceWidthLength) + (6.2 * CGFloat(i - (lastYIndex + 1)))))
+               context.addLine(to: CGPoint(x: 0.0, y: 1.6 + (6.2 * CGFloat(i))))
+               context.strokePath()
+               lastXIndex = i - (lastYIndex + 1)
+            }
+         }
+         for i in 0...Int(rect.size.width / 6.2) {
+            context.move(to: CGPoint(x: rect.maxX, y: (6.2 - emptySpaceWidthLength) + (CGFloat(lastXIndex + 1) * 6.2) + (6.2 * CGFloat(i))))
+            context.addLine(to: CGPoint(x: (6.2 - emptySpaceHeightLength) + (6.2 * CGFloat(i)), y: rect.maxY))
+            context.strokePath()
+         }
+      }
+      
+      let overlayImage = UIGraphicsGetImageFromCurrentImageContext()
+      UIGraphicsEndImageContext()
+      
+      let overlayLayer = CALayer()
+      overlayLayer.frame = rect
+      overlayLayer.contents = overlayImage?.cgImage
+      return overlayLayer
+   }
 }
 
 extension UIStoryboard {
-
-   class func onBoardingNVC() -> UINavigationController {
-      let onBoardingNVC = UIStoryboard(name: "OnBoarding", bundle: Bundle.main).instantiateViewController(withIdentifier: "onBoardingNVC") as! UINavigationController
-      return onBoardingNVC
-   }
    
    class func addServicesVC() -> AddServicesViewController {
       let addServicesVC = UIStoryboard(name: "OnBoarding", bundle: Bundle.main).instantiateViewController(withIdentifier: "addServicesVC") as! AddServicesViewController
       return addServicesVC
+   }
+   
+   class func newServiceVC() -> NewServiceViewController {
+      let newServiceVC = UIStoryboard(name: "OnBoarding", bundle: Bundle.main).instantiateViewController(withIdentifier: "newServiceVC") as! NewServiceViewController
+      return newServiceVC
    }
    
    class func addEmployeesVC() -> AddEmployeesViewController {
@@ -103,10 +198,35 @@ extension UIStoryboard {
       return addEmployeesVC
    }
    
+   class func newEmployeeVC() -> NewEmployeeViewController {
+      let newEmployeeVC = UIStoryboard(name: "OnBoarding", bundle: Bundle.main).instantiateViewController(withIdentifier: "newEmployeeVC") as! NewEmployeeViewController
+      return newEmployeeVC
+   }
+   
+   class func workingHoursVC() -> WorkingHoursViewController {
+      let workingHoursVC = UIStoryboard(name: "OnBoarding", bundle: Bundle.main).instantiateViewController(withIdentifier: "workingHoursVC") as! WorkingHoursViewController
+      return workingHoursVC
+   }
+   
+   class func closingDaysVC() -> ClosingDaysViewController {
+      let closingDaysVC = UIStoryboard(name: "OnBoarding", bundle: Bundle.main).instantiateViewController(withIdentifier: "closingDaysVC") as! ClosingDaysViewController
+      return closingDaysVC
+   }
+   
+   class func revealMenuVC() -> RevealMenuViewController {
+      let revealMenuVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "revealMenuVC") as! RevealMenuViewController
+      return revealMenuVC
+   }
+   
    class func agendaVC() -> AgendaViewController {
       let agendaVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "agendaVC") as! AgendaViewController
       return agendaVC
    }
+   
+//   class func addAppointmentVC() -> AddAppointmentViewController {
+//      let addAppointmentVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "addAppointmentVC") as! AddAppointmentViewController
+//      return addAppointmentVC
+//   }
    
    class func dipendentiVC() -> DipendentiViewController {
       let dipendentiVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "dipendentiVC") as! DipendentiViewController
@@ -138,19 +258,14 @@ extension UIStoryboard {
       return impostazioniVC
    }
    
-   class func filterVC() -> FilterViewController {
-      let filterVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "filterVC") as! FilterViewController
-      return filterVC
+   class func takeNotesVC() -> TakeNotesViewController {
+      let takeNotesVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "takeNotesVC") as! TakeNotesViewController
+      return takeNotesVC
    }
    
-   class func addAppointmentVC() -> AddAppointmentViewController {
-      let addAppointmentVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "addAppointmentVC") as! AddAppointmentViewController
-      return addAppointmentVC
-   }
-   
-   class func dragAndDropVC() -> DragAndDropViewController {
-      let dragAndDropVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "dragAndDropVC") as! DragAndDropViewController
-      return dragAndDropVC
+   class func addMemoVC() -> AddMemoViewController {
+      let addMemoVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "addMemoVC") as! AddMemoViewController
+      return addMemoVC
    }
    
 }
@@ -159,9 +274,24 @@ extension Date {
    
    // to get ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"]
    static func weekDays(withShortFormat: Bool = false) -> [String] {
-      var days = withShortFormat ? DateFormatter().shortWeekdaySymbols! : DateFormatter().weekdaySymbols!
+      let dateFormatter = DateFormatter()
+      dateFormatter.locale = Locale(identifier: "it-IT")
+      var days = withShortFormat ? dateFormatter.shortWeekdaySymbols! : dateFormatter.weekdaySymbols!
       days.append(days.remove(at: 0))
+      days = days.map { $0.capitalized }
       return days
+   }
+   
+   static func months(withShortFormat: Bool = false) -> [String] {
+      let dateFormatter = DateFormatter()
+      dateFormatter.locale = Locale(identifier: "it-IT")
+      var months = withShortFormat ? dateFormatter.shortMonthSymbols! : dateFormatter.monthSymbols!
+      months = months.map { $0.capitalized }
+      return months
+   }
+   
+   func monthStr() -> String {
+      return Date.months()[self.getMonth() - 1]
    }
    
    func getNumberOfDaysInMonth() -> Int {
@@ -209,6 +339,14 @@ extension Date {
       return Calendar.current.dateComponents([.year], from: self).year!
    }
    
+   func getHour() -> Int {
+      return Calendar.current.dateComponents([.hour], from: self).hour!
+   }
+   
+   func getMinute() -> Int {
+      return Calendar.current.dateComponents([.minute], from: self).minute!
+   }
+   
    func getFullDayDescription() -> String {
       let formatter = DateFormatter()
       formatter.dateFormat = "EEEE d MMMM"
@@ -222,6 +360,19 @@ extension Date {
       dateComponents.month = self.getMonth()
       dateComponents.day = day
       return Calendar.current.date(from: dateComponents)!
+   }
+   
+   func hasSameDMY(as date: Date) -> Bool {
+      return self.getDay() == date.getDay() && self.getMonth() == date.getMonth() && self.getYear() == date.getYear()
+   }
+   
+   func getNotificationDateDescription() -> NSAttributedString {
+      let attributedString = NSMutableAttributedString()
+      attributedString.append(UILabel.attributedString(withText: "il ", andTextColor: UIColor.grayWith(value: 182.0), andFont: UIFont.init(name: "SFUIText-Regular", size: 13.0)!, andCharacterSpacing: 0.0))
+      attributedString.append(UILabel.attributedString(withText: "\(self.getDay())/\(self.getMonth()) ", andTextColor: UIColor.grayWith(value: 85.0), andFont: UIFont.init(name: "SFUIText-Regular", size: 13.0)!, andCharacterSpacing: 0.0))
+      attributedString.append(UILabel.attributedString(withText: "alle ", andTextColor: UIColor.grayWith(value: 182.0), andFont: UIFont.init(name: "SFUIText-Regular", size: 13.0)!, andCharacterSpacing: 0.0))
+      attributedString.append(UILabel.attributedString(withText: "\(self.getHour()):\(self.getMinute()) ", andTextColor: UIColor.grayWith(value: 85.0), andFont: UIFont.init(name: "SFUIText-Regular", size: 13.0)!, andCharacterSpacing: 0.0))
+      return attributedString
    }
    
 }
@@ -274,7 +425,7 @@ extension UIView {
 
 extension CALayer {
    
-   func roundCorners(corners: UIRectCorner, radius: CGFloat, viewBounds: CGRect) {
+   func roundCornersWithShadow(corners: UIRectCorner, radius: CGFloat, viewBounds: CGRect) {
       let maskPath = UIBezierPath(roundedRect: viewBounds,
                                   byRoundingCorners: corners,
                                   cornerRadii: CGSize(width: radius, height: radius))
@@ -289,11 +440,22 @@ extension CALayer {
       self.masksToBounds = false
       self.insertSublayer(shape, at: 0)
    }
+   
+   func roundCorners(corners: UIRectCorner, radius: CGFloat, viewBounds: CGRect) {
+      let maskPath = UIBezierPath(roundedRect: viewBounds,
+                                  byRoundingCorners: corners,
+                                  cornerRadii: CGSize(width: radius, height: radius))
+      let shape = CAShapeLayer()
+      shape.path = maskPath.cgPath
+      self.masksToBounds = false
+      self.mask = shape
+   }
+   
 }
 
 extension UIImage {
    
-   func scale(toSize newSize:CGSize) -> UIImage{
+   func scale(toSize newSize:CGSize) -> UIImage {
       UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
       self.draw(in: CGRect(origin: CGPoint.zero, size: CGSize(width: newSize.width, height: newSize.height)))
       let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
@@ -309,9 +471,21 @@ extension UIImage {
       UIGraphicsEndImageContext()
       return newImage!
    }
+   
+   func takeSnapshotOfView(sourceView view: UIView) -> UIImage {
+      UIGraphicsBeginImageContext(view.frame.size)
+      view.drawHierarchy(in: CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height), afterScreenUpdates: true)
+      let image = UIGraphicsGetImageFromCurrentImageContext()
+      UIGraphicsEndImageContext()
+      return image!
+   }
 }
 
 extension UIColor {
+   
+   class func grayWith(value: CGFloat) -> UIColor {
+      return UIColor(red: value/255.0, green: value/255.0, blue: value/255.0, alpha: 1.0)
+   }
    
    class func getMiddleColor(fromColor startColor: UIColor, toColor endColor: UIColor, withPercentage percentage: CGFloat) -> UIColor {
       guard percentage != 0.0 else {
@@ -332,48 +506,37 @@ extension UIColor {
 
 extension UILabel {
    
-   func setLineHeightInset(_ height: CGFloat) {
-      self.sizeToFit()
-      self.bounds.size.height += height
-   }
-   
    class func attributedString(withText text: String, andTextColor textColor: UIColor, andFont font: UIFont, andCharacterSpacing characterSpacing: CGFloat?, isCentered: Bool = false) -> NSAttributedString {
       
       let attrString = NSMutableAttributedString(string: text)
       let style = NSMutableParagraphStyle()
       style.alignment = isCentered ? .center : .natural
-      attrString.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSRange(location: 0, length: text.characters.count))
+      attrString.addAttribute(NSAttributedStringKey.paragraphStyle, value: style, range: NSRange(location: 0, length: text.count))
       if let characterSpacing = characterSpacing {
-         attrString.addAttribute(NSKernAttributeName, value: characterSpacing, range: NSRange(location: 0, length: text.characters.count))
+         attrString.addAttribute(NSAttributedStringKey.kern, value: characterSpacing, range: NSRange(location: 0, length: text.count))
       }
-      attrString.addAttribute(NSFontAttributeName, value: font, range: NSRange(location: 0, length: text.characters.count))
-      attrString.addAttribute(NSForegroundColorAttributeName, value: textColor, range: NSRange(location: 0, length: text.characters.count))
+      attrString.addAttribute(NSAttributedStringKey.font, value: font, range: NSRange(location: 0, length: text.count))
+      attrString.addAttribute(NSAttributedStringKey.foregroundColor, value: textColor, range: NSRange(location: 0, length: text.count))
       return attrString
    }
    
-   class func attributes(forTextColor textColor: UIColor, andFont font: UIFont, andCharacterSpacing characterSpacing: CGFloat?, isCentered: Bool = false) -> [String: Any] {
+   class func attributes(forTextColor textColor: UIColor, andFont font: UIFont, andCharacterSpacing characterSpacing: CGFloat?, isCentered: Bool = false) -> [NSAttributedStringKey: Any] {
       
       let style = NSMutableParagraphStyle()
       style.alignment = isCentered ? .center : .natural
       
-      var attributes: [String: Any] = [
-         NSFontAttributeName : font,
-         NSForegroundColorAttributeName : textColor,
-         NSParagraphStyleAttributeName: style
+      var attributes: [NSAttributedStringKey: Any] = [
+         NSAttributedStringKey.font : font,
+         NSAttributedStringKey.foregroundColor : textColor,
+         NSAttributedStringKey.paragraphStyle: style
       ]
       if let characterSpacing = characterSpacing {
-         attributes[NSKernAttributeName] = characterSpacing
+         attributes[NSAttributedStringKey.kern] = characterSpacing
       }
       
       return attributes
    }
    
-   class func onBoardingTitleView(withText text: String) -> UILabel {
-      let onBoardingTitleLabel = UILabel()
-      onBoardingTitleLabel.attributedText = UILabel.attributedString(withText: text, andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 16.0)!, andCharacterSpacing: nil, isCentered: true)
-      onBoardingTitleLabel.setLineHeightInset(3.0)
-      return onBoardingTitleLabel
-   }
 }
 
 extension UIButton {
@@ -399,7 +562,7 @@ extension NSLayoutConstraint {
    func setMultiplier(multiplier:CGFloat) -> NSLayoutConstraint {
       NSLayoutConstraint.deactivate([self])
       let newConstraint = NSLayoutConstraint(
-         item: firstItem,
+         item: firstItem as Any,
          attribute: firstAttribute,
          relatedBy: relation,
          toItem: secondItem,
@@ -411,20 +574,6 @@ extension NSLayoutConstraint {
       newConstraint.identifier = self.identifier
       NSLayoutConstraint.activate([newConstraint])
       return newConstraint
-   }
-}
-
-extension UIStackView {
-   
-   func removeLast() {
-      guard self.arrangedSubviews.count > 1 else {
-         return
-      }
-      self.removeArrangedSubview(self.arrangedSubviews[self.arrangedSubviews.count - 2])
-   }
-   
-   func last() -> UIView {
-      return self.arrangedSubviews[self.arrangedSubviews.count - 1]
    }
 }
 

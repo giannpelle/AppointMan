@@ -37,6 +37,6 @@ class CalendarDayCollectionViewCell: UICollectionViewCell {
    func setup(withDay day: String, andDayColor dayColor: UIColor) {
       self.dayButton.setAttributedTitle(UILabel.attributedString(withText: day, andTextColor: dayColor, andFont: UIFont.init(name: "SFUIText-Semibold", size: 14.0)!, andCharacterSpacing: nil, isCentered: true), for: .normal)
       self.dayButton.setAttributedTitle(UILabel.attributedString(withText: day, andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Semibold", size: 14.0)!, andCharacterSpacing: nil, isCentered: true), for: .selected)
-      self.dayButton.titleLabel?.setLineHeightInset(2.0)
+      self.dayButton.titleLabel?.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
    }
 }

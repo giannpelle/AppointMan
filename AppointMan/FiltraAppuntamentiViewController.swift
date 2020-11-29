@@ -20,7 +20,7 @@ class FiltraAppuntamentiViewController: UIViewController {
    // BANNER
    @IBOutlet weak var filterBannerView: UIView!
    @IBOutlet weak var filterAppointmentsLabel: UILabel!
-   @IBOutlet weak var employeeLabel: UILabel!
+   @IBOutlet weak var employeesLabel: UILabel!
    @IBOutlet weak var employeePickerCollectionView: UICollectionView!
    @IBOutlet weak var disclosureIndicatorImageView: UIImageView!
    
@@ -54,7 +54,8 @@ class FiltraAppuntamentiViewController: UIViewController {
       self.filterAppointmentsScrollView.delegate = self
       
       self.filterAppointmentsLabel.attributedText = UILabel.attributedString(withText: "FILTRA APPUNTAMENTI", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86, isCentered: true)
-      self.employeeLabel.attributedText = UILabel.attributedString(withText: "DIPENDENTE/I", andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
+      self.employeesLabel.attributedText = UILabel.attributedString(withText: "DIPENDENTE/I", andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86)
+      self.employeesLabel.heightAnchor.constraint(equalToConstant: 14.0).isActive = true
       
       self.employeePickerCollectionView.tag = 2
       self.employeePickerCollectionView.delegate = self
@@ -125,7 +126,7 @@ extension FiltraAppuntamentiViewController: UITableViewDataSource {
       let headerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.bounds.size.width, height: 48.0))
       let titleLabel = UILabel()
       titleLabel.attributedText = UILabel.attributedString(withText: "1\(section) maggio 2017", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, andCharacterSpacing: 0.0)
-      titleLabel.setLineHeightInset(14.0)
+      titleLabel.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
       headerView.addSubview(titleLabel)
       titleLabel.translatesAutoresizingMaskIntoConstraints = false
       titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 20.0).isActive = true

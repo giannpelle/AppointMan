@@ -73,6 +73,8 @@ import Foundation
 import UIKit
 
 extension UIColor {
+   static let amOnBoardingHeaderTextGrey = #colorLiteral(red: 0.4078176022, green: 0.407827884, blue: 0.4078223705, alpha: 1)
+   static let amOnBoardingHeaderTextLightGrey = #colorLiteral(red: 0.7137254902, green: 0.7137254902, blue: 0.7137254902, alpha: 1)
    static let amBlue = #colorLiteral(red: 0.04705882353, green: 0.3215686275, blue: 0.6941176471, alpha: 1)
    static let amOpaqueBlue = #colorLiteral(red: 0.4549019608, green: 0.5529411765, blue: 0.6901960784, alpha: 1)
    static let amDarkBlue = #colorLiteral(red: 0.03137254902, green: 0.2039215686, blue: 0.4509803922, alpha: 1)
@@ -86,25 +88,11 @@ extension UIColor {
 
 class Const {
    
-   static let defaultOpenCloseAnimationDuration: Double = 0.25
-   static let masterToAllWidthPercentage: CGFloat = 1.0 / 3.0
-   static let masterMaxWidth: CGFloat = UIScreen.main.bounds.size.width * Const.masterToAllWidthPercentage
-   static let detailMaxWidth: CGFloat = UIScreen.main.bounds.size.width * (1 - Const.masterToAllWidthPercentage)
-   static let hourHeaderWidth: CGFloat = 40.0
-   static let hourUnitHeight: CGFloat = 144.0
-   static let halfHourUnitHeight: CGFloat = 72.0
-   static let twoThirdUnitHeight: CGFloat = 96.0
-   static let halfdayBreakSpacing: CGFloat = 20.0
-   static let employeeColomnSpacing: CGFloat = 2.0
-   static let hourScrollViewInset: CGFloat = 10.0
-   static let employeeHeaderHeight: CGFloat = 40.0
-   static let employeeHeaderWidth: CGFloat = UIScreen.main.bounds.size.width * (1.0 / 5.0)
-   static let numberOfMorningHours: CGFloat = 6.0
-   static let numberOfAfternoonHours: CGFloat = 4.0
-   static let numberOfEmployees: CGFloat = 8
-   
-   // Hard coded values, will be set during initial setup
-   static let employees = ["Laura", "Marco", "Giovanni", "Francesca", "Carlo", "Mario", "Giuseppina", "Marica"]
+   static let hourUnitHeight: CGFloat = 120.0
+   static let threeQuarterHourUnitHeight: CGFloat = 90.0
+   static let halfHourUnitHeight: CGFloat = 60.0
+   static let quarterHourUnitHeight: CGFloat = 30.0
+   static let agendaEmployeeColomnWidth: CGFloat = 240.0
    
 }
 

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="AHh-hV-Vpp" customClass="BottomImagePickerView" customModule="AppointMan" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="805" height="654"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9UL-nG-AeR">
+                    <rect key="frame" x="0.0" y="496" width="805" height="158"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="PfG-EZ-S9s">
+                            <rect key="frame" x="379" y="13" width="46" height="132"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DU8-OL-TRv">
+                                    <rect key="frame" x="0.0" y="0.0" width="46" height="44"/>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S2I-MN-FFg">
+                                    <rect key="frame" x="0.0" y="44" width="46" height="44"/>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXX-Y3-oGB">
+                                    <rect key="frame" x="0.0" y="88" width="46" height="44"/>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.047058823530000002" green="0.32156862749999998" blue="0.69411764710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="PfG-EZ-S9s" firstAttribute="top" secondItem="9UL-nG-AeR" secondAttribute="top" constant="13" id="0VT-Mg-0iX"/>
+                        <constraint firstAttribute="height" constant="158" id="MGC-u6-xtI"/>
+                        <constraint firstItem="PfG-EZ-S9s" firstAttribute="centerX" secondItem="9UL-nG-AeR" secondAttribute="centerX" id="UFU-rh-0fx"/>
+                        <constraint firstAttribute="bottom" secondItem="PfG-EZ-S9s" secondAttribute="bottom" constant="13" id="wPV-AX-03D"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="jcA-cq-xGd" firstAttribute="trailing" secondItem="9UL-nG-AeR" secondAttribute="trailing" id="VTw-mM-qTS"/>
+                <constraint firstItem="jcA-cq-xGd" firstAttribute="bottom" secondItem="9UL-nG-AeR" secondAttribute="bottom" id="u9m-wp-9kX"/>
+                <constraint firstItem="9UL-nG-AeR" firstAttribute="leading" secondItem="jcA-cq-xGd" secondAttribute="leading" id="y8q-rH-LvI"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="jcA-cq-xGd"/>
+            <connections>
+                <outlet property="bottomImagePickerViewBottomAnchor" destination="u9m-wp-9kX" id="1Mz-4Q-J4j"/>
+                <outlet property="imagePickerActionsStackView" destination="PfG-EZ-S9s" id="rSu-uT-zWv"/>
+            </connections>
+            <point key="canvasLocation" x="169.5" y="-21"/>
+        </view>
+    </objects>
+</document>

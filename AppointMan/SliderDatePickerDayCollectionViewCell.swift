@@ -19,7 +19,7 @@ class SliderDatePickerDayCollectionViewCell: UICollectionViewCell {
             self.dayLabel.attributedText = UILabel.attributedString(withText: self.dayLabel.attributedText?.string ?? "", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 21.0) ?? UIFont.systemFont(ofSize: 21.0), andCharacterSpacing: nil, isCentered: true)
          } else {
             self.dayLabel.attributedText = UILabel.attributedString(withText: self.dayLabel.attributedText?.string ?? "", andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 13.0) ?? UIFont.systemFont(ofSize: 13.0), andCharacterSpacing: nil, isCentered: true)
-            self.dayLabel.setLineHeightInset(2.0)
+            self.dayLabel.heightAnchor.constraint(equalToConstant: 15.0).isActive = true
          }
       }
    }
@@ -42,7 +42,7 @@ class SliderDatePickerDayCollectionViewCell: UICollectionViewCell {
       self.dayLabel.translatesAutoresizingMaskIntoConstraints = false
       self.dayLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
       self.dayLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-      self.dayLabel.lastBaselineAnchor.constraint(equalTo: self.bottomAnchor, constant: -18.0).isActive = true
+      self.dayLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -18.0).isActive = true
       
       self.dotLayer = CAShapeLayer()
       let path = UIBezierPath(ovalIn: CGRect(x: self.bounds.size.width / 2.0 - (6.0 / 2.0), y: 38.0, width: 6.0, height: 6.0))
@@ -67,7 +67,7 @@ class SliderDatePickerDayCollectionViewCell: UICollectionViewCell {
    
    func setup(withDay day: String) {
       self.dayLabel.attributedText = UILabel.attributedString(withText: day, andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 13.0) ?? UIFont.systemFont(ofSize: 13.0), andCharacterSpacing: nil, isCentered: true)
-      self.dayLabel.setLineHeightInset(2.0)
+      self.dayLabel.heightAnchor.constraint(equalToConstant: 15.0).isActive = true
    }
 }
 

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>1</key>
+	<array>
+		<dict>
+			<key>data</key>
+			<date>2017-12-31T23:00:00Z</date>
+			<key>festivita</key>
+			<string>Capodanno</string>
+		</dict>
+		<dict>
+			<key>data</key>
+			<date>2018-01-05T23:00:00Z</date>
+			<key>festivita</key>
+			<string>Epifania</string>
+		</dict>
+		<dict>
+			<key>data</key>
+			<date>2018-01-26T23:00:00Z</date>
+			<key>festivita</key>
+			<string>Giorno della memoria</string>
+		</dict>
+	</array>
+	<key>2</key>
+	<array>
+		<dict>
+			<key>data</key>
+			<date>2018-02-10T23:00:00Z</date>
+			<key>festivita</key>
+			<string>Carnevale</string>
+		</dict>
+	</array>
+	<key>3</key>
+	<array>
+		<dict>
+			<key>data</key>
+			<date>2018-03-24T23:00:00Z</date>
+			<key>festivita</key>
+			<string>Domenica delle palme</string>
+		</dict>
+	</array>
+	<key>4</key>
+	<array>
+		<dict>
+			<key>data</key>
+			<date>2018-03-31T22:00:00Z</date>
+			<key>festivita</key>
+			<string>Pasqua</string>
+		</dict>
+		<dict>
+			<key>data</key>
+			<date>2018-04-01T22:00:00Z</date>
+			<key>festivita</key>
+			<string>Pasquetta</string>
+		</dict>
+		<dict>
+			<key>data</key>
+			<date>2018-04-24T22:00:00Z</date>
+			<key>festivita</key>
+			<string>Festa della Liberazione</string>
+		</dict>
+	</array>
+	<key>5</key>
+	<array>
+		<dict>
+			<key>data</key>
+			<string>May 1, 2018 at 12:00:00 AM</string>
+			<key>festivita</key>
+			<string>Festa del lavoro</string>
+		</dict>
+		<dict>
+			<key>data</key>
+			<date>2018-05-19T22:00:00Z</date>
+			<key>festivita</key>
+			<string>Pentecoste</string>
+		</dict>
+	</array>
+	<key>6</key>
+	<array>
+		<dict>
+			<key>data</key>
+			<date>2018-06-01T22:00:00Z</date>
+			<key>festivita</key>
+			<string>Festa della Repubblica</string>
+		</dict>
+	</array>
+	<key>7</key>
+	<array/>
+	<key>8</key>
+	<array>
+		<dict>
+			<key>data</key>
+			<date>2018-08-14T22:00:00Z</date>
+			<key>festivita</key>
+			<string>Ferragosto</string>
+		</dict>
+	</array>
+	<key>9</key>
+	<array/>
+	<key>10</key>
+	<array/>
+	<key>11</key>
+	<array>
+		<dict>
+			<key>data</key>
+			<date>2018-10-31T23:00:00Z</date>
+			<key>festivita</key>
+			<string>Ognissanti</string>
+		</dict>
+		<dict>
+			<key>data</key>
+			<date>2018-11-01T23:00:00Z</date>
+			<key>festivita</key>
+			<string>Unità nazionale</string>
+		</dict>
+	</array>
+	<key>12</key>
+	<array>
+		<dict>
+			<key>data</key>
+			<date>2018-12-07T23:00:00Z</date>
+			<key>festivita</key>
+			<string>Immacolata</string>
+		</dict>
+		<dict>
+			<key>data</key>
+			<date>2018-12-24T23:00:00Z</date>
+			<key>festivita</key>
+			<string>Natale</string>
+		</dict>
+		<dict>
+			<key>data</key>
+			<date>2018-12-25T23:00:00Z</date>
+			<key>festivita</key>
+			<string>Santo Stefano</string>
+		</dict>
+		<dict>
+			<key>data</key>
+			<date>2018-12-30T23:00:00Z</date>
+			<key>festivita</key>
+			<string>San Silvestro</string>
+		</dict>
+	</array>
+</dict>
+</plist>

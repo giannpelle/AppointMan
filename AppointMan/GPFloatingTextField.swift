@@ -8,47 +8,54 @@
 
 import UIKit
 
+// You'll have 14 pixels on top and 3 pixels on bottom, the height of textRect is the difference
+
 class GPFloatingTextField: UITextField {
    
    var underlineLayer: CALayer!
    var titleHeaderLabel: UILabel!
    var titleHeaderLabelTopAnchor: NSLayoutConstraint!
-   
-   override var attributedText: NSAttributedString? {
-      get {
-         if let text = super.attributedText, text.string != "" {
-            self.showTitleHeaderLabel()
-         } else {
-            self.hideTitleHeaderLabel()
-         }
-         return super.attributedText
-      }
-      set {
-         self.attributedText = newValue
-      }
-   }
+   var isAnimationEnabled: Bool = true
    
    lazy var textAttributes: [String: Any] = {
       let style = NSMutableParagraphStyle()
       style.lineSpacing = 14.0
       style.alignment = .natural
-      let attributes: [String: Any] = [NSParagraphStyleAttributeName: style, NSKernAttributeName: 0.0, NSFontAttributeName: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, NSForegroundColorAttributeName: UIColor.amFloatingTextFieldText]
+      let attributes: [String: Any] = [NSAttributedStringKey.paragraphStyle.rawValue: style, NSAttributedStringKey.kern.rawValue: 0.0, NSAttributedStringKey.font.rawValue: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, NSAttributedStringKey.foregroundColor.rawValue: UIColor.amFloatingTextFieldText]
+      return attributes
+   }()
+   
+   lazy var txtAttributes: [NSAttributedStringKey: Any] = {
+      let style = NSMutableParagraphStyle()
+      style.lineSpacing = 14.0
+      style.alignment = .natural
+      let attributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey.paragraphStyle: style, NSAttributedStringKey.kern: 0.0, NSAttributedStringKey.font: UIFont.init(name: "SFUIText-Regular", size: 14.0)!, NSAttributedStringKey.foregroundColor: UIColor.amFloatingTextFieldText]
       return attributes
    }()
    
    override var isEditing: Bool {
       get {
          self.typingAttributes = self.textAttributes
+         if let text = self.attributedText, text.string != "" {
+            if self.isAnimationEnabled {
+               self.showTitleHeaderLabel()
+            } else {
+               self.showTitleHeaderLabelWithoutAnimation()
+               self.isAnimationEnabled = true
+            }
+         } else {
+            self.hideTitleHeaderLabel()
+         }
          return super.isEditing
       }
    }
 
    override func textRect(forBounds bounds: CGRect) -> CGRect {
-      return CGRect(x: bounds.origin.x + 1, y: bounds.origin.y + 14.0, width: bounds.size.width - 1.0, height: bounds.size.height - (14.0 + 4.0))
+      return CGRect(x: bounds.origin.x + 1, y: bounds.origin.y + 14.0, width: bounds.size.width - 1.0, height: bounds.size.height - (14.0 + 3.0))
    }
    
    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-      return CGRect(x: bounds.origin.x + 1, y: bounds.origin.y + 14.0, width: bounds.size.width - 1.0, height: bounds.size.height - (14.0 + 4.0))
+      return CGRect(x: bounds.origin.x + 1, y: bounds.origin.y + 14.0, width: bounds.size.width - 1.0, height: bounds.size.height - (14.0 + 3.0))
    }
    
    init() {
@@ -67,10 +74,16 @@ class GPFloatingTextField: UITextField {
    }
    
    private func setup() {
+      
+      // to avoid auto layout conflicts, really strange, test on real device uncommenting the following lines of code
+      self.autocorrectionType = .no
+      self.inputAssistantItem.leadingBarButtonGroups.removeAll()
+      self.inputAssistantItem.trailingBarButtonGroups.removeAll()
+      self.autocapitalizationType = .sentences
       self.borderStyle = .none
       
       self.underlineLayer = CALayer()
-      self.underlineLayer.frame = CGRect(x: 0.0, y: self.bounds.size.height - 3.0, width: self.bounds.size.width, height: 2.0)
+      self.underlineLayer.frame = CGRect(x: 0.0, y: self.bounds.size.height - 2.0, width: self.bounds.size.width, height: 2.0)
       self.underlineLayer.backgroundColor = UIColor.amLightGray.cgColor
       self.layer.insertSublayer(self.underlineLayer, at: 1)
       
@@ -86,7 +99,12 @@ class GPFloatingTextField: UITextField {
    func setPlaceholderText(placeholderText: String) {
       self.attributedPlaceholder = UILabel.attributedString(withText: placeholderText, andTextColor: UIColor.amFloatingTextFieldPlaceholderText, andFont: UIFont.init(name: "SFUIText-Regular", size: 14)!, andCharacterSpacing: nil)
       self.titleHeaderLabel.attributedText = UILabel.attributedString(withText: placeholderText, andTextColor: UIColor.amOpaqueBlue, andFont: UIFont.init(name: "SFUIText-Bold", size: 11)!, andCharacterSpacing: 0.2)
-      self.titleHeaderLabel.setLineHeightInset(2.0)
+      self.titleHeaderLabel.heightAnchor.constraint(equalToConstant: 13.0).isActive = true
+   }
+   
+   func setTextWithoutAnimation(text: String) {
+      self.isAnimationEnabled = false
+      self.attributedText = NSAttributedString(string: text, attributes: self.txtAttributes)
    }
    
    private func showTitleHeaderLabel() {
@@ -99,6 +117,12 @@ class GPFloatingTextField: UITextField {
       }
    }
    
+   private func showTitleHeaderLabelWithoutAnimation() {
+      self.titleHeaderLabelTopAnchor.constant = 0.0
+      self.titleHeaderLabel.alpha = 1.0
+      self.layoutIfNeeded()
+   }
+   
    private func hideTitleHeaderLabel() {
       self.titleHeaderLabelTopAnchor.constant = 21.0
       UIView.animate(withDuration: 0.7, animations: {
@@ -108,4 +132,5 @@ class GPFloatingTextField: UITextField {
          
       }
    }
+   
 }
