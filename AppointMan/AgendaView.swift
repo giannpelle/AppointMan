@@ -15,7 +15,7 @@ enum Direction: Int {
 protocol AgendaViewDelegate: class {
    func highlightAccessoryTimetable(at index: Int)
    func resetHighlightStateOnAccessoryTimetable()
-   func showAddAppointmentController()
+   //func showAddAppointmentController()
 }
 
 class AgendaView: UIView {
@@ -223,9 +223,9 @@ class AgendaView: UIView {
                   if success {
                      self.removeColomnHoveringLayer()
                      
-                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                        self.delegate?.showAddAppointmentController()
-                     })
+//                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+//                        self.delegate?.showAddAppointmentController()
+//                     })
                   }
                }
             }

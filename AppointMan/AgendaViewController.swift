@@ -304,12 +304,12 @@ extension AgendaViewController: AgendaViewDelegate {
       }
    }
    
-   func showAddAppointmentController() {
-      let addAppointmentVC = UIStoryboard.addAppointmentVC()
-      addAppointmentVC.modalPresentationStyle = .formSheet
-      addAppointmentVC.preferredContentSize = CGSize(width: 540.0, height: 580.0)
-      self.present(addAppointmentVC, animated: true, completion: nil)
-   }
+//   func showAddAppointmentController() {
+//      let addAppointmentVC = UIStoryboard.addAppointmentVC()
+//      addAppointmentVC.modalPresentationStyle = .formSheet
+//      addAppointmentVC.preferredContentSize = CGSize(width: 540.0, height: 580.0)
+//      self.present(addAppointmentVC, animated: true, completion: nil)
+//   }
 }
 
 // MARK: CalendarDatePickerView handler

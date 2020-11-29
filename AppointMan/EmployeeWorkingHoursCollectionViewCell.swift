@@ -10,6 +10,7 @@ import UIKit
 
 class EmployeeWorkingHoursCollectionViewCell: UICollectionViewCell {
    
+   @IBOutlet weak var workingHoursLabel: UILabel!
    @IBOutlet weak var weekDaysStackView: UIStackView!
    @IBOutlet weak var timetableView: UIView!
    @IBOutlet weak var dayOffButton: UIButton!
@@ -20,10 +21,11 @@ class EmployeeWorkingHoursCollectionViewCell: UICollectionViewCell {
       super.awakeFromNib()
       
       self.applyTypography()
+      self.setupUI()
    }
    
    func applyTypography() {
-      //self.workingHoursLabel.attributedText = UILabel.attributedString(withText: "ORARIO DI LAVORO", andTextColor: UIColor.grayWith(value: 75.0), andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86, isCentered: true)
+      self.workingHoursLabel.attributedText = UILabel.attributedString(withText: "ORARIO DI LAVORO", andTextColor: UIColor.grayWith(value: 75.0), andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.86, isCentered: true)
       if let weekDayLabels = self.weekDaysStackView.arrangedSubviews as? [UILabel] {
          let weekDays = Date.weekDays(withShortFormat: true).map { $0.uppercased() }
          for (index, weekDayLabel) in weekDayLabels.enumerated() {
@@ -31,6 +33,10 @@ class EmployeeWorkingHoursCollectionViewCell: UICollectionViewCell {
          }
       }
       self.dayOffButton.setAttributedTitle(UILabel.attributedString(withText: "AGGIUNGI FERIE / PERMESSI", andTextColor: UIColor.white, andFont: UIFont.init(name: "SFUIText-Bold", size: 12.0)!, andCharacterSpacing: 0.0, isCentered: true), for: .normal)
+   }
+   
+   func setupUI() {
+      self.dayOffButton.layer.cornerRadius = 5.0
    }
    
    func setupTimetable() {

@@ -17,7 +17,7 @@ class TakeNotesViewController: UIViewController {
    
    var newMemoTextViewContentSizeHeight: CGFloat?
    
-   var memos = [Memo(withText: "Ciao a tutti io sono Pietro e torno sempre indietro", isFavorite: true, notificationDate: Date().increaseMonth(by: 1)), Memo(withText: "Ciao a tutti", isFavorite: true, notificationDate: Date()), Memo(withText: "Ciao a tutti io sono Pietro e torno sempre indietro ma a volte prenod l'autostrada senza fare danni wjsjs sjsjs sjsjs sjsjs sjsjs sjsjs sjs sjs sjssj sjsj sjsjs sj ssjs sj sjsjsjs sj sjsjs jssj sj", isFavorite: false, notificationDate: nil)]
+   var memos = [Memo(withText: "Francesca ricordati di pulire la vetrina del negozio perchè è molto sporca e non va bene", isFavorite: true, notificationDate: Date().increaseMonth(by: 1)), Memo(withText: "A pomeriggio arriva la nuova fornitura di colori con keratina. Ricordatevi di pagare a Giorgio solo metà della merce perche l'ultima volta si era dimenticato di applicarci lo sconto fedeltà", isFavorite: true, notificationDate: Date()), Memo(withText: "Paolo Mori deve ancora saldare", isFavorite: false, notificationDate: nil), Memo(withText: "Questa settimana Sabrina è in maternità quindi dobbiamo riorganizzare tutti i suoi appuntamenti con i vari clienti per sopperire alla sua mancanza", isFavorite: false, notificationDate: nil), Memo(withText: "Vi ricordo che questo mese offriamo il 10% di sconto a tutti i nuovi clienti", isFavorite: false, notificationDate: nil)]
    
    override func viewDidLoad() {
       super.viewDidLoad()

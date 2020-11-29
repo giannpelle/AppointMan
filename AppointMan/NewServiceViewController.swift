@@ -267,6 +267,8 @@ class NewServiceViewController: UIViewController {
       if let serviceName = self.serviceNameTextField.text, !serviceName.isEmpty {
          if self.isManBoxEnabled || self.isWomanBoxEnabled {
             
+            self.saveNewService()
+            
             //TO BE FIX
 //            let fetchRequest = NSFetchRequest<Service>(entityName: "Service")
 //            fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Service.name), serviceName)

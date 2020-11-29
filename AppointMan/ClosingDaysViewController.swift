@@ -168,7 +168,8 @@ class ClosingDaysViewController: UIViewController {
    
    @objc func nextBarButtonItemPressed(sender: UIBarButtonItem) {
       let homeVC = UIStoryboard.revealMenuVC()
-      self.present(homeVC, animated: true, completion: nil)
+      homeVC.modalPresentationStyle = .fullScreen
+      self.present(homeVC, animated: false, completion: nil)
       //nextVC.navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "on_boarding_back_button"), style: .plain, target: self, action: nil)
    }
    

@@ -98,7 +98,6 @@
 		EF13C4BA1FE9156D0008AC0B /* NotificationDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF13C4B91FE9156D0008AC0B /* NotificationDatePickerView.swift */; };
 		EF13C4BC1FE93A650008AC0B /* EmployeeGeneralInfoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF13C4BB1FE93A650008AC0B /* EmployeeGeneralInfoCollectionViewCell.xib */; };
 		EF13C4BE1FE93B710008AC0B /* EmployeeGeneralInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF13C4BD1FE93B710008AC0B /* EmployeeGeneralInfoCollectionViewCell.swift */; };
-		EF13C4C01FE93BDF0008AC0B /* EmployeeWorkingHoursCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF13C4BF1FE93BDF0008AC0B /* EmployeeWorkingHoursCollectionViewCell.xib */; };
 		EF13C4C21FE956090008AC0B /* LastMonthStatsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF13C4C11FE956090008AC0B /* LastMonthStatsCollectionViewCell.xib */; };
 		EF1E99F71F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF1E99F61F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib */; };
 		EF1E99F91F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1E99F81F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift */; };
@@ -128,6 +127,7 @@
 		EF5FA4C21F9E3B3B00F9086F /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */; };
 		EF649D5D1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */; };
 		EF7346EE1FD5F63100051C48 /* EmployeeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7346ED1FD5F63100051C48 /* EmployeeManager.swift */; };
+		EF7EC95F2574010300D010EF /* TagsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7EC95B2573FF9C00D010EF /* TagsTextField.swift */; };
 		EF85C6911FCECF8C00E52EBC /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF85C6901FCECF8C00E52EBC /* Memo.swift */; };
 		EF8897FB1FCE3DA50012808E /* AddMemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8897FA1FCE3DA50012808E /* AddMemoViewController.swift */; };
 		EF9D092E1FDF027E00EAF3D5 /* ClosingDaysCalendarBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D092D1FDF027E00EAF3D5 /* ClosingDaysCalendarBackgroundView.swift */; };
@@ -137,8 +137,6 @@
 		EF9D3F231FCD808500BCC6FD /* AddAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43A7B41FC4DDE500938ABA /* AddAppointmentViewController.swift */; };
 		EF9D3F241FCD808500BCC6FD /* AddAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43A7B41FC4DDE500938ABA /* AddAppointmentViewController.swift */; };
 		EFBB49881F8C41890011698E /* NewServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBB49871F8C41890011698E /* NewServiceViewController.swift */; };
-		EFCDC5951FCD8FB500F327D0 /* TagsTextField.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF9D3F6C1FCD8BE200BCC6FD /* TagsTextField.framework */; };
-		EFCDC5961FCD8FB500F327D0 /* TagsTextField.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EF9D3F6C1FCD8BE200BCC6FD /* TagsTextField.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EFD86F951F92953E00E92425 /* ServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD86F941F92953E00E92425 /* ServiceCollectionViewCell.swift */; };
 		EFD86F971F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD86F961F9295CE00E92425 /* ServicesHeaderCollectionReusableView.swift */; };
 		EFE309091F98A2ED006247B2 /* EmployeeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE309081F98A2ED006247B2 /* EmployeeCollectionViewCell.swift */; };
@@ -153,6 +151,7 @@
 		EFF22EA51F9A49F600C7E052 /* ServicesInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFF22EA41F9A49F600C7E052 /* ServicesInputView.xib */; };
 		EFF2C6831FC98ED8008CE050 /* AppointmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFF2C6821FC98ED8008CE050 /* AppointmentView.xib */; };
 		EFF2C6851FC996B3008CE050 /* AppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2C6841FC996B3008CE050 /* AppointmentView.swift */; };
+		EFFB54DB1FEAD67500C3C136 /* EmployeeWorkingHoursCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFFB54DA1FEAD67500C3C136 /* EmployeeWorkingHoursCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,28 +176,7 @@
 			remoteGlobalIDString = EF9D3F4A1FCD8B5800BCC6FD;
 			remoteInfo = TagsTextField;
 		};
-		EFCDC5971FCD8FB500F327D0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EF9D3F671FCD8BE200BCC6FD /* TagsTextField.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = EF9D3F491FCD8B5800BCC6FD;
-			remoteInfo = TagsTextField;
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		EF9D3F211FCD7C3600BCC6FD /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				EFCDC5961FCD8FB500F327D0 /* TagsTextField.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2304A60F1F40589400E1FB7E /* RevealMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealMenuViewController.swift; sourceTree = "<group>"; };
@@ -298,7 +276,6 @@
 		EF13C4B91FE9156D0008AC0B /* NotificationDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDatePickerView.swift; sourceTree = "<group>"; };
 		EF13C4BB1FE93A650008AC0B /* EmployeeGeneralInfoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeGeneralInfoCollectionViewCell.xib; sourceTree = "<group>"; };
 		EF13C4BD1FE93B710008AC0B /* EmployeeGeneralInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeGeneralInfoCollectionViewCell.swift; sourceTree = "<group>"; };
-		EF13C4BF1FE93BDF0008AC0B /* EmployeeWorkingHoursCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeWorkingHoursCollectionViewCell.xib; sourceTree = "<group>"; };
 		EF13C4C11FE956090008AC0B /* LastMonthStatsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LastMonthStatsCollectionViewCell.xib; sourceTree = "<group>"; };
 		EF1E99F61F9B40CB00CBFFA4 /* ServiceInputViewCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceInputViewCollectionViewCell.xib; sourceTree = "<group>"; };
 		EF1E99F81F9B416100CBFFA4 /* ServiceInputViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInputViewCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -328,6 +305,7 @@
 		EF5FA4C11F9E3B3B00F9086F /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		EF649D5C1F9CD4A300A79E62 /* EmployeeServiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeServiceCollectionViewCell.swift; sourceTree = "<group>"; };
 		EF7346ED1FD5F63100051C48 /* EmployeeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeManager.swift; sourceTree = "<group>"; };
+		EF7EC95B2573FF9C00D010EF /* TagsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsTextField.swift; sourceTree = "<group>"; };
 		EF85C6901FCECF8C00E52EBC /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		EF8897FA1FCE3DA50012808E /* AddMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoViewController.swift; sourceTree = "<group>"; };
 		EF9D092D1FDF027E00EAF3D5 /* ClosingDaysCalendarBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosingDaysCalendarBackgroundView.swift; sourceTree = "<group>"; };
@@ -350,6 +328,7 @@
 		EFF22EA41F9A49F600C7E052 /* ServicesInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServicesInputView.xib; sourceTree = "<group>"; };
 		EFF2C6821FC98ED8008CE050 /* AppointmentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppointmentView.xib; sourceTree = "<group>"; };
 		EFF2C6841FC996B3008CE050 /* AppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentView.swift; sourceTree = "<group>"; };
+		EFFB54DA1FEAD67500C3C136 /* EmployeeWorkingHoursCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeWorkingHoursCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,7 +336,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFCDC5951FCD8FB500F327D0 /* TagsTextField.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +373,7 @@
 		2303DD221ECC49DF00C24113 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EF7EC95B2573FF9C00D010EF /* TagsTextField.swift */,
 				2304A60F1F40589400E1FB7E /* RevealMenuViewController.swift */,
 				2304A6111F4058D300E1FB7E /* AgendaViewController.swift */,
 				EF43A7B41FC4DDE500938ABA /* AddAppointmentViewController.swift */,
@@ -427,7 +406,7 @@
 				EF85C6901FCECF8C00E52EBC /* Memo.swift */,
 				EF13C4BB1FE93A650008AC0B /* EmployeeGeneralInfoCollectionViewCell.xib */,
 				EF13C4BD1FE93B710008AC0B /* EmployeeGeneralInfoCollectionViewCell.swift */,
-				EF13C4BF1FE93BDF0008AC0B /* EmployeeWorkingHoursCollectionViewCell.xib */,
+				EFFB54DA1FEAD67500C3C136 /* EmployeeWorkingHoursCollectionViewCell.xib */,
 				EF44C7C01FEA71CE0024F819 /* EmployeeWorkingHoursCollectionViewCell.swift */,
 				EF13C4C11FE956090008AC0B /* LastMonthStatsCollectionViewCell.xib */,
 			);
@@ -536,6 +515,7 @@
 				237C527C1EC4B6CB00D98DD9 /* AppointManTests */,
 				237C52871EC4B6CB00D98DD9 /* AppointManUITests */,
 				237C52661EC4B6CB00D98DD9 /* Products */,
+				EF7EC95A2573FF9C00D010EF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -670,6 +650,13 @@
 			name = datamodel;
 			sourceTree = "<group>";
 		};
+		EF7EC95A2573FF9C00D010EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EF9D3F681FCD8BE200BCC6FD /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -711,12 +698,10 @@
 				237C52611EC4B6CA00D98DD9 /* Sources */,
 				237C52621EC4B6CA00D98DD9 /* Frameworks */,
 				237C52631EC4B6CA00D98DD9 /* Resources */,
-				EF9D3F211FCD7C3600BCC6FD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				EFCDC5981FCD8FB500F327D0 /* PBXTargetDependency */,
 			);
 			name = AppointMan;
 			productName = AppointMan;
@@ -796,6 +781,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -860,7 +846,6 @@
 				23E63C991F41B15A0084EA75 /* SF-Pro-Text-Light.otf in Resources */,
 				23E63C9B1F41B15A0084EA75 /* SF-Pro-Text-Medium.otf in Resources */,
 				EFF2C6831FC98ED8008CE050 /* AppointmentView.xib in Resources */,
-				EF13C4C01FE93BDF0008AC0B /* EmployeeWorkingHoursCollectionViewCell.xib in Resources */,
 				23E63C981F41B15A0084EA75 /* SF-Pro-Text-HeavyItalic.otf in Resources */,
 				23E63C8A1F41B15A0084EA75 /* SF-Pro-Display-LightItalic.otf in Resources */,
 				23E63CAF1F41B15A0084EA75 /* SFText-LightItalic.otf in Resources */,
@@ -890,6 +875,7 @@
 				EF13C4C21FE956090008AC0B /* LastMonthStatsCollectionViewCell.xib in Resources */,
 				237C526E1EC4B6CB00D98DD9 /* Main.storyboard in Resources */,
 				23E63CB51F41B15A0084EA75 /* SFText-SemiboldItalic.otf in Resources */,
+				EFFB54DB1FEAD67500C3C136 /* EmployeeWorkingHoursCollectionViewCell.xib in Resources */,
 				23E63CAB1F41B15A0084EA75 /* SFText-BoldItalic.otf in Resources */,
 				23E63CAA1F41B15A0084EA75 /* SFText-Bold.otf in Resources */,
 				23E63C971F41B15A0084EA75 /* SF-Pro-Text-Heavy.otf in Resources */,
@@ -943,6 +929,7 @@
 				EF5635971FDE90290048EB16 /* Service+CoreDataProperties.swift in Sources */,
 				EF8897FB1FCE3DA50012808E /* AddMemoViewController.swift in Sources */,
 				2304A6141F40597C00E1FB7E /* DipendentiViewController.swift in Sources */,
+				EF7EC95F2574010300D010EF /* TagsTextField.swift in Sources */,
 				EF43A7B51FC4DDE500938ABA /* AddAppointmentViewController.swift in Sources */,
 				238B1BAF1F52976C00A1F6CA /* GPCalendarDatePickerView.swift in Sources */,
 				EF9D09311FE0274C00EAF3D5 /* ClosingCalendarCollectionViewCell.swift in Sources */,
@@ -1029,11 +1016,6 @@
 			isa = PBXTargetDependency;
 			target = 237C52641EC4B6CA00D98DD9 /* AppointMan */;
 			targetProxy = 237C52851EC4B6CB00D98DD9 /* PBXContainerItemProxy */;
-		};
-		EFCDC5981FCD8FB500F327D0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = TagsTextField;
-			targetProxy = EFCDC5971FCD8FB500F327D0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1167,7 +1149,6 @@
 		237C528E1EC4B6CB00D98DD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZGBRK2HS2K;
@@ -1185,7 +1166,6 @@
 		237C528F1EC4B6CB00D98DD9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZGBRK2HS2K;

@@ -27,13 +27,13 @@ class ServicesHeaderCollectionReusableView: UICollectionReusableView {
       }
       
       switch self.sectionType {
-      case .female:
+      case .female?:
          let femaleImageView = UIImageView(image: #imageLiteral(resourceName: "icona_sesso_donna"))
          self.gendersStackView.insertArrangedSubview(femaleImageView, at: 0)
-      case .male:
+      case .male?:
          let maleImageView = UIImageView(image: #imageLiteral(resourceName: "icona_sesso_uomo"))
          self.gendersStackView.insertArrangedSubview(maleImageView, at: 0)
-      case .unisex:
+      case .unisex?:
          let femaleImageView = UIImageView(image: #imageLiteral(resourceName: "icona_sesso_donna"))
          let maleImageView = UIImageView(image: #imageLiteral(resourceName: "icona_sesso_uomo"))
          self.gendersStackView.addArrangedSubview(femaleImageView)

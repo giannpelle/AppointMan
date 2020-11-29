@@ -41,6 +41,12 @@ class DipendentiViewController: UIViewController {
       self.revealMenuDelegate?.openRevealMenu()
    }
    
+   override func viewDidLayoutSubviews() {
+      super.viewDidLayoutSubviews()
+      
+      print(self.employeeDetailCollectionView.bounds)
+   }
+   
 }
 
 extension DipendentiViewController: UICollectionViewDataSource {

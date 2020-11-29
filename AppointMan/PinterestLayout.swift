@@ -32,7 +32,7 @@ class PinterestLayout: UICollectionViewLayout {
          return 0
       }
       let insets = collectionView.contentInset
-      return collectionView.bounds.width - (insets.left + insets.right)
+      return UIScreen.main.bounds.size.width - (insets.left + insets.right) - (270.0 + 25.0)
    }
    
    override var collectionViewContentSize: CGSize {
@@ -50,6 +50,7 @@ class PinterestLayout: UICollectionViewLayout {
       }
       // 2. Pre-Calculates the X Offset for every column and adds an array to increment the currently max Y Offset for each column
       let columnWidth = contentWidth / CGFloat(numberOfColumns)
+      print(columnWidth)
       var xOffset = [CGFloat]()
       for column in 0 ..< numberOfColumns {
          xOffset.append(CGFloat(column) * columnWidth)

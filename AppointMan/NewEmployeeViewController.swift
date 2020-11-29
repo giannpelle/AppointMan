@@ -218,9 +218,9 @@ class NewEmployeeViewController: UIViewController {
    
    @IBAction func addEmployeeWorkingHoursButtonPressed(sender: UIButton) {
       let workingHoursVC = UIStoryboard.workingHoursVC()
-      self.inOutTransition.originFrame = sender.convert(sender.bounds, to: nil)
-      self.inOutTransition.presentingVCFrame = self.view.convert(self.view.bounds, to: nil)
-      workingHoursVC.transitioningDelegate = self
+//      self.inOutTransition.originFrame = sender.convert(sender.bounds, to: nil)
+//      self.inOutTransition.presentingVCFrame = self.view.convert(self.view.bounds, to: nil)
+//      workingHoursVC.transitioningDelegate = self
       self.present(workingHoursVC, animated: true, completion: nil)
    }
    
