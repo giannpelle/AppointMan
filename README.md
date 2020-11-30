@@ -13,32 +13,32 @@ Below there are some examples of the most _relevant components_ of the app runni
 
 ## Adding haircut services
 
-Floating TextField in the forms -> [GPFloatingTextField]()
+Floating TextField in the forms -> [GPFloatingTextField](https://github.com/giannpelle/AppointMan/tree/master/AppointMan/Libraries/GPFloatingTextField)
 
-<img src="/images/add_services.gif" height="300">
+<img src="/images/add_services.gif" height="540">
 
 ## Adding employees
 
-<img src="/images/add_employees.gif" height="300">
+<img src="/images/add_employees.gif" height="540">
 
 ## Selecting saloon day-offs
 
-<img src="/images/add_closing_days.gif" height="300">
+<img src="/images/add_closing_days.gif" height="540">
 
 ## Agenda home
 
-<img src="/images/drag_drop.gif" height="300">
+<img src="/images/drag_drop.gif" height="540">
 
-<img src="/images/side_menus.gif" height="300">
+<img src="/images/side_menus.gif" height="540">
 
-Bottom Sliding Date picker -> [GPSliderDatePicker]()
+Bottom Sliding Date picker -> [GPSliderDatePicker](https://github.com/giannpelle/AppointMan/tree/master/AppointMan/Libraries/GPSliderDatePicker)
 
-<img src="/images/sliding_picker.gif" height="300">
+<img src="/images/sliding_picker.gif" height="540">
 
-Bottom-Left Date picker -> [GPCalendarDatePicker]()
+Bottom-Left Date picker -> [GPCalendarDatePicker](https://github.com/giannpelle/AppointMan/tree/master/AppointMan/Libraries/GPCalendarDatePicker)
 
-<img src="/images/date_picker.gif" height="300">
+<img src="/images/date_picker.gif" height="540">
 
 ## Make notes
 
-<img src="/images/memo.png" height="300">
+<img src="/images/memo.png" height="540">
